@@ -40,10 +40,14 @@ module Comet
         when "MeasureCompleted"
           @measure_completed = v
         when "Components"
-          @components = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @components[i] = Comet::ContentMeasurementComponent.new
-            @components[i].from_hash(v)
+          if v != nil
+            @components = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @components[i] = Comet::ContentMeasurementComponent.new
+              @components[i].from_hash(v)
+            end
+          else
+            @components = []
           end
         else
           @unknown_json_fields[k] = v

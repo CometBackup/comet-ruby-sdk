@@ -42,16 +42,24 @@ module Comet
         when "DeletionEnabled"
           @deletion_enabled = v
         when "Targets"
-          @targets = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @targets[i] = v
+          if v != nil
+            @targets = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @targets[i] = v
+            end
+          else
+            @targets = []
           end
         when "TargetNames"
-          @target_names = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @target_names[i] = v
+          if v != nil
+            @target_names = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @target_names[i] = v
+            end
+          else
+            @target_names = []
           end
         when "Stats"
           @stats = Comet::ConstellationStats.new

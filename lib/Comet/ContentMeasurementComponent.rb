@@ -35,10 +35,14 @@ module Comet
         when "Bytes"
           @bytes = v
         when "UsedBy"
-          @used_by = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @used_by[i] = v
+          if v != nil
+            @used_by = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @used_by[i] = v
+            end
+          else
+            @used_by = []
           end
         else
           @unknown_json_fields[k] = v

@@ -192,16 +192,24 @@ module Comet
         when "ModifyTime"
           @modify_time = v
         when "PreExec"
-          @pre_exec = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @pre_exec[i] = v
+          if v != nil
+            @pre_exec = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @pre_exec[i] = v
+            end
+          else
+            @pre_exec = []
           end
         when "PostExec"
-          @post_exec = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @post_exec[i] = v
+          if v != nil
+            @post_exec = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @post_exec[i] = v
+            end
+          else
+            @post_exec = []
           end
         when "DestinationType"
           @destination_type = v
@@ -310,10 +318,14 @@ module Comet
           @b2 = Comet::B2DestinationLocation.new
           @b2.from_hash(v)
         when "SpanTargets"
-          @span_targets = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @span_targets[i] = Comet::DestinationLocation.new
-            @span_targets[i].from_hash(v)
+          if v != nil
+            @span_targets = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @span_targets[i] = Comet::DestinationLocation.new
+              @span_targets[i].from_hash(v)
+            end
+          else
+            @span_targets = []
           end
         when "EncryptionKeyEncryptionMethod"
           @encryption_key_encryption_method = v

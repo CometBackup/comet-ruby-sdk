@@ -41,10 +41,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @message = v
         when "VirtualMachines"
-          @virtual_machines = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @virtual_machines[i] = Comet::HyperVMachineInfo.new
-            @virtual_machines[i].from_hash(v)
+          if v != nil
+            @virtual_machines = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @virtual_machines[i] = Comet::HyperVMachineInfo.new
+              @virtual_machines[i].from_hash(v)
+            end
+          else
+            @virtual_machines = []
           end
         else
           @unknown_json_fields[k] = v

@@ -35,10 +35,14 @@ module Comet
         when "ShouldRestrictEngineTypeList"
           @should_restrict_engine_type_list = v
         when "AllowedEngineTypeWhenRestricted"
-          @allowed_engine_type_when_restricted = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @allowed_engine_type_when_restricted[i] = v
+          if v != nil
+            @allowed_engine_type_when_restricted = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @allowed_engine_type_when_restricted[i] = v
+            end
+          else
+            @allowed_engine_type_when_restricted = []
           end
         else
           @unknown_json_fields[k] = v

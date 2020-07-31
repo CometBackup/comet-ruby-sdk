@@ -41,10 +41,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @message = v
         when "StoredObjects"
-          @stored_objects = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @stored_objects[i] = Comet::StoredObject.new
-            @stored_objects[i].from_hash(v)
+          if v != nil
+            @stored_objects = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @stored_objects[i] = Comet::StoredObject.new
+              @stored_objects[i].from_hash(v)
+            end
+          else
+            @stored_objects = []
           end
         else
           @unknown_json_fields[k] = v

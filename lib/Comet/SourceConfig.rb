@@ -73,28 +73,44 @@ module Comet
         when "ModifyTime"
           @modify_time = v
         when "PreExec"
-          @pre_exec = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @pre_exec[i] = v
+          if v != nil
+            @pre_exec = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @pre_exec[i] = v
+            end
+          else
+            @pre_exec = []
           end
         when "PostExec"
-          @post_exec = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @post_exec[i] = v
+          if v != nil
+            @post_exec = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @post_exec[i] = v
+            end
+          else
+            @post_exec = []
           end
         when "EngineProps"
           @engine_props = {}
-          v.each do |k, v|
-            raise TypeError 'expected string' unless v.is_a? String
-            @engine_props[k] = v
+          if v != nil
+            v.each do |k, v|
+              raise TypeError 'expected string' unless v.is_a? String
+              @engine_props[k] = v
+            end
+          else
+            @engine_props = {}
           end
         when "OverrideDestinationRetention"
           @override_destination_retention = {}
-          v.each do |k, v|
-            @override_destination_retention[k] = Comet::RetentionPolicy.new
-            @override_destination_retention[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @override_destination_retention[k] = Comet::RetentionPolicy.new
+              @override_destination_retention[k].from_hash(v)
+            end
+          else
+            @override_destination_retention = {}
           end
         when "Statistics"
           @statistics = Comet::SourceStatistics.new

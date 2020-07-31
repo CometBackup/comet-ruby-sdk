@@ -31,9 +31,13 @@ module Comet
         case k
         when "TotalTransactionsInTimeInterval"
           @total_transactions_in_time_interval = {}
-          v.each do |k, v|
-            @total_transactions_in_time_interval[k] = Comet::B2TransactionTotals.new
-            @total_transactions_in_time_interval[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @total_transactions_in_time_interval[k] = Comet::B2TransactionTotals.new
+              @total_transactions_in_time_interval[k].from_hash(v)
+            end
+          else
+            @total_transactions_in_time_interval = {}
           end
         else
           @unknown_json_fields[k] = v

@@ -43,9 +43,13 @@ module Comet
           @platform_version.from_hash(v)
         when "Sources"
           @sources = {}
-          v.each do |k, v|
-            @sources[k] = Comet::SourceBasicInfo.new
-            @sources[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @sources[k] = Comet::SourceBasicInfo.new
+              @sources[k].from_hash(v)
+            end
+          else
+            @sources = {}
           end
         else
           @unknown_json_fields[k] = v

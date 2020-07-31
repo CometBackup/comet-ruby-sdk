@@ -42,9 +42,13 @@ module Comet
           @message = v
         when "ImportSources"
           @import_sources = {}
-          v.each do |k, v|
-            raise TypeError 'expected string' unless v.is_a? String
-            @import_sources[k] = v
+          if v != nil
+            v.each do |k, v|
+              raise TypeError 'expected string' unless v.is_a? String
+              @import_sources[k] = v
+            end
+          else
+            @import_sources = {}
           end
         else
           @unknown_json_fields[k] = v

@@ -30,10 +30,14 @@ module Comet
       obj.each do |k, v|
         case k
         when "SpanTargets"
-          @span_targets = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @span_targets[i] = Comet::DestinationLocation.new
-            @span_targets[i].from_hash(v)
+          if v != nil
+            @span_targets = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @span_targets[i] = Comet::DestinationLocation.new
+              @span_targets[i].from_hash(v)
+            end
+          else
+            @span_targets = []
           end
         else
           @unknown_json_fields[k] = v

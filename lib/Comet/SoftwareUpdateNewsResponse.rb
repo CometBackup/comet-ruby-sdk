@@ -48,10 +48,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @downloads_url = v
         when "updates_info"
-          @whats_new = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @whats_new[i] = v
+          if v != nil
+            @whats_new = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @whats_new[i] = v
+            end
+          else
+            @whats_new = []
           end
         else
           @unknown_json_fields[k] = v

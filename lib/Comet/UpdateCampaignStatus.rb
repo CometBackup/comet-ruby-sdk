@@ -61,10 +61,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @target_version = v
         when "Devices"
-          @devices = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @devices[i] = Comet::UpdateCampaignStatusDeviceEntry.new
-            @devices[i].from_hash(v)
+          if v != nil
+            @devices = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @devices[i] = Comet::UpdateCampaignStatusDeviceEntry.new
+              @devices[i].from_hash(v)
+            end
+          else
+            @devices = []
           end
         else
           @unknown_json_fields[k] = v

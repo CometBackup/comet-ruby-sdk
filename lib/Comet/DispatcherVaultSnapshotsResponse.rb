@@ -41,10 +41,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @message = v
         when "Snapshots"
-          @snapshots = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @snapshots[i] = Comet::VaultSnapshot.new
-            @snapshots[i].from_hash(v)
+          if v != nil
+            @snapshots = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @snapshots[i] = Comet::VaultSnapshot.new
+              @snapshots[i].from_hash(v)
+            end
+          else
+            @snapshots = []
           end
         else
           @unknown_json_fields[k] = v

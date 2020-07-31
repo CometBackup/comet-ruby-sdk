@@ -112,10 +112,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @replica_name = v
         when "ReplicaMembers"
-          @replica_members = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @replica_members[i] = v
+          if v != nil
+            @replica_members = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @replica_members[i] = v
+            end
+          else
+            @replica_members = []
           end
         when "UseSSL"
           @use_ssl = v

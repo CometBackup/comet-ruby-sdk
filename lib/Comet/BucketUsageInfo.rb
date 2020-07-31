@@ -34,15 +34,23 @@ module Comet
       obj.each do |k, v|
         case k
         when "ExistsOnServers"
-          @exists_on_servers = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @exists_on_servers[i] = v
+          if v != nil
+            @exists_on_servers = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @exists_on_servers[i] = v
+            end
+          else
+            @exists_on_servers = []
           end
         when "InUseBy"
-          @in_use_by = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @in_use_by[i] = Comet::UserOnServer.new
-            @in_use_by[i].from_hash(v)
+          if v != nil
+            @in_use_by = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @in_use_by[i] = Comet::UserOnServer.new
+              @in_use_by[i].from_hash(v)
+            end
+          else
+            @in_use_by = []
           end
         else
           @unknown_json_fields[k] = v

@@ -41,9 +41,13 @@ module Comet
           @check_completed = v
         when "Usage"
           @usage = {}
-          v.each do |k, v|
-            @usage[k] = Comet::BucketUsageInfo.new
-            @usage[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @usage[k] = Comet::BucketUsageInfo.new
+              @usage[k].from_hash(v)
+            end
+          else
+            @usage = {}
           end
         else
           @unknown_json_fields[k] = v

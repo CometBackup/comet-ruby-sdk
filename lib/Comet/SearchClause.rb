@@ -54,10 +54,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @rule_value = v
         when "ClauseChildren"
-          @clause_children = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @clause_children[i] = Comet::SearchClause.new
-            @clause_children[i].from_hash(v)
+          if v != nil
+            @clause_children = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @clause_children[i] = Comet::SearchClause.new
+              @clause_children[i].from_hash(v)
+            end
+          else
+            @clause_children = []
           end
         else
           @unknown_json_fields[k] = v

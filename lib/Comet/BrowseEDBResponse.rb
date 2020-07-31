@@ -41,10 +41,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @message = v
         when "Databases"
-          @databases = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @databases[i] = Comet::EDBFileInfo.new
-            @databases[i].from_hash(v)
+          if v != nil
+            @databases = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @databases[i] = Comet::EDBFileInfo.new
+              @databases[i].from_hash(v)
+            end
+          else
+            @databases = []
           end
         else
           @unknown_json_fields[k] = v

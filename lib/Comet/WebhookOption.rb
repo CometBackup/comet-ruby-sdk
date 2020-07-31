@@ -36,9 +36,13 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @url = v
         when "WhiteListedEventTypes"
-          @white_listed_event_types = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @white_listed_event_types[i] = v
+          if v != nil
+            @white_listed_event_types = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @white_listed_event_types[i] = v
+            end
+          else
+            @white_listed_event_types = []
           end
         else
           @unknown_json_fields[k] = v

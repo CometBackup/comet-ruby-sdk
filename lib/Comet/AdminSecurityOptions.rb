@@ -65,10 +65,14 @@ module Comet
         when "AllowPasswordAndU2FLogin"
           @allow_password_and_u2flogin = v
         when "U2FRegistrations"
-          @u2fregistrations = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @u2fregistrations[i] = Comet::AdminU2FRegistration.new
-            @u2fregistrations[i].from_hash(v)
+          if v != nil
+            @u2fregistrations = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @u2fregistrations[i] = Comet::AdminU2FRegistration.new
+              @u2fregistrations[i].from_hash(v)
+            end
+          else
+            @u2fregistrations = []
           end
         when "TOTPKeyEncryptionFormat"
           @totpkey_encryption_format = v

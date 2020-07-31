@@ -35,10 +35,14 @@ module Comet
         when "ShouldOverrideDefaultReports"
           @should_override_default_reports = v
         when "Reports"
-          @reports = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @reports[i] = Comet::EmailReportConfig.new
-            @reports[i].from_hash(v)
+          if v != nil
+            @reports = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @reports[i] = Comet::EmailReportConfig.new
+              @reports[i].from_hash(v)
+            end
+          else
+            @reports = []
           end
         else
           @unknown_json_fields[k] = v

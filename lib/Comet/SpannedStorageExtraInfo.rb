@@ -30,10 +30,14 @@ module Comet
       obj.each do |k, v|
         case k
         when "Targets"
-          @targets = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @targets[i] = Comet::StorageFreeSpaceInfo.new
-            @targets[i].from_hash(v)
+          if v != nil
+            @targets = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @targets[i] = Comet::StorageFreeSpaceInfo.new
+              @targets[i].from_hash(v)
+            end
+          else
+            @targets = []
           end
         else
           @unknown_json_fields[k] = v

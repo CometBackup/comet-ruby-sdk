@@ -75,10 +75,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @volume_serial = v
         when "MountPoints"
-          @mount_points = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @mount_points[i] = v
+          if v != nil
+            @mount_points = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @mount_points[i] = v
+            end
+          else
+            @mount_points = []
           end
         when "ReadOffset"
           @read_offset = v

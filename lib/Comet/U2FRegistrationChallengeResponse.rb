@@ -57,16 +57,24 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @app_id = v
         when "RegisteredKeys"
-          @registered_keys = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @registered_keys[i] = Comet::U2FRegisteredKey.new
-            @registered_keys[i].from_hash(v)
+          if v != nil
+            @registered_keys = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @registered_keys[i] = Comet::U2FRegisteredKey.new
+              @registered_keys[i].from_hash(v)
+            end
+          else
+            @registered_keys = []
           end
         when "RegisterRequests"
-          @register_requests = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @register_requests[i] = Comet::U2FRegisterRequest.new
-            @register_requests[i].from_hash(v)
+          if v != nil
+            @register_requests = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @register_requests[i] = Comet::U2FRegisterRequest.new
+              @register_requests[i].from_hash(v)
+            end
+          else
+            @register_requests = []
           end
         else
           @unknown_json_fields[k] = v

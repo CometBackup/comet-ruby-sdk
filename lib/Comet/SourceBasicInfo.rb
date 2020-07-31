@@ -42,9 +42,13 @@ module Comet
           @size = v
         when "OverrideDestinationRetention"
           @override_destination_retention = {}
-          v.each do |k, v|
-            @override_destination_retention[k] = Comet::RetentionPolicy.new
-            @override_destination_retention[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @override_destination_retention[k] = Comet::RetentionPolicy.new
+              @override_destination_retention[k].from_hash(v)
+            end
+          else
+            @override_destination_retention = {}
           end
         else
           @unknown_json_fields[k] = v

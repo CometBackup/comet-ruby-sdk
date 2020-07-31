@@ -253,10 +253,14 @@ module Comet
           @b2 = Comet::B2DestinationLocation.new
           @b2.from_hash(v)
         when "SpanTargets"
-          @span_targets = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @span_targets[i] = Comet::DestinationLocation.new
-            @span_targets[i].from_hash(v)
+          if v != nil
+            @span_targets = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @span_targets[i] = Comet::DestinationLocation.new
+              @span_targets[i].from_hash(v)
+            end
+          else
+            @span_targets = []
           end
         else
           @unknown_json_fields[k] = v

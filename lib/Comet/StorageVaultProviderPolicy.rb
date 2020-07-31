@@ -35,9 +35,13 @@ module Comet
         when "ShouldRestrictProviderList"
           @should_restrict_provider_list = v
         when "AllowedProvidersWhenRestricted"
-          @allowed_providers_when_restricted = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @allowed_providers_when_restricted[i] = v
+          if v != nil
+            @allowed_providers_when_restricted = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @allowed_providers_when_restricted[i] = v
+            end
+          else
+            @allowed_providers_when_restricted = []
           end
         else
           @unknown_json_fields[k] = v

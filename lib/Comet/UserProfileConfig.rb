@@ -125,42 +125,66 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @language_code = v
         when "Emails"
-          @emails = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @emails[i] = v
+          if v != nil
+            @emails = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @emails[i] = v
+            end
+          else
+            @emails = []
           end
         when "OverrideEmailSettings"
           @override_email_settings = {}
-          v.each do |k, v|
-            @override_email_settings[k] = Comet::UserCustomEmailSettings.new
-            @override_email_settings[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @override_email_settings[k] = Comet::UserCustomEmailSettings.new
+              @override_email_settings[k].from_hash(v)
+            end
+          else
+            @override_email_settings = {}
           end
         when "SendEmailReports"
           @send_email_reports = v
         when "Destinations"
           @destinations = {}
-          v.each do |k, v|
-            @destinations[k] = Comet::DestinationConfig.new
-            @destinations[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @destinations[k] = Comet::DestinationConfig.new
+              @destinations[k].from_hash(v)
+            end
+          else
+            @destinations = {}
           end
         when "Sources"
           @sources = {}
-          v.each do |k, v|
-            @sources[k] = Comet::SourceConfig.new
-            @sources[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @sources[k] = Comet::SourceConfig.new
+              @sources[k].from_hash(v)
+            end
+          else
+            @sources = {}
           end
         when "BackupRules"
           @backup_rules = {}
-          v.each do |k, v|
-            @backup_rules[k] = Comet::BackupRuleConfig.new
-            @backup_rules[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @backup_rules[k] = Comet::BackupRuleConfig.new
+              @backup_rules[k].from_hash(v)
+            end
+          else
+            @backup_rules = {}
           end
         when "Devices"
           @devices = {}
-          v.each do |k, v|
-            @devices[k] = Comet::DeviceConfig.new
-            @devices[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @devices[k] = Comet::DeviceConfig.new
+              @devices[k].from_hash(v)
+            end
+          else
+            @devices = {}
           end
         when "IsSuspended"
           @is_suspended = v

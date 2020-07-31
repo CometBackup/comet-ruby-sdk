@@ -81,16 +81,24 @@ module Comet
         when "ModifyTime"
           @modify_time = v
         when "PreExec"
-          @pre_exec = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @pre_exec[i] = v
+          if v != nil
+            @pre_exec = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @pre_exec[i] = v
+            end
+          else
+            @pre_exec = []
           end
         when "PostExec"
-          @post_exec = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @post_exec[i] = v
+          if v != nil
+            @post_exec = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @post_exec[i] = v
+            end
+          else
+            @post_exec = []
           end
         when "Source"
           raise TypeError 'expected string' unless v.is_a? String
@@ -111,10 +119,14 @@ module Comet
         when "AllowZeroFilesSuccess"
           @allow_zero_files_success = v
         when "Schedules"
-          @schedules = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @schedules[i] = Comet::ScheduleConfig.new
-            @schedules[i].from_hash(v)
+          if v != nil
+            @schedules = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @schedules[i] = Comet::ScheduleConfig.new
+              @schedules[i].from_hash(v)
+            end
+          else
+            @schedules = []
           end
         when "EventTriggers"
           @event_triggers = Comet::BackupRuleEventTriggers.new

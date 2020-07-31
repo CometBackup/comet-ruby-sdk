@@ -80,10 +80,14 @@ module Comet
         when "Size"
           @size = v
         when "Partitions"
-          @partitions = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @partitions[i] = Comet::Partition.new
-            @partitions[i].from_hash(v)
+          if v != nil
+            @partitions = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @partitions[i] = Comet::Partition.new
+              @partitions[i].from_hash(v)
+            end
+          else
+            @partitions = []
           end
         when "Flags"
           @flags = v

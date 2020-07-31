@@ -36,10 +36,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @display_name = v
         when "Components"
-          @components = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @components[i] = Comet::VSSComponent.new
-            @components[i].from_hash(v)
+          if v != nil
+            @components = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @components[i] = Comet::VSSComponent.new
+              @components[i].from_hash(v)
+            end
+          else
+            @components = []
           end
         else
           @unknown_json_fields[k] = v

@@ -106,10 +106,14 @@ module Comet
         when "ConstellationRole"
           @constellation_role = v
         when "ExperimentalOptions"
-          @experimental_options = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @experimental_options[i] = v
+          if v != nil
+            @experimental_options = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @experimental_options[i] = v
+            end
+          else
+            @experimental_options = []
           end
         when "ServerStartTime"
           @server_start_time = v

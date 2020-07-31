@@ -35,10 +35,14 @@ module Comet
         when "Mode"
           @mode = v
         when "Ranges"
-          @ranges = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @ranges[i] = Comet::RetentionRange.new
-            @ranges[i].from_hash(v)
+          if v != nil
+            @ranges = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @ranges[i] = Comet::RetentionRange.new
+              @ranges[i].from_hash(v)
+            end
+          else
+            @ranges = []
           end
         else
           @unknown_json_fields[k] = v

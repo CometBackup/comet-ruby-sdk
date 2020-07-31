@@ -280,9 +280,13 @@ module Comet
       
       json_body = JSON.parse body
       ret = {}
-      json_body.each do |k, v|
-        ret[k] = Comet::AvailableDownload.new
-        ret[k].from_hash(v)
+      if json_body != nil
+        json_body.each do |k, v|
+          ret[k] = Comet::AvailableDownload.new
+          ret[k].from_hash(v)
+        end
+      else
+        ret = {}
       end
       ret
     end
@@ -806,9 +810,13 @@ module Comet
       
       json_body = JSON.parse body
       ret = {}
-      json_body.each do |k, v|
-        ret[k] = Comet::LiveUserConnection.new
-        ret[k].from_hash(v)
+      if json_body != nil
+        json_body.each do |k, v|
+          ret[k] = Comet::LiveUserConnection.new
+          ret[k].from_hash(v)
+        end
+      else
+        ret = {}
       end
       ret
     end
@@ -966,10 +974,14 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/dispatcher\/request-filesystem-objects", submit_params)
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        ret[i] = Comet::StoredObject.new
-        ret[i].from_hash(v)
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::StoredObject.new
+          ret[i].from_hash(v)
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -1342,10 +1354,14 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/get-jobs-all")
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        ret[i] = Comet::BackupJobDetail.new
-        ret[i].from_hash(v)
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::BackupJobDetail.new
+          ret[i].from_hash(v)
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -1367,10 +1383,14 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/get-jobs-for-custom-search", submit_params)
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        ret[i] = Comet::BackupJobDetail.new
-        ret[i].from_hash(v)
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::BackupJobDetail.new
+          ret[i].from_hash(v)
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -1399,10 +1419,14 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/get-jobs-for-date-range", submit_params)
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        ret[i] = Comet::BackupJobDetail.new
-        ret[i].from_hash(v)
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::BackupJobDetail.new
+          ret[i].from_hash(v)
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -1424,10 +1448,14 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/get-jobs-for-user", submit_params)
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        ret[i] = Comet::BackupJobDetail.new
-        ret[i].from_hash(v)
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::BackupJobDetail.new
+          ret[i].from_hash(v)
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -1444,10 +1472,14 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/get-jobs-recent")
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        ret[i] = Comet::BackupJobDetail.new
-        ret[i].from_hash(v)
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::BackupJobDetail.new
+          ret[i].from_hash(v)
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -1556,10 +1588,14 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/list-users")
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        raise TypeError 'expected string' unless v.is_a? String
-        ret[i] = v
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          raise TypeError 'expected string' unless v.is_a? String
+          ret[i] = v
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -1576,9 +1612,13 @@ module Comet
       
       json_body = JSON.parse body
       ret = {}
-      json_body.each do |k, v|
-        ret[k] = Comet::UserProfileConfig.new
-        ret[k].from_hash(v)
+      if json_body != nil
+        json_body.each do |k, v|
+          ret[k] = Comet::UserProfileConfig.new
+          ret[k].from_hash(v)
+        end
+      else
+        ret = {}
       end
       ret
     end
@@ -1668,9 +1708,13 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/meta\/list-available-log-days")
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        ret[i] = v
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = v
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -1704,10 +1748,14 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/meta\/remote-storage-vault\/get")
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        ret[i] = Comet::RemoteStorageOption.new
-        ret[i].from_hash(v)
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::RemoteStorageOption.new
+          ret[i].from_hash(v)
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -1841,10 +1889,14 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/meta\/server-config\/network-interfaces")
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        raise TypeError 'expected string' unless v.is_a? String
-        ret[i] = v
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          raise TypeError 'expected string' unless v.is_a? String
+          ret[i] = v
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -1923,9 +1975,13 @@ module Comet
       
       json_body = JSON.parse body
       ret = {}
-      json_body.each do |k, v|
-        ret[k] = Comet::StatResult.new
-        ret[k].from_hash(v)
+      if json_body != nil
+        json_body.each do |k, v|
+          ret[k] = Comet::StatResult.new
+          ret[k].from_hash(v)
+        end
+      else
+        ret = {}
       end
       ret
     end
@@ -1957,9 +2013,13 @@ module Comet
       
       json_body = JSON.parse body
       ret = {}
-      json_body.each do |k, v|
-        ret[k] = Comet::WebhookOption.new
-        ret[k].from_hash(v)
+      if json_body != nil
+        json_body.each do |k, v|
+          ret[k] = Comet::WebhookOption.new
+          ret[k].from_hash(v)
+        end
+      else
+        ret = {}
       end
       ret
     end
@@ -1997,9 +2057,13 @@ module Comet
       
       json_body = JSON.parse body
       ret = {}
-      json_body.each do |k, v|
-        ret[k] = Comet::NewsEntry.new
-        ret[k].from_hash(v)
+      if json_body != nil
+        json_body.each do |k, v|
+          ret[k] = Comet::NewsEntry.new
+          ret[k].from_hash(v)
+        end
+      else
+        ret = {}
       end
       ret
     end
@@ -2101,9 +2165,13 @@ module Comet
       
       json_body = JSON.parse body
       ret = {}
-      json_body.each do |k, v|
-        raise TypeError 'expected string' unless v.is_a? String
-        ret[k] = v
+      if json_body != nil
+        json_body.each do |k, v|
+          raise TypeError 'expected string' unless v.is_a? String
+          ret[k] = v
+        end
+      else
+        ret = {}
       end
       ret
     end
@@ -2120,9 +2188,13 @@ module Comet
       
       json_body = JSON.parse body
       ret = {}
-      json_body.each do |k, v|
-        ret[k] = Comet::GroupPolicy.new
-        ret[k].from_hash(v)
+      if json_body != nil
+        json_body.each do |k, v|
+          ret[k] = Comet::GroupPolicy.new
+          ret[k].from_hash(v)
+        end
+      else
+        ret = {}
       end
       ret
     end
@@ -2218,10 +2290,14 @@ module Comet
       body = perform_request("\/api\/v1\/admin\/replication\/state")
       
       json_body = JSON.parse body
-      ret = Array.new(json_body.length)
-      json_body.each_with_index do |v, i|
-        ret[i] = Comet::ReplicatorStateAPIResponse.new
-        ret[i].from_hash(v)
+      if json_body != nil
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::ReplicatorStateAPIResponse.new
+          ret[i].from_hash(v)
+        end
+      else
+        ret = []
       end
       ret
     end
@@ -2269,9 +2345,13 @@ module Comet
       
       json_body = JSON.parse body
       ret = {}
-      json_body.each do |k, v|
-        raise TypeError 'expected string' unless v.is_a? String
-        ret[k] = v
+      if json_body != nil
+        json_body.each do |k, v|
+          raise TypeError 'expected string' unless v.is_a? String
+          ret[k] = v
+        end
+      else
+        ret = {}
       end
       ret
     end
@@ -2438,9 +2518,13 @@ module Comet
       
       json_body = JSON.parse body
       ret = {}
-      json_body.each do |k, v|
-        ret[k] = Comet::BucketProperties.new
-        ret[k].from_hash(v)
+      if json_body != nil
+        json_body.each do |k, v|
+          ret[k] = Comet::BucketProperties.new
+          ret[k].from_hash(v)
+        end
+      else
+        ret = {}
       end
       ret
     end

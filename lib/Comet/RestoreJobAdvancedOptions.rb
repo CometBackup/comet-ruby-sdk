@@ -49,10 +49,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @dest_path = v
         when "ExactDestPaths"
-          @exact_dest_paths = Array.new(v.length)
-          v.each_with_index do |v, i|
-            raise TypeError 'expected string' unless v.is_a? String
-            @exact_dest_paths[i] = v
+          if v != nil
+            @exact_dest_paths = Array.new(v.length)
+            v.each_with_index do |v, i|
+              raise TypeError 'expected string' unless v.is_a? String
+              @exact_dest_paths[i] = v
+            end
+          else
+            @exact_dest_paths = []
           end
         when "ArchiveFormat"
           @archive_format = v

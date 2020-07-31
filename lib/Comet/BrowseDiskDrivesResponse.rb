@@ -41,10 +41,14 @@ module Comet
           raise TypeError 'expected string' unless v.is_a? String
           @message = v
         when "Disks"
-          @disks = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @disks[i] = Comet::DiskDrive.new
-            @disks[i].from_hash(v)
+          if v != nil
+            @disks = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @disks[i] = Comet::DiskDrive.new
+              @disks[i].from_hash(v)
+            end
+          else
+            @disks = []
           end
         else
           @unknown_json_fields[k] = v

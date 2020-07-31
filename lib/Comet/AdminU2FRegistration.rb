@@ -41,9 +41,13 @@ module Comet
         when "RegisterTime"
           @register_time = v
         when "Registration"
-          @registration = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @registration[i] = v
+          if v != nil
+            @registration = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @registration[i] = v
+            end
+          else
+            @registration = []
           end
         else
           @unknown_json_fields[k] = v

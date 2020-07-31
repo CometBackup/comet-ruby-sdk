@@ -42,9 +42,13 @@ module Comet
           @message = v
         when "VSSWriters"
           @vsswriters = {}
-          v.each do |k, v|
-            @vsswriters[k] = Comet::VSSWriterInfo.new
-            @vsswriters[k].from_hash(v)
+          if v != nil
+            v.each do |k, v|
+              @vsswriters[k] = Comet::VSSWriterInfo.new
+              @vsswriters[k].from_hash(v)
+            end
+          else
+            @vsswriters = {}
           end
         else
           @unknown_json_fields[k] = v

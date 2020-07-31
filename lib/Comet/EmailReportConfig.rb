@@ -38,10 +38,14 @@ module Comet
         when "ReportType"
           @report_type = v
         when "SummaryFrequency"
-          @summary_frequency = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @summary_frequency[i] = Comet::ScheduleConfig.new
-            @summary_frequency[i].from_hash(v)
+          if v != nil
+            @summary_frequency = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @summary_frequency[i] = Comet::ScheduleConfig.new
+              @summary_frequency[i].from_hash(v)
+            end
+          else
+            @summary_frequency = []
           end
         when "Filter"
           @filter = Comet::SearchClause.new

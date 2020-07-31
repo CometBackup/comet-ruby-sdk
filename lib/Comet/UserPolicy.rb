@@ -136,10 +136,14 @@ module Comet
           @protected_item_engine_types = Comet::ProtectedItemEngineTypePolicy.new
           @protected_item_engine_types.from_hash(v)
         when "FileAndFolderMandatoryExclusions"
-          @file_and_folder_mandatory_exclusions = Array.new(v.length)
-          v.each_with_index do |v, i|
-            @file_and_folder_mandatory_exclusions[i] = Comet::ExtraFileExclusion.new
-            @file_and_folder_mandatory_exclusions[i].from_hash(v)
+          if v != nil
+            @file_and_folder_mandatory_exclusions = Array.new(v.length)
+            v.each_with_index do |v, i|
+              @file_and_folder_mandatory_exclusions[i] = Comet::ExtraFileExclusion.new
+              @file_and_folder_mandatory_exclusions[i].from_hash(v)
+            end
+          else
+            @file_and_folder_mandatory_exclusions = []
           end
         when "ModeScheduleSkipAlreadyRunning"
           @mode_schedule_skip_already_running = v
