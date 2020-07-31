@@ -1,0 +1,86 @@
+require 'json'
+
+module Comet
+  
+  class StorageFreeSpaceInfo
+    
+    # @type [Boolean] unlimited
+    attr_accessor :unlimited
+    
+    # @type [Number] used_percent
+    attr_accessor :used_percent
+    
+    # @type [Number] available_bytes
+    attr_accessor :available_bytes
+    
+    # @type [Comet::SpannedStorageExtraInfo] spanned
+    attr_accessor :spanned
+    
+    # @type [Comet::B2StorageExtraInfo] b2
+    attr_accessor :b2
+    
+    # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
+    attr_accessor :unknown_json_fields
+    
+    def initialize()
+      @unknown_json_fields = {} # empty hashmap
+    end
+    
+    # @param [String] json_string The complete object in JSON format
+    def from_json(json_string)
+      from_hash(JSON.parse(json_string))
+    end
+    
+    # @param [Hash] obj The complete object as a Ruby hash
+    def from_hash(obj)
+      obj.each do |k, v|
+        case k
+        when "Unlimited"
+          @unlimited = v
+        when "UsedPercent"
+          @used_percent = v
+        when "AvailableBytes"
+          @available_bytes = v
+        when "Spanned"
+          @spanned = Comet::SpannedStorageExtraInfo.new
+          @spanned.from_hash(v)
+        when "B2"
+          @b2 = Comet::B2StorageExtraInfo.new
+          @b2.from_hash(v)
+        else
+          @unknown_json_fields[k] = v
+        end
+      end
+    end
+    
+    # @return [Hash] The complete object as a Ruby hash
+    def to_hash()
+      ret = {}
+      ret["Unlimited"] = @unlimited
+      ret["UsedPercent"] = @used_percent
+      ret["AvailableBytes"] = @available_bytes
+      if @spanned != nil
+        ret["Spanned"] = @spanned
+      end
+      if @b2 != nil
+        ret["B2"] = @b2
+      end
+      @unknown_json_fields.each do |k, v|
+        ret[k] = v
+      end
+      ret
+    end
+    
+    # @return [Hash] The complete object as a Ruby hash
+    def to_h()
+      to_hash()
+    end
+    
+    # @return [String] The complete object as a JSON string
+    def to_json(*a)
+      to_hash().to_json *a
+    end
+    
+  end
+  
+end # module

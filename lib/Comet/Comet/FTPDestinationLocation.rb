@@ -1,0 +1,108 @@
+require 'json'
+
+module Comet
+  
+  class FTPDestinationLocation
+    
+    # @type [String] ftpserver
+    attr_accessor :ftpserver
+    
+    # @type [String] ftpusername
+    attr_accessor :ftpusername
+    
+    # @type [String] ftppassword
+    attr_accessor :ftppassword
+    
+    # @type [Boolean] ftpbase_use_home_directory
+    attr_accessor :ftpbase_use_home_directory
+    
+    # @type [String] ftpcustom_base_directory
+    attr_accessor :ftpcustom_base_directory
+    
+    # @type [Number] ftpsmode
+    attr_accessor :ftpsmode
+    
+    # @type [Number] ftpport
+    attr_accessor :ftpport
+    
+    # @type [Number] ftpmax_connections
+    attr_accessor :ftpmax_connections
+    
+    # @type [Boolean] ftpaccept_invalid_ssl
+    attr_accessor :ftpaccept_invalid_ssl
+    
+    # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
+    attr_accessor :unknown_json_fields
+    
+    def initialize()
+      @unknown_json_fields = {} # empty hashmap
+    end
+    
+    # @param [String] json_string The complete object in JSON format
+    def from_json(json_string)
+      from_hash(JSON.parse(json_string))
+    end
+    
+    # @param [Hash] obj The complete object as a Ruby hash
+    def from_hash(obj)
+      obj.each do |k, v|
+        case k
+        when "FTPServer"
+          raise TypeError 'expected string' unless v.is_a? String
+          @ftpserver = v
+        when "FTPUsername"
+          raise TypeError 'expected string' unless v.is_a? String
+          @ftpusername = v
+        when "FTPPassword"
+          raise TypeError 'expected string' unless v.is_a? String
+          @ftppassword = v
+        when "FTPBaseUseHomeDirectory"
+          @ftpbase_use_home_directory = v
+        when "FTPCustomBaseDirectory"
+          raise TypeError 'expected string' unless v.is_a? String
+          @ftpcustom_base_directory = v
+        when "FTPSMode"
+          @ftpsmode = v
+        when "FTPPort"
+          @ftpport = v
+        when "FTPMaxConnections"
+          @ftpmax_connections = v
+        when "FTPAcceptInvalidSSL"
+          @ftpaccept_invalid_ssl = v
+        else
+          @unknown_json_fields[k] = v
+        end
+      end
+    end
+    
+    # @return [Hash] The complete object as a Ruby hash
+    def to_hash()
+      ret = {}
+      ret["FTPServer"] = @ftpserver
+      ret["FTPUsername"] = @ftpusername
+      ret["FTPPassword"] = @ftppassword
+      ret["FTPBaseUseHomeDirectory"] = @ftpbase_use_home_directory
+      ret["FTPCustomBaseDirectory"] = @ftpcustom_base_directory
+      ret["FTPSMode"] = @ftpsmode
+      ret["FTPPort"] = @ftpport
+      ret["FTPMaxConnections"] = @ftpmax_connections
+      ret["FTPAcceptInvalidSSL"] = @ftpaccept_invalid_ssl
+      @unknown_json_fields.each do |k, v|
+        ret[k] = v
+      end
+      ret
+    end
+    
+    # @return [Hash] The complete object as a Ruby hash
+    def to_h()
+      to_hash()
+    end
+    
+    # @return [String] The complete object as a JSON string
+    def to_json(*a)
+      to_hash().to_json *a
+    end
+    
+  end
+  
+end # module
