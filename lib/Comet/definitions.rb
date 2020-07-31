@@ -1,3 +1,8 @@
+# Copyright (c) 2020-2020 Comet Licensing Ltd.
+# Please see the LICENSE file for usage information.
+# 
+# SPDX-License-Identifier: MIT
+
 module Comet
   
   # JobClassification:

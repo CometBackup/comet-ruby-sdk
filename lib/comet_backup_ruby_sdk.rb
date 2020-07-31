@@ -1,3 +1,8 @@
+# Copyright (c) 2020-2020 Comet Licensing Ltd.
+# Please see the LICENSE file for usage information.
+# 
+# SPDX-License-Identifier: MIT
+
 require_relative "Comet/AddBucketResponseMessage.rb"
 require_relative "Comet/AdminAccountPropertiesResponse.rb"
 require_relative "Comet/AdminResourceResponse.rb"
