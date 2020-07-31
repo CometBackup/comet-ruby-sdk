@@ -19,7 +19,8 @@ module Comet
     attr_accessor :unknown_json_fields
     
     def initialize()
-      @unknown_json_fields = {} # empty hashmap
+      @allowed_engine_type_when_restricted = []
+      @unknown_json_fields = {}
     end
     
     # @param [String] json_string The complete object in JSON format
