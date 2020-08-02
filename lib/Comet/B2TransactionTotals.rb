@@ -1,73 +1,76 @@
+#!/usr/bin/env ruby --enable-frozen-string-literal
+#
 # Copyright (c) 2020-2020 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
-# 
+#
 # SPDX-License-Identifier: MIT
+#
+# frozen_string_literal: true
 
 require 'json'
 
 module Comet
-  
+
+  # B2TransactionTotals is a typed class wrapper around the underlying Comet Server API data structure.
   class B2TransactionTotals
-    
+
     # @type [Number] class_a
     attr_accessor :class_a
-    
+
     # @type [Number] class_b
     attr_accessor :class_b
-    
+
     # @type [Number] class_c
     attr_accessor :class_c
-    
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
-    
-    def initialize()
+
+    def initialize
       @unknown_json_fields = {}
     end
-    
+
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
       from_hash(JSON.parse(json_string))
     end
-    
+
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
       obj.each do |k, v|
         case k
-        when "ClassA"
+        when 'ClassA'
           @class_a = v
-        when "ClassB"
+        when 'ClassB'
           @class_b = v
-        when "ClassC"
+        when 'ClassC'
           @class_c = v
         else
           @unknown_json_fields[k] = v
         end
       end
     end
-    
+
     # @return [Hash] The complete object as a Ruby hash
-    def to_hash()
+    def to_hash
       ret = {}
-      ret["ClassA"] = @class_a
-      ret["ClassB"] = @class_b
-      ret["ClassC"] = @class_c
+      ret['ClassA'] = @class_a
+      ret['ClassB'] = @class_b
+      ret['ClassC'] = @class_c
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
       ret
     end
-    
+
     # @return [Hash] The complete object as a Ruby hash
-    def to_h()
-      to_hash()
+    def to_h
+      to_hash
     end
-    
+
     # @return [String] The complete object as a JSON string
-    def to_json(*a)
-      to_hash().to_json *a
+    def to_json(options = {})
+      to_hash.to_json(options)
     end
-    
   end
-  
-end # module
+end
