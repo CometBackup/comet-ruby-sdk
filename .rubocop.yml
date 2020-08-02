@@ -1,0 +1,25 @@
+AllCops:
+  NewCops: enable
+
+# Use unix LF file endings on all OS platforms
+Layout/EndOfLine:
+  EnforcedStyle: lf
+  
+# Disable complexity metrics - it's out of our control
+Metrics:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+# Allow a bit more whitespace
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+# Don't warn about single-line if bodies. It's better for us to be consistent
+# with the times when we do need multi-line bodies
+Style/IfUnlessModifier:
+  Enabled: false
