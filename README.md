@@ -21,23 +21,26 @@ Older API libraries can be safely used with newer versions of Comet Server. Unkn
 
 ## Getting Started
 
-Add this line to your application's Gemfile:
+This package is provided as a Gem hosted on [rubygems.org](https://rubygems.org/).
 
-```ruby
-gem 'comet_backup_ruby_sdk'
+Install using [Bundler](https://bundler.io/):
+
+```bash
+echo "gem 'comet_backup_ruby_sdk'" >> Gemfile
+bundle
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Or install using [Gem](https://rubygems.org/):
 
     $ gem install comet_backup_ruby_sdk
 
-If you want to build the gem from source:
+To compile the gem from source:
 
-    $ gem build comet_backup_ruby_sdk.gemspec
+```bash
+git clone https://github.com/CometBackup/comet-ruby-sdk.git
+cd comet-ruby-sdk
+gem build comet_backup_ruby_sdk.gemspec
+```
 
 ## Usage
 
@@ -53,5 +56,6 @@ client.admin_list_users_full.each { |username, profile|
 
 ## Getting Help
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/CometBackup/comet-ruby-sdk](https://github.com/CometBackup/comet-ruby-sdk). You may also submit issues via the ticket system at [cometbackup.com](https://cometbackup.com/).
+Bug reports and pull requests are welcome on GitHub at [https://github.com/CometBackup/comet-ruby-sdk](https://github.com/CometBackup/comet-ruby-sdk).
 
+You may also submit issues via the ticket system at [cometbackup.com](https://cometbackup.com/).
