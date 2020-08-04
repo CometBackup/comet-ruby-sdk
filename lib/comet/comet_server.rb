@@ -95,7 +95,9 @@ module Comet
     # @return [Comet::SessionKeyRegeneratedResponse]
     def admin_account_session_start(self_address = nil)
       submit_params = {}
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -340,7 +342,9 @@ module Comet
     def admin_branding_generate_client_by_platform(platform, self_address = nil)
       submit_params = {}
       submit_params['Platform'] = platform
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -361,7 +365,9 @@ module Comet
     # @return [String]
     def admin_branding_generate_client_linuxgeneric(self_address = nil)
       submit_params = {}
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -382,7 +388,9 @@ module Comet
     # @return [String]
     def admin_branding_generate_client_macos_x8664(self_address = nil)
       submit_params = {}
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -405,7 +413,9 @@ module Comet
     def admin_branding_generate_client_test(platform, self_address = nil)
       submit_params = {}
       submit_params['Platform'] = platform
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -432,7 +442,9 @@ module Comet
     # @return [String]
     def admin_branding_generate_client_windows_anycpu_exe(self_address = nil)
       submit_params = {}
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -454,7 +466,9 @@ module Comet
     # @return [String]
     def admin_branding_generate_client_windows_anycpu_zip(self_address = nil)
       submit_params = {}
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -476,7 +490,9 @@ module Comet
     # @return [String]
     def admin_branding_generate_client_windows_x8632exe(self_address = nil)
       submit_params = {}
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -498,7 +514,9 @@ module Comet
     # @return [String]
     def admin_branding_generate_client_windows_x8632zip(self_address = nil)
       submit_params = {}
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -520,7 +538,9 @@ module Comet
     # @return [String]
     def admin_branding_generate_client_windows_x8664exe(self_address = nil)
       submit_params = {}
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -542,7 +562,9 @@ module Comet
     # @return [String]
     def admin_branding_generate_client_windows_x8664zip(self_address = nil)
       submit_params = {}
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -1415,7 +1437,9 @@ module Comet
       raise TypeError 'expected string' unless target_id.is_a? String
 
       submit_params['TargetID'] = target_id
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
@@ -2500,7 +2524,9 @@ module Comet
       raise TypeError 'expected string' unless storage_provider.is_a? String
 
       submit_params['StorageProvider'] = storage_provider
-      unless self_address.nil?
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
         raise TypeError 'expected string' unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
