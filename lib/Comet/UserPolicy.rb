@@ -101,11 +101,23 @@ module Comet
     # @type [Boolean] prevent_protected_item_retention
     attr_accessor :prevent_protected_item_retention
 
+    # @type [Hash{String => Comet::SourceConfig}] default_sources
+    attr_accessor :default_sources
+
+    # @type [Hash{String => Comet::BackupRuleConfig}] default_sources_backup_rules
+    attr_accessor :default_sources_backup_rules
+
+    # @type [Hash{String => Comet::BackupRuleConfig}] default_backup_rules
+    attr_accessor :default_backup_rules
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
     def initialize
       @file_and_folder_mandatory_exclusions = []
+      @default_sources = {}
+      @default_sources_backup_rules = {}
+      @default_backup_rules = {}
       @unknown_json_fields = {}
     end
 
@@ -188,6 +200,36 @@ module Comet
           @enforce_storage_vault_retention = v
         when 'PreventProtectedItemRetention'
           @prevent_protected_item_retention = v
+        when 'DefaultSources'
+          @default_sources = {}
+          if v.nil?
+            @default_sources = {}
+          else
+            v.each do |k1, v1|
+              @default_sources[k1] = Comet::SourceConfig.new
+              @default_sources[k1].from_hash(v1)
+            end
+          end
+        when 'DefaultSourcesBackupRules'
+          @default_sources_backup_rules = {}
+          if v.nil?
+            @default_sources_backup_rules = {}
+          else
+            v.each do |k1, v1|
+              @default_sources_backup_rules[k1] = Comet::BackupRuleConfig.new
+              @default_sources_backup_rules[k1].from_hash(v1)
+            end
+          end
+        when 'DefaultBackupRules'
+          @default_backup_rules = {}
+          if v.nil?
+            @default_backup_rules = {}
+          else
+            v.each do |k1, v1|
+              @default_backup_rules[k1] = Comet::BackupRuleConfig.new
+              @default_backup_rules[k1].from_hash(v1)
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -236,6 +278,9 @@ module Comet
       ret['DefaultStorageVaultRetention'] = @default_storage_vault_retention
       ret['EnforceStorageVaultRetention'] = @enforce_storage_vault_retention
       ret['PreventProtectedItemRetention'] = @prevent_protected_item_retention
+      ret['DefaultSources'] = @default_sources
+      ret['DefaultSourcesBackupRules'] = @default_sources_backup_rules
+      ret['DefaultBackupRules'] = @default_backup_rules
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
