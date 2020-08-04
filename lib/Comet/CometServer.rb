@@ -319,7 +319,7 @@ module Comet
     #
     # @param [Number] platform The selected download platform, from the AdminBrandingAvailablePlatforms API
     # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
-    # @return [Object]
+    # @return [String]
     def admin_branding_generate_client_by_platform(platform, self_address = nil)
       submit_params = {}
       submit_params['Platform'] = platform
@@ -331,7 +331,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/branding/generate-client/by-platform', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminBrandingGenerateClientLinuxgeneric
@@ -342,7 +342,7 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
-    # @return [Object]
+    # @return [String]
     def admin_branding_generate_client_linuxgeneric(self_address = nil)
       submit_params = {}
       unless self_address.nil?
@@ -353,7 +353,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/branding/generate-client/linuxgeneric', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminBrandingGenerateClientMacosX8664
@@ -364,7 +364,7 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
-    # @return [Object]
+    # @return [String]
     def admin_branding_generate_client_macos_x8664(self_address = nil)
       submit_params = {}
       unless self_address.nil?
@@ -375,7 +375,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/branding/generate-client/macos-x86_64', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminBrandingGenerateClientTest
@@ -414,7 +414,7 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
-    # @return [Object]
+    # @return [String]
     def admin_branding_generate_client_windows_anycpu_exe(self_address = nil)
       submit_params = {}
       unless self_address.nil?
@@ -425,7 +425,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/branding/generate-client/windows-anycpu-exe', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminBrandingGenerateClientWindowsAnycpuZip
@@ -437,7 +437,7 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
-    # @return [Object]
+    # @return [String]
     def admin_branding_generate_client_windows_anycpu_zip(self_address = nil)
       submit_params = {}
       unless self_address.nil?
@@ -448,7 +448,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/branding/generate-client/windows-anycpu-zip', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminBrandingGenerateClientWindowsX8632Exe
@@ -460,7 +460,7 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
-    # @return [Object]
+    # @return [String]
     def admin_branding_generate_client_windows_x8632exe(self_address = nil)
       submit_params = {}
       unless self_address.nil?
@@ -471,7 +471,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/branding/generate-client/windows-x86_32-exe', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminBrandingGenerateClientWindowsX8632Zip
@@ -483,7 +483,7 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
-    # @return [Object]
+    # @return [String]
     def admin_branding_generate_client_windows_x8632zip(self_address = nil)
       submit_params = {}
       unless self_address.nil?
@@ -494,7 +494,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/branding/generate-client/windows-x86_32-zip', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminBrandingGenerateClientWindowsX8664Exe
@@ -506,7 +506,7 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
-    # @return [Object]
+    # @return [String]
     def admin_branding_generate_client_windows_x8664exe(self_address = nil)
       submit_params = {}
       unless self_address.nil?
@@ -517,7 +517,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/branding/generate-client/windows-x86_64-exe', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminBrandingGenerateClientWindowsX8664Zip
@@ -529,7 +529,7 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
-    # @return [Object]
+    # @return [String]
     def admin_branding_generate_client_windows_x8664zip(self_address = nil)
       submit_params = {}
       unless self_address.nil?
@@ -540,7 +540,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/branding/generate-client/windows-x86_64-zip', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminBulletinSubmit
@@ -1396,7 +1396,7 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] job_id Selected job ID
-    # @return [Object]
+    # @return [String]
     def admin_get_job_log(job_id)
       submit_params = {}
       raise TypeError 'expected string' unless job_id.is_a? String
@@ -1405,7 +1405,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/get-job-log', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminGetJobProperties
@@ -1825,14 +1825,14 @@ module Comet
     # You must supply administrator authentication credentials to use this API.
     #
     # @param [Number] log A log day, selected from the options returned by the Get Log Files API
-    # @return [Object]
+    # @return [String]
     def admin_meta_read_logs(log)
       submit_params = {}
       submit_params['Log'] = log
 
       body = perform_request('/api/v1/admin/meta/read-logs', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminMetaRemoteStorageVaultGet
@@ -1887,7 +1887,7 @@ module Comet
     # You must supply administrator authentication credentials to use this API.
     #
     # @param [String] hash The resource identifier
-    # @return [Object]
+    # @return [String]
     def admin_meta_resource_get(hash)
       submit_params = {}
       raise TypeError 'expected string' unless hash.is_a? String
@@ -1896,7 +1896,7 @@ module Comet
 
       body = perform_request('/api/v1/admin/meta/resource/get', submit_params)
 
-      JSON.parse body
+      body
     end
 
     # AdminMetaResourceNew
