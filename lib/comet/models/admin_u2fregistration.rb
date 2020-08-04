@@ -7,6 +7,7 @@
 #
 # frozen_string_literal: true
 
+require 'base64'
 require 'json'
 
 module Comet
@@ -51,14 +52,7 @@ module Comet
         when 'RegisterTime'
           @register_time = v
         when 'Registration'
-          if v.nil?
-            @registration = []
-          else
-            @registration = Array.new(v.length)
-            v.each_with_index do |v1, i1|
-              @registration[i1] = v1
-            end
-          end
+          @registration = Base64.decode64(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -70,7 +64,7 @@ module Comet
       ret = {}
       ret['Description'] = @description
       ret['RegisterTime'] = @register_time
-      ret['Registration'] = @registration
+      ret['Registration'] = Base64.strict_encode64(@registration)
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
