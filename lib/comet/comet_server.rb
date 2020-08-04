@@ -36,7 +36,8 @@ module Comet
     end
 
     # AdminAccountProperties
-    # Retrieve properties about the current admin account
+    #
+    # Retrieve properties about the current admin account.
     # Some key parameters are obscured, but the obscured values are safely recognised by the corresponding AdminAccountSetProperties API.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -52,7 +53,8 @@ module Comet
     end
 
     # AdminAccountRegenerateTotp
-    # Generate a new TOTP secret
+    #
+    # Generate a new TOTP secret.
     # The secret is returned as a `data-uri` image of a QR code. The new secret is immediately applied to the current admin account.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -68,7 +70,8 @@ module Comet
     end
 
     # AdminAccountSessionRevoke
-    # Revoke a session key (log out)
+    #
+    # Revoke a session key (log out).
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -83,7 +86,8 @@ module Comet
     end
 
     # AdminAccountSessionStart
-    # Generate a session key (log in)
+    #
+    # Generate a session key (log in).
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -106,7 +110,8 @@ module Comet
     end
 
     # AdminAccountSessionStartAsUser
-    # Generate a session key for an end-user (log in as end-user)
+    #
+    # Generate a session key for an end-user (log in as end-user).
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -127,7 +132,8 @@ module Comet
     end
 
     # AdminAccountSetProperties
-    # Update settings for your own admin account
+    #
+    # Update settings for your own admin account.
     # Updating your account password requires you to supply your current password.
     # To set a new plaintext password, use a password format of 0 (PASSWORD_FORMAT_PLAINTEXT).
     # This API does not currently allow you to modify your TOTP secret or IP whitelist.
@@ -151,7 +157,8 @@ module Comet
     end
 
     # AdminAccountU2fRequestRegistrationChallenge
-    # Register a new FIDO U2F token
+    #
+    # Register a new FIDO U2F token.
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -172,7 +179,8 @@ module Comet
     end
 
     # AdminAccountU2fSubmitChallengeResponse
-    # Register a new FIDO U2F token
+    #
+    # Register a new FIDO U2F token.
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -209,7 +217,8 @@ module Comet
     end
 
     # AdminAccountValidateTotp
-    # Validate the TOTP code before turning 2fa(TOTP) on
+    #
+    # Validate the TOTP code before turning 2fa(TOTP) on.
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -230,7 +239,8 @@ module Comet
     end
 
     # AdminAddUser
-    # Add a new user account
+    #
+    # Add a new user account.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -264,7 +274,8 @@ module Comet
     end
 
     # AdminAddUserFromProfile
-    # Add a new user account (with all information)
+    #
+    # Add a new user account (with all information).
     # This allows you to create a new account and set all its properties at once (e.g. during account replication). Developers creating a signup form may find it simpler to use the AdminAddUser and AdminGetUserProfile / AdminSetUserProfile APIs separately.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -291,7 +302,8 @@ module Comet
     end
 
     # AdminBrandingAvailablePlatforms
-    # List available software download platforms
+    #
+    # List available software download platforms.
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
     # This API requires the Software Build Role to be enabled.
@@ -315,7 +327,8 @@ module Comet
     end
 
     # AdminBrandingGenerateClientByPlatform
-    # Download software
+    #
+    # Download software.
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
     # This API requires the Software Build Role to be enabled.
@@ -337,7 +350,8 @@ module Comet
     end
 
     # AdminBrandingGenerateClientLinuxgeneric
-    # Download software (Linux Server .run)
+    #
+    # Download software (Linux Server .run).
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
     # This API requires the Software Build Role to be enabled.
@@ -357,7 +371,8 @@ module Comet
     end
 
     # AdminBrandingGenerateClientMacosX8664
-    # Download software (macOS x86_64 pkg)
+    #
+    # Download software (macOS x86_64 pkg).
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
     # This API requires the Software Build Role to be enabled.
@@ -377,7 +392,8 @@ module Comet
     end
 
     # AdminBrandingGenerateClientTest
-    # Check if a software download is available
+    #
+    # Check if a software download is available.
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
     # This API requires the Software Build Role to be enabled.
@@ -404,7 +420,8 @@ module Comet
     end
 
     # AdminBrandingGenerateClientWindowsAnycpuExe
-    # Download software update (Windows AnyCPU exe)
+    #
+    # Download software update (Windows AnyCPU exe).
     # The exe endpoints are not recommended for end-users, as they may not be able to provide a codesigned installer if no custom codesigning certificate is present.
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
@@ -425,7 +442,8 @@ module Comet
     end
 
     # AdminBrandingGenerateClientWindowsAnycpuZip
-    # Download software (Windows AnyCPU zip)
+    #
+    # Download software (Windows AnyCPU zip).
     # The zip endpoints are recommended for end-users, as they may be able to provide a codesigned installer even when no custom codesigning certificate is present.
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
@@ -446,7 +464,8 @@ module Comet
     end
 
     # AdminBrandingGenerateClientWindowsX8632Exe
-    # Download software update (Windows x86_32 exe)
+    #
+    # Download software update (Windows x86_32 exe).
     # The exe endpoints are not recommended for end-users, as they may not be able to provide a codesigned installer if no custom codesigning certificate is present.
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
@@ -467,7 +486,8 @@ module Comet
     end
 
     # AdminBrandingGenerateClientWindowsX8632Zip
-    # Download software (Windows x86_32 zip)
+    #
+    # Download software (Windows x86_32 zip).
     # The zip endpoints are recommended for end-users, as they may be able to provide a codesigned installer even when no custom codesigning certificate is present.
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
@@ -488,7 +508,8 @@ module Comet
     end
 
     # AdminBrandingGenerateClientWindowsX8664Exe
-    # Download software update (Windows x86_64 exe)
+    #
+    # Download software update (Windows x86_64 exe).
     # The exe endpoints are not recommended for end-users, as they may not be able to provide a codesigned installer if no custom codesigning certificate is present.
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
@@ -509,7 +530,8 @@ module Comet
     end
 
     # AdminBrandingGenerateClientWindowsX8664Zip
-    # Download software (Windows x86_64 zip)
+    #
+    # Download software (Windows x86_64 zip).
     # The zip endpoints are recommended for end-users, as they may be able to provide a codesigned installer even when no custom codesigning certificate is present.
     #
     # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
@@ -530,7 +552,8 @@ module Comet
     end
 
     # AdminBulletinSubmit
-    # Send an email bulletin to all users
+    #
+    # Send an email bulletin to all users.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -556,7 +579,8 @@ module Comet
     end
 
     # AdminConstellationLastReport
-    # Get Constellation bucket usage report (cached)
+    #
+    # Get Constellation bucket usage report (cached).
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Constellation Role to be enabled.
@@ -572,7 +596,8 @@ module Comet
     end
 
     # AdminConstellationNewReport
-    # Get Constellation bucket usage report (regenerate)
+    #
+    # Get Constellation bucket usage report (regenerate).
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Constellation Role to be enabled.
@@ -588,7 +613,8 @@ module Comet
     end
 
     # AdminConstellationPruneNow
-    # Prune unused buckets
+    #
+    # Prune unused buckets.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Constellation Role to be enabled.
@@ -604,7 +630,8 @@ module Comet
     end
 
     # AdminConstellationStatus
-    # Get Constellation status
+    #
+    # Get Constellation status.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Constellation Role to be enabled.
@@ -620,7 +647,8 @@ module Comet
     end
 
     # AdminDeleteUser
-    # Delete user account
+    #
+    # Delete user account.
     # This does not remove any storage buckets. Unused storage buckets will be cleaned up by the Constellation Role.
     # Any stored data can not be decrypted without the user profile. Misuse can cause data loss!
     # This also allows to uninstall software from active devices under the user account
@@ -651,7 +679,8 @@ module Comet
     end
 
     # AdminDisableUserTotp
-    # Disable user account 2FA(TOTP) authentication
+    #
+    # Disable user account 2FA(TOTP) authentication.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -673,7 +702,8 @@ module Comet
     end
 
     # AdminDispatcherApplyRetentionRules
-    # Instruct a live connected device to apply retention rules now
+    #
+    # Instruct a live connected device to apply retention rules now.
     # This command is understood by Comet Backup 17.6.9 and newer.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -700,7 +730,8 @@ module Comet
     end
 
     # AdminDispatcherDeepverifyStorageVault
-    # Instruct a live connected device to deeply verify Storage Vault content
+    #
+    # Instruct a live connected device to deeply verify Storage Vault content.
     # This command is understood by Comet Backup 18.8.2 and newer.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -727,7 +758,8 @@ module Comet
     end
 
     # AdminDispatcherDeleteSnapshot
-    # Instruct a live connected device to delete a stored snapshot
+    #
+    # Instruct a live connected device to delete a stored snapshot.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -757,7 +789,8 @@ module Comet
     end
 
     # AdminDispatcherDropConnection
-    # Disconnect a live connected device
+    #
+    # Disconnect a live connected device.
     # The device will almost certainly attempt to reconnect.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -780,7 +813,8 @@ module Comet
     end
 
     # AdminDispatcherImportApply
-    # Instruct a live connected device to import settings from an installed product
+    #
+    # Instruct a live connected device to import settings from an installed product.
     # This command is understood by Comet Backup 17.12.0 and newer.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -807,7 +841,8 @@ module Comet
     end
 
     # AdminDispatcherKillProcess
-    # Instruct a live connected device to disconnect
+    #
+    # Instruct a live connected device to disconnect.
     # The device will terminate its live-connection process and will not reconnect.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -830,7 +865,8 @@ module Comet
     end
 
     # AdminDispatcherListActive
-    # List live connected devices
+    #
+    # List live connected devices.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -853,7 +889,8 @@ module Comet
     end
 
     # AdminDispatcherRefetchProfile
-    # Instruct a live connected device to refresh their profile
+    #
+    # Instruct a live connected device to refresh their profile.
     # This command is understood by Comet Backup 17.12.0 and newer.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -876,7 +913,8 @@ module Comet
     end
 
     # AdminDispatcherReindexStorageVault
-    # Instruct a live connected device to rebuild Storage Vault indexes now
+    #
+    # Instruct a live connected device to rebuild Storage Vault indexes now.
     # This command is understood by Comet Backup 18.6.9 and newer.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -903,7 +941,8 @@ module Comet
     end
 
     # AdminDispatcherRequestBrowseDiskDrives
-    # Request a list of physical disk drive information from a live connected device
+    #
+    # Request a list of physical disk drive information from a live connected device.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -925,7 +964,8 @@ module Comet
     end
 
     # AdminDispatcherRequestBrowseExchangeEdb
-    # Request a list of Exchange EDB databases from a live connected device
+    #
+    # Request a list of Exchange EDB databases from a live connected device.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -947,7 +987,8 @@ module Comet
     end
 
     # AdminDispatcherRequestBrowseHyperv
-    # Request a list of Hyper-V virtual machines from a live connected device
+    #
+    # Request a list of Hyper-V virtual machines from a live connected device.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -969,7 +1010,8 @@ module Comet
     end
 
     # AdminDispatcherRequestBrowseVssAaw
-    # Request a list of installed VSS Writers (Application-Aware Writers) from a live connected device
+    #
+    # Request a list of installed VSS Writers (Application-Aware Writers) from a live connected device.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -991,7 +1033,8 @@ module Comet
     end
 
     # AdminDispatcherRequestFilesystemObjects
-    # Request a list of filesystem objects from a live connected device
+    #
+    # Request a list of filesystem objects from a live connected device.
     # The device must have granted the administrator permission to view its filenames.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1027,7 +1070,8 @@ module Comet
     end
 
     # AdminDispatcherRequestImportSources
-    # Request a list of import sources from a live connected device
+    #
+    # Request a list of import sources from a live connected device.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1049,7 +1093,8 @@ module Comet
     end
 
     # AdminDispatcherRequestStoredObjects
-    # Request a list of stored objects inside an existing backup job
+    #
+    # Request a list of stored objects inside an existing backup job.
     # The remote device must have given consent for an MSP to browse their files.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1086,7 +1131,8 @@ module Comet
     end
 
     # AdminDispatcherRequestVaultSnapshots
-    # Request a list of Storage Vault snapshots from a live connected device
+    #
+    # Request a list of Storage Vault snapshots from a live connected device.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1112,7 +1158,8 @@ module Comet
     end
 
     # AdminDispatcherRunBackup
-    # Instruct a live connected device to run a scheduled backup
+    #
+    # Instruct a live connected device to run a scheduled backup.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1138,7 +1185,8 @@ module Comet
     end
 
     # AdminDispatcherRunBackupCustom
-    # Instruct a live connected device to run a backup
+    #
+    # Instruct a live connected device to run a backup.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1174,7 +1222,8 @@ module Comet
     end
 
     # AdminDispatcherRunRestore
-    # Instruct a live connected device to perform a local restore
+    #
+    # Instruct a live connected device to perform a local restore.
     # This command is understood by Comet Backup 17.9.3 and newer.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1221,7 +1270,8 @@ module Comet
     end
 
     # AdminDispatcherRunRestoreCustom
-    # Instruct a live connected device to perform a local restore
+    #
+    # Instruct a live connected device to perform a local restore.
     # This command is understood by Comet Backup 18.6.0 and newer.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1268,7 +1318,8 @@ module Comet
     end
 
     # AdminDispatcherUninstallSoftware
-    # Instruct a live connected device to self-uninstall the software
+    #
+    # Instruct a live connected device to self-uninstall the software.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1292,7 +1343,8 @@ module Comet
     end
 
     # AdminDispatcherUnlock
-    # Instruct a live connected device to remove lock files from a Storage Vault
+    #
+    # Instruct a live connected device to remove lock files from a Storage Vault.
     # Misuse can cause data loss!
     # This command is understood by Comet Backup 17.9.4 and newer.
     #
@@ -1320,7 +1372,8 @@ module Comet
     end
 
     # AdminDispatcherUpdateLoginUrl
-    # Instruct a live connected device to update its login server URL
+    #
+    # Instruct a live connected device to update its login server URL.
     # The device will attempt to connect to the new Auth Role Comet Server using its current username and password. If the test connection succeeds, the device migrates its saved connection settings and live connections to the new server. If the device is not registered on the new URL, or if the credentials are incorrect, the device remains on the current Auth Role server.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1347,7 +1400,8 @@ module Comet
     end
 
     # AdminDispatcherUpdateSoftware
-    # Instruct a live connected device to download a software update
+    #
+    # Instruct a live connected device to download a software update.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1376,7 +1430,8 @@ module Comet
     end
 
     # AdminGetJobLog
-    # Get the report log entries for a single job
+    #
+    # Get the report log entries for a single job.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1393,7 +1448,8 @@ module Comet
     end
 
     # AdminGetJobProperties
-    # Get properties of a single job
+    #
+    # Get properties of a single job.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1415,7 +1471,8 @@ module Comet
     end
 
     # AdminGetJobsAll
-    # Get jobs (All)
+    #
+    # Get jobs (All).
     # The jobs are returned in an unspecified order.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1439,7 +1496,8 @@ module Comet
     end
 
     # AdminGetJobsForCustomSearch
-    # Get jobs (for custom search)
+    #
+    # Get jobs (for custom search).
     # The jobs are returned in an unspecified order.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1469,7 +1527,8 @@ module Comet
     end
 
     # AdminGetJobsForDateRange
-    # Get jobs (for date range)
+    #
+    # Get jobs (for date range).
     # The jobs are returned in an unspecified order.
     #
     # If the `Start` parameter is later than `End`, they will be swapped.
@@ -1505,7 +1564,8 @@ module Comet
     end
 
     # AdminGetJobsForUser
-    # Get jobs (for user)
+    #
+    # Get jobs (for user).
     # The jobs are returned in an unspecified order.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1535,7 +1595,8 @@ module Comet
     end
 
     # AdminGetJobsRecent
-    # Get jobs (Recent and incomplete)
+    #
+    # Get jobs (Recent and incomplete).
     # The jobs are returned in an unspecified order.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1559,7 +1620,8 @@ module Comet
     end
 
     # AdminGetUserProfile
-    # Get user account profile
+    #
+    # Get user account profile.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1581,7 +1643,8 @@ module Comet
     end
 
     # AdminGetUserProfileAndHash
-    # Get user account profile (atomic)
+    #
+    # Get user account profile (atomic).
     # The resulting hash parameter can be passed to the corresponding update API, to atomically ensure that no changes occur between get/set operations.
     # The hash format is not publicly documented and may change in a future server version. Use server APIs to retrieve current hash values.
     #
@@ -1605,7 +1668,8 @@ module Comet
     end
 
     # AdminGetUserProfileHash
-    # Get user account profile (hash)
+    #
+    # Get user account profile (hash).
     # The profile hash can be used to determine if a user account profile has changed.
     # The hash format is not publicly documented and may change in a future server version. Use server APIs to retrieve current hash values.
     #
@@ -1629,7 +1693,8 @@ module Comet
     end
 
     # AdminJobCancel
-    # Cancel a running job
+    #
+    # Cancel a running job.
     # A request is sent to the live-connected device, asking it to cancel the operation. This may fail if there is no live-connection.
     # Only jobs from Comet 18.3.5 or newer can be cancelled. A job can only be cancelled if it has a non-empty CancellationID field in its properties.
     #
@@ -1657,7 +1722,8 @@ module Comet
     end
 
     # AdminListUsers
-    # List all user accounts
+    #
+    # List all user accounts.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1681,7 +1747,8 @@ module Comet
     end
 
     # AdminListUsersFull
-    # List all user account profiles
+    #
+    # List all user account profiles.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1704,7 +1771,8 @@ module Comet
     end
 
     # AdminMetaBrandingConfigGet
-    # Get Branding configuration
+    #
+    # Get Branding configuration.
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
@@ -1720,7 +1788,8 @@ module Comet
     end
 
     # AdminMetaBrandingConfigSet
-    # Set Branding configuration
+    #
+    # Set Branding configuration.
     # Note that file resources must be provided using a resource URI I.E `"resource://05ba0b90ee66bda433169581188aba8d29faa938f9464cccd651a02fdf2e5b57"`. See AdminMetaResourceNew for the API documentation to create new file resources.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1743,7 +1812,8 @@ module Comet
     end
 
     # AdminMetaBuildConfigGet
-    # Get Software Build Role configuration
+    #
+    # Get Software Build Role configuration.
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
@@ -1759,7 +1829,8 @@ module Comet
     end
 
     # AdminMetaBuildConfigSet
-    # Set Build Role configuration
+    #
+    # Set Build Role configuration.
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
@@ -1781,7 +1852,8 @@ module Comet
     end
 
     # AdminMetaListAvailableLogDays
-    # Get log files
+    #
+    # Get log files.
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -1802,7 +1874,8 @@ module Comet
     end
 
     # AdminMetaReadLogs
-    # Get log file content
+    #
+    # Get log file content.
     # On non-Windows platforms, log content uses LF line endings. On Windows, Comet changed from LF to CRLF line endings in 18.3.2.
     # This API does not automatically convert line endings; around the 18.3.2 timeframe, log content may even contain mixed line-endings.
     #
@@ -1818,7 +1891,8 @@ module Comet
     end
 
     # AdminMetaRemoteStorageVaultGet
-    # Get Requesting Remote Storage Vault Config
+    #
+    # Get Requesting Remote Storage Vault Config.
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
@@ -1841,7 +1915,8 @@ module Comet
     end
 
     # AdminMetaRemoteStorageVaultSet
-    # Set Requestable Remote Storage Vault options
+    #
+    # Set Requestable Remote Storage Vault options.
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
@@ -1863,7 +1938,8 @@ module Comet
     end
 
     # AdminMetaResourceGet
-    # Get a resource file
+    #
+    # Get a resource file.
     # Resources are used to upload files within the server configuration.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1880,7 +1956,8 @@ module Comet
     end
 
     # AdminMetaResourceNew
-    # Upload a resource file
+    #
+    # Upload a resource file.
     # Resources are used to upload files within the server configuration.
     # The resulting resource ID is autogenerated.
     # The lifespan of an uploaded resource is undefined. Resources may be deleted automatically, but it should remain available until the next call to AdminMetaServerconfigSet, and will remain available for as long as it is referenced by the server configuration.
@@ -1898,7 +1975,8 @@ module Comet
     end
 
     # AdminMetaRestartService
-    # Restart server
+    #
+    # Restart server.
     # The Comet Server process will exit. The service manager should restart the server automatically.
     #
     # Prior to 18.9.2, this API terminated the server immediately without returning a response. In 18.9.2 and later, it returns a successful response before shutting down.
@@ -1917,7 +1995,8 @@ module Comet
     end
 
     # AdminMetaSendTestEmail
-    # Send a test email message
+    #
+    # Send a test email message.
     # This allows the Comet Server web interface to support testing different email credentials during setup.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1944,7 +2023,8 @@ module Comet
     end
 
     # AdminMetaServerConfigGet
-    # Get server configuration
+    #
+    # Get server configuration.
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
@@ -1960,7 +2040,8 @@ module Comet
     end
 
     # AdminMetaServerConfigNetworkInterfaces
-    # List the available network interfaces on the PC running Comet Server
+    #
+    # List the available network interfaces on the PC running Comet Server.
     # Any IPv6 addresses are listed in compressed form without square-brackets.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -1985,7 +2066,8 @@ module Comet
     end
 
     # AdminMetaServerConfigSet
-    # Set server configuration
+    #
+    # Set server configuration.
     # The Comet Server process will exit. The service manager should restart the server automatically.
     #
     # Prior to 18.9.2, this API terminated the server immediately without returning a response. In 18.9.2 and later, it returns a successful response before shutting down.
@@ -2010,7 +2092,8 @@ module Comet
     end
 
     # AdminMetaShutdownService
-    # Shut down server
+    #
+    # Shut down server.
     # The Comet Server process will exit.
     #
     # Prior to 18.9.2, this API terminated the server immediately without returning a response. In 18.9.2 and later, it returns a successful response before shutting down.
@@ -2029,7 +2112,8 @@ module Comet
     end
 
     # AdminMetaSoftwareUpdateNews
-    # Get software update news from the software provider
+    #
+    # Get software update news from the software provider.
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -2044,7 +2128,8 @@ module Comet
     end
 
     # AdminMetaStats
-    # Get Comet Server historical statistics
+    #
+    # Get Comet Server historical statistics.
     # The returned key-value map is not necessarily ordered. Client-side code should sort the result before display.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -2071,7 +2156,8 @@ module Comet
     end
 
     # AdminMetaVersion
-    # Get server properties
+    #
+    # Get server properties.
     # Retrieve the version number and basic properties about the server.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -2087,7 +2173,8 @@ module Comet
     end
 
     # AdminMetaWebhookOptionsGet
-    # Get the server webhook configuration
+    #
+    # Get the server webhook configuration.
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -2109,7 +2196,8 @@ module Comet
     end
 
     # AdminMetaWebhookOptionsSet
-    # Update the server webhook configuration
+    #
+    # Update the server webhook configuration.
     # Calling this endpoint will interrupt any messages currently queued for existing webhook destinations.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -2131,7 +2219,8 @@ module Comet
     end
 
     # AdminNewsGetAll
-    # Get News entries (Admin)
+    #
+    # Get News entries (Admin).
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2154,7 +2243,8 @@ module Comet
     end
 
     # AdminNewsRemove
-    # Remove news item
+    #
+    # Remove news item.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2176,7 +2266,8 @@ module Comet
     end
 
     # AdminNewsSubmit
-    # Submit news item
+    #
+    # Submit news item.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2198,7 +2289,8 @@ module Comet
     end
 
     # AdminPoliciesDelete
-    # Delete an existing policy object
+    #
+    # Delete an existing policy object.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2220,7 +2312,8 @@ module Comet
     end
 
     # AdminPoliciesGet
-    # Retrieve a single policy object
+    #
+    # Retrieve a single policy object.
     # A hash is also returned, to allow atomic modification operations.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -2243,7 +2336,8 @@ module Comet
     end
 
     # AdminPoliciesList
-    # List all policy object names
+    #
+    # List all policy object names.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2267,7 +2361,8 @@ module Comet
     end
 
     # AdminPoliciesListFull
-    # Get all policy objects
+    #
+    # Get all policy objects.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2290,7 +2385,8 @@ module Comet
     end
 
     # AdminPoliciesNew
-    # Create a new policy object
+    #
+    # Create a new policy object.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2312,7 +2408,8 @@ module Comet
     end
 
     # AdminPoliciesSet
-    # Update an existing policy object
+    #
+    # Update an existing policy object.
     # An optional hash may be used, to ensure the modification was atomic.
     # This API can also be used to create a new policy object with a specific hash.
     #
@@ -2346,7 +2443,8 @@ module Comet
     end
 
     # AdminPreviewUserEmailReport
-    # Preview an email report for a customer
+    #
+    # Preview an email report for a customer.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2378,7 +2476,8 @@ module Comet
     end
 
     # AdminReplicationState
-    # Get Replication status
+    #
+    # Get Replication status.
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -2400,7 +2499,8 @@ module Comet
     end
 
     # AdminRequestStorageVault
-    # Request a new Storage Vault on behalf of a user
+    #
+    # Request a new Storage Vault on behalf of a user.
     # This action does not respect the "Prevent creating new Storage Vaults (via Request)" policy setting. New Storage Vaults can be requested regardless of the policy setting.
     # Prior to Comet 19.8.0, the response type was CometAPIResponseMessage (i.e. no DestinationID field in response).
     #
@@ -2434,7 +2534,8 @@ module Comet
     end
 
     # AdminRequestStorageVaultProviders
-    # Get the available options for Requesting a Storage Vault
+    #
+    # Get the available options for Requesting a Storage Vault.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2458,7 +2559,8 @@ module Comet
     end
 
     # AdminResetUserPassword
-    # Reset user account password
+    #
+    # Reset user account password.
     # The user account must have a recovery code present. A new replacement recovery code will be generated automatically.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -2489,7 +2591,8 @@ module Comet
     end
 
     # AdminRevokeDevice
-    # Revoke device from user account
+    #
+    # Revoke device from user account.
     # It's possible to simply remove the Device section from the user's profile, however, using this dedicated API will also gracefully handle live connections.
     #
     # You must supply administrator authentication credentials to use this API.
@@ -2516,7 +2619,8 @@ module Comet
     end
 
     # AdminSetUserProfile
-    # Modify user account profile
+    #
+    # Modify user account profile.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2542,7 +2646,8 @@ module Comet
     end
 
     # AdminSetUserProfileHash
-    # Modify user account profile (atomic)
+    #
+    # Modify user account profile (atomic).
     # The hash parameter can be determined from the corresponding API, to atomically ensure that no changes occur between get/set operations.
     # The hash format is not publicly documented and may change in a future server version. Use server APIs to retrieve current hash values.
     #
@@ -2574,7 +2679,8 @@ module Comet
     end
 
     # AdminStorageDeleteBucket
-    # Delete a bucket
+    #
+    # Delete a bucket.
     # All data will be removed from the server. Misuse can cause data loss!
     #
     # You must supply administrator authentication credentials to use this API.
@@ -2597,7 +2703,8 @@ module Comet
     end
 
     # AdminStorageFreeSpace
-    # Retrieve available space metrics
+    #
+    # Retrieve available space metrics.
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
@@ -2620,7 +2727,8 @@ module Comet
     end
 
     # AdminStorageListBuckets
-    # List all buckets
+    #
+    # List all buckets.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Storage Role to be enabled.
@@ -2643,7 +2751,8 @@ module Comet
     end
 
     # AdminStorageRegisterBucket
-    # Create a new bucket
+    #
+    # Create a new bucket.
     # Leave the Set* parameters blank to generate a bucket with random credentials, or, supply a pre-hashed password for zero-knowledge operations.
     # Any auto-generated credentials are returned in the response message.
     #
@@ -2681,7 +2790,8 @@ module Comet
     end
 
     # AdminUpdateCampaignStart
-    # Start a new software update campaign
+    #
+    # Start a new software update campaign.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Software Build Role to be enabled.
@@ -2704,7 +2814,8 @@ module Comet
     end
 
     # AdminUpdateCampaignStatus
-    # Get current campaign status
+    #
+    # Get current campaign status.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Software Build Role to be enabled.
@@ -2721,7 +2832,8 @@ module Comet
     end
 
     # HybridSessionStart
-    # Generate a session key (log in)
+    #
+    # Generate a session key (log in).
     # This hybrid API allows you to log in to the Comet Server as either an administrator or end-user account.
     # This API behaves like either AdminAccountSessionStart or UserWebSessionStart, depending on what the supplied credentials were valid for.
     #
@@ -2736,7 +2848,8 @@ module Comet
     end
 
     # UserWebSessionRevoke
-    # Revoke a session key (log out)
+    #
+    # Revoke a session key (log out).
     #
     # You must supply user authentication credentials to use this API, and the user account must be authorized for web access.
     # This API requires the Auth Role to be enabled.
@@ -2752,7 +2865,8 @@ module Comet
     end
 
     # UserWebSessionStart
-    # Generate a session key (log in)
+    #
+    # Generate a session key (log in).
     #
     # You must supply user authentication credentials to use this API, and the user account must be authorized for web access.
     # This API requires the Auth Role to be enabled.
