@@ -7,6 +7,7 @@
 #
 # frozen_string_literal: true
 
+require_relative 'comet/api_response_error'
 require_relative 'comet/comet_server'
 require_relative 'comet/definitions'
 require_relative 'comet/models/add_bucket_response_message'

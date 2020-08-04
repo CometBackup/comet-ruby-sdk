@@ -2896,15 +2896,16 @@ module Comet
     # If the supplied object represents an unsuccessful CometAPIResponseMessage, raise
     # it as an error.
     #
-    # @param [Hash] hash
-    def check_status(hash)
-      return unless json_body.is_a? Hash
+    # @param [Hash] obj
+    def check_status(obj)
+      return unless obj.is_a? Hash
+      return unless obj.key?('Status')
+      return unless obj.key?('Message')
+      return unless obj['Status'] != 200 && obj['Status'] != 201
 
-      if json_body.key?('Status') && json_body.key?('Message') && !(json_body['Status'] == 200 || json_body['Status'] == 201) do
-        ret_error = Comet::CometAPIResponseMessage.new
-        ret_error.from_hash(json_body)
-        raise ret_error
-      end
+      ret_error = Comet::CometAPIResponseMessage.new
+      ret_error.from_hash(obj)
+      raise Comet::APIResponseError.new(ret_error)
     end
 
     # Perform a synchronous HTTP request.
