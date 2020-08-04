@@ -44,6 +44,8 @@ gem build comet_backup_ruby_sdk.gemspec
 
 ## Usage
 
+Connect to the Comet Server and iterate through user profiles:
+
 ```ruby
 require 'comet_backup_ruby_sdk'
 
@@ -51,6 +53,24 @@ client = Comet::CometServer.new("http://127.0.0.1:8060", "admin", "admin")
 
 client.admin_list_users_full.each do |username, profile|
   puts "#{username} has #{profile.destinations.length} Storage Vault(s)"
+end
+```
+
+The Comet Server API always returns an HTTP 200 status code, and puts application-level errors in the response message body using the `Comet::CometAPIResponseMessage` structure. This helps to distinguish between network-level errors and proxy-level errors. This SDK converts application-level errors to raise exceptions:
+
+```ruby
+begin
+  client.admin_get_user_profile('non_existent_user')
+
+rescue Comet::APIResponseError => err
+  if err.detail.status >= 400 && err.detail.status < 500
+    puts "Comet Server returned caller-side error (4xx) - permanent, do not retry"
+  else
+    puts "Comet Server returned server-side error (5xx) - may want to retry"
+  end
+
+rescue StandardError
+  puts "Failed to reach the Comet Server (non-200 HTTP status code) - may want to retry"
 end
 ```
 
