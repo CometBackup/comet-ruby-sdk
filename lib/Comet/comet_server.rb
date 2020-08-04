@@ -42,6 +42,7 @@ module Comet
       body = perform_request('/api/v1/admin/account/properties')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::AdminAccountPropertiesResponse.new
       ret.from_hash(json_body)
       ret
@@ -58,6 +59,7 @@ module Comet
       body = perform_request('/api/v1/admin/account/regenerate-totp')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::TotpRegeneratedResponse.new
       ret.from_hash(json_body)
       ret
@@ -73,6 +75,7 @@ module Comet
       body = perform_request('/api/v1/admin/account/session-revoke')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -96,6 +99,7 @@ module Comet
       body = perform_request('/api/v1/admin/account/session-start', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::SessionKeyRegeneratedResponse.new
       ret.from_hash(json_body)
       ret
@@ -117,6 +121,7 @@ module Comet
       body = perform_request('/api/v1/admin/account/session-start-as-user', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::SessionKeyRegeneratedResponse.new
       ret.from_hash(json_body)
       ret
@@ -141,6 +146,7 @@ module Comet
       body = perform_request('/api/v1/admin/account/set-properties', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -162,6 +168,7 @@ module Comet
       body = perform_request('/api/v1/admin/account/u2f/request-registration-challenge', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::U2FRegistrationChallengeResponse.new
       ret.from_hash(json_body)
       ret
@@ -199,6 +206,7 @@ module Comet
       body = perform_request('/api/v1/admin/account/u2f/submit-challenge-response', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -220,6 +228,7 @@ module Comet
       body = perform_request('/api/v1/admin/account/validate-totp', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -254,6 +263,7 @@ module Comet
       body = perform_request('/api/v1/admin/add-user', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -281,6 +291,7 @@ module Comet
       body = perform_request('/api/v1/admin/add-user-from-profile', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -298,6 +309,7 @@ module Comet
       body = perform_request('/api/v1/admin/branding/available-platforms')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = {}
       if json_body.nil?
         ret = {}
@@ -400,6 +412,7 @@ module Comet
       body = perform_request('/api/v1/admin/branding/generate-client/test', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -564,6 +577,7 @@ module Comet
       body = perform_request('/api/v1/admin/bulletin/submit', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -580,6 +594,7 @@ module Comet
       body = perform_request('/api/v1/admin/constellation/last-report')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::ConstellationCheckReport.new
       ret.from_hash(json_body)
       ret
@@ -596,6 +611,7 @@ module Comet
       body = perform_request('/api/v1/admin/constellation/new-report')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::ConstellationCheckReport.new
       ret.from_hash(json_body)
       ret
@@ -612,6 +628,7 @@ module Comet
       body = perform_request('/api/v1/admin/constellation/prune-now')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -628,6 +645,7 @@ module Comet
       body = perform_request('/api/v1/admin/constellation/status')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::ConstellationStatusAPIResponse.new
       ret.from_hash(json_body)
       ret
@@ -659,6 +677,7 @@ module Comet
       body = perform_request('/api/v1/admin/delete-user', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -681,6 +700,7 @@ module Comet
       body = perform_request('/api/v1/admin/disable-user-totp', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -708,6 +728,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/apply-retention-rules', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -735,6 +756,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/deepverify-storage-vault', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -765,6 +787,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/delete-snapshot', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -788,6 +811,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/drop-connection', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -815,6 +839,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/import-apply', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -838,6 +863,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/kill-process', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -854,6 +880,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/list-active')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = {}
       if json_body.nil?
         ret = {}
@@ -884,6 +911,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/refetch-profile', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -911,6 +939,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/reindex-storage-vault', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -933,6 +962,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/request-browse-disk-drives', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::BrowseDiskDrivesResponse.new
       ret.from_hash(json_body)
       ret
@@ -955,6 +985,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/request-browse-exchange-edb', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::BrowseEDBResponse.new
       ret.from_hash(json_body)
       ret
@@ -977,6 +1008,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/request-browse-hyperv', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::BrowseHVResponse.new
       ret.from_hash(json_body)
       ret
@@ -999,6 +1031,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/request-browse-vss-aaw', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::BrowseVSSResponse.new
       ret.from_hash(json_body)
       ret
@@ -1028,6 +1061,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/request-filesystem-objects', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -1057,6 +1091,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/request-import-sources', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::DispatcherAdminSourcesResponse.new
       ret.from_hash(json_body)
       ret
@@ -1094,6 +1129,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/request-stored-objects', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::DispatcherStoredObjectsResponse.new
       ret.from_hash(json_body)
       ret
@@ -1120,6 +1156,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/request-vault-snapshots', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::DispatcherVaultSnapshotsResponse.new
       ret.from_hash(json_body)
       ret
@@ -1146,6 +1183,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/run-backup', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1182,6 +1220,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/run-backup-custom', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1229,6 +1268,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/run-restore', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1276,6 +1316,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/run-restore-custom', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1300,6 +1341,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/uninstall-software', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1328,6 +1370,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/unlock', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1355,6 +1398,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/update-login-url', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1384,6 +1428,7 @@ module Comet
       body = perform_request('/api/v1/admin/dispatcher/update-software', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1425,6 +1470,7 @@ module Comet
       body = perform_request('/api/v1/admin/get-job-properties', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::BackupJobDetail.new
       ret.from_hash(json_body)
       ret
@@ -1442,6 +1488,7 @@ module Comet
       body = perform_request('/api/v1/admin/get-jobs-all')
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -1472,6 +1519,7 @@ module Comet
       body = perform_request('/api/v1/admin/get-jobs-for-custom-search', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -1508,6 +1556,7 @@ module Comet
       body = perform_request('/api/v1/admin/get-jobs-for-date-range', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -1538,6 +1587,7 @@ module Comet
       body = perform_request('/api/v1/admin/get-jobs-for-user', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -1562,6 +1612,7 @@ module Comet
       body = perform_request('/api/v1/admin/get-jobs-recent')
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -1591,6 +1642,7 @@ module Comet
       body = perform_request('/api/v1/admin/get-user-profile', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::UserProfileConfig.new
       ret.from_hash(json_body)
       ret
@@ -1615,6 +1667,7 @@ module Comet
       body = perform_request('/api/v1/admin/get-user-profile-and-hash', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::GetProfileAndHashResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1639,6 +1692,7 @@ module Comet
       body = perform_request('/api/v1/admin/get-user-profile-hash', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::GetProfileHashResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1667,6 +1721,7 @@ module Comet
       body = perform_request('/api/v1/admin/job/cancel', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1683,6 +1738,7 @@ module Comet
       body = perform_request('/api/v1/admin/list-users')
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -1707,6 +1763,7 @@ module Comet
       body = perform_request('/api/v1/admin/list-users-full')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = {}
       if json_body.nil?
         ret = {}
@@ -1730,6 +1787,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/branding-config/get')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::ServerConfigOptionsBrandingFragment.new
       ret.from_hash(json_body)
       ret
@@ -1753,6 +1811,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/branding-config/set', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1769,6 +1828,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/build-config/get')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::ServerConfigOptionsSoftwareBuildRoleFragment.new
       ret.from_hash(json_body)
       ret
@@ -1791,6 +1851,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/build-config/set', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1806,6 +1867,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/list-available-log-days')
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -1846,6 +1908,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/remote-storage-vault/get')
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -1875,6 +1938,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/remote-storage-vault/set', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1912,6 +1976,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/resource/new')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::AdminResourceResponse.new
       ret.from_hash(json_body)
       ret
@@ -1931,6 +1996,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/restart-service')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1958,6 +2024,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/send-test-email', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -1974,6 +2041,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/server-config/get')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::ServerConfigOptions.new
       ret.from_hash(json_body)
       ret
@@ -1991,6 +2059,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/server-config/network-interfaces')
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -2024,6 +2093,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/server-config/set', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2043,6 +2113,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/shutdown-service')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2058,6 +2129,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/software-update-news')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::SoftwareUpdateNewsResponse.new
       ret.from_hash(json_body)
       ret
@@ -2078,6 +2150,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/stats', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = {}
       if json_body.nil?
         ret = {}
@@ -2101,6 +2174,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/version')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::ServerMetaVersionInfo.new
       ret.from_hash(json_body)
       ret
@@ -2116,6 +2190,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/webhook-options/get')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = {}
       if json_body.nil?
         ret = {}
@@ -2145,6 +2220,7 @@ module Comet
       body = perform_request('/api/v1/admin/meta/webhook-options/set', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2161,6 +2237,7 @@ module Comet
       body = perform_request('/api/v1/admin/news/get-all')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = {}
       if json_body.nil?
         ret = {}
@@ -2190,6 +2267,7 @@ module Comet
       body = perform_request('/api/v1/admin/news/remove', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2212,6 +2290,7 @@ module Comet
       body = perform_request('/api/v1/admin/news/submit', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2234,6 +2313,7 @@ module Comet
       body = perform_request('/api/v1/admin/policies/delete', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2257,6 +2337,7 @@ module Comet
       body = perform_request('/api/v1/admin/policies/get', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::GetGroupPolicyResponse.new
       ret.from_hash(json_body)
       ret
@@ -2273,6 +2354,7 @@ module Comet
       body = perform_request('/api/v1/admin/policies/list')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = {}
       if json_body.nil?
         ret = {}
@@ -2297,6 +2379,7 @@ module Comet
       body = perform_request('/api/v1/admin/policies/list-full')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = {}
       if json_body.nil?
         ret = {}
@@ -2326,6 +2409,7 @@ module Comet
       body = perform_request('/api/v1/admin/policies/new', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CreateGroupPolicyResponse.new
       ret.from_hash(json_body)
       ret
@@ -2360,6 +2444,7 @@ module Comet
       body = perform_request('/api/v1/admin/policies/set', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2392,6 +2477,7 @@ module Comet
       body = perform_request('/api/v1/admin/preview-user-email-report', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::EmailReportGeneratedPreview.new
       ret.from_hash(json_body)
       ret
@@ -2407,6 +2493,7 @@ module Comet
       body = perform_request('/api/v1/admin/replication/state')
 
       json_body = JSON.parse body
+      check_status json_body
       if json_body.nil?
         ret = []
       else
@@ -2448,6 +2535,7 @@ module Comet
       body = perform_request('/api/v1/admin/request-storage-vault', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::RequestStorageVaultResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2464,6 +2552,7 @@ module Comet
       body = perform_request('/api/v1/admin/request-storage-vault-providers')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = {}
       if json_body.nil?
         ret = {}
@@ -2503,6 +2592,7 @@ module Comet
       body = perform_request('/api/v1/admin/reset-user-password', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2530,6 +2620,7 @@ module Comet
       body = perform_request('/api/v1/admin/revoke-device', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2556,6 +2647,7 @@ module Comet
       body = perform_request('/api/v1/admin/set-user-profile', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2588,6 +2680,7 @@ module Comet
       body = perform_request('/api/v1/admin/set-user-profile-hash', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2611,6 +2704,7 @@ module Comet
       body = perform_request('/api/v1/admin/storage/delete-bucket', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2634,6 +2728,7 @@ module Comet
       body = perform_request('/api/v1/admin/storage/free-space', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::StorageFreeSpaceInfo.new
       ret.from_hash(json_body)
       ret
@@ -2650,6 +2745,7 @@ module Comet
       body = perform_request('/api/v1/admin/storage/list-buckets')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = {}
       if json_body.nil?
         ret = {}
@@ -2695,6 +2791,7 @@ module Comet
       body = perform_request('/api/v1/admin/storage/register-bucket', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::AddBucketResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2718,6 +2815,7 @@ module Comet
       body = perform_request('/api/v1/admin/update-campaign/start', submit_params)
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2735,6 +2833,7 @@ module Comet
       body = perform_request('/api/v1/admin/update-campaign/status')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::UpdateCampaignStatus.new
       ret.from_hash(json_body)
       ret
@@ -2750,6 +2849,7 @@ module Comet
       body = perform_request('/api/v1/hybrid/session/start')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::SessionKeyRegeneratedResponse.new
       ret.from_hash(json_body)
       ret
@@ -2766,6 +2866,7 @@ module Comet
       body = perform_request('/api/v1/user/web/session/revoke')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
@@ -2782,11 +2883,25 @@ module Comet
       body = perform_request('/api/v1/user/web/session/start')
 
       json_body = JSON.parse body
+      check_status json_body
       ret = Comet::SessionKeyRegeneratedResponse.new
       ret.from_hash(json_body)
       ret
     end
 
+    # If the supplied object represents an unsuccessful CometAPIResponseMessage, raise
+    # it as an error.
+    #
+    # @param [Hash] hash
+    def check_status(hash)
+      return unless json_body.is_a? Hash
+
+      if json_body.key?('Status') && json_body.key?('Message') && !(json_body['Status'] == 200 || json_body['Status'] == 201) do
+        ret_error = Comet::CometAPIResponseMessage.new
+        ret_error.from_hash(json_body)
+        raise ret_error
+      end
+    end
 
     # Perform a synchronous HTTP request.
     #
