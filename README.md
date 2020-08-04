@@ -33,9 +33,11 @@ bundle
 
 Or install using [Gem](https://rubygems.org/):
 
-    $ gem install comet_backup_ruby_sdk
+```bash
+gem install comet_backup_ruby_sdk
+```
 
-To compile the gem from source:
+To compile the Gem from source:
 
 ```bash
 git clone https://github.com/CometBackup/comet-ruby-sdk.git
