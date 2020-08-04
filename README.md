@@ -59,6 +59,8 @@ client.admin_list_users_full.each do |username, profile|
 end
 ```
 
+### Error handling
+
 The Comet Server API always returns an HTTP 200 status code, and puts application-level errors in the response message body using the `Comet::CometAPIResponseMessage` structure. This helps to distinguish between network-level errors and proxy-level errors. This SDK converts application-level errors to raise exceptions:
 
 ```ruby
@@ -75,6 +77,17 @@ rescue Comet::APIResponseError => err
 rescue StandardError
   puts "Failed to reach the Comet Server (non-200 HTTP status code) - may want to retry"
 end
+```
+
+### Running SDK test suite
+
+```ruby
+bundle exec rake rubocop
+
+COMETSERVER_ADDRESS='http://127.0.0.1:8060' \
+	COMETSERVER_ADMINUSER=admin \
+	COMETSERVER_ADMINPASS=admin \
+	bundle exec rake test
 ```
 
 ## Getting Help
