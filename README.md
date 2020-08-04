@@ -1,7 +1,8 @@
 # Ruby SDK for the Comet Server API
 
 [![@CometBackup on Twitter](https://img.shields.io/badge/twitter-%40CometBackup-blue.svg?style=flat)](https://twitter.com/CometBackup)
-![MIT License](https://img.shields.io/packagist/l/cometbackup/comet-php-sdk.svg)
+[![Gem Version](https://badge.fury.io/rb/comet_backup_ruby_sdk.svg)](https://badge.fury.io/rb/comet_backup_ruby_sdk)
+![MIT License](https://img.shields.io/badge/license-MIT-green)
 
 The Comet Server API allows you to create and manage customer accounts on your Comet Server.
 
@@ -21,7 +22,7 @@ Older API libraries can be safely used with newer versions of Comet Server. Unkn
 
 ## Getting Started
 
-This package is provided as a Gem hosted on [rubygems.org](https://rubygems.org/).
+This package is provided as a Gem hosted on [rubygems.org](https://rubygems.org/gems/comet_backup_ruby_sdk).
 
 Install using [Bundler](https://bundler.io/):
 
