@@ -49,9 +49,9 @@ require 'comet_backup_ruby_sdk'
 
 client = Comet::CometServer.new("http://127.0.0.1:8060", "admin", "admin")
 
-client.admin_list_users_full.each { |username, profile|
-    puts "#{username} has #{profile.destinations.length} Storage Vault(s)"
-}
+client.admin_list_users_full.each do |username, profile|
+  puts "#{username} has #{profile.destinations.length} Storage Vault(s)"
+end
 ```
 
 ## Getting Help
