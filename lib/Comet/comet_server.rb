@@ -26,6 +26,10 @@ module Comet
 
     # Initialize a new CometServer class instance.
     def initialize(server_address, username, password)
+      raise TypeError 'expected string' unless server_address.is_a? String
+      raise TypeError 'expected string' unless username.is_a? String
+      raise TypeError 'expected string' unless password.is_a? String
+
       @server_address = server_address
       @username = username
       @password = password
