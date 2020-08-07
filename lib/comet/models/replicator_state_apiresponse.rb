@@ -54,6 +54,22 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @description = ""
+      @remote_server_id = ""
+      @display_class = ""
+      @active_workers = ""
+      @total_workers = ""
+      @state = ""
+      @items_queued = ""
+      @bytes_queued = ""
+      @last_worker_submit_time = ""
+      @current_time = ""
+      @items_replicated = ""
+      @bytes_replicated = ""
       @unknown_json_fields = {}
     end
 

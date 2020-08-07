@@ -54,7 +54,22 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @id = ""
+      @device_name = ""
+      @caption = ""
+      @model = ""
+      @serial_number = ""
+      @size = ""
       @partitions = []
+      @flags = ""
+      @cylinders = ""
+      @heads = ""
+      @sectors = ""
+      @sector_size = ""
       @unknown_json_fields = {}
     end
 

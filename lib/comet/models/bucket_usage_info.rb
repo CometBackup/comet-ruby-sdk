@@ -24,6 +24,10 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
       @exists_on_servers = []
       @in_use_by = []
       @unknown_json_fields = {}

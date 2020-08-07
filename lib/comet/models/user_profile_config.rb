@@ -99,12 +99,31 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @username = ""
+      @account_name = ""
+      @local_timezone = ""
+      @language_code = ""
       @emails = []
       @override_email_settings = {}
       @destinations = {}
       @sources = {}
       @backup_rules = {}
       @devices = {}
+      @all_protected_items_quota_bytes = ""
+      @maximum_devices = ""
+      @policy_id = ""
+      @policy = Comet::UserPolicy.new
+      @password_format = ""
+      @password_hash = ""
+      @password_recovery = ""
+      @totpkey_encryption_format = ""
+      @totpkey = ""
+      @create_time = ""
+      @creation_guid = ""
       @unknown_json_fields = {}
     end
 

@@ -27,6 +27,12 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @check_started = ""
+      @check_completed = ""
       @usage = {}
       @unknown_json_fields = {}
     end

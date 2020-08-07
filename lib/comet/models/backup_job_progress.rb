@@ -33,6 +33,15 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @counter = ""
+      @sent_time = ""
+      @recieved_time = ""
+      @bytes_done = ""
+      @items_done = ""
       @unknown_json_fields = {}
     end
 

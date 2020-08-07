@@ -27,6 +27,12 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @friendly_name = ""
+      @platform_version = Comet::OSInfo.new
       @sources = {}
       @unknown_json_fields = {}
     end

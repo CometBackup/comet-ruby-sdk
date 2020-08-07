@@ -39,6 +39,17 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @level = ""
+      @sshserver = Comet::SSHConnection.new
+      @certificate_name = ""
+      @app_certificate_name = ""
+      @apple_id = ""
+      @apple_idpass = ""
+      @apple_idpass_format = ""
       @unknown_json_fields = {}
     end
 

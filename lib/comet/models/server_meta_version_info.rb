@@ -81,7 +81,25 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @version = ""
+      @version_codename = ""
       @experimental_options = []
+      @server_start_time = ""
+      @server_start_hash = ""
+      @current_time = ""
+      @server_license_hash = ""
+      @license_valid_until = ""
+      @emails_sent_successfully = ""
+      @emails_sent_errors = ""
+      @emails_waiting_in_queue = ""
+      @scheduled_email_thread_current_state = ""
+      @scheduled_email_thread_last_calculate_duration_nanos = ""
+      @scheduled_email_thread_waiting_until = ""
+      @scheduled_email_thread_last_wake_time = ""
       @unknown_json_fields = {}
     end
 

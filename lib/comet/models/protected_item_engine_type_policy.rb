@@ -24,6 +24,10 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
       @allowed_engine_type_when_restricted = []
       @unknown_json_fields = {}
     end

@@ -27,6 +27,13 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @snapshot = ""
+      @source = ""
+      @create_time = ""
       @unknown_json_fields = {}
     end
 

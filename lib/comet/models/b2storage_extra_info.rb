@@ -21,6 +21,10 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
       @total_transactions_in_time_interval = {}
       @unknown_json_fields = {}
     end

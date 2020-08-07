@@ -33,6 +33,14 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @used_percent = ""
+      @available_bytes = ""
+      @spanned = Comet::SpannedStorageExtraInfo.new
+      @b2 = Comet::B2StorageExtraInfo.new
       @unknown_json_fields = {}
     end
 

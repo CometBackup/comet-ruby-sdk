@@ -39,6 +39,15 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @s3server = ""
+      @s3access_key = ""
+      @s3secret_key = ""
+      @s3bucket_name = ""
+      @s3subdir = ""
       @unknown_json_fields = {}
     end
 

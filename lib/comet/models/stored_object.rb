@@ -45,6 +45,18 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @name = ""
+      @modify_time = ""
+      @type = ""
+      @subtree = ""
+      @size = ""
+      @recursive_files = ""
+      @recursive_bytes = ""
+      @recursive_folders = ""
       @unknown_json_fields = {}
     end
 

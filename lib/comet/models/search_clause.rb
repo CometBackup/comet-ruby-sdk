@@ -33,6 +33,14 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @clause_type = ""
+      @rule_field = ""
+      @rule_operator = ""
+      @rule_value = ""
       @clause_children = []
       @unknown_json_fields = {}
     end

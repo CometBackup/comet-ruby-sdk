@@ -114,7 +114,19 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @storage_vault_providers = Comet::StorageVaultProviderPolicy.new
+      @protected_item_engine_types = Comet::ProtectedItemEngineTypePolicy.new
       @file_and_folder_mandatory_exclusions = []
+      @mode_schedule_skip_already_running = ""
+      @mode_admin_reset_password = ""
+      @mode_admin_view_filenames = ""
+      @mode_require_user_reset_password = ""
+      @default_email_reports = Comet::DefaultEmailReportPolicy.new
+      @default_storage_vault_retention = Comet::RetentionPolicy.new
       @default_sources = {}
       @default_sources_backup_rules = {}
       @default_backup_rules = {}

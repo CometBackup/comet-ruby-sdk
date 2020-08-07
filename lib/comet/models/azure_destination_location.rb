@@ -33,6 +33,15 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @azbaccount_name = ""
+      @azbaccount_key = ""
+      @azbcontainer = ""
+      @azbrealm = ""
+      @azbprefix = ""
       @unknown_json_fields = {}
     end
 

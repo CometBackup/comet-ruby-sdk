@@ -33,6 +33,14 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @brand_name = ""
+      @logo_image = ""
+      @top_color = ""
+      @favicon = ""
       @unknown_json_fields = {}
     end
 

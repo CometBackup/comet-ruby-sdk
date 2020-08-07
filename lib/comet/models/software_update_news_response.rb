@@ -30,6 +30,13 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @latest_stable = ""
+      @latest_prerelease = ""
+      @downloads_url = ""
       @whats_new = []
       @unknown_json_fields = {}
     end

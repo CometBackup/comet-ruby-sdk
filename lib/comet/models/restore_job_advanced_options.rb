@@ -33,7 +33,14 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @type = ""
+      @dest_path = ""
       @exact_dest_paths = []
+      @archive_format = ""
       @unknown_json_fields = {}
     end
 

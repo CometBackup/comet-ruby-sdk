@@ -30,6 +30,14 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @localcopy_path = ""
+      @localcopy_win_smbusername = ""
+      @localcopy_win_smbpassword = ""
+      @localcopy_win_smbpassword_format = ""
       @unknown_json_fields = {}
     end
 

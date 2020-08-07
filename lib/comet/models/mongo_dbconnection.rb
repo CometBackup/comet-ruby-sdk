@@ -75,7 +75,24 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @server = ""
+      @port = ""
+      @username = ""
+      @password = ""
+      @authentication_db = ""
+      @mongo_shell_path = ""
+      @mongodump_path = ""
+      @read_preference = ""
+      @replica_name = ""
       @replica_members = []
+      @client_sslpempath = ""
+      @server_sslpempath = ""
+      @sslclient_key_password = ""
+      @sshconnection = Comet::SSHConnection.new
       @unknown_json_fields = {}
     end
 

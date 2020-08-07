@@ -42,6 +42,16 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @product_name = ""
+      @company_name = ""
+      @help_url = ""
+      @default_login_server_url = ""
+      @tile_background_color = ""
+      @account_register_url = ""
       @unknown_json_fields = {}
     end
 

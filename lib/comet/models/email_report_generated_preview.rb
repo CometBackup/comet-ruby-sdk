@@ -33,6 +33,15 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @status = ""
+      @message = ""
+      @email_subject = ""
+      @email_body_html = ""
+      @email_body_plaintext = ""
       @unknown_json_fields = {}
     end
 

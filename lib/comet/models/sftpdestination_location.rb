@@ -42,6 +42,17 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @sftpserver = ""
+      @sftpusername = ""
+      @sftpremote_path = ""
+      @sftpauth_mode = ""
+      @sftppassword = ""
+      @sftpprivate_key = ""
+      @sftpcustom_auth__known_hosts_file = ""
       @unknown_json_fields = {}
     end
 

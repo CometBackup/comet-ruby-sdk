@@ -30,6 +30,14 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @create_time = ""
+      @read_write_key_format = ""
+      @read_write_key = ""
+      @size = Comet::SizeMeasurement.new
       @unknown_json_fields = {}
     end
 

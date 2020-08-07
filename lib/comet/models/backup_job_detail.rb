@@ -75,6 +75,29 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @guid = ""
+      @username = ""
+      @classification = ""
+      @status = ""
+      @start_time = ""
+      @end_time = ""
+      @source_guid = ""
+      @destination_guid = ""
+      @device_id = ""
+      @snapshot_id = ""
+      @client_version = ""
+      @total_directories = ""
+      @total_files = ""
+      @total_size = ""
+      @total_chunks = ""
+      @upload_size = ""
+      @download_size = ""
+      @cancellation_id = ""
+      @progress = Comet::BackupJobProgress.new
       @unknown_json_fields = {}
     end
 

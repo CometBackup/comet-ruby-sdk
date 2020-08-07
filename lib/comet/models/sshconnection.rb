@@ -39,6 +39,16 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @sshserver = ""
+      @sshusername = ""
+      @sshauth_mode = ""
+      @sshpassword = ""
+      @sshprivate_key = ""
+      @sshcustom_auth__known_hosts_file = ""
       @unknown_json_fields = {}
     end
 

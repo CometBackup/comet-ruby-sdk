@@ -42,6 +42,17 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @username = ""
+      @device_id = ""
+      @reported_version = ""
+      @reported_platform = ""
+      @reported_platform_version = Comet::OSInfo.new
+      @ipaddress = ""
+      @connection_time = ""
       @unknown_json_fields = {}
     end
 

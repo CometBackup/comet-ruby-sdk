@@ -30,6 +30,14 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @share_path = ""
+      @username = ""
+      @password = ""
+      @password_format = ""
       @unknown_json_fields = {}
     end
 

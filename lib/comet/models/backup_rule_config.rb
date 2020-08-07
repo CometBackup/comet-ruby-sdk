@@ -63,9 +63,21 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @description = ""
+      @create_time = ""
+      @modify_time = ""
       @pre_exec = []
       @post_exec = []
+      @source = ""
+      @destination = ""
+      @stop_after = ""
+      @limit_vault_speed_bps = ""
       @schedules = []
+      @event_triggers = Comet::BackupRuleEventTriggers.new
       @unknown_json_fields = {}
     end
 

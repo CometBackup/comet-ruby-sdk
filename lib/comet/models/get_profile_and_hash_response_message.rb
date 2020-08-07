@@ -30,6 +30,14 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @status = ""
+      @message = ""
+      @profile_hash = ""
+      @profile = Comet::UserProfileConfig.new
       @unknown_json_fields = {}
     end
 

@@ -33,6 +33,15 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @client_provided_size = Comet::SizeMeasurement.new
+      @client_provided_content = Comet::ContentMeasurement.new
+      @last_successful_deep_verify__guid = ""
+      @last_successful_deep_verify__start_time = ""
+      @last_successful_deep_verify__end_time = ""
       @unknown_json_fields = {}
     end
 

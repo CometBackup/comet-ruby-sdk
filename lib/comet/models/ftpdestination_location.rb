@@ -45,6 +45,17 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @ftpserver = ""
+      @ftpusername = ""
+      @ftppassword = ""
+      @ftpcustom_base_directory = ""
+      @ftpsmode = ""
+      @ftpport = ""
+      @ftpmax_connections = ""
       @unknown_json_fields = {}
     end
 

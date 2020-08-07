@@ -30,6 +30,14 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @status = ""
+      @message = ""
+      @new_bucket_id = ""
+      @new_bucket_key = ""
       @unknown_json_fields = {}
     end
 

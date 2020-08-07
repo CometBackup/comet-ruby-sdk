@@ -57,6 +57,23 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @username = ""
+      @apikey = ""
+      @region = ""
+      @auth_url = ""
+      @domain = ""
+      @tenant = ""
+      @tenant_domain = ""
+      @tenant_id = ""
+      @trust_id = ""
+      @auth_token = ""
+      @prefix = ""
+      @container = ""
+      @default_container_policy = ""
       @unknown_json_fields = {}
     end
 

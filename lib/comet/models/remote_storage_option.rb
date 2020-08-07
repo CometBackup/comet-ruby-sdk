@@ -48,6 +48,19 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @type = ""
+      @description = ""
+      @remote_address = ""
+      @username = ""
+      @password = ""
+      @ldap = Comet::ExternalLDAPAuthenticationSourceSettings.new
+      @b2 = Comet::B2VirtualStorageRoleSettings.new
+      @wasabi = Comet::WasabiVirtualStorageRoleSettings.new
+      @storage_limit_bytes = ""
       @unknown_json_fields = {}
     end
 

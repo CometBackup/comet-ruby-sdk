@@ -30,6 +30,13 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @challenge_id = ""
+      @challenge_data = ""
+      @app_id = ""
       @registered_keys = []
       @unknown_json_fields = {}
     end

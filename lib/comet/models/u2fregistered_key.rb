@@ -27,6 +27,13 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @app_id = ""
+      @key_handle = ""
+      @version = ""
       @unknown_json_fields = {}
     end
 

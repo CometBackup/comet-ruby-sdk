@@ -42,6 +42,18 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @type = ""
+      @timestamp = ""
+      @jobs = ""
+      @days = ""
+      @weeks = ""
+      @months = ""
+      @week_offset = ""
+      @month_offset = ""
       @unknown_json_fields = {}
     end
 

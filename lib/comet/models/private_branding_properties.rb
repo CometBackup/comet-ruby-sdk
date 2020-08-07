@@ -66,6 +66,26 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @path_ico_file = ""
+      @path_icns_file = ""
+      @path_eula_rtf = ""
+      @path_tile_png = ""
+      @path_header_image = ""
+      @package_identifier = ""
+      @windows_code_sign_pkcs12file_path = ""
+      @windows_code_sign_pkcs12password_format = ""
+      @windows_code_sign_pkcs12password = ""
+      @windows_code_sign_pkcs11engine = ""
+      @windows_code_sign_pkcs11module = ""
+      @windows_code_sign_pkcs11certfile = ""
+      @windows_code_sign_pkcs11key_id = ""
+      @windows_code_sign_pkcs11password_format = ""
+      @windows_code_sign_pkcs11password = ""
+      @mac_oscode_sign = Comet::MacOSCodeSignProperties.new
       @unknown_json_fields = {}
     end
 

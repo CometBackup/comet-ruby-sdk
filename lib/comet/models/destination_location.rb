@@ -138,6 +138,44 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @destination_type = ""
+      @comet_server = ""
+      @comet_bucket = ""
+      @comet_bucket_key = ""
+      @s3server = ""
+      @s3access_key = ""
+      @s3secret_key = ""
+      @s3bucket_name = ""
+      @s3subdir = ""
+      @sftpserver = ""
+      @sftpusername = ""
+      @sftpremote_path = ""
+      @sftpauth_mode = ""
+      @sftppassword = ""
+      @sftpprivate_key = ""
+      @sftpcustom_auth__known_hosts_file = ""
+      @ftpserver = ""
+      @ftpusername = ""
+      @ftppassword = ""
+      @ftpcustom_base_directory = ""
+      @ftpsmode = ""
+      @ftpport = ""
+      @ftpmax_connections = ""
+      @azbaccount_name = ""
+      @azbaccount_key = ""
+      @azbcontainer = ""
+      @azbrealm = ""
+      @azbprefix = ""
+      @localcopy_path = ""
+      @localcopy_win_smbusername = ""
+      @localcopy_win_smbpassword = ""
+      @localcopy_win_smbpassword_format = ""
+      @swift = Comet::SwiftDestinationLocation.new
+      @b2 = Comet::B2DestinationLocation.new
       @span_targets = []
       @unknown_json_fields = {}
     end

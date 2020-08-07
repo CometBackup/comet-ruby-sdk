@@ -27,6 +27,12 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @description = ""
+      @size = ""
       @override_destination_retention = {}
       @unknown_json_fields = {}
     end

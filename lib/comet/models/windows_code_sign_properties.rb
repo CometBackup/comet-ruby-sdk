@@ -45,6 +45,19 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @windows_code_sign_pkcs12file_path = ""
+      @windows_code_sign_pkcs12password_format = ""
+      @windows_code_sign_pkcs12password = ""
+      @windows_code_sign_pkcs11engine = ""
+      @windows_code_sign_pkcs11module = ""
+      @windows_code_sign_pkcs11certfile = ""
+      @windows_code_sign_pkcs11key_id = ""
+      @windows_code_sign_pkcs11password_format = ""
+      @windows_code_sign_pkcs11password = ""
       @unknown_json_fields = {}
     end
 

@@ -36,6 +36,12 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @stop_after = ""
+      @limit_vault_speed_bps = ""
       @unknown_json_fields = {}
     end
 

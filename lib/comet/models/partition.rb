@@ -51,7 +51,21 @@ module Comet
     attr_accessor :unknown_json_fields
 
     def initialize
+      clear
+    end
+
+    def clear
+      @device_name = ""
+      @filesystem = ""
+      @volume_name = ""
+      @volume_guid = ""
+      @volume_serial = ""
       @mount_points = []
+      @read_offset = ""
+      @size = ""
+      @used_size = ""
+      @flags = ""
+      @bytes_per_filesystem_cluster = ""
       @unknown_json_fields = {}
     end
 
