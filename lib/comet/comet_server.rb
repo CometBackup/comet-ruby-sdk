@@ -1455,7 +1455,7 @@ module Comet
 
     # AdminGetJobLog
     #
-    # Get the report log entries for a single job.
+    # Get the report log entries for a single job, in plaintext format.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1469,6 +1469,36 @@ module Comet
       submit_params['JobID'] = job_id
 
       perform_request('/api/v1/admin/get-job-log', submit_params)
+    end
+
+    # AdminGetJobLogEntries
+    #
+    # Get the report log entries for a single job.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] job_id Selected job ID
+    # @return [Array<Comet::JobEntry>]
+    def admin_get_job_log_entries(job_id)
+      submit_params = {}
+      raise TypeError 'expected string' unless job_id.is_a? String
+
+      submit_params['JobID'] = job_id
+
+      body = perform_request('/api/v1/admin/get-job-log-entries', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      if json_body.nil?
+        ret = []
+      else
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::JobEntry.new
+          ret[i].from_hash(v)
+        end
+      end
+      ret
     end
 
     # AdminGetJobProperties
