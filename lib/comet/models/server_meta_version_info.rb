@@ -130,32 +130,52 @@ module Comet
             end
           end
         when 'ServerStartTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @server_start_time = v
         when 'ServerStartHash'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @server_start_hash = v
         when 'CurrentTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @current_time = v
         when 'ServerLicenseHash'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @server_license_hash = v
         when 'LicenseValidUntil'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @license_valid_until = v
         when 'EmailsSentSuccessfully'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @emails_sent_successfully = v
         when 'EmailsSentErrors'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @emails_sent_errors = v
         when 'EmailsWaitingInQueue'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @emails_waiting_in_queue = v
         when 'ScheduledEmailThreadCurrentState'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @scheduled_email_thread_current_state = v
         when 'ScheduledEmailThreadLastCalculateDurationNanos'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @scheduled_email_thread_last_calculate_duration_nanos = v
         when 'ScheduledEmailThreadWaitingUntil'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @scheduled_email_thread_waiting_until = v
         when 'ScheduledEmailThreadLastWakeTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @scheduled_email_thread_last_wake_time = v
         when 'ScheduledEmailThreadLastWakeSentEmails'
           @scheduled_email_thread_last_wake_sent_emails = v

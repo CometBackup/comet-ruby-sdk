@@ -81,24 +81,44 @@ module Comet
 
           @remote_server_id = v
         when 'DisplayClass'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @display_class = v
         when 'ActiveWorkers'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @active_workers = v
         when 'TotalWorkers'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @total_workers = v
         when 'State'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @state = v
         when 'ItemsQueued'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @items_queued = v
         when 'BytesQueued'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @bytes_queued = v
         when 'LastWorkerSubmitTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @last_worker_submit_time = v
         when 'CurrentTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @current_time = v
         when 'ItemsReplicated'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @items_replicated = v
         when 'BytesReplicated'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @bytes_replicated = v
         else
           @unknown_json_fields[k] = v

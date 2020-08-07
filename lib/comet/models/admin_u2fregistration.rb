@@ -52,6 +52,8 @@ module Comet
 
           @description = v
         when 'RegisterTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @register_time = v
         when 'Registration'
           @registration = Base64.decode64(v)

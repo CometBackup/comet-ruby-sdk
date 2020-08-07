@@ -165,6 +165,8 @@ module Comet
 
           @windows_code_sign_pkcs12file_path = v
         when 'WindowsCodeSignPKCS12PasswordFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @windows_code_sign_pkcs12password_format = v
         when 'WindowsCodeSignPKCS12Password'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -187,6 +189,8 @@ module Comet
 
           @windows_code_sign_pkcs11key_id = v
         when 'WindowsCodeSignPKCS11PasswordFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @windows_code_sign_pkcs11password_format = v
         when 'WindowsCodeSignPKCS11Password'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

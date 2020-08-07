@@ -67,6 +67,8 @@ module Comet
         when 'DowngradeNewer'
           @downgrade_newer = v
         when 'StartTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @start_time = v
         when 'TargetVersion'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

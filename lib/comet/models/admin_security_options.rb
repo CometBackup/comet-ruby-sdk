@@ -65,6 +65,8 @@ module Comet
       obj.each do |k, v|
         case k
         when 'PasswordFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @password_format = v
         when 'Password'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -87,6 +89,8 @@ module Comet
             end
           end
         when 'TOTPKeyEncryptionFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @totpkey_encryption_format = v
         when 'TOTPKey'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

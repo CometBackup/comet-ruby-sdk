@@ -49,12 +49,20 @@ module Comet
       obj.each do |k, v|
         case k
         when 'Buckets'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @buckets = v
         when 'Users'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @users = v
         when 'Devices'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @devices = v
         when 'Boosters'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @boosters = v
         else
           @unknown_json_fields[k] = v

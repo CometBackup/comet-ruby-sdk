@@ -54,6 +54,8 @@ module Comet
 
           @device_id = v
         when 'Status'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @status = v
         else
           @unknown_json_fields[k] = v

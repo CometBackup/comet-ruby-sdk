@@ -62,8 +62,12 @@ module Comet
 
           @last_successful_deep_verify__guid = v
         when 'LastSuccessfulDeepVerify_StartTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @last_successful_deep_verify__start_time = v
         when 'LastSuccessfulDeepVerify_EndTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @last_successful_deep_verify__end_time = v
         else
           @unknown_json_fields[k] = v

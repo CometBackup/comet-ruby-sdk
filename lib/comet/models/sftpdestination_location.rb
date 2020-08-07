@@ -73,6 +73,8 @@ module Comet
 
           @sftpremote_path = v
         when 'SFTPAuthMode'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @sftpauth_mode = v
         when 'SFTPPassword'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

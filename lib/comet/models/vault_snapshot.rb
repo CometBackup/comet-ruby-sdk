@@ -54,6 +54,8 @@ module Comet
 
           @source = v
         when 'CreateTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @create_time = v
         else
           @unknown_json_fields[k] = v

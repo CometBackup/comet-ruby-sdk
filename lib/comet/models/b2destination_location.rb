@@ -68,6 +68,8 @@ module Comet
 
           @prefix = v
         when 'MaxConnections'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @max_connections = v
         else
           @unknown_json_fields[k] = v

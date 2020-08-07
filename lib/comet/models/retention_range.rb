@@ -61,20 +61,36 @@ module Comet
       obj.each do |k, v|
         case k
         when 'Type'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @type = v
         when 'Timestamp'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @timestamp = v
         when 'Jobs'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @jobs = v
         when 'Days'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @days = v
         when 'Weeks'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @weeks = v
         when 'Months'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @months = v
         when 'WeekOffset'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @week_offset = v
         when 'MonthOffset'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @month_offset = v
         else
           @unknown_json_fields[k] = v

@@ -89,8 +89,12 @@ module Comet
 
           @description = v
         when 'CreateTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @create_time = v
         when 'ModifyTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @modify_time = v
         when 'PreExec'
           if v.nil?
@@ -125,8 +129,12 @@ module Comet
         when 'SkipAlreadyRunning'
           @skip_already_running = v
         when 'StopAfter'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @stop_after = v
         when 'LimitVaultSpeedBps'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @limit_vault_speed_bps = v
         when 'ReduceDiskConcurrency'
           @reduce_disk_concurrency = v

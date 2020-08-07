@@ -51,6 +51,8 @@ module Comet
           else
             @allowed_providers_when_restricted = Array.new(v.length)
             v.each_with_index do |v1, i1|
+              raise TypeError "'v1' expected Numeric, got #{v1.class}" unless v1.is_a? Numeric
+
               @allowed_providers_when_restricted[i1] = v1
             end
           end

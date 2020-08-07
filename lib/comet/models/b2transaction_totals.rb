@@ -46,10 +46,16 @@ module Comet
       obj.each do |k, v|
         case k
         when 'ClassA'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @class_a = v
         when 'ClassB'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @class_b = v
         when 'ClassC'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @class_c = v
         else
           @unknown_json_fields[k] = v

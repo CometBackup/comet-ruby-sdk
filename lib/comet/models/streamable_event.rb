@@ -43,6 +43,8 @@ module Comet
       obj.each do |k, v|
         case k
         when 'Type'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @type = v
         when 'Data'
           @data = v

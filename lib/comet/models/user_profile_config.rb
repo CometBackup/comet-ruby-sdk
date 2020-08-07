@@ -207,8 +207,12 @@ module Comet
         when 'AllProtectedItemsQuotaEnabled'
           @all_protected_items_quota_enabled = v
         when 'AllProtectedItemsQuotaBytes'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @all_protected_items_quota_bytes = v
         when 'MaximumDevices'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @maximum_devices = v
         when 'PolicyID'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -218,6 +222,8 @@ module Comet
           @policy = Comet::UserPolicy.new
           @policy.from_hash(v)
         when 'PasswordFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @password_format = v
         when 'PasswordHash'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -232,6 +238,8 @@ module Comet
         when 'AllowPasswordAndTOTPLogin'
           @allow_password_and_totplogin = v
         when 'TOTPKeyEncryptionFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @totpkey_encryption_format = v
         when 'TOTPKey'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -240,6 +248,8 @@ module Comet
         when 'RequirePasswordChange'
           @require_password_change = v
         when 'CreateTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @create_time = v
         when 'CreationGUID'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

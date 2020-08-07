@@ -49,12 +49,20 @@ module Comet
       obj.each do |k, v|
         case k
         when 'LastCheckStart'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @last_check_start = v
         when 'TotalChecksStarted'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @total_checks_started = v
         when 'TotalBucketsDeleted'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @total_buckets_deleted = v
         when 'ChecksCurrentlyActive'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @checks_currently_active = v
         else
           @unknown_json_fields[k] = v

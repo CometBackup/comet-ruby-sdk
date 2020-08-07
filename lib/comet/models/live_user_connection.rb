@@ -84,6 +84,8 @@ module Comet
 
           @ipaddress = v
         when 'ConnectionTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @connection_time = v
         when 'AllowsFilenames'
           @allows_filenames = v

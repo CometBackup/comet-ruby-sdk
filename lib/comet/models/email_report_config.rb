@@ -47,6 +47,8 @@ module Comet
       obj.each do |k, v|
         case k
         when 'ReportType'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @report_type = v
         when 'SummaryFrequency'
           if v.nil?

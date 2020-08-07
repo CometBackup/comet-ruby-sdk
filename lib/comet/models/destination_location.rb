@@ -158,6 +158,8 @@ module Comet
       obj.each do |k, v|
         case k
         when 'DestinationType'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @destination_type = v
         when 'CometServer'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -208,6 +210,8 @@ module Comet
 
           @sftpremote_path = v
         when 'SFTPAuthMode'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @sftpauth_mode = v
         when 'SFTPPassword'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -242,10 +246,16 @@ module Comet
 
           @ftpcustom_base_directory = v
         when 'FTPSMode'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @ftpsmode = v
         when 'FTPPort'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @ftpport = v
         when 'FTPMaxConnections'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @ftpmax_connections = v
         when 'FTPAcceptInvalidSSL'
           @ftpaccept_invalid_ssl = v
@@ -282,6 +292,8 @@ module Comet
 
           @localcopy_win_smbpassword = v
         when 'LocalcopyWinSMBPasswordFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @localcopy_win_smbpassword_format = v
         when 'Swift'
           @swift = Comet::SwiftDestinationLocation.new

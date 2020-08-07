@@ -46,6 +46,8 @@ module Comet
       obj.each do |k, v|
         case k
         when 'Time'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @time = v
         when 'Severity'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

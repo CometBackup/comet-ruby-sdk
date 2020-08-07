@@ -99,6 +99,8 @@ module Comet
 
           @server = v
         when 'Port'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @port = v
         when 'Username'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

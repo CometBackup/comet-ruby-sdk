@@ -46,10 +46,16 @@ module Comet
       obj.each do |k, v|
         case k
         when 'FrequencyType'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @frequency_type = v
         when 'SecondsPast'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @seconds_past = v
         when 'Offset'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @offset = v
         else
           @unknown_json_fields[k] = v

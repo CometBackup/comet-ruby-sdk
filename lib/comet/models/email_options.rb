@@ -80,6 +80,8 @@ module Comet
 
           @smtphost = v
         when 'SMTPPort'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @smtpport = v
         when 'SMTPUsername'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

@@ -83,8 +83,12 @@ module Comet
 
           @owner_device = v
         when 'CreateTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @create_time = v
         when 'ModifyTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @modify_time = v
         when 'PreExec'
           if v.nil?

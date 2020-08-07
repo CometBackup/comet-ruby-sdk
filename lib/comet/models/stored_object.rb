@@ -68,6 +68,8 @@ module Comet
 
           @name = v
         when 'mtime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @modify_time = v
         when 'type'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -78,14 +80,22 @@ module Comet
 
           @subtree = v
         when 'size'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @size = v
         when 'r'
           @recursive_count_known = v
         when 'f'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @recursive_files = v
         when 'b'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @recursive_bytes = v
         when 'd'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @recursive_folders = v
         else
           @unknown_json_fields[k] = v

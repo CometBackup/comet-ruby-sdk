@@ -98,6 +98,8 @@ module Comet
         when 'StorageLimitEnabled'
           @storage_limit_enabled = v
         when 'StorageLimitBytes'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @storage_limit_bytes = v
         else
           @unknown_json_fields[k] = v

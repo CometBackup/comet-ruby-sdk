@@ -102,12 +102,20 @@ module Comet
 
           @username = v
         when 'Classification'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @classification = v
         when 'Status'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @status = v
         when 'StartTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @start_time = v
         when 'EndTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @end_time = v
         when 'SourceGUID'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -130,16 +138,28 @@ module Comet
 
           @client_version = v
         when 'TotalDirectories'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @total_directories = v
         when 'TotalFiles'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @total_files = v
         when 'TotalSize'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @total_size = v
         when 'TotalChunks'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @total_chunks = v
         when 'UploadSize'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @upload_size = v
         when 'DownloadSize'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @download_size = v
         when 'CancellationID'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

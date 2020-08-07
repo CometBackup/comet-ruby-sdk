@@ -200,8 +200,12 @@ module Comet
 
           @description = v
         when 'CreateTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @create_time = v
         when 'ModifyTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @modify_time = v
         when 'PreExec'
           if v.nil?
@@ -226,6 +230,8 @@ module Comet
             end
           end
         when 'DestinationType'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @destination_type = v
         when 'CometServer'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -276,6 +282,8 @@ module Comet
 
           @sftpremote_path = v
         when 'SFTPAuthMode'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @sftpauth_mode = v
         when 'SFTPPassword'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
@@ -310,10 +318,16 @@ module Comet
 
           @ftpcustom_base_directory = v
         when 'FTPSMode'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @ftpsmode = v
         when 'FTPPort'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @ftpport = v
         when 'FTPMaxConnections'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @ftpmax_connections = v
         when 'FTPAcceptInvalidSSL'
           @ftpaccept_invalid_ssl = v
@@ -350,6 +364,8 @@ module Comet
 
           @localcopy_win_smbpassword = v
         when 'LocalcopyWinSMBPasswordFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @localcopy_win_smbpassword_format = v
         when 'Swift'
           @swift = Comet::SwiftDestinationLocation.new
@@ -368,16 +384,22 @@ module Comet
             end
           end
         when 'EncryptionKeyEncryptionMethod'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @encryption_key_encryption_method = v
         when 'EncryptedEncryptionKey'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @encrypted_encryption_key = v
         when 'RepoInitTimestamp'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @repo_init_timestamp = v
         when 'StorageLimitEnabled'
           @storage_limit_enabled = v
         when 'StorageLimitBytes'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @storage_limit_bytes = v
         when 'Statistics'
           @statistics = Comet::DestinationStatistics.new

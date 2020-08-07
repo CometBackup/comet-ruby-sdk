@@ -52,14 +52,24 @@ module Comet
       obj.each do |k, v|
         case k
         when 'Counter'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @counter = v
         when 'SentTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @sent_time = v
         when 'RecievedTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @recieved_time = v
         when 'BytesDone'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @bytes_done = v
         when 'ItemsDone'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @items_done = v
         else
           @unknown_json_fields[k] = v

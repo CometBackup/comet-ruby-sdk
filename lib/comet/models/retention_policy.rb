@@ -44,6 +44,8 @@ module Comet
       obj.each do |k, v|
         case k
         when 'Mode'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @mode = v
         when 'Ranges'
           if v.nil?

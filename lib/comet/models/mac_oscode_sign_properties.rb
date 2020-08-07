@@ -58,6 +58,8 @@ module Comet
       obj.each do |k, v|
         case k
         when 'Level'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @level = v
         when 'SSHServer'
           @sshserver = Comet::SSHConnection.new
@@ -79,6 +81,8 @@ module Comet
 
           @apple_idpass = v
         when 'AppleIDPassFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @apple_idpass_format = v
         else
           @unknown_json_fields[k] = v

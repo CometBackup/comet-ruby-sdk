@@ -49,8 +49,12 @@ module Comet
       obj.each do |k, v|
         case k
         when 'CreateTime'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @create_time = v
         when 'ReadWriteKeyFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @read_write_key_format = v
         when 'ReadWriteKey'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

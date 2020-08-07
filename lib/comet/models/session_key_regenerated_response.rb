@@ -49,6 +49,8 @@ module Comet
       obj.each do |k, v|
         case k
         when 'Status'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @status = v
         when 'Message'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

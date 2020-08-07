@@ -169,12 +169,20 @@ module Comet
             end
           end
         when 'ModeScheduleSkipAlreadyRunning'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @mode_schedule_skip_already_running = v
         when 'ModeAdminResetPassword'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @mode_admin_reset_password = v
         when 'ModeAdminViewFilenames'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @mode_admin_view_filenames = v
         when 'ModeRequireUserResetPassword'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @mode_require_user_reset_password = v
         when 'PreventDeleteSingleSnapshots'
           @prevent_delete_single_snapshots = v

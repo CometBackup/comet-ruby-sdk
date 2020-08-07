@@ -52,6 +52,8 @@ module Comet
         when 'Regex'
           @regex = v
         when 'RestrictOS'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @restrict_os = v
         else
           @unknown_json_fields[k] = v

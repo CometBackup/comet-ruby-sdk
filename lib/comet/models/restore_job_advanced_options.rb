@@ -53,6 +53,8 @@ module Comet
       obj.each do |k, v|
         case k
         when 'Type'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @type = v
         when 'OverwriteExistingFiles'
           @overwrite_existing_files = v
@@ -72,6 +74,8 @@ module Comet
             end
           end
         when 'ArchiveFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @archive_format = v
         else
           @unknown_json_fields[k] = v

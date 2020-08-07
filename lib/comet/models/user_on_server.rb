@@ -43,6 +43,8 @@ module Comet
       obj.each do |k, v|
         case k
         when 'ServerID'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @server_id = v
         when 'Username'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

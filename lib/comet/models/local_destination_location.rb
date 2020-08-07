@@ -61,6 +61,8 @@ module Comet
 
           @localcopy_win_smbpassword = v
         when 'LocalcopyWinSMBPasswordFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @localcopy_win_smbpassword_format = v
         else
           @unknown_json_fields[k] = v

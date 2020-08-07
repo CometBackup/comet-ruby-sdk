@@ -82,10 +82,16 @@ module Comet
 
           @ftpcustom_base_directory = v
         when 'FTPSMode'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @ftpsmode = v
         when 'FTPPort'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @ftpport = v
         when 'FTPMaxConnections'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @ftpmax_connections = v
         when 'FTPAcceptInvalidSSL'
           @ftpaccept_invalid_ssl = v

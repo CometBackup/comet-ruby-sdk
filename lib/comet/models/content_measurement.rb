@@ -47,8 +47,12 @@ module Comet
       obj.each do |k, v|
         case k
         when 'MeasureStarted'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @measure_started = v
         when 'MeasureCompleted'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @measure_completed = v
         when 'Components'
           if v.nil?

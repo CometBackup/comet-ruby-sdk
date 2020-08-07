@@ -54,8 +54,12 @@ module Comet
         when 'Unlimited'
           @unlimited = v
         when 'UsedPercent'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @used_percent = v
         when 'AvailableBytes'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @available_bytes = v
         when 'Spanned'
           @spanned = Comet::SpannedStorageExtraInfo.new

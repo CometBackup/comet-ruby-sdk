@@ -94,6 +94,8 @@ module Comet
 
           @serial_number = v
         when 'Size'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @size = v
         when 'Partitions'
           if v.nil?
@@ -106,14 +108,24 @@ module Comet
             end
           end
         when 'Flags'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @flags = v
         when 'Cylinders'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @cylinders = v
         when 'Heads'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @heads = v
         when 'Sectors'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @sectors = v
         when 'SectorSize'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @sector_size = v
         else
           @unknown_json_fields[k] = v

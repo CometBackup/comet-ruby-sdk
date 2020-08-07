@@ -263,9 +263,13 @@ module Comet
 
       submit_params['TargetPassword'] = target_password
       unless store_recovery_code.nil?
+        raise TypeError "'store_recovery_code' expected Numeric, got #{store_recovery_code.class}" unless store_recovery_code.is_a? Numeric
+
         submit_params['StoreRecoveryCode'] = store_recovery_code
       end
       unless require_password_change.nil?
+        raise TypeError "'require_password_change' expected Numeric, got #{require_password_change.class}" unless require_password_change.is_a? Numeric
+
         submit_params['RequirePasswordChange'] = require_password_change
       end
 
@@ -343,6 +347,8 @@ module Comet
     # @return [String]
     def admin_branding_generate_client_by_platform(platform, self_address = nil)
       submit_params = {}
+      raise TypeError "'platform' expected Numeric, got #{platform.class}" unless platform.is_a? Numeric
+
       submit_params['Platform'] = platform
       if self_address.nil?
         submit_params['SelfAddress'] = @server_address
@@ -414,6 +420,8 @@ module Comet
     # @return [Comet::CometAPIResponseMessage]
     def admin_branding_generate_client_test(platform, self_address = nil)
       submit_params = {}
+      raise TypeError "'platform' expected Numeric, got #{platform.class}" unless platform.is_a? Numeric
+
       submit_params['Platform'] = platform
       if self_address.nil?
         submit_params['SelfAddress'] = @server_address
@@ -1601,7 +1609,11 @@ module Comet
     # @return [Array<Comet::BackupJobDetail>]
     def admin_get_jobs_for_date_range(start_value, end_value)
       submit_params = {}
+      raise TypeError "'start_value' expected Numeric, got #{start_value.class}" unless start_value.is_a? Numeric
+
       submit_params['Start'] = start_value
+      raise TypeError "'end_value' expected Numeric, got #{end_value.class}" unless end_value.is_a? Numeric
+
       submit_params['End'] = end_value
 
       body = perform_request('/api/v1/admin/get-jobs-for-date-range', submit_params)
@@ -1923,6 +1935,8 @@ module Comet
       else
         ret = Array.new(json_body.length)
         json_body.each_with_index do |v, i|
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           ret[i] = v
         end
       end
@@ -1941,6 +1955,8 @@ module Comet
     # @return [String]
     def admin_meta_read_logs(log)
       submit_params = {}
+      raise TypeError "'log' expected Numeric, got #{log.class}" unless log.is_a? Numeric
+
       submit_params['Log'] = log
 
       perform_request('/api/v1/admin/meta/read-logs', submit_params)

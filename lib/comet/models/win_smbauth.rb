@@ -61,6 +61,8 @@ module Comet
 
           @password = v
         when 'PasswordFormat'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @password_format = v
         else
           @unknown_json_fields[k] = v

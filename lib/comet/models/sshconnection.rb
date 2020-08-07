@@ -66,6 +66,8 @@ module Comet
 
           @sshusername = v
         when 'SSHAuthMode'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @sshauth_mode = v
         when 'SSHPassword'
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String

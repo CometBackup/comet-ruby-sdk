@@ -51,6 +51,8 @@ module Comet
 
           @description = v
         when 'Size'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @size = v
         when 'OverrideDestinationRetention'
           @override_destination_retention = {}

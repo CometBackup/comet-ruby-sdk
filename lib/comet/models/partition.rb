@@ -102,14 +102,24 @@ module Comet
             end
           end
         when 'ReadOffset'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @read_offset = v
         when 'Size'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @size = v
         when 'UsedSize'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @used_size = v
         when 'Flags'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @flags = v
         when 'BytesPerFilesystemCluster'
+          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
           @bytes_per_filesystem_cluster = v
         else
           @unknown_json_fields[k] = v
