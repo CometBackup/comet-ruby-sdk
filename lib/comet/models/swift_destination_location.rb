@@ -62,67 +62,69 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError 'expected string' unless json_string.is_a? String
+      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError 'expected hash' unless obj.is_a? Hash
+      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+
 
       obj.each do |k, v|
         case k
         when 'Username'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @username = v
         when 'APIKey'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @apikey = v
         when 'Region'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @region = v
         when 'AuthURL'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @auth_url = v
         when 'Domain'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @domain = v
         when 'Tenant'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @tenant = v
         when 'TenantDomain'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @tenant_domain = v
         when 'TenantID'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @tenant_id = v
         when 'TrustID'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @trust_id = v
         when 'AuthToken'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @auth_token = v
         when 'Prefix'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @prefix = v
         when 'Container'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @container = v
         when 'DefaultContainerPolicy'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @default_container_policy = v
         else

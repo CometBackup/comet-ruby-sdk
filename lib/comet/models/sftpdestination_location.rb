@@ -47,43 +47,45 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError 'expected string' unless json_string.is_a? String
+      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError 'expected hash' unless obj.is_a? Hash
+      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+
 
       obj.each do |k, v|
         case k
         when 'SFTPServer'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftpserver = v
         when 'SFTPUsername'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftpusername = v
         when 'SFTPRemotePath'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftpremote_path = v
         when 'SFTPAuthMode'
           @sftpauth_mode = v
         when 'SFTPPassword'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftppassword = v
         when 'SFTPPrivateKey'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftpprivate_key = v
         when 'SFTPCustomAuth_UseKnownHostsFile'
           @sftpcustom_auth__use_known_hosts_file = v
         when 'SFTPCustomAuth_KnownHostsFile'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftpcustom_auth__known_hosts_file = v
         else

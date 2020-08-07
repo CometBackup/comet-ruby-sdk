@@ -71,19 +71,21 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError 'expected string' unless json_string.is_a? String
+      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError 'expected hash' unless obj.is_a? Hash
+      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+
 
       obj.each do |k, v|
         case k
         when 'Description'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @description = v
         when 'CreateTime'
@@ -96,7 +98,7 @@ module Comet
           else
             @pre_exec = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError 'expected string' unless v1.is_a? String
+              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @pre_exec[i1] = v1
             end
@@ -107,17 +109,17 @@ module Comet
           else
             @post_exec = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError 'expected string' unless v1.is_a? String
+              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @post_exec[i1] = v1
             end
           end
         when 'Source'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @source = v
         when 'Destination'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @destination = v
         when 'SkipAlreadyRunning'

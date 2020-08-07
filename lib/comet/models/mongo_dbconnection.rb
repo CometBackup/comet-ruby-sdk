@@ -81,51 +81,53 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError 'expected string' unless json_string.is_a? String
+      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError 'expected hash' unless obj.is_a? Hash
+      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+
 
       obj.each do |k, v|
         case k
         when 'Server'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @server = v
         when 'Port'
           @port = v
         when 'Username'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @username = v
         when 'Password'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @password = v
         when 'AuthenticationDB'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @authentication_db = v
         when 'MongoShellPath'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @mongo_shell_path = v
         when 'MongodumpPath'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @mongodump_path = v
         when 'ReadPreference'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @read_preference = v
         when 'UseReplica'
           @use_replica = v
         when 'ReplicaName'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @replica_name = v
         when 'ReplicaMembers'
@@ -134,7 +136,7 @@ module Comet
           else
             @replica_members = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError 'expected string' unless v1.is_a? String
+              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @replica_members[i1] = v1
             end
@@ -142,15 +144,15 @@ module Comet
         when 'UseSSL'
           @use_ssl = v
         when 'ClientSSLPEMPath'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @client_sslpempath = v
         when 'ServerSSLPEMPath'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @server_sslpempath = v
         when 'SSLClientKeyPassword'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sslclient_key_password = v
         when 'AllowInvalidCertificate'

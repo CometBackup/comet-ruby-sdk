@@ -110,117 +110,119 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError 'expected string' unless json_string.is_a? String
+      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError 'expected hash' unless obj.is_a? Hash
+      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+
 
       obj.each do |k, v|
         case k
         when 'BrandName'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @brand_name = v
         when 'LogoImage'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @logo_image = v
         when 'TopColor'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @top_color = v
         when 'Favicon'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @favicon = v
         when 'HideNewsArea'
           @hide_news_area = v
         when 'ProductName'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @product_name = v
         when 'CompanyName'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @company_name = v
         when 'HelpURL'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @help_url = v
         when 'HelpIsPopup'
           @help_is_popup = v
         when 'DefaultLoginServerURL'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @default_login_server_url = v
         when 'TileBackgroundColor'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @tile_background_color = v
         when 'AccountRegisterURL'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @account_register_url = v
         when 'HideBackgroundLogo'
           @hide_background_logo = v
         when 'PathIcoFile'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @path_ico_file = v
         when 'PathIcnsFile'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @path_icns_file = v
         when 'PathEulaRtf'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @path_eula_rtf = v
         when 'PathTilePng'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @path_tile_png = v
         when 'PathHeaderImage'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @path_header_image = v
         when 'PackageIdentifier'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @package_identifier = v
         when 'WindowsCodeSignPKCS12FilePath'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @windows_code_sign_pkcs12file_path = v
         when 'WindowsCodeSignPKCS12PasswordFormat'
           @windows_code_sign_pkcs12password_format = v
         when 'WindowsCodeSignPKCS12Password'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @windows_code_sign_pkcs12password = v
         when 'WindowsCodeSignPKCS11Engine'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @windows_code_sign_pkcs11engine = v
         when 'WindowsCodeSignPKCS11Module'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @windows_code_sign_pkcs11module = v
         when 'WindowsCodeSignPKCS11Certfile'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @windows_code_sign_pkcs11certfile = v
         when 'WindowsCodeSignPKCS11KeyID'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @windows_code_sign_pkcs11key_id = v
         when 'WindowsCodeSignPKCS11PasswordFormat'
           @windows_code_sign_pkcs11password_format = v
         when 'WindowsCodeSignPKCS11Password'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @windows_code_sign_pkcs11password = v
         when 'MacOSCodeSign'

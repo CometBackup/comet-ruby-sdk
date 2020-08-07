@@ -87,23 +87,25 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError 'expected string' unless json_string.is_a? String
+      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError 'expected hash' unless obj.is_a? Hash
+      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+
 
       obj.each do |k, v|
         case k
         when 'Version'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @version = v
         when 'VersionCodename'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @version_codename = v
         when 'StorageRole'
@@ -122,7 +124,7 @@ module Comet
           else
             @experimental_options = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError 'expected string' unless v1.is_a? String
+              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @experimental_options[i1] = v1
             end
@@ -130,13 +132,13 @@ module Comet
         when 'ServerStartTime'
           @server_start_time = v
         when 'ServerStartHash'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @server_start_hash = v
         when 'CurrentTime'
           @current_time = v
         when 'ServerLicenseHash'
-          raise TypeError 'expected string' unless v.is_a? String
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @server_license_hash = v
         when 'LicenseValidUntil'
