@@ -79,24 +79,24 @@ module Comet
     end
 
     def clear
-      @guid = ""
-      @username = ""
-      @classification = ""
-      @status = ""
-      @start_time = ""
-      @end_time = ""
-      @source_guid = ""
-      @destination_guid = ""
-      @device_id = ""
-      @snapshot_id = ""
-      @client_version = ""
-      @total_directories = ""
-      @total_files = ""
-      @total_size = ""
-      @total_chunks = ""
-      @upload_size = ""
-      @download_size = ""
-      @cancellation_id = ""
+      @guid = ''
+      @username = ''
+      @classification = 0
+      @status = 0
+      @start_time = 0
+      @end_time = 0
+      @source_guid = ''
+      @destination_guid = ''
+      @device_id = ''
+      @snapshot_id = ''
+      @client_version = ''
+      @total_directories = 0
+      @total_files = 0
+      @total_size = 0
+      @total_chunks = 0
+      @upload_size = 0
+      @download_size = 0
+      @cancellation_id = ''
       @progress = Comet::BackupJobProgress.new
       @unknown_json_fields = {}
     end
@@ -105,14 +105,12 @@ module Comet
     def from_json(json_string)
       raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
-
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
       raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
-
 
       obj.each do |k, v|
         case k

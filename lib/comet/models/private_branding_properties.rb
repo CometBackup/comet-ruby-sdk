@@ -70,21 +70,21 @@ module Comet
     end
 
     def clear
-      @path_ico_file = ""
-      @path_icns_file = ""
-      @path_eula_rtf = ""
-      @path_tile_png = ""
-      @path_header_image = ""
-      @package_identifier = ""
-      @windows_code_sign_pkcs12file_path = ""
-      @windows_code_sign_pkcs12password_format = ""
-      @windows_code_sign_pkcs12password = ""
-      @windows_code_sign_pkcs11engine = ""
-      @windows_code_sign_pkcs11module = ""
-      @windows_code_sign_pkcs11certfile = ""
-      @windows_code_sign_pkcs11key_id = ""
-      @windows_code_sign_pkcs11password_format = ""
-      @windows_code_sign_pkcs11password = ""
+      @path_ico_file = ''
+      @path_icns_file = ''
+      @path_eula_rtf = ''
+      @path_tile_png = ''
+      @path_header_image = ''
+      @package_identifier = ''
+      @windows_code_sign_pkcs12file_path = ''
+      @windows_code_sign_pkcs12password_format = 0
+      @windows_code_sign_pkcs12password = ''
+      @windows_code_sign_pkcs11engine = ''
+      @windows_code_sign_pkcs11module = ''
+      @windows_code_sign_pkcs11certfile = ''
+      @windows_code_sign_pkcs11key_id = ''
+      @windows_code_sign_pkcs11password_format = 0
+      @windows_code_sign_pkcs11password = ''
       @mac_oscode_sign = Comet::MacOSCodeSignProperties.new
       @unknown_json_fields = {}
     end
@@ -93,14 +93,12 @@ module Comet
     def from_json(json_string)
       raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
-
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
       raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
-
 
       obj.each do |k, v|
         case k

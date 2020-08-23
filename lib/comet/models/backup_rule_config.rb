@@ -67,15 +67,15 @@ module Comet
     end
 
     def clear
-      @description = ""
-      @create_time = ""
-      @modify_time = ""
+      @description = ''
+      @create_time = 0
+      @modify_time = 0
       @pre_exec = []
       @post_exec = []
-      @source = ""
-      @destination = ""
-      @stop_after = ""
-      @limit_vault_speed_bps = ""
+      @source = ''
+      @destination = ''
+      @stop_after = 0
+      @limit_vault_speed_bps = 0
       @schedules = []
       @event_triggers = Comet::BackupRuleEventTriggers.new
       @unknown_json_fields = {}
@@ -85,14 +85,12 @@ module Comet
     def from_json(json_string)
       raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
-
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
       raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
-
 
       obj.each do |k, v|
         case k

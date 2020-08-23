@@ -85,21 +85,21 @@ module Comet
     end
 
     def clear
-      @version = ""
-      @version_codename = ""
+      @version = ''
+      @version_codename = ''
       @experimental_options = []
-      @server_start_time = ""
-      @server_start_hash = ""
-      @current_time = ""
-      @server_license_hash = ""
-      @license_valid_until = ""
-      @emails_sent_successfully = ""
-      @emails_sent_errors = ""
-      @emails_waiting_in_queue = ""
-      @scheduled_email_thread_current_state = ""
-      @scheduled_email_thread_last_calculate_duration_nanos = ""
-      @scheduled_email_thread_waiting_until = ""
-      @scheduled_email_thread_last_wake_time = ""
+      @server_start_time = 0
+      @server_start_hash = ''
+      @current_time = 0
+      @server_license_hash = ''
+      @license_valid_until = 0
+      @emails_sent_successfully = 0
+      @emails_sent_errors = 0
+      @emails_waiting_in_queue = 0
+      @scheduled_email_thread_current_state = 0
+      @scheduled_email_thread_last_calculate_duration_nanos = 0
+      @scheduled_email_thread_waiting_until = 0
+      @scheduled_email_thread_last_wake_time = 0
       @unknown_json_fields = {}
     end
 
@@ -107,14 +107,12 @@ module Comet
     def from_json(json_string)
       raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
-
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
       raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
-
 
       obj.each do |k, v|
         case k

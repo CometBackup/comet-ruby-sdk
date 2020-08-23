@@ -46,13 +46,13 @@ module Comet
     end
 
     def clear
-      @username = ""
-      @device_id = ""
-      @reported_version = ""
-      @reported_platform = ""
+      @username = ''
+      @device_id = ''
+      @reported_version = ''
+      @reported_platform = ''
       @reported_platform_version = Comet::OSInfo.new
-      @ipaddress = ""
-      @connection_time = ""
+      @ipaddress = ''
+      @connection_time = 0
       @unknown_json_fields = {}
     end
 
@@ -60,14 +60,12 @@ module Comet
     def from_json(json_string)
       raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
-
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
       raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
-
 
       obj.each do |k, v|
         case k

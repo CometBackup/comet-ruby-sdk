@@ -142,38 +142,38 @@ module Comet
     end
 
     def clear
-      @destination_type = ""
-      @comet_server = ""
-      @comet_bucket = ""
-      @comet_bucket_key = ""
-      @s3server = ""
-      @s3access_key = ""
-      @s3secret_key = ""
-      @s3bucket_name = ""
-      @s3subdir = ""
-      @sftpserver = ""
-      @sftpusername = ""
-      @sftpremote_path = ""
-      @sftpauth_mode = ""
-      @sftppassword = ""
-      @sftpprivate_key = ""
-      @sftpcustom_auth__known_hosts_file = ""
-      @ftpserver = ""
-      @ftpusername = ""
-      @ftppassword = ""
-      @ftpcustom_base_directory = ""
-      @ftpsmode = ""
-      @ftpport = ""
-      @ftpmax_connections = ""
-      @azbaccount_name = ""
-      @azbaccount_key = ""
-      @azbcontainer = ""
-      @azbrealm = ""
-      @azbprefix = ""
-      @localcopy_path = ""
-      @localcopy_win_smbusername = ""
-      @localcopy_win_smbpassword = ""
-      @localcopy_win_smbpassword_format = ""
+      @destination_type = 0
+      @comet_server = ''
+      @comet_bucket = ''
+      @comet_bucket_key = ''
+      @s3server = ''
+      @s3access_key = ''
+      @s3secret_key = ''
+      @s3bucket_name = ''
+      @s3subdir = ''
+      @sftpserver = ''
+      @sftpusername = ''
+      @sftpremote_path = ''
+      @sftpauth_mode = 0
+      @sftppassword = ''
+      @sftpprivate_key = ''
+      @sftpcustom_auth__known_hosts_file = ''
+      @ftpserver = ''
+      @ftpusername = ''
+      @ftppassword = ''
+      @ftpcustom_base_directory = ''
+      @ftpsmode = 0
+      @ftpport = 0
+      @ftpmax_connections = 0
+      @azbaccount_name = ''
+      @azbaccount_key = ''
+      @azbcontainer = ''
+      @azbrealm = ''
+      @azbprefix = ''
+      @localcopy_path = ''
+      @localcopy_win_smbusername = ''
+      @localcopy_win_smbpassword = ''
+      @localcopy_win_smbpassword_format = 0
       @swift = Comet::SwiftDestinationLocation.new
       @b2 = Comet::B2DestinationLocation.new
       @span_targets = []
@@ -184,14 +184,12 @@ module Comet
     def from_json(json_string)
       raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
-
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
       raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
-
 
       obj.each do |k, v|
         case k

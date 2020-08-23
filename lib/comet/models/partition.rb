@@ -55,17 +55,17 @@ module Comet
     end
 
     def clear
-      @device_name = ""
-      @filesystem = ""
-      @volume_name = ""
-      @volume_guid = ""
-      @volume_serial = ""
+      @device_name = ''
+      @filesystem = ''
+      @volume_name = ''
+      @volume_guid = ''
+      @volume_serial = ''
       @mount_points = []
-      @read_offset = ""
-      @size = ""
-      @used_size = ""
-      @flags = ""
-      @bytes_per_filesystem_cluster = ""
+      @read_offset = 0
+      @size = 0
+      @used_size = 0
+      @flags = 0
+      @bytes_per_filesystem_cluster = 0
       @unknown_json_fields = {}
     end
 
@@ -73,14 +73,12 @@ module Comet
     def from_json(json_string)
       raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
-
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
       raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
-
 
       obj.each do |k, v|
         case k

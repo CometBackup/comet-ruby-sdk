@@ -103,27 +103,27 @@ module Comet
     end
 
     def clear
-      @username = ""
-      @account_name = ""
-      @local_timezone = ""
-      @language_code = ""
+      @username = ''
+      @account_name = ''
+      @local_timezone = ''
+      @language_code = ''
       @emails = []
       @override_email_settings = {}
       @destinations = {}
       @sources = {}
       @backup_rules = {}
       @devices = {}
-      @all_protected_items_quota_bytes = ""
-      @maximum_devices = ""
-      @policy_id = ""
+      @all_protected_items_quota_bytes = 0
+      @maximum_devices = 0
+      @policy_id = ''
       @policy = Comet::UserPolicy.new
-      @password_format = ""
-      @password_hash = ""
-      @password_recovery = ""
-      @totpkey_encryption_format = ""
-      @totpkey = ""
-      @create_time = ""
-      @creation_guid = ""
+      @password_format = 0
+      @password_hash = ''
+      @password_recovery = ''
+      @totpkey_encryption_format = 0
+      @totpkey = ''
+      @create_time = 0
+      @creation_guid = ''
       @unknown_json_fields = {}
     end
 
@@ -131,14 +131,12 @@ module Comet
     def from_json(json_string)
       raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
-
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
       raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
-
 
       obj.each do |k, v|
         case k

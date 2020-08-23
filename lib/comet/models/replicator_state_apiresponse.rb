@@ -58,18 +58,18 @@ module Comet
     end
 
     def clear
-      @description = ""
-      @remote_server_id = ""
-      @display_class = ""
-      @active_workers = ""
-      @total_workers = ""
-      @state = ""
-      @items_queued = ""
-      @bytes_queued = ""
-      @last_worker_submit_time = ""
-      @current_time = ""
-      @items_replicated = ""
-      @bytes_replicated = ""
+      @description = ''
+      @remote_server_id = ''
+      @display_class = 0
+      @active_workers = 0
+      @total_workers = 0
+      @state = 0
+      @items_queued = 0
+      @bytes_queued = 0
+      @last_worker_submit_time = 0
+      @current_time = 0
+      @items_replicated = 0
+      @bytes_replicated = 0
       @unknown_json_fields = {}
     end
 
@@ -77,14 +77,12 @@ module Comet
     def from_json(json_string)
       raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
-
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
       raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
-
 
       obj.each do |k, v|
         case k
