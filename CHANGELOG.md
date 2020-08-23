@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2020-08-24 v0.3.1
+- Fix an issue with version number in gem packaging
+- Fix an issue with `.clear` initializers for numeric types
+- Fix an issue with extra whitespace affecting the RuboCop linter
+
 ## 2020-08-24 v0.3.0
 - Based on Comet 20.8.0
 - Feature: Support new `AdminGetJobLogEntries` endpoint
