@@ -37,7 +37,7 @@ module Comet
     end
 
     def clear
-      @used_percent = 0
+      @used_percent = 0.0
       @available_bytes = 0
       @spanned = Comet::SpannedStorageExtraInfo.new
       @b2 = Comet::B2StorageExtraInfo.new
