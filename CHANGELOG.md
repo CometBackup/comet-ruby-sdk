@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2020-08-28 v0.4.0
+- Feature: Add definitions B2 and Wasabi `VirtualStorageRole` classes
+- Feature: Add definitions for remote LDAP authentication data sources
+- Fix an issue with floating point constant initializers
+
 ## 2020-08-24 v0.3.1
 - Fix an issue with version number in gem packaging
 - Fix an issue with `.clear` initializers for numeric types
