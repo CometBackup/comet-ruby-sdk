@@ -517,6 +517,12 @@ module Comet
   # RemoteServerType:
   REMOTESERVER_WASABI = 'wasabi'
 
+  LDAPSECURITYMETHOD_PLAIN = 'plain'
+
+  LDAPSECURITYMETHOD_LDAPS = 'ldaps'
+
+  LDAPSECURITYMETHOD_STARTTLS = 'starttls'
+
   # MacOSCodesignLevel:
   MACOSCODESIGN_LEVEL_SIGN = 0
 
