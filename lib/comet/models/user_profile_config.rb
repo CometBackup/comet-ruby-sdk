@@ -26,6 +26,9 @@ module Comet
     # @type [String] language_code
     attr_accessor :language_code
 
+    # @type [String] organization_id
+    attr_accessor :organization_id
+
     # @type [Array<String>] emails
     attr_accessor :emails
 
@@ -107,6 +110,7 @@ module Comet
       @account_name = ''
       @local_timezone = ''
       @language_code = ''
+      @organization_id = ''
       @emails = []
       @override_email_settings = {}
       @destinations = {}
@@ -156,6 +160,10 @@ module Comet
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @language_code = v
+        when 'OrganizationID'
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @organization_id = v
         when 'Emails'
           if v.nil?
             @emails = []
@@ -285,6 +293,9 @@ module Comet
       ret['AccountName'] = @account_name
       ret['LocalTimezone'] = @local_timezone
       ret['LanguageCode'] = @language_code
+      unless @organization_id.nil?
+        ret['OrganizationID'] = @organization_id
+      end
       ret['Emails'] = @emails
       ret['OverrideEmailSettings'] = @override_email_settings
       ret['SendEmailReports'] = @send_email_reports

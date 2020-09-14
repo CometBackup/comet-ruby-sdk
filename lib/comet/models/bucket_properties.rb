@@ -14,6 +14,9 @@ module Comet
   # BucketProperties is a typed class wrapper around the underlying Comet Server API data structure.
   class BucketProperties
 
+    # @type [String] organization_id
+    attr_accessor :organization_id
+
     # @type [Number] create_time
     attr_accessor :create_time
 
@@ -34,6 +37,7 @@ module Comet
     end
 
     def clear
+      @organization_id = ''
       @create_time = 0
       @read_write_key_format = 0
       @read_write_key = ''
@@ -54,6 +58,10 @@ module Comet
 
       obj.each do |k, v|
         case k
+        when 'OrganizationID'
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @organization_id = v
         when 'CreateTime'
           raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -78,6 +86,7 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
+      ret['OrganizationID'] = @organization_id
       ret['CreateTime'] = @create_time
       ret['ReadWriteKeyFormat'] = @read_write_key_format
       ret['ReadWriteKey'] = @read_write_key

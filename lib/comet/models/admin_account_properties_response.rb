@@ -14,6 +14,9 @@ module Comet
   # AdminAccountPropertiesResponse is a typed class wrapper around the underlying Comet Server API data structure.
   class AdminAccountPropertiesResponse
 
+    # @type [String] organization_id
+    attr_accessor :organization_id
+
     # @type [Comet::AdminUserPermissions] permissions
     attr_accessor :permissions
 
@@ -28,6 +31,7 @@ module Comet
     end
 
     def clear
+      @organization_id = ''
       @permissions = Comet::AdminUserPermissions.new
       @security = Comet::AdminSecurityOptions.new
       @unknown_json_fields = {}
@@ -46,6 +50,10 @@ module Comet
 
       obj.each do |k, v|
         case k
+        when 'OrganizationID'
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @organization_id = v
         when 'Permissions'
           @permissions = Comet::AdminUserPermissions.new
           @permissions.from_hash(v)
@@ -61,6 +69,7 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
+      ret['OrganizationID'] = @organization_id
       ret['Permissions'] = @permissions
       ret['Security'] = @security
       @unknown_json_fields.each do |k, v|

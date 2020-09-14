@@ -17,6 +17,9 @@ module Comet
     # @type [String] description
     attr_accessor :description
 
+    # @type [String] organization_id
+    attr_accessor :organization_id
+
     # @type [Comet::UserPolicy] policy
     attr_accessor :policy
 
@@ -32,6 +35,7 @@ module Comet
 
     def clear
       @description = ''
+      @organization_id = ''
       @policy = Comet::UserPolicy.new
       @unknown_json_fields = {}
     end
@@ -53,6 +57,10 @@ module Comet
           raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @description = v
+        when 'OrganizationID'
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @organization_id = v
         when 'Policy'
           @policy = Comet::UserPolicy.new
           @policy.from_hash(v)
@@ -68,6 +76,7 @@ module Comet
     def to_hash
       ret = {}
       ret['Description'] = @description
+      ret['OrganizationID'] = @organization_id
       ret['Policy'] = @policy
       ret['DefaultUserPolicy'] = @default_user_policy
       @unknown_json_fields.each do |k, v|

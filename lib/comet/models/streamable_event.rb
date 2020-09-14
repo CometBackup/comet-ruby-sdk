@@ -14,6 +14,9 @@ module Comet
   # StreamableEvent is a typed class wrapper around the underlying Comet Server API data structure.
   class StreamableEvent
 
+    # @type [String] owner_organization_id
+    attr_accessor :owner_organization_id
+
     # @type [Number] type
     attr_accessor :type
 
@@ -28,6 +31,7 @@ module Comet
     end
 
     def clear
+      @owner_organization_id = ''
       @type = 0
       @unknown_json_fields = {}
     end
@@ -45,6 +49,10 @@ module Comet
 
       obj.each do |k, v|
         case k
+        when 'OwnerOrganizationID'
+          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @owner_organization_id = v
         when 'Type'
           raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -60,6 +68,7 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
+      ret['OwnerOrganizationID'] = @owner_organization_id
       ret['Type'] = @type
       ret['Data'] = @data
       @unknown_json_fields.each do |k, v|
