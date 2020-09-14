@@ -2470,6 +2470,92 @@ module Comet
       ret
     end
 
+    # AdminOrganizationDelete
+    #
+    # Delete an organization and all related users.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    #
+    # @param [String] organization_id (Optional) (No description available)
+    # @param [Comet::UninstallConfig] uninstall_config (Optional) Uninstall software configuration
+    # @return [Comet::OrganizationResponse]
+    def admin_organization_delete(organization_id = nil, uninstall_config = nil)
+      submit_params = {}
+      unless organization_id.nil?
+        raise TypeError "'organization_id' expected String, got #{organization_id.class}" unless organization_id.is_a? String
+
+        submit_params['OrganizationID'] = organization_id
+      end
+      unless uninstall_config.nil?
+        raise TypeError "'uninstall_config' expected Comet::UninstallConfig, got #{uninstall_config.class}" unless uninstall_config.is_a? Comet::UninstallConfig
+
+        submit_params['UninstallConfig'] = uninstall_config.to_json
+      end
+
+      body = perform_request('/api/v1/admin/organization/delete', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::OrganizationResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminOrganizationList
+    #
+    # List Organizations.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    #
+    # @return [Hash{String => Comet::Organization}]
+    def admin_organization_list
+      body = perform_request('/api/v1/admin/organization/list')
+      json_body = JSON.parse body
+      check_status json_body
+      ret = {}
+      if json_body.nil?
+        ret = {}
+      else
+        json_body.each do |k, v|
+          ret[k] = Comet::Organization.new
+          ret[k].from_hash(v)
+        end
+      end
+      ret
+    end
+
+    # AdminOrganizationSet
+    #
+    # Create or Update an Organization.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    #
+    # @param [String] organization_id (Optional) (No description available)
+    # @param [Comet::Organization] organization (Optional) (No description available)
+    # @return [Comet::OrganizationResponse]
+    def admin_organization_set(organization_id = nil, organization = nil)
+      submit_params = {}
+      unless organization_id.nil?
+        raise TypeError "'organization_id' expected String, got #{organization_id.class}" unless organization_id.is_a? String
+
+        submit_params['OrganizationID'] = organization_id
+      end
+      unless organization.nil?
+        raise TypeError "'organization' expected Comet::Organization, got #{organization.class}" unless organization.is_a? Comet::Organization
+
+        submit_params['Organization'] = organization.to_json
+      end
+
+      body = perform_request('/api/v1/admin/organization/set', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::OrganizationResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminPoliciesDelete
     #
     # Delete an existing policy object.
