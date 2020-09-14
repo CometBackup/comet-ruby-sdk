@@ -682,6 +682,40 @@ module Comet
       ret
     end
 
+    # AdminCreateInstallToken
+    #
+    # Create token for silent installation (Windows only).
+    # Provide the installation token to silently install the client on windows `install.exe /TOKEN=<installtoken>`
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_user Selected account username
+    # @param [String] target_password Selected account password
+    # @param [String] server (Optional) External URL of the authentication server that is different from the current server
+    # @return [Comet::InstallTokenResponse]
+    def admin_create_install_token(target_user, target_password, server = nil)
+      submit_params = {}
+      raise TypeError "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
+
+      submit_params['TargetUser'] = target_user
+      raise TypeError "'target_password' expected String, got #{target_password.class}" unless target_password.is_a? String
+
+      submit_params['TargetPassword'] = target_password
+      unless server.nil?
+        raise TypeError "'server' expected String, got #{server.class}" unless server.is_a? String
+
+        submit_params['Server'] = server
+      end
+
+      body = perform_request('/api/v1/admin/create-install-token', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::InstallTokenResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDeleteUser
     #
     # Delete user account.
