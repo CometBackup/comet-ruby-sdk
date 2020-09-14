@@ -2255,7 +2255,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     #
-    # @param [Hash{String => Comet::WebhookOption}] webhook_options A json encoded string of the new webhook target options.
+    # @param [Hash{String => Comet::WebhookOption}] webhook_options The replacement webhook target options.
     # @return [Comet::CometAPIResponseMessage]
     def admin_meta_webhook_options_set(webhook_options)
       submit_params = {}
