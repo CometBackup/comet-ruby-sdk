@@ -2831,8 +2831,9 @@ module Comet
     # @param [String] set_bucket_value (Optional) Bucket ID
     # @param [String] set_key_hash_format (Optional) Bucket key hashing format
     # @param [String] set_key_hash_value (Optional) Bucket key hash
+    # @param [String] set_organization_id (Optional) Target organization ID (>= 20.9.0)
     # @return [Comet::AddBucketResponseMessage]
-    def admin_storage_register_bucket(set_bucket_value = nil, set_key_hash_format = nil, set_key_hash_value = nil)
+    def admin_storage_register_bucket(set_bucket_value = nil, set_key_hash_format = nil, set_key_hash_value = nil, set_organization_id = nil)
       submit_params = {}
       unless set_bucket_value.nil?
         raise TypeError "'set_bucket_value' expected String, got #{set_bucket_value.class}" unless set_bucket_value.is_a? String
@@ -2848,6 +2849,11 @@ module Comet
         raise TypeError "'set_key_hash_value' expected String, got #{set_key_hash_value.class}" unless set_key_hash_value.is_a? String
 
         submit_params['SetKeyHashValue'] = set_key_hash_value
+      end
+      unless set_organization_id.nil?
+        raise TypeError "'set_organization_id' expected String, got #{set_organization_id.class}" unless set_organization_id.is_a? String
+
+        submit_params['SetOrganizationID'] = set_organization_id
       end
 
       body = perform_request('/api/v1/admin/storage/register-bucket', submit_params)
