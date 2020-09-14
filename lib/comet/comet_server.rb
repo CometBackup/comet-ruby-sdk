@@ -309,6 +309,89 @@ module Comet
       ret
     end
 
+    # AdminAdminUserDelete
+    #
+    # Delete an administrator.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # Access to this API may be prevented on a per-administrator basis.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    #
+    # @param [String] target_user the username of the admin to be deleted
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_admin_user_delete(target_user)
+      submit_params = {}
+      raise TypeError "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
+
+      submit_params['TargetUser'] = target_user
+
+      body = perform_request('/api/v1/admin/admin-user/delete', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminAdminUserList
+    #
+    # List administrators.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # Access to this API may be prevented on a per-administrator basis.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    #
+    # @return [Array<Comet::AllowedAdminUser>]
+    def admin_admin_user_list
+      body = perform_request('/api/v1/admin/admin-user/list')
+      json_body = JSON.parse body
+      check_status json_body
+      if json_body.nil?
+        ret = []
+      else
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::AllowedAdminUser.new
+          ret[i].from_hash(v)
+        end
+      end
+      ret
+    end
+
+    # AdminAdminUserNew
+    #
+    # Add a new administrator.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # Access to this API may be prevented on a per-administrator basis.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    #
+    # @param [String] target_user the username for this new admin
+    # @param [String] target_password the password for this new admin user
+    # @param [String] target_org_id (Optional) provide the organization ID for this user, it will default to the org of the authenticating user otherwise
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_admin_user_new(target_user, target_password, target_org_id = nil)
+      submit_params = {}
+      raise TypeError "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
+
+      submit_params['TargetUser'] = target_user
+      raise TypeError "'target_password' expected String, got #{target_password.class}" unless target_password.is_a? String
+
+      submit_params['TargetPassword'] = target_password
+      unless target_org_id.nil?
+        raise TypeError "'target_org_id' expected String, got #{target_org_id.class}" unless target_org_id.is_a? String
+
+        submit_params['TargetOrgID'] = target_org_id
+      end
+
+      body = perform_request('/api/v1/admin/admin-user/new', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminBrandingAvailablePlatforms
     #
     # List available software download platforms.
