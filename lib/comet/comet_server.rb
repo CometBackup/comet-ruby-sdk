@@ -615,6 +615,7 @@ module Comet
     # Get Constellation bucket usage report (cached).
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # This API requires the Constellation Role to be enabled.
     #
     # @return [Comet::ConstellationCheckReport]
@@ -632,6 +633,7 @@ module Comet
     # Get Constellation bucket usage report (regenerate).
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # This API requires the Constellation Role to be enabled.
     #
     # @return [Comet::ConstellationCheckReport]
@@ -649,6 +651,7 @@ module Comet
     # Prune unused buckets.
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # This API requires the Constellation Role to be enabled.
     #
     # @return [Comet::CometAPIResponseMessage]
@@ -666,6 +669,7 @@ module Comet
     # Get Constellation status.
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # This API requires the Constellation Role to be enabled.
     #
     # @return [Comet::ConstellationStatusAPIResponse]
@@ -1924,6 +1928,7 @@ module Comet
     # Get log files.
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     #
     # @return [Array<Number>]
     def admin_meta_list_available_log_days
@@ -1950,6 +1955,7 @@ module Comet
     # This API does not automatically convert line endings; around the 18.3.2 timeframe, log content may even contain mixed line-endings.
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     #
     # @param [Number] log A log day, selected from the options returned by the Get Log Files API
     # @return [String]
@@ -2035,6 +2041,7 @@ module Comet
     # Prior to 18.9.2, this API terminated the server immediately without returning a response. In 18.9.2 and later, it returns a successful response before shutting down.
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # Access to this API may be prevented on a per-administrator basis.
     #
     # @return [Comet::CometAPIResponseMessage]
@@ -2053,6 +2060,7 @@ module Comet
     # This allows the Comet Server web interface to support testing different email credentials during setup.
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # Access to this API may be prevented on a per-administrator basis.
     #
     # @param [Comet::EmailOptions] email_options Updated configuration content
@@ -2081,6 +2089,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     #
     # @return [Comet::ServerConfigOptions]
     def admin_meta_server_config_get
@@ -2099,6 +2108,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     #
     # @return [Array<String>]
     def admin_meta_server_config_network_interfaces
@@ -2127,6 +2137,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     #
     # @param [Comet::ServerConfigOptions] config Updated configuration content
     # @return [Comet::CometAPIResponseMessage]
@@ -2152,6 +2163,7 @@ module Comet
     # Prior to 18.9.2, this API terminated the server immediately without returning a response. In 18.9.2 and later, it returns a successful response before shutting down.
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # Access to this API may be prevented on a per-administrator basis.
     #
     # @return [Comet::CometAPIResponseMessage]
@@ -2533,6 +2545,7 @@ module Comet
     # Get Replication status.
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     #
     # @return [Array<Comet::ReplicatorStateAPIResponse>]
     def admin_replication_state
@@ -2764,6 +2777,7 @@ module Comet
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
     # This API requires the Storage Role to be enabled.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     #
     # @param [String] bucket_id Selected bucket name
     # @return [Comet::StorageFreeSpaceInfo]
@@ -2849,6 +2863,7 @@ module Comet
     # Start a new software update campaign.
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # This API requires the Software Build Role to be enabled.
     # This API requires the Auth Role to be enabled.
     #
@@ -2873,6 +2888,7 @@ module Comet
     # Get current campaign status.
     #
     # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # This API requires the Software Build Role to be enabled.
     # This API requires the Auth Role to be enabled.
     #
