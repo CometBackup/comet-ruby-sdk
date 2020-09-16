@@ -170,6 +170,9 @@ module Comet
     # @type [Comet::RetentionPolicy] default_retention
     attr_accessor :default_retention
 
+    # @type [Boolean] rebrand_storage
+    attr_accessor :rebrand_storage
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -452,6 +455,8 @@ module Comet
         when 'DefaultRetention'
           @default_retention = Comet::RetentionPolicy.new
           @default_retention.from_hash(v)
+        when 'RebrandStorage'
+          @rebrand_storage = v
         else
           @unknown_json_fields[k] = v
         end
@@ -515,6 +520,7 @@ module Comet
         ret['Statistics'] = @statistics
       end
       ret['DefaultRetention'] = @default_retention
+      ret['RebrandStorage'] = @rebrand_storage
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

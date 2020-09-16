@@ -44,6 +44,9 @@ module Comet
     # @type [Number] storage_limit_bytes
     attr_accessor :storage_limit_bytes
 
+    # @type [Boolean] rebrand_storage
+    attr_accessor :rebrand_storage
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -112,6 +115,8 @@ module Comet
           raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @storage_limit_bytes = v
+        when 'RebrandStorage'
+          @rebrand_storage = v
         else
           @unknown_json_fields[k] = v
         end
@@ -143,6 +148,7 @@ module Comet
       end
       ret['StorageLimitEnabled'] = @storage_limit_enabled
       ret['StorageLimitBytes'] = @storage_limit_bytes
+      ret['RebrandStorage'] = @rebrand_storage
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
