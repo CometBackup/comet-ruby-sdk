@@ -3,7 +3,7 @@
 1. All tests passing
 2. Update changelog in `CHANGELOG.md`
 3. Update version number in `gemspec`
-4. `gem build`
+4. `gem build comet_backup_ruby_sdk`
 	- Should be warning-free
 5. Git tag
 	- Respect semver
