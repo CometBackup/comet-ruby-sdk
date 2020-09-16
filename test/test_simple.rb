@@ -53,8 +53,10 @@ class TestCometServer < MiniTest::Test
       @server.admin_get_user_profile(non_existent_username)
       assert false # should be unreachable
     rescue Comet::APIResponseError => e
-      assert_equal(400, e.detail.status)
-      assert_equal('User not found', e.detail.message)
+      # On server versions prior to Organization support, returns 400 - User not found
+      # On server versions with Organization support (>= 20.9.0), returns 403 - Unauthorised
+      assert_includes(400..499, e.detail.status)
+      assert_includes(['User not found', 'Unauthorised'], e.detail.message)
     end
   end
 
