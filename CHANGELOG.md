@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2020-09-16 v1.0.0
+- Tag a v1.0.0 release as the SDK design has stabilized. Future v1.x.x SDK releases will remain compatible with code written against v1.0.0, according to [Semantic Versioning](https://semver.org/).
+- Support new Organization feature
+- Support new `AdminCreateInstallTokenRequest` API
+- Support new Admin user management APIs
+- Support new `RebrandStorage` property on Storage Vaults and on Requestable destination targets
+- Update descriptions for `SEVT_META_HELLO` and `AdminMetaWebhookOptionsSet`
+
 ## 2020-08-28 v0.4.0
 - Feature: Add definitions B2 and Wasabi `VirtualStorageRole` classes
 - Feature: Add definitions for remote LDAP authentication data sources
