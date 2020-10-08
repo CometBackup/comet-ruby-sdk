@@ -2985,13 +2985,15 @@ module Comet
     # This API requires the Storage Role to be enabled.
     # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     #
-    # @param [String] bucket_id Selected bucket name
+    # @param [String] bucket_id (Optional) (This parameter is not used)
     # @return [Comet::StorageFreeSpaceInfo]
-    def admin_storage_free_space(bucket_id)
+    def admin_storage_free_space(bucket_id = nil)
       submit_params = {}
-      raise TypeError "'bucket_id' expected String, got #{bucket_id.class}" unless bucket_id.is_a? String
+      unless bucket_id.nil?
+        raise TypeError "'bucket_id' expected String, got #{bucket_id.class}" unless bucket_id.is_a? String
 
-      submit_params['BucketID'] = bucket_id
+        submit_params['BucketID'] = bucket_id
+      end
 
       body = perform_request('api/v1/admin/storage/free-space', submit_params)
       json_body = JSON.parse body
