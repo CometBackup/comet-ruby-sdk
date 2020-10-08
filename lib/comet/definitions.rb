@@ -135,6 +135,15 @@ module Comet
   # EmailReportType:
   EMAILREPORTTYPE_SUMMARY = 1
 
+  # FtpsModeType:
+  FTPS_MODE_PLAINTEXT = 0
+
+  # FtpsModeType:
+  FTPS_MODE_IMPLICIT = 1
+
+  # FtpsModeType:
+  FTPS_MODE_EXPLICIT = 2
+
   # Severity:
   SEVERITY_INFO = 'I'
 
