@@ -2952,6 +2952,36 @@ module Comet
       ret
     end
 
+    # AdminStorageBucketProperties
+    #
+    # Retrieve properties for a single bucket.
+    # This API can also be used to refresh the size measurement for a single bucket by passing a valid AfterTimestamp parameter.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Storage Role to be enabled.
+    #
+    # @param [String] bucket_id Bucket ID
+    # @param [Number] after_timestamp (Optional) Allow a stale size measurement if it is at least as new as the supplied Unix timestamp. Timestamps in the future may produce a result clamped down to the Comet Server's current time. If not present, the size measurement may be arbitrarily stale.
+    # @return [Comet::BucketProperties]
+    def admin_storage_bucket_properties(bucket_id, after_timestamp = nil)
+      submit_params = {}
+      raise TypeError "'bucket_id' expected String, got #{bucket_id.class}" unless bucket_id.is_a? String
+
+      submit_params['BucketID'] = bucket_id
+      unless after_timestamp.nil?
+        raise TypeError "'after_timestamp' expected Numeric, got #{after_timestamp.class}" unless after_timestamp.is_a? Numeric
+
+        submit_params['AfterTimestamp'] = after_timestamp
+      end
+
+      body = perform_request('api/v1/admin/storage/bucket-properties', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BucketProperties.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminStorageDeleteBucket
     #
     # Delete a bucket.
