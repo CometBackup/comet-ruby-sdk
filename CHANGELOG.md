@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2020-10-08 v1.1.0
+- Based on Comet 20.9.6
+- Support new `AdminStorageBucketProperties` API
+- Allow passing in nil or no value for `AdminStorageFreeSpace` parameter
+- Fix an issue with automatic SelfAddress parameters not containing a trailing slash
+
 ## 2020-09-16 v1.0.0
 - Tag a v1.0.0 release as the SDK design has stabilized. Future v1.x.x SDK releases will remain compatible with code written against v1.0.0, according to [Semantic Versioning](https://semver.org/).
 - Support new Organization feature
