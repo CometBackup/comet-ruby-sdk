@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2020-11-05 v1.2.0
+- Based on Comet 20.9.10
+- Support new `ThawExec` feature
+
 ## 2020-10-08 v1.1.0
 - Based on Comet 20.9.6
 - Support new `AdminStorageBucketProperties` API
