@@ -32,6 +32,9 @@ module Comet
     # @type [Array<String>] pre_exec
     attr_accessor :pre_exec
 
+    # @type [Array<String>] thaw_exec
+    attr_accessor :thaw_exec
+
     # @type [Array<String>] post_exec
     attr_accessor :post_exec
 
@@ -58,6 +61,7 @@ module Comet
       @create_time = 0
       @modify_time = 0
       @pre_exec = []
+      @thaw_exec = []
       @post_exec = []
       @engine_props = {}
       @override_destination_retention = {}
@@ -107,6 +111,17 @@ module Comet
               raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @pre_exec[i1] = v1
+            end
+          end
+        when 'ThawExec'
+          if v.nil?
+            @thaw_exec = []
+          else
+            @thaw_exec = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+
+              @thaw_exec[i1] = v1
             end
           end
         when 'PostExec'
@@ -159,6 +174,7 @@ module Comet
       ret['CreateTime'] = @create_time
       ret['ModifyTime'] = @modify_time
       ret['PreExec'] = @pre_exec
+      ret['ThawExec'] = @thaw_exec
       ret['PostExec'] = @post_exec
       ret['EngineProps'] = @engine_props
       unless @override_destination_retention.nil?
