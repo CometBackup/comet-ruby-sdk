@@ -69,4 +69,15 @@ class TestCometServer < MiniTest::Test
     @server.admin_list_users_full
   end
 
+  def test_type_assertion
+    begin
+      @server.admin_get_user_profile(100)
+      assert false # should be unreachable
+    rescue TypeError
+      assert true  # correct type of exception
+    rescue
+      assert false # got some other kind of exception
+    end
+  end
+
 end
