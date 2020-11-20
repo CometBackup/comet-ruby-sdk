@@ -944,6 +944,38 @@ module Comet
       ret
     end
 
+    # AdminDispatcherDeleteSnapshots
+    #
+    # Instruct a live connected device to delete multiple stored snapshots.
+    # The target device must be running Comet 20.9.10 or later.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [String] destination_id The Storage Vault GUID
+    # @param [Array<String>] snapshot_ids The backup job snapshot IDs to delete
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_dispatcher_delete_snapshots(target_id, destination_id, snapshot_ids)
+      submit_params = {}
+      raise TypeError "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError "'destination_id' expected String, got #{destination_id.class}" unless destination_id.is_a? String
+
+      submit_params['DestinationID'] = destination_id
+      raise TypeError "'snapshot_ids' expected Array, got #{snapshot_ids.class}" unless snapshot_ids.is_a? Array
+
+      submit_params['SnapshotIDs'] = snapshot_ids.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/delete-snapshots', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherDropConnection
     #
     # Disconnect a live connected device.
