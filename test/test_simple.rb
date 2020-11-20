@@ -80,4 +80,15 @@ class TestCometServer < MiniTest::Test
     end
   end
 
+  # test_multipart
+  #
+  # Test use of the AdminMetaResourceNew API that uses multipart/form-data submission.
+
+  def test_multipart
+    resource_content = "comet-test-resource-content-#{SecureRandom.uuid}"
+    props = @server.admin_meta_resource_new(resource_content);
+    result = @server.admin_meta_resource_get(props.resource_hash);
+    assert resource_content == result
+  end
+
 end
