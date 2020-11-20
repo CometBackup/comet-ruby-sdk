@@ -105,23 +105,23 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+      raise TypeError, "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+      raise TypeError, "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
 
       obj.each do |k, v|
         case k
         when 'Version'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @version = v
         when 'VersionCodename'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @version_codename = v
         when 'StorageRole'
@@ -140,57 +140,57 @@ module Comet
           else
             @experimental_options = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @experimental_options[i1] = v1
             end
           end
         when 'ServerStartTime'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @server_start_time = v
         when 'ServerStartHash'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @server_start_hash = v
         when 'CurrentTime'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @current_time = v
         when 'ServerLicenseHash'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @server_license_hash = v
         when 'LicenseValidUntil'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @license_valid_until = v
         when 'EmailsSentSuccessfully'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @emails_sent_successfully = v
         when 'EmailsSentErrors'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @emails_sent_errors = v
         when 'EmailsWaitingInQueue'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @emails_waiting_in_queue = v
         when 'ScheduledEmailThreadCurrentState'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @scheduled_email_thread_current_state = v
         when 'ScheduledEmailThreadLastCalculateDurationNanos'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @scheduled_email_thread_last_calculate_duration_nanos = v
         when 'ScheduledEmailThreadWaitingUntil'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @scheduled_email_thread_waiting_until = v
         when 'ScheduledEmailThreadLastWakeTime'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @scheduled_email_thread_last_wake_time = v
         when 'ScheduledEmailThreadLastWakeSentEmails'

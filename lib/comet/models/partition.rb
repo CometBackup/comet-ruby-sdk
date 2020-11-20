@@ -71,35 +71,35 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+      raise TypeError, "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+      raise TypeError, "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
 
       obj.each do |k, v|
         case k
         when 'DeviceName'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @device_name = v
         when 'Filesystem'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @filesystem = v
         when 'VolumeName'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @volume_name = v
         when 'VolumeGuid'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @volume_guid = v
         when 'VolumeSerial'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @volume_serial = v
         when 'MountPoints'
@@ -108,29 +108,29 @@ module Comet
           else
             @mount_points = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @mount_points[i1] = v1
             end
           end
         when 'ReadOffset'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @read_offset = v
         when 'Size'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @size = v
         when 'UsedSize'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @used_size = v
         when 'Flags'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @flags = v
         when 'BytesPerFilesystemCluster'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @bytes_per_filesystem_cluster = v
         else

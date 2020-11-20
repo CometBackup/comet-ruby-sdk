@@ -135,14 +135,14 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+      raise TypeError, "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+      raise TypeError, "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
 
       obj.each do |k, v|
         case k
@@ -179,19 +179,19 @@ module Comet
             end
           end
         when 'ModeScheduleSkipAlreadyRunning'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @mode_schedule_skip_already_running = v
         when 'ModeAdminResetPassword'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @mode_admin_reset_password = v
         when 'ModeAdminViewFilenames'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @mode_admin_view_filenames = v
         when 'ModeRequireUserResetPassword'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @mode_require_user_reset_password = v
         when 'PreventDeleteSingleSnapshots'

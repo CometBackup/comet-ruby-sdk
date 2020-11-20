@@ -46,31 +46,31 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+      raise TypeError, "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+      raise TypeError, "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
 
       obj.each do |k, v|
         case k
         when 'BrandName'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @brand_name = v
         when 'LogoImage'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @logo_image = v
         when 'TopColor'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @top_color = v
         when 'Favicon'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @favicon = v
         when 'HideNewsArea'

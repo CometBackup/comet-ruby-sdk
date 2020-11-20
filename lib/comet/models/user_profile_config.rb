@@ -133,35 +133,35 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+      raise TypeError, "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+      raise TypeError, "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
 
       obj.each do |k, v|
         case k
         when 'Username'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @username = v
         when 'AccountName'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @account_name = v
         when 'LocalTimezone'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @local_timezone = v
         when 'LanguageCode'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @language_code = v
         when 'OrganizationID'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @organization_id = v
         when 'Emails'
@@ -170,7 +170,7 @@ module Comet
           else
             @emails = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @emails[i1] = v1
             end
@@ -232,30 +232,30 @@ module Comet
         when 'AllProtectedItemsQuotaEnabled'
           @all_protected_items_quota_enabled = v
         when 'AllProtectedItemsQuotaBytes'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @all_protected_items_quota_bytes = v
         when 'MaximumDevices'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @maximum_devices = v
         when 'PolicyID'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @policy_id = v
         when 'Policy'
           @policy = Comet::UserPolicy.new
           @policy.from_hash(v)
         when 'PasswordFormat'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @password_format = v
         when 'PasswordHash'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @password_hash = v
         when 'PasswordRecovery'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @password_recovery = v
         when 'AllowPasswordLogin'
@@ -263,21 +263,21 @@ module Comet
         when 'AllowPasswordAndTOTPLogin'
           @allow_password_and_totplogin = v
         when 'TOTPKeyEncryptionFormat'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @totpkey_encryption_format = v
         when 'TOTPKey'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @totpkey = v
         when 'RequirePasswordChange'
           @require_password_change = v
         when 'CreateTime'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @create_time = v
         when 'CreationGUID'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @creation_guid = v
         else

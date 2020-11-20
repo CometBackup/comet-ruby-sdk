@@ -47,35 +47,35 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+      raise TypeError, "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+      raise TypeError, "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
 
       obj.each do |k, v|
         case k
         when 'AZBAccountName'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @azbaccount_name = v
         when 'AZBAccountKey'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @azbaccount_key = v
         when 'AZBContainer'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @azbcontainer = v
         when 'AZBRealm'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @azbrealm = v
         when 'AZBPrefix'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @azbprefix = v
         else

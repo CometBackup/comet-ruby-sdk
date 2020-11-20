@@ -182,153 +182,153 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+      raise TypeError, "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+      raise TypeError, "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
 
       obj.each do |k, v|
         case k
         when 'DestinationType'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @destination_type = v
         when 'CometServer'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @comet_server = v
         when 'CometBucket'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @comet_bucket = v
         when 'CometBucketKey'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @comet_bucket_key = v
         when 'S3Server'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @s3server = v
         when 'S3UsesTLS'
           @s3uses_tls = v
         when 'S3AccessKey'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @s3access_key = v
         when 'S3SecretKey'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @s3secret_key = v
         when 'S3BucketName'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @s3bucket_name = v
         when 'S3Subdir'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @s3subdir = v
         when 'S3UsesV2Signing'
           @s3uses_v2signing = v
         when 'SFTPServer'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftpserver = v
         when 'SFTPUsername'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftpusername = v
         when 'SFTPRemotePath'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftpremote_path = v
         when 'SFTPAuthMode'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @sftpauth_mode = v
         when 'SFTPPassword'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftppassword = v
         when 'SFTPPrivateKey'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftpprivate_key = v
         when 'SFTPCustomAuth_UseKnownHostsFile'
           @sftpcustom_auth__use_known_hosts_file = v
         when 'SFTPCustomAuth_KnownHostsFile'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @sftpcustom_auth__known_hosts_file = v
         when 'FTPServer'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @ftpserver = v
         when 'FTPUsername'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @ftpusername = v
         when 'FTPPassword'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @ftppassword = v
         when 'FTPBaseUseHomeDirectory'
           @ftpbase_use_home_directory = v
         when 'FTPCustomBaseDirectory'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @ftpcustom_base_directory = v
         when 'FTPSMode'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @ftpsmode = v
         when 'FTPPort'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @ftpport = v
         when 'FTPMaxConnections'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @ftpmax_connections = v
         when 'FTPAcceptInvalidSSL'
           @ftpaccept_invalid_ssl = v
         when 'AZBAccountName'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @azbaccount_name = v
         when 'AZBAccountKey'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @azbaccount_key = v
         when 'AZBContainer'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @azbcontainer = v
         when 'AZBRealm'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @azbrealm = v
         when 'AZBPrefix'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @azbprefix = v
         when 'LocalcopyPath'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @localcopy_path = v
         when 'LocalcopyWinSMBUsername'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @localcopy_win_smbusername = v
         when 'LocalcopyWinSMBPassword'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @localcopy_win_smbpassword = v
         when 'LocalcopyWinSMBPasswordFormat'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @localcopy_win_smbpassword_format = v
         when 'Swift'

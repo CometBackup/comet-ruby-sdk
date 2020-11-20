@@ -71,35 +71,35 @@ module Comet
 
     # @param [String] json_string The complete object in JSON format
     def from_json(json_string)
-      raise TypeError "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
+      raise TypeError, "'json_string' expected String, got #{json_string.class}" unless json_string.is_a? String
 
       from_hash(JSON.parse(json_string))
     end
 
     # @param [Hash] obj The complete object as a Ruby hash
     def from_hash(obj)
-      raise TypeError "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
+      raise TypeError, "'obj' expected Hash, got #{obj.class}" unless obj.is_a? Hash
 
       obj.each do |k, v|
         case k
         when 'Engine'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @engine = v
         when 'Description'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @description = v
         when 'OwnerDevice'
-          raise TypeError "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @owner_device = v
         when 'CreateTime'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @create_time = v
         when 'ModifyTime'
-          raise TypeError "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @modify_time = v
         when 'PreExec'
@@ -108,7 +108,7 @@ module Comet
           else
             @pre_exec = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @pre_exec[i1] = v1
             end
@@ -119,7 +119,7 @@ module Comet
           else
             @thaw_exec = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @thaw_exec[i1] = v1
             end
@@ -130,7 +130,7 @@ module Comet
           else
             @post_exec = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @post_exec[i1] = v1
             end
@@ -141,7 +141,7 @@ module Comet
             @engine_props = {}
           else
             v.each do |k1, v1|
-              raise TypeError "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
               @engine_props[k1] = v1
             end
