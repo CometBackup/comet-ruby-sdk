@@ -3261,6 +3261,35 @@ module Comet
 
       res.body
     end
+
+    # Perform a synchronous HTTP request, using multipart/form-data.
+    #
+    # @param [String] endpoint The URL suffix
+    # @param [Hash<String,String>] params Form post parameters to submit to the target API
+    # @return [String] Response body
+    def perform_request_multipart(endpoint, params = {})
+      full_uri = URI(@server_address + endpoint)
+
+      req = Net::HTTP::Post.new(full_uri)
+      req['X-Comet-Admin-Username'] = @username
+      req['X-Comet-Admin-AuthType'] = 'Password'
+      req['X-Comet-Admin-Password'] = @password
+
+      form_params = []
+      params.each do |k, v|
+        form_params.append [k, v, {:filename => k}]
+      end
+      req.set_form(form_params, 'multipart/form-data')
+
+      http = Net::HTTP.new(full_uri.hostname, full_uri.port)
+      res = http.request(req)
+
+      unless res.is_a?(Net::HTTPSuccess)
+        raise res
+      end
+
+      res.body
+    end
   end
 
 end
