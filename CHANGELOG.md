@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2020-11-24 v1.3.0
+- Based on Comet 20.11.0
+- Support new `AdminDispatcherDeleteSnapshots` API for deleting multiple snapshots in a single step
+- Support `AdminMetaResourceNew` API using multipart request
+- Fix an issue with properly raising `TypeError` for invalid parameters
+
 ## 2020-11-05 v1.2.0
 - Based on Comet 20.9.10
 - Support new `ThawExec` feature
