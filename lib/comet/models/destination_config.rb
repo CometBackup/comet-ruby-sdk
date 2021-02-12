@@ -152,6 +152,9 @@ module Comet
     # @type [Array<Comet::DestinationLocation>] span_targets
     attr_accessor :span_targets
 
+    # @type [Boolean] span_use_static_slots
+    attr_accessor :span_use_static_slots
+
     # @type [Number] encryption_key_encryption_method
     attr_accessor :encryption_key_encryption_method
 
@@ -446,6 +449,8 @@ module Comet
               @span_targets[i1].from_hash(v1)
             end
           end
+        when 'SpanUseStaticSlots'
+          @span_use_static_slots = v
         when 'EncryptionKeyEncryptionMethod'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -527,6 +532,7 @@ module Comet
       ret['Swift'] = @swift
       ret['B2'] = @b2
       ret['SpanTargets'] = @span_targets
+      ret['SpanUseStaticSlots'] = @span_use_static_slots
       ret['EncryptionKeyEncryptionMethod'] = @encryption_key_encryption_method
       ret['EncryptedEncryptionKey'] = @encrypted_encryption_key
       ret['RepoInitTimestamp'] = @repo_init_timestamp

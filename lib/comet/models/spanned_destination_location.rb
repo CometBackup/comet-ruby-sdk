@@ -17,6 +17,9 @@ module Comet
     # @type [Array<Comet::DestinationLocation>] span_targets
     attr_accessor :span_targets
 
+    # @type [Boolean] span_use_static_slots
+    attr_accessor :span_use_static_slots
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -52,6 +55,8 @@ module Comet
               @span_targets[i1].from_hash(v1)
             end
           end
+        when 'SpanUseStaticSlots'
+          @span_use_static_slots = v
         else
           @unknown_json_fields[k] = v
         end
@@ -62,6 +67,7 @@ module Comet
     def to_hash
       ret = {}
       ret['SpanTargets'] = @span_targets
+      ret['SpanUseStaticSlots'] = @span_use_static_slots
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
