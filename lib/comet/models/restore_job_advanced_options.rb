@@ -20,6 +20,9 @@ module Comet
     # @type [Boolean] overwrite_existing_files
     attr_accessor :overwrite_existing_files
 
+    # @type [Boolean] dest_is_original_location
+    attr_accessor :dest_is_original_location
+
     # @type [String] dest_path
     attr_accessor :dest_path
 
@@ -63,6 +66,8 @@ module Comet
           @type = v
         when 'OverwriteExistingFiles'
           @overwrite_existing_files = v
+        when 'DestIsOriginalLocation'
+          @dest_is_original_location = v
         when 'DestPath'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -93,6 +98,7 @@ module Comet
       ret = {}
       ret['Type'] = @type
       ret['OverwriteExistingFiles'] = @overwrite_existing_files
+      ret['DestIsOriginalLocation'] = @dest_is_original_location
       ret['DestPath'] = @dest_path
       ret['ExactDestPaths'] = @exact_dest_paths
       ret['ArchiveFormat'] = @archive_format

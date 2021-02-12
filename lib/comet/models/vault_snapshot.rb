@@ -23,6 +23,9 @@ module Comet
     # @type [Number] create_time
     attr_accessor :create_time
 
+    # @type [Boolean] has_original_path_info
+    attr_accessor :has_original_path_info
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -62,6 +65,8 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @create_time = v
+        when 'HasOriginalPathInfo'
+          @has_original_path_info = v
         else
           @unknown_json_fields[k] = v
         end
@@ -74,6 +79,7 @@ module Comet
       ret['Snapshot'] = @snapshot
       ret['Source'] = @source
       ret['CreateTime'] = @create_time
+      ret['HasOriginalPathInfo'] = @has_original_path_info
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
