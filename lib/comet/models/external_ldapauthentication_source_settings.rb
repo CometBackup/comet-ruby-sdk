@@ -26,6 +26,18 @@ module Comet
     # @type [String] bind_user
     attr_accessor :bind_user
 
+    # @type [String] bind_password
+    attr_accessor :bind_password
+
+    # @type [String] search_dn
+    attr_accessor :search_dn
+
+    # @type [String] search_filter
+    attr_accessor :search_filter
+
+    # @type [Boolean] accept_invalid_ssl
+    attr_accessor :accept_invalid_ssl
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -38,6 +50,9 @@ module Comet
       @port = 0
       @security_method = ''
       @bind_user = ''
+      @bind_password = ''
+      @search_dn = ''
+      @search_filter = ''
       @unknown_json_fields = {}
     end
 
@@ -70,6 +85,20 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @bind_user = v
+        when 'BindPassword'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @bind_password = v
+        when 'SearchDN'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @search_dn = v
+        when 'SearchFilter'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @search_filter = v
+        when 'AcceptInvalidSSL'
+          @accept_invalid_ssl = v
         else
           @unknown_json_fields[k] = v
         end
@@ -83,6 +112,10 @@ module Comet
       ret['Port'] = @port
       ret['SecurityMethod'] = @security_method
       ret['BindUser'] = @bind_user
+      ret['BindPassword'] = @bind_password
+      ret['SearchDN'] = @search_dn
+      ret['SearchFilter'] = @search_filter
+      ret['AcceptInvalidSSL'] = @accept_invalid_ssl
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
