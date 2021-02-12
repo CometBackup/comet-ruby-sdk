@@ -1230,7 +1230,7 @@ module Comet
     #
     # @param [String] target_id The live connection GUID
     # @param [String] path (Optional) Browse objects inside this path. If empty or not present, returns the top-level device paths
-    # @return [Array<Comet::StoredObject>]
+    # @return [Comet::DispatcherStoredObjectsResponse]
     def admin_dispatcher_request_filesystem_objects(target_id, path = nil)
       submit_params = {}
       raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
@@ -1245,15 +1245,8 @@ module Comet
       body = perform_request('api/v1/admin/dispatcher/request-filesystem-objects', submit_params)
       json_body = JSON.parse body
       check_status json_body
-      if json_body.nil?
-        ret = []
-      else
-        ret = Array.new(json_body.length)
-        json_body.each_with_index do |v, i|
-          ret[i] = Comet::StoredObject.new
-          ret[i].from_hash(v)
-        end
-      end
+      ret = Comet::DispatcherStoredObjectsResponse.new
+      ret.from_hash(json_body)
       ret
     end
 
