@@ -70,7 +70,9 @@ module Comet
       ret = {}
       ret['OwnerOrganizationID'] = @owner_organization_id
       ret['Type'] = @type
-      ret['Data'] = @data
+      unless @data.nil?
+        ret['Data'] = @data
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
