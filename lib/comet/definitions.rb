@@ -526,6 +526,9 @@ module Comet
   # RemoteServerType:
   REMOTESERVER_WASABI = 'wasabi'
 
+  # RemoteServerType:
+  REMOTESERVER_CUSTOM = 'custom'
+
   LDAPSECURITYMETHOD_PLAIN = 'plain'
 
   LDAPSECURITYMETHOD_LDAPS = 'ldaps'

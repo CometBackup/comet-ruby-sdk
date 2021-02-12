@@ -38,6 +38,9 @@ module Comet
     # @type [Comet::WasabiVirtualStorageRoleSettings] wasabi
     attr_accessor :wasabi
 
+    # @type [Comet::CustomRemoteBucketSettings] custom
+    attr_accessor :custom
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -54,6 +57,7 @@ module Comet
       @ldap = Comet::ExternalLDAPAuthenticationSourceSettings.new
       @b2 = Comet::B2VirtualStorageRoleSettings.new
       @wasabi = Comet::WasabiVirtualStorageRoleSettings.new
+      @custom = Comet::CustomRemoteBucketSettings.new
       @unknown_json_fields = {}
     end
 
@@ -99,6 +103,9 @@ module Comet
         when 'Wasabi'
           @wasabi = Comet::WasabiVirtualStorageRoleSettings.new
           @wasabi.from_hash(v)
+        when 'Custom'
+          @custom = Comet::CustomRemoteBucketSettings.new
+          @custom.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -127,6 +134,9 @@ module Comet
       end
       unless @wasabi.nil?
         ret['Wasabi'] = @wasabi
+      end
+      unless @custom.nil?
+        ret['Custom'] = @custom
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

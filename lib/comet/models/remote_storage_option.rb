@@ -38,6 +38,9 @@ module Comet
     # @type [Comet::WasabiVirtualStorageRoleSettings] wasabi
     attr_accessor :wasabi
 
+    # @type [Comet::CustomRemoteBucketSettings] custom
+    attr_accessor :custom
+
     # @type [Boolean] storage_limit_enabled
     attr_accessor :storage_limit_enabled
 
@@ -63,6 +66,7 @@ module Comet
       @ldap = Comet::ExternalLDAPAuthenticationSourceSettings.new
       @b2 = Comet::B2VirtualStorageRoleSettings.new
       @wasabi = Comet::WasabiVirtualStorageRoleSettings.new
+      @custom = Comet::CustomRemoteBucketSettings.new
       @storage_limit_bytes = 0
       @unknown_json_fields = {}
     end
@@ -109,6 +113,9 @@ module Comet
         when 'Wasabi'
           @wasabi = Comet::WasabiVirtualStorageRoleSettings.new
           @wasabi.from_hash(v)
+        when 'Custom'
+          @custom = Comet::CustomRemoteBucketSettings.new
+          @custom.from_hash(v)
         when 'StorageLimitEnabled'
           @storage_limit_enabled = v
         when 'StorageLimitBytes'
@@ -145,6 +152,9 @@ module Comet
       end
       unless @wasabi.nil?
         ret['Wasabi'] = @wasabi
+      end
+      unless @custom.nil?
+        ret['Custom'] = @custom
       end
       ret['StorageLimitEnabled'] = @storage_limit_enabled
       ret['StorageLimitBytes'] = @storage_limit_bytes
