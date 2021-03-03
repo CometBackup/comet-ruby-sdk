@@ -24,9 +24,9 @@ class TestCometServer < MiniTest::Test
   # Configure environment for Minitest
 
   def setup
-    raise StandardError.new 'Missing COMETSERVER_ADDRESS environment variable' unless ENV.key?('COMETSERVER_ADDRESS')
-    raise StandardError.new 'Missing COMETSERVER_ADMINUSER environment variable' unless ENV.key?('COMETSERVER_ADMINUSER')
-    raise StandardError.new 'Missing COMETSERVER_ADMINPASS environment variable' unless ENV.key?('COMETSERVER_ADMINPASS')
+    raise StandardError, 'Missing COMETSERVER_ADDRESS environment variable' unless ENV.key?('COMETSERVER_ADDRESS')
+    raise StandardError, 'Missing COMETSERVER_ADMINUSER environment variable' unless ENV.key?('COMETSERVER_ADMINUSER')
+    raise StandardError, 'Missing COMETSERVER_ADMINPASS environment variable' unless ENV.key?('COMETSERVER_ADMINPASS')
 
     @server = Comet::CometServer.new(ENV['COMETSERVER_ADDRESS'], ENV['COMETSERVER_ADMINUSER'], ENV['COMETSERVER_ADMINPASS'])
   end
@@ -70,14 +70,12 @@ class TestCometServer < MiniTest::Test
   end
 
   def test_type_assertion
-    begin
-      @server.admin_get_user_profile(100)
-      assert false # should be unreachable
-    rescue TypeError
-      assert true  # correct type of exception
-    rescue
-      assert false # got some other kind of exception
-    end
+    @server.admin_get_user_profile(100)
+    assert false # should be unreachable
+  rescue TypeError
+    assert true  # correct type of exception
+  rescue
+    assert false # got some other kind of exception
   end
 
   # test_multipart
@@ -86,8 +84,8 @@ class TestCometServer < MiniTest::Test
 
   def test_multipart
     resource_content = "comet-test-resource-content-#{SecureRandom.uuid}"
-    props = @server.admin_meta_resource_new(resource_content);
-    result = @server.admin_meta_resource_get(props.resource_hash);
+    props = @server.admin_meta_resource_new(resource_content)
+    result = @server.admin_meta_resource_get(props.resource_hash)
     assert resource_content == result
   end
 
