@@ -35,6 +35,9 @@ module Comet
     # @type [Comet::AdminEmailOptions] email
     attr_accessor :email
 
+    # @type [Boolean] is_suspended
+    attr_accessor :is_suspended
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -110,6 +113,8 @@ module Comet
         when 'Email'
           @email = Comet::AdminEmailOptions.new
           @email.from_hash(v)
+        when 'IsSuspended'
+          @is_suspended = v
         else
           @unknown_json_fields[k] = v
         end
@@ -126,6 +131,7 @@ module Comet
       ret['RemoteStorage'] = @remote_storage
       ret['WebhookOptions'] = @webhook_options
       ret['Email'] = @email
+      ret['IsSuspended'] = @is_suspended
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
