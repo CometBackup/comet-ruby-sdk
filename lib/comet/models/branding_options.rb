@@ -59,6 +59,9 @@ module Comet
     # @type [String] path_icns_file
     attr_accessor :path_icns_file
 
+    # @type [String] path_menu_bar_icns_file
+    attr_accessor :path_menu_bar_icns_file
+
     # @type [String] path_eula_rtf
     attr_accessor :path_eula_rtf
 
@@ -121,6 +124,7 @@ module Comet
       @account_register_url = ''
       @path_ico_file = ''
       @path_icns_file = ''
+      @path_menu_bar_icns_file = ''
       @path_eula_rtf = ''
       @path_tile_png = ''
       @path_header_image = ''
@@ -205,6 +209,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @path_icns_file = v
+        when 'PathMenuBarIcnsFile'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @path_menu_bar_icns_file = v
         when 'PathEulaRtf'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -284,6 +292,7 @@ module Comet
       ret['HideBackgroundLogo'] = @hide_background_logo
       ret['PathIcoFile'] = @path_ico_file
       ret['PathIcnsFile'] = @path_icns_file
+      ret['PathMenuBarIcnsFile'] = @path_menu_bar_icns_file
       ret['PathEulaRtf'] = @path_eula_rtf
       ret['PathTilePng'] = @path_tile_png
       ret['PathHeaderImage'] = @path_header_image
