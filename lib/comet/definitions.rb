@@ -291,6 +291,8 @@ module Comet
 
   ENGINE_BUILTIN_MONGODB = 'engine1/mongodb'
 
+  ENGINE_BUILTIN_MSOFFICE = 'engine1/winmsofficemail'
+
   # MSSQLAuthMode:
   MSSQL_AUTH_WINDOWS = 'windows'
 
