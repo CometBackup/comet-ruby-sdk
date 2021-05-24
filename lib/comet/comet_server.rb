@@ -1100,6 +1100,62 @@ module Comet
       ret
     end
 
+    # AdminDispatcherRegisterOfficeApplicationBegin
+    #
+    # Begin the process of registering a new Azure AD application that can access Office 365 for backup.
+    # After calling this API, you should supply the login details to the end-user, and then begin polling the AdminDispatcherRegisterOfficeApplicationCheck with the supplied "Continuation" parameter to check on the registration process.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [String] email_address The email address of the Azure AD administrator
+    # @return [Comet::RegisterOfficeApplicationBeginResponse]
+    def admin_dispatcher_register_office_application_begin(target_id, email_address)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'email_address' expected String, got #{email_address.class}" unless email_address.is_a? String
+
+      submit_params['EmailAddress'] = email_address
+
+      body = perform_request('api/v1/admin/dispatcher/register-office-application/begin', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::RegisterOfficeApplicationBeginResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherRegisterOfficeApplicationCheck
+    #
+    # Check the process of registering a new Azure AD application that can access Office 365 for backup.
+    # You should begin the process by calling AdminDispatcherRegisterOfficeApplicationBegin and asking the end-user to complete the Azure authentication steps.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [String] continuation The ID returned from the AdminDispatcherRegisterOfficeApplicationBegin endpoint
+    # @return [Comet::RegisterOfficeApplicationCheckResponse]
+    def admin_dispatcher_register_office_application_check(target_id, continuation)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'continuation' expected String, got #{continuation.class}" unless continuation.is_a? String
+
+      submit_params['Continuation'] = continuation
+
+      body = perform_request('api/v1/admin/dispatcher/register-office-application/check', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::RegisterOfficeApplicationCheckResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherReindexStorageVault
     #
     # Instruct a live connected device to rebuild Storage Vault indexes now.
