@@ -29,6 +29,30 @@ module Comet
     # @type [Number] size
     attr_accessor :size
 
+    # @type [String] display_name
+    attr_accessor :display_name
+
+    # @type [String] item_class
+    attr_accessor :item_class
+
+    # @type [String] from
+    attr_accessor :from
+
+    # @type [String] to
+    attr_accessor :to
+
+    # @type [Number] received_date_time
+    attr_accessor :received_date_time
+
+    # @type [Boolean] has_attachments
+    attr_accessor :has_attachments
+
+    # @type [Number] start_time
+    attr_accessor :start_time
+
+    # @type [Number] end_time
+    attr_accessor :end_time
+
     # @type [Boolean] recursive_count_known
     attr_accessor :recursive_count_known
 
@@ -54,6 +78,13 @@ module Comet
       @type = ''
       @subtree = ''
       @size = 0
+      @display_name = ''
+      @item_class = ''
+      @from = ''
+      @to = ''
+      @received_date_time = 0
+      @start_time = 0
+      @end_time = 0
       @recursive_files = 0
       @recursive_bytes = 0
       @recursive_folders = 0
@@ -93,6 +124,36 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @size = v
+        when 'dname'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @display_name = v
+        when 'itemClass'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @item_class = v
+        when 'from'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @from = v
+        when 'to'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @to = v
+        when 'rtime'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @received_date_time = v
+        when 'has_attachments'
+          @has_attachments = v
+        when 'stime'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @start_time = v
+        when 'etime'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @end_time = v
         when 'r'
           @recursive_count_known = v
         when 'f'
@@ -121,6 +182,30 @@ module Comet
       ret['type'] = @type
       ret['subtree'] = @subtree
       ret['size'] = @size
+      unless @display_name.nil?
+        ret['dname'] = @display_name
+      end
+      unless @item_class.nil?
+        ret['itemClass'] = @item_class
+      end
+      unless @from.nil?
+        ret['from'] = @from
+      end
+      unless @to.nil?
+        ret['to'] = @to
+      end
+      unless @received_date_time.nil?
+        ret['rtime'] = @received_date_time
+      end
+      unless @has_attachments.nil?
+        ret['has_attachments'] = @has_attachments
+      end
+      unless @start_time.nil?
+        ret['stime'] = @start_time
+      end
+      unless @end_time.nil?
+        ret['etime'] = @end_time
+      end
       unless @recursive_count_known.nil?
         ret['r'] = @recursive_count_known
       end

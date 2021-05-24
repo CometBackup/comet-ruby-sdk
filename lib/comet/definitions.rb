@@ -327,6 +327,33 @@ module Comet
   # StoredObjectType:
   STOREDOBJECTTYPE_WINEFS = 'winefs'
 
+  # StoredObjectType: "file"
+  STOREDOBJECTTYPE_EMAILMESSAGE = 'emailmessage\"'
+
+  # StoredObjectType: "dir"
+  STOREDOBJECTTYPE_EMAILFOLDER = 'mailfolder\"'
+
+  # StoredObjectType: "file"
+  STOREDOBJECTTYPE_OFFICECONTACT = 'contact\"'
+
+  # StoredObjectType: "dir"
+  STOREDOBJECTTYPE_OFFICECONTACTFOLDER = 'contactfolder\"'
+
+  # StoredObjectType: "file"
+  STOREDOBJECTTYPE_OFFICECALENDAREVENT = 'calendarevent\"'
+
+  # StoredObjectType: "dir"
+  STOREDOBJECTTYPE_OFFICECALENDAR = 'calendar\"'
+
+  # StoredObjectType:
+  STOREDOBJECTTYPE_MSSITE = 'mssite'
+
+  # StoredObjectType:
+  STOREDOBJECTTYPE_MSSITELISTENTITY = 'mssitelistentity'
+
+  # StoredObjectType:
+  STOREDOBJECTTYPE_MSSITEITEMENTITY = 'mssiteitementity'
+
   # ExtraFileExclusionOSRestriction:
   OS_ANY = 0
 
