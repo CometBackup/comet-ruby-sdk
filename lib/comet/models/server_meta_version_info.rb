@@ -77,6 +77,9 @@ module Comet
     # @type [Boolean] scheduled_email_thread_last_wake_sent_emails
     attr_accessor :scheduled_email_thread_last_wake_sent_emails
 
+    # @type [Array<Comet::SelfBackupStatistics>] self_backup
+    attr_accessor :self_backup
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -100,6 +103,7 @@ module Comet
       @scheduled_email_thread_last_calculate_duration_nanos = 0
       @scheduled_email_thread_waiting_until = 0
       @scheduled_email_thread_last_wake_time = 0
+      @self_backup = []
       @unknown_json_fields = {}
     end
 
@@ -195,6 +199,16 @@ module Comet
           @scheduled_email_thread_last_wake_time = v
         when 'ScheduledEmailThreadLastWakeSentEmails'
           @scheduled_email_thread_last_wake_sent_emails = v
+        when 'SelfBackup'
+          if v.nil?
+            @self_backup = []
+          else
+            @self_backup = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              @self_backup[i1] = Comet::SelfBackupStatistics.new
+              @self_backup[i1].from_hash(v1)
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -227,6 +241,7 @@ module Comet
       ret['ScheduledEmailThreadWaitingUntil'] = @scheduled_email_thread_waiting_until
       ret['ScheduledEmailThreadLastWakeTime'] = @scheduled_email_thread_last_wake_time
       ret['ScheduledEmailThreadLastWakeSentEmails'] = @scheduled_email_thread_last_wake_sent_emails
+      ret['SelfBackup'] = @self_backup
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
