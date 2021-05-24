@@ -1197,6 +1197,90 @@ module Comet
       ret
     end
 
+    # AdminDispatcherRequestBrowseMongodb
+    #
+    # Request a list of tables in MongoDB database.
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::MongoDBConnection] credentials The Mongo database authentication settings
+    # @return [Comet::BrowseSQLServerResponse]
+    def admin_dispatcher_request_browse_mongodb(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::MongoDBConnection, got #{credentials.class}" unless credentials.is_a? Comet::MongoDBConnection
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-mongodb', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseSQLServerResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherRequestBrowseMssql
+    #
+    # Request a list of tables in MSSQL database.
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::MSSQLConnection] credentials The MSSQL database authentication settings
+    # @return [Comet::BrowseSQLServerResponse]
+    def admin_dispatcher_request_browse_mssql(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::MSSQLConnection, got #{credentials.class}" unless credentials.is_a? Comet::MSSQLConnection
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-mssql', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseSQLServerResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherRequestBrowseMysql
+    #
+    # Request a list of tables in MySQL database.
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::MySQLConnection] credentials The MySQL database authentication settings
+    # @return [Comet::BrowseSQLServerResponse]
+    def admin_dispatcher_request_browse_mysql(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::MySQLConnection, got #{credentials.class}" unless credentials.is_a? Comet::MySQLConnection
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-mysql', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseSQLServerResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherRequestBrowseVssAaw
     #
     # Request a list of installed VSS Writers (Application-Aware Writers) from a live connected device.
