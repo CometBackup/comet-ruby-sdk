@@ -1413,6 +1413,62 @@ module Comet
       ret
     end
 
+    # AdminDispatcherRequestOffice365Accounts
+    #
+    # Request a list of Office365 mailbox accounts.
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::Office365Credential] credentials The Office365 account credential
+    # @return [Comet::BrowseOffice365ObjectsResponse]
+    def admin_dispatcher_request_office_365accounts(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::Office365Credential, got #{credentials.class}" unless credentials.is_a? Comet::Office365Credential
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/request-office365-accounts', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseOffice365ObjectsResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherRequestOffice365Sites
+    #
+    # Request a list of Office365 sites.
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::Office365Credential] credentials The Office365 account credential
+    # @return [Comet::BrowseOffice365ObjectsResponse]
+    def admin_dispatcher_request_office_365sites(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::Office365Credential, got #{credentials.class}" unless credentials.is_a? Comet::Office365Credential
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/request-office365-sites', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseOffice365ObjectsResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherRequestStoredObjects
     #
     # Request a list of stored objects inside an existing backup job.
