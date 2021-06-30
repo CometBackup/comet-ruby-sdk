@@ -354,6 +354,9 @@ module Comet
   STOREDOBJECTTYPE_MSSITE = 'mssite'
 
   # StoredObjectType:
+  STOREDOBJECTTYPE_MSSITE_TEAM = 'mssiteteam'
+
+  # StoredObjectType:
   STOREDOBJECTTYPE_MSSITELISTENTITY = 'mssitelistentity'
 
   # StoredObjectType:
