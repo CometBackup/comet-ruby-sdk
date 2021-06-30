@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    comet_backup_ruby_sdk (1.4.0)
+    comet_backup_ruby_sdk (1.6.0)
 
 GEM
   remote: https://rubygems.org/
