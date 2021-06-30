@@ -2,9 +2,11 @@
 
 1. All tests passing
 2. Update changelog in `CHANGELOG.md`
-3. Update version number in `gemspec`
-4. `gem build comet_backup_ruby_sdk`
+3. Update version number in `comet_backup_ruby_sdk.gemspec`
+4. `bundle install`
+	- Should update our internal version in Gemfile.lock
+5. `gem build comet_backup_ruby_sdk.gemspec`
 	- Should be warning-free
-5. Git tag
+6. Git tag
 	- Respect semver
-6. `gem push comet_backup_ruby_sdk-0.x.x.gem`
+7. `gem push comet_backup_ruby_sdk-1.x.x.gem`
