@@ -17,6 +17,9 @@ module Comet
     # @type [Comet::BackupJobDetail] last_backup_job
     attr_accessor :last_backup_job
 
+    # @type [Comet::BackupJobDetail] last_successful_backup_job
+    attr_accessor :last_successful_backup_job
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -26,6 +29,7 @@ module Comet
 
     def clear
       @last_backup_job = Comet::BackupJobDetail.new
+      @last_successful_backup_job = Comet::BackupJobDetail.new
       @unknown_json_fields = {}
     end
 
@@ -45,6 +49,9 @@ module Comet
         when 'LastBackupJob'
           @last_backup_job = Comet::BackupJobDetail.new
           @last_backup_job.from_hash(v)
+        when 'LastSuccessfulBackupJob'
+          @last_successful_backup_job = Comet::BackupJobDetail.new
+          @last_successful_backup_job.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -55,6 +62,7 @@ module Comet
     def to_hash
       ret = {}
       ret['LastBackupJob'] = @last_backup_job
+      ret['LastSuccessfulBackupJob'] = @last_successful_backup_job
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
