@@ -107,6 +107,9 @@ module Comet
     # @type [Hash{String => Comet::BackupRuleConfig}] default_sources_backup_rules
     attr_accessor :default_sources_backup_rules
 
+    # @type [Hash{String => Comet::DefaultSourceWithOSRestriction}] default_sources_with_osrestriction
+    attr_accessor :default_sources_with_osrestriction
+
     # @type [Hash{String => Comet::BackupRuleConfig}] default_backup_rules
     attr_accessor :default_backup_rules
 
@@ -129,6 +132,7 @@ module Comet
       @default_storage_vault_retention = Comet::RetentionPolicy.new
       @default_sources = {}
       @default_sources_backup_rules = {}
+      @default_sources_with_osrestriction = {}
       @default_backup_rules = {}
       @unknown_json_fields = {}
     end
@@ -244,6 +248,16 @@ module Comet
               @default_sources_backup_rules[k1].from_hash(v1)
             end
           end
+        when 'DefaultSourcesWithOSRestriction'
+          @default_sources_with_osrestriction = {}
+          if v.nil?
+            @default_sources_with_osrestriction = {}
+          else
+            v.each do |k1, v1|
+              @default_sources_with_osrestriction[k1] = Comet::DefaultSourceWithOSRestriction.new
+              @default_sources_with_osrestriction[k1].from_hash(v1)
+            end
+          end
         when 'DefaultBackupRules'
           @default_backup_rules = {}
           if v.nil?
@@ -304,6 +318,7 @@ module Comet
       ret['PreventProtectedItemRetention'] = @prevent_protected_item_retention
       ret['DefaultSources'] = @default_sources
       ret['DefaultSourcesBackupRules'] = @default_sources_backup_rules
+      ret['DefaultSourcesWithOSRestriction'] = @default_sources_with_osrestriction
       ret['DefaultBackupRules'] = @default_backup_rules
       @unknown_json_fields.each do |k, v|
         ret[k] = v
