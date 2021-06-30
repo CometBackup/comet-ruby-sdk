@@ -32,6 +32,9 @@ module Comet
     # @type [Number] archive_format
     attr_accessor :archive_format
 
+    # @type [Comet::Office365Credential] office_365credential
+    attr_accessor :office_365credential
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -44,6 +47,7 @@ module Comet
       @dest_path = ''
       @exact_dest_paths = []
       @archive_format = 0
+      @office_365credential = Comet::Office365Credential.new
       @unknown_json_fields = {}
     end
 
@@ -87,6 +91,9 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @archive_format = v
+        when 'Office365Credential'
+          @office_365credential = Comet::Office365Credential.new
+          @office_365credential.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -102,6 +109,9 @@ module Comet
       ret['DestPath'] = @dest_path
       ret['ExactDestPaths'] = @exact_dest_paths
       ret['ArchiveFormat'] = @archive_format
+      unless @office_365credential.nil?
+        ret['Office365Credential'] = @office_365credential
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
