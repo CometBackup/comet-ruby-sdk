@@ -808,6 +808,7 @@ module Comet
     # This does not remove any storage buckets. Unused storage buckets will be cleaned up by the Constellation Role.
     # Any stored data can not be decrypted without the user profile. Misuse can cause data loss!
     # This also allows to uninstall software from active devices under the user account
+    # This also removes all job history for the user account.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -1073,6 +1074,33 @@ module Comet
           ret[k].from_hash(v)
         end
       end
+      ret
+    end
+
+    # AdminDispatcherPingDestination
+    #
+    # Test the connection to the storage bucket.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::DestinationLocation] extra_data The destination location settings
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_dispatcher_ping_destination(target_id, extra_data)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'extra_data' expected Comet::DestinationLocation, got #{extra_data.class}" unless extra_data.is_a? Comet::DestinationLocation
+
+      submit_params['ExtraData'] = extra_data.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/ping-destination', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
       ret
     end
 
