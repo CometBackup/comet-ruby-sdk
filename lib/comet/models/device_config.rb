@@ -23,6 +23,9 @@ module Comet
     # @type [Hash{String => Comet::SourceBasicInfo}] sources
     attr_accessor :sources
 
+    # @type [String] device_timezone
+    attr_accessor :device_timezone
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -34,6 +37,7 @@ module Comet
       @friendly_name = ''
       @platform_version = Comet::OSInfo.new
       @sources = {}
+      @device_timezone = ''
       @unknown_json_fields = {}
     end
 
@@ -67,6 +71,10 @@ module Comet
               @sources[k1].from_hash(v1)
             end
           end
+        when 'DeviceTimezone'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @device_timezone = v
         else
           @unknown_json_fields[k] = v
         end
@@ -82,6 +90,9 @@ module Comet
       end
       unless @sources.nil?
         ret['Sources'] = @sources
+      end
+      unless @device_timezone.nil?
+        ret['DeviceTimezone'] = @device_timezone
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

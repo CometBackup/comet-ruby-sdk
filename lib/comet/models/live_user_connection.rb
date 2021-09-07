@@ -29,6 +29,9 @@ module Comet
     # @type [Comet::OSInfo] reported_platform_version
     attr_accessor :reported_platform_version
 
+    # @type [String] device_time_zone
+    attr_accessor :device_time_zone
+
     # @type [String] ipaddress
     attr_accessor :ipaddress
 
@@ -51,6 +54,7 @@ module Comet
       @reported_version = ''
       @reported_platform = ''
       @reported_platform_version = Comet::OSInfo.new
+      @device_time_zone = ''
       @ipaddress = ''
       @connection_time = 0
       @unknown_json_fields = {}
@@ -88,6 +92,10 @@ module Comet
         when 'ReportedPlatformVersion'
           @reported_platform_version = Comet::OSInfo.new
           @reported_platform_version.from_hash(v)
+        when 'DeviceTimeZone'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @device_time_zone = v
         when 'IPAddress'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -113,6 +121,9 @@ module Comet
       ret['ReportedPlatform'] = @reported_platform
       unless @reported_platform_version.nil?
         ret['ReportedPlatformVersion'] = @reported_platform_version
+      end
+      unless @device_time_zone.nil?
+        ret['DeviceTimeZone'] = @device_time_zone
       end
       unless @ipaddress.nil?
         ret['IPAddress'] = @ipaddress
