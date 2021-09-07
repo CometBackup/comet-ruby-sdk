@@ -371,6 +371,9 @@ module Comet
   # StoredObjectType:
   STOREDOBJECTTYPE_MSSITEITEMENTITY = 'mssiteitementity'
 
+  # StoredObjectType:
+  STOREDOBJECTTYPE_MSSITELISTDRIVEENTITY = 'mssitelistdriveentity'
+
   # ExtraFileExclusionOSRestriction:
   OS_ANY = 0
 
@@ -409,13 +412,13 @@ module Comet
 
   DEFAULT_TIMEZONE = 'UTC'
 
-  APPLICATION_VERSION = '21.6.6'
+  APPLICATION_VERSION = '21.9.1'
 
   APPLICATION_VERSION_MAJOR = 21
 
-  APPLICATION_VERSION_MINOR = 6
+  APPLICATION_VERSION_MINOR = 9
 
-  APPLICATION_VERSION_REVISION = 6
+  APPLICATION_VERSION_REVISION = 1
 
   RELEASE_CODENAME = 'Voyager'
 
@@ -608,5 +611,15 @@ module Comet
 
   # StreamableEventType: Data is the string bucket ref
   SEVT_BUCKET_NEW = 4300
+
+  OFFICE365_REGION_PUBLIC = 'GlobalPublicCloud'
+
+  OFFICE365_REGION_CHINA = 'ChinaCloud'
+
+  OFFICE365_REGION_GERMANY = 'GermanCloud'
+
+  OFFICE365_REGION_US_GOVT = 'USGovtGccCloud'
+
+  OFFICE365_REGION_US_DOD = 'USGovtGccDoDCloud'
 
 end
