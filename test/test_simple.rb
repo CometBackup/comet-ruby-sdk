@@ -74,9 +74,12 @@ class TestCometServer < MiniTest::Test
     assert false # should be unreachable
   rescue TypeError
     assert true  # correct type of exception
+
+  # rubocop:disable Style/RescueStandardError
   rescue
     assert false # got some other kind of exception
   end
+  # rubocop:enable Style/RescueStandardError
 
   # test_multipart
   #

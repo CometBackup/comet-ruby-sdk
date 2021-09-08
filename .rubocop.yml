@@ -23,3 +23,8 @@ Layout/EmptyLinesAroundClassBody:
 # with the times when we do need multi-line bodies
 Style/IfUnlessModifier:
   Enabled: false
+
+  # allow rocket hashes
+
+Style/HashSyntax:
+  EnforcedStyle: no_mixed_keys

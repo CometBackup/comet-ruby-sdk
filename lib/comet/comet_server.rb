@@ -3483,7 +3483,7 @@ module Comet
 
       ret_error = Comet::CometAPIResponseMessage.new
       ret_error.from_hash(obj)
-      raise Comet::APIResponseError.new(ret_error)
+      raise Comet::APIResponseError.new(ret_error), 'Comet API response status was not OK'
     end
 
     # Perform a synchronous HTTP request.
@@ -3520,7 +3520,7 @@ module Comet
 
       form_params = []
       params.each do |k, v|
-        form_params.append [k, v, {:filename => k}]
+        form_params.append [k, v, { :filename => k }]
       end
       req.set_form(form_params, 'multipart/form-data')
 
