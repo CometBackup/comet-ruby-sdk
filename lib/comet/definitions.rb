@@ -412,13 +412,13 @@ module Comet
 
   DEFAULT_TIMEZONE = 'UTC'
 
-  APPLICATION_VERSION = '21.9.1'
+  APPLICATION_VERSION = '21.9.2'
 
   APPLICATION_VERSION_MAJOR = 21
 
   APPLICATION_VERSION_MINOR = 9
 
-  APPLICATION_VERSION_REVISION = 1
+  APPLICATION_VERSION_REVISION = 2
 
   RELEASE_CODENAME = 'Voyager'
 
@@ -591,6 +591,9 @@ module Comet
   # MacOSCodesignLevel:
   MACOSCODESIGN_LEVEL_SIGN_NOTARISE_STAPLE = 2
 
+  # StreamableEventType:
+  SEVT__MIN = 4000
+
   # StreamableEventType: Event is emitted when the webhook is registered, or when the server starts up. The Data associated is ServerMetaVersionInfo
   SEVT_META_HELLO = 4000
 
@@ -611,6 +614,9 @@ module Comet
 
   # StreamableEventType: Data is the string bucket ref
   SEVT_BUCKET_NEW = 4300
+
+  # StreamableEventType:
+  SEVT__MAX = 4999
 
   OFFICE365_REGION_PUBLIC = 'GlobalPublicCloud'
 

@@ -20,6 +20,9 @@ module Comet
     # @type [Array<Number>] white_listed_event_types
     attr_accessor :white_listed_event_types
 
+    # @type [Hash{String => String}] custom_headers
+    attr_accessor :custom_headers
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -30,6 +33,7 @@ module Comet
     def clear
       @url = ''
       @white_listed_event_types = []
+      @custom_headers = {}
       @unknown_json_fields = {}
     end
 
@@ -61,6 +65,17 @@ module Comet
               @white_listed_event_types[i1] = v1
             end
           end
+        when 'CustomHeaders'
+          @custom_headers = {}
+          if v.nil?
+            @custom_headers = {}
+          else
+            v.each do |k1, v1|
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+
+              @custom_headers[k1] = v1
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -72,6 +87,7 @@ module Comet
       ret = {}
       ret['URL'] = @url
       ret['WhiteListedEventTypes'] = @white_listed_event_types
+      ret['CustomHeaders'] = @custom_headers
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
