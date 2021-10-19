@@ -84,7 +84,7 @@ end
 ```ruby
 bundle exec rake rubocop
 
-COMETSERVER_ADDRESS='http://127.0.0.1:8060' \
+  COMETSERVER_ADDRESS='http://127.0.0.1:8060' \
 	COMETSERVER_ADMINUSER=admin \
 	COMETSERVER_ADMINPASS=admin \
 	bundle exec rake test

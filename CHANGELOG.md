@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2021-10-21 1.9.0
+- Based on 21.9.7
+- Add Support for `HideFiles` parameter in B2 Destination Locations
+- Add support for `RegistrationTime` to `DeviceConfig`
+- Upgrade MYSQL to support new TLS connection options
+- Add support for new API: `AdminMetaReadAllLogsRequest` and `AdminDispatcherRequestWindiskSnapshot`
+
 ## 2021-09-14 1.8.0
 - Based on Comet 21.9.2
 - Support new `custom_headers` field on the `WebhookOption` class for specifying custom HTTP headers
