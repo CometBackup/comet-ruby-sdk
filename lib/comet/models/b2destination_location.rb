@@ -29,6 +29,9 @@ module Comet
     # @type [Number] max_connections
     attr_accessor :max_connections
 
+    # @type [Boolean] hide_deleted_files
+    attr_accessor :hide_deleted_files
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -78,6 +81,8 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @max_connections = v
+        when 'HideDeletedFiles'
+          @hide_deleted_files = v
         else
           @unknown_json_fields[k] = v
         end
@@ -101,6 +106,9 @@ module Comet
       end
       unless @max_connections.nil?
         ret['MaxConnections'] = @max_connections
+      end
+      unless @hide_deleted_files.nil?
+        ret['HideDeletedFiles'] = @hide_deleted_files
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

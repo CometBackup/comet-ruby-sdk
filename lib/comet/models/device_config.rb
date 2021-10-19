@@ -17,6 +17,9 @@ module Comet
     # @type [String] friendly_name
     attr_accessor :friendly_name
 
+    # @type [Number] registration_time
+    attr_accessor :registration_time
+
     # @type [Comet::OSInfo] platform_version
     attr_accessor :platform_version
 
@@ -35,6 +38,7 @@ module Comet
 
     def clear
       @friendly_name = ''
+      @registration_time = 0
       @platform_version = Comet::OSInfo.new
       @sources = {}
       @device_timezone = ''
@@ -58,6 +62,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @friendly_name = v
+        when 'RegistrationTime'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @registration_time = v
         when 'PlatformVersion'
           @platform_version = Comet::OSInfo.new
           @platform_version.from_hash(v)
@@ -85,6 +93,9 @@ module Comet
     def to_hash
       ret = {}
       ret['FriendlyName'] = @friendly_name
+      unless @registration_time.nil?
+        ret['RegistrationTime'] = @registration_time
+      end
       unless @platform_version.nil?
         ret['PlatformVersion'] = @platform_version
       end
