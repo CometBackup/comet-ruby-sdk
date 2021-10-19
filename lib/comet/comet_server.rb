@@ -2350,6 +2350,20 @@ module Comet
       ret
     end
 
+    # AdminMetaReadAllLogs
+    #
+    # Get a ZIP file of all of the server's log files.
+    # On non-Windows platforms, log content uses LF line endings. On Windows, Comet changed from LF to CRLF line endings in 18.3.2.
+    # This API does not automatically convert line endings; around the 18.3.2 timeframe, log content may even contain mixed line-endings.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    #
+    # @return [String]
+    def admin_meta_read_all_logs
+      perform_request('api/v1/admin/meta/read-all-logs')
+    end
+
     # AdminMetaReadLogs
     #
     # Get log file content.
