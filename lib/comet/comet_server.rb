@@ -1563,6 +1563,37 @@ module Comet
       ret
     end
 
+    # AdminDispatcherRequestWindiskSnapshot
+    #
+    # Request a Disk Image snapshot with the windiskbrowse-style from a live connected device.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [String] destination The Storage Vault ID
+    # @param [String] snapshot_id The Snapshot ID
+    # @return [Comet::DispatcherWindiskSnapshotResponse]
+    def admin_dispatcher_request_windisk_snapshot(target_id, destination, snapshot_id)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'destination' expected String, got #{destination.class}" unless destination.is_a? String
+
+      submit_params['Destination'] = destination
+      raise TypeError, "'snapshot_id' expected String, got #{snapshot_id.class}" unless snapshot_id.is_a? String
+
+      submit_params['SnapshotID'] = snapshot_id
+
+      body = perform_request('api/v1/admin/dispatcher/request-windisk-snapshot', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::DispatcherWindiskSnapshotResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherRunBackup
     #
     # Instruct a live connected device to run a scheduled backup.
@@ -2139,6 +2170,7 @@ module Comet
     # Cancel a running job.
     # A request is sent to the live-connected device, asking it to cancel the operation. This may fail if there is no live-connection.
     # Only jobs from Comet 18.3.5 or newer can be cancelled. A job can only be cancelled if it has a non-empty CancellationID field in its properties.
+    # If the device is running Comet 21.9.5 or later, this API will wait up to ten seconds for a confirmation from the client.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
