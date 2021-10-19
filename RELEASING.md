@@ -1,6 +1,6 @@
 # Procedure for releasing gem package updates
 
-0. As a cygwin user, with docker installed; `docker run -it -v "c://cygwin64/$PWD":/app -w /app ruby:2.7 bash` will get you with a suitable ruby environment for testing/building and releasing this package
+0. As a cygwin user, with docker installed; `docker run -it -v "c://cygwin64/$PWD":/app -w /app ruby:2.7 bash` will get you with a suitable ruby environment for testing/building and releasing this package9.
 1. All tests passing
 2. Update changelog in `CHANGELOG.md`
 3. Update version number in `comet_backup_ruby_sdk.gemspec`
