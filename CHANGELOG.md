@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2021-11-24 v3.18.0
+## 2021-11-24 v1.10.0
 - Based on 21.9.12
 - Add support for Thai and Danish localizations
 - Add From and To fields to the EmailReportGenerated API
