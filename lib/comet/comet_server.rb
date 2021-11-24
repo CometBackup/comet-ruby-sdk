@@ -1001,6 +1001,42 @@ module Comet
       ret
     end
 
+    # AdminDispatcherEmailPreview
+    #
+    # Request HTML content of an email.
+    # The remote device must have given consent for an MSP to browse their mail
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [String] snapshot where the email belongs to
+    # @param [String] destination The Storage Vault ID
+    # @param [String] path of the email to view
+    # @return [Comet::EmailReportGeneratedPreview]
+    def admin_dispatcher_email_preview(target_id, snapshot, destination, path)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'snapshot' expected String, got #{snapshot.class}" unless snapshot.is_a? String
+
+      submit_params['Snapshot'] = snapshot
+      raise TypeError, "'destination' expected String, got #{destination.class}" unless destination.is_a? String
+
+      submit_params['Destination'] = destination
+      raise TypeError, "'path' expected String, got #{path.class}" unless path.is_a? String
+
+      submit_params['Path'] = path
+
+      body = perform_request('api/v1/admin/dispatcher/email-preview', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::EmailReportGeneratedPreview.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherImportApply
     #
     # Instruct a live connected device to import settings from an installed product.
@@ -1074,6 +1110,34 @@ module Comet
           ret[k].from_hash(v)
         end
       end
+      ret
+    end
+
+    # AdminDispatcherOffice365ListVirtualAccounts
+    #
+    # Request a list of Office365 Resources (groups, sites, teams groups and users).
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::Office365Credential] credentials The Office365 account credential
+    # @return [Comet::BrowseOffice365ListVirtualAccountsResponse]
+    def admin_dispatcher_office_365list_virtual_accounts(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::Office365Credential, got #{credentials.class}" unless credentials.is_a? Comet::Office365Credential
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/office365-list-virtual-accounts', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseOffice365ListVirtualAccountsResponse.new
+      ret.from_hash(json_body)
       ret
     end
 

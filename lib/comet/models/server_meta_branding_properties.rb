@@ -23,6 +23,9 @@ module Comet
     # @type [Boolean] has_image
     attr_accessor :has_image
 
+    # @type [String] image_etag
+    attr_accessor :image_etag
+
     # @type [String] top_color
     attr_accessor :top_color
 
@@ -51,6 +54,7 @@ module Comet
     def clear
       @brand_name = ''
       @product_name = ''
+      @image_etag = ''
       @top_color = ''
       @prune_logs_after_days = 0
       @expired_in_seconds = 0
@@ -80,6 +84,10 @@ module Comet
           @product_name = v
         when 'HasImage'
           @has_image = v
+        when 'ImageEtag'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @image_etag = v
         when 'TopColor'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -110,6 +118,7 @@ module Comet
       ret['BrandName'] = @brand_name
       ret['ProductName'] = @product_name
       ret['HasImage'] = @has_image
+      ret['ImageEtag'] = @image_etag
       ret['TopColor'] = @top_color
       ret['HideNewsArea'] = @hide_news_area
       ret['AllowUnauthenticatedDownloads'] = @allow_unauthenticated_downloads

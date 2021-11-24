@@ -11,8 +11,8 @@ require 'json'
 
 module Comet
 
-  # EmailReportGeneratedPreview is a typed class wrapper around the underlying Comet Server API data structure.
-  class EmailReportGeneratedPreview
+  # BrowseOffice365ListVirtualAccountsResponse is a typed class wrapper around the underlying Comet Server API data structure.
+  class BrowseOffice365ListVirtualAccountsResponse
 
     # @type [Number] status
     attr_accessor :status
@@ -20,20 +20,8 @@ module Comet
     # @type [String] message
     attr_accessor :message
 
-    # @type [String] from
-    attr_accessor :from
-
-    # @type [Array<String>] to
-    attr_accessor :to
-
-    # @type [String] email_subject
-    attr_accessor :email_subject
-
-    # @type [String] email_body_html
-    attr_accessor :email_body_html
-
-    # @type [String] email_body_plaintext
-    attr_accessor :email_body_plaintext
+    # @type [Array<Comet::Office365MixedVirtualAccount>] objects
+    attr_accessor :objects
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -45,11 +33,7 @@ module Comet
     def clear
       @status = 0
       @message = ''
-      @from = ''
-      @to = []
-      @email_subject = ''
-      @email_body_html = ''
-      @email_body_plaintext = ''
+      @objects = []
       @unknown_json_fields = {}
     end
 
@@ -74,33 +58,16 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @message = v
-        when 'From'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @from = v
-        when 'To'
+        when 'Objects'
           if v.nil?
-            @to = []
+            @objects = []
           else
-            @to = Array.new(v.length)
+            @objects = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
-
-              @to[i1] = v1
+              @objects[i1] = Comet::Office365MixedVirtualAccount.new
+              @objects[i1].from_hash(v1)
             end
           end
-        when 'EmailSubject'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @email_subject = v
-        when 'EmailBodyHTML'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @email_body_html = v
-        when 'EmailBodyPlaintext'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @email_body_plaintext = v
         else
           @unknown_json_fields[k] = v
         end
@@ -112,11 +79,7 @@ module Comet
       ret = {}
       ret['Status'] = @status
       ret['Message'] = @message
-      ret['From'] = @from
-      ret['To'] = @to
-      ret['EmailSubject'] = @email_subject
-      ret['EmailBodyHTML'] = @email_body_html
-      ret['EmailBodyPlaintext'] = @email_body_plaintext
+      ret['Objects'] = @objects
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

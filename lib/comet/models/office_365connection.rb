@@ -29,6 +29,9 @@ module Comet
     # @type [Array<String>] site_unique_members
     attr_accessor :site_unique_members
 
+    # @type [Comet::Office365CustomSettingV2] custom_setting_v2
+    attr_accessor :custom_setting_v2
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -42,6 +45,7 @@ module Comet
       @custom_setting = Comet::Office365CustomSetting.new
       @mailbox_unique_members = []
       @site_unique_members = []
+      @custom_setting_v2 = Comet::Office365CustomSettingV2.new
       @unknown_json_fields = {}
     end
 
@@ -90,6 +94,9 @@ module Comet
               @site_unique_members[i1] = v1
             end
           end
+        when 'CustomSettingV2'
+          @custom_setting_v2 = Comet::Office365CustomSettingV2.new
+          @custom_setting_v2.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -104,6 +111,7 @@ module Comet
       ret['CustomSetting'] = @custom_setting
       ret['MailboxUniqueMembers'] = @mailbox_unique_members
       ret['SiteUniqueMembers'] = @site_unique_members
+      ret['CustomSettingV2'] = @custom_setting_v2
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
