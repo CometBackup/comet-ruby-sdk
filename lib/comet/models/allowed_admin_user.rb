@@ -11,8 +11,17 @@ require 'json'
 
 module Comet
 
-  # AdminSecurityOptions is a typed class wrapper around the underlying Comet Server API data structure.
-  class AdminSecurityOptions
+  # AllowedAdminUser is a typed class wrapper around the underlying Comet Server API data structure.
+  class AllowedAdminUser
+
+    # @type [String] username
+    attr_accessor :username
+
+    # @type [String] organization_id
+    attr_accessor :organization_id
+
+    # @type [String] external_authentication_source
+    attr_accessor :external_authentication_source
 
     # @type [Number] password_format
     attr_accessor :password_format
@@ -47,6 +56,9 @@ module Comet
     # @type [String] ipwhitelist
     attr_accessor :ipwhitelist
 
+    # @type [Comet::AdminUserPermissions] permissions
+    attr_accessor :permissions
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -55,6 +67,9 @@ module Comet
     end
 
     def clear
+      @username = ''
+      @organization_id = ''
+      @external_authentication_source = ''
       @password_format = 0
       @password = ''
       @u2fregistrations = []
@@ -62,6 +77,7 @@ module Comet
       @totpkey_encryption_format = 0
       @totpkey = ''
       @ipwhitelist = ''
+      @permissions = Comet::AdminUserPermissions.new
       @unknown_json_fields = {}
     end
 
@@ -78,6 +94,18 @@ module Comet
 
       obj.each do |k, v|
         case k
+        when 'Username'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @username = v
+        when 'OrganizationID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @organization_id = v
+        when 'ExternalAuthenticationSource'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @external_authentication_source = v
         when 'PasswordFormat'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -126,6 +154,9 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @ipwhitelist = v
+        when 'Permissions'
+          @permissions = Comet::AdminUserPermissions.new
+          @permissions.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -135,6 +166,11 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
+      ret['Username'] = @username
+      ret['OrganizationID'] = @organization_id
+      unless @external_authentication_source.nil?
+        ret['ExternalAuthenticationSource'] = @external_authentication_source
+      end
       ret['PasswordFormat'] = @password_format
       ret['Password'] = @password
       ret['AllowPasswordLogin'] = @allow_password_login
@@ -156,6 +192,7 @@ module Comet
       unless @ipwhitelist.nil?
         ret['IPWhitelist'] = @ipwhitelist
       end
+      ret['Permissions'] = @permissions
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

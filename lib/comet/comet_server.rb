@@ -96,7 +96,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     #
-    # @param [String] self_address (Optional) External URL of this server (used for U2F AppID)
+    # @param [String] self_address (Optional) External URL of this server
     # @return [Comet::SessionKeyRegeneratedResponse]
     def admin_account_session_start(self_address = nil)
       submit_params = {}
@@ -166,6 +166,9 @@ module Comet
     # AdminAccountU2fRequestRegistrationChallenge
     #
     # Register a new FIDO U2F token.
+    # Browser support for U2F is ending in February 2022. WebAuthn is backwards
+    # compatible with U2F keys, and Comet will automatically migrate existing U2F keys
+    # to allow their use with the WebAuthn endpoints.
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -188,6 +191,9 @@ module Comet
     # AdminAccountU2fSubmitChallengeResponse
     #
     # Register a new FIDO U2F token.
+    # Browser support for U2F is ending in February 2022. WebAuthn is backwards
+    # compatible with U2F keys, and Comet will automatically migrate existing U2F keys
+    # to allow their use with the WebAuthn endpoints.
     #
     # You must supply administrator authentication credentials to use this API.
     #
@@ -238,6 +244,58 @@ module Comet
       submit_params['TOTPCode'] = totpcode
 
       body = perform_request('api/v1/admin/account/validate-totp', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminAccountWebauthnRequestRegistrationChallenge
+    #
+    # Register a new FIDO2 WebAuthn token.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @param [String] self_address External URL of this server, used as WebAuthn ID
+    # @return [Comet::WebAuthnRegistrationChallengeResponse]
+    def admin_account_webauthn_request_registration_challenge(self_address)
+      submit_params = {}
+      raise TypeError, "'self_address' expected String, got #{self_address.class}" unless self_address.is_a? String
+
+      submit_params['SelfAddress'] = self_address
+
+      body = perform_request('api/v1/admin/account/webauthn/request-registration-challenge', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::WebAuthnRegistrationChallengeResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminAccountWebauthnSubmitChallengeResponse
+    #
+    # Register a new FIDO2 WebAuthn token.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @param [String] self_address External URL of this server, used as WebAuthn ID
+    # @param [String] challenge_id Associated value from AdminAccountWebAuthnRequestRegistrationChallenge API
+    # @param [String] credential JSON-encoded credential
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_account_webauthn_submit_challenge_response(self_address, challenge_id, credential)
+      submit_params = {}
+      raise TypeError, "'self_address' expected String, got #{self_address.class}" unless self_address.is_a? String
+
+      submit_params['SelfAddress'] = self_address
+      raise TypeError, "'challenge_id' expected String, got #{challenge_id.class}" unless challenge_id.is_a? String
+
+      submit_params['ChallengeID'] = challenge_id
+      raise TypeError, "'credential' expected String, got #{credential.class}" unless credential.is_a? String
+
+      submit_params['Credential'] = credential
+
+      body = perform_request('api/v1/admin/account/webauthn/submit-challenge-response', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::CometAPIResponseMessage.new
@@ -3593,7 +3651,7 @@ module Comet
 
       ret_error = Comet::CometAPIResponseMessage.new
       ret_error.from_hash(obj)
-      raise Comet::APIResponseError.new(ret_error), 'Comet API response status was not OK'
+      raise Comet::APIResponseError.new(ret_error)
     end
 
     # Perform a synchronous HTTP request.
@@ -3630,7 +3688,7 @@ module Comet
 
       form_params = []
       params.each do |k, v|
-        form_params.append [k, v, { :filename => k }]
+        form_params.append [k, v, {:filename => k}]
       end
       req.set_form(form_params, 'multipart/form-data')
 

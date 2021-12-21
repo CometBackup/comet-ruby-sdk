@@ -11,23 +11,14 @@ require 'json'
 
 module Comet
 
-  # StatResult is a typed class wrapper around the underlying Comet Server API data structure.
-  class StatResult
+  # WebAuthnCredentialParameter is a typed class wrapper around the underlying Comet Server API data structure.
+  class WebAuthnCredentialParameter
 
-    # @type [Number] buckets
-    attr_accessor :buckets
+    # @type [String] type
+    attr_accessor :type
 
-    # @type [Number] users
-    attr_accessor :users
-
-    # @type [Number] devices
-    attr_accessor :devices
-
-    # @type [Number] boosters
-    attr_accessor :boosters
-
-    # @type [Number] network_devices
-    attr_accessor :network_devices
+    # @type [Number] algorithm
+    attr_accessor :algorithm
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -37,11 +28,8 @@ module Comet
     end
 
     def clear
-      @buckets = 0
-      @users = 0
-      @devices = 0
-      @boosters = 0
-      @network_devices = 0
+      @type = ''
+      @algorithm = 0
       @unknown_json_fields = {}
     end
 
@@ -58,26 +46,14 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Buckets'
+        when 'type'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @type = v
+        when 'alg'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
-          @buckets = v
-        when 'Users'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @users = v
-        when 'Devices'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @devices = v
-        when 'Boosters'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @boosters = v
-        when 'NetworkDevices'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @network_devices = v
+          @algorithm = v
         else
           @unknown_json_fields[k] = v
         end
@@ -87,11 +63,8 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Buckets'] = @buckets
-      ret['Users'] = @users
-      ret['Devices'] = @devices
-      ret['Boosters'] = @boosters
-      ret['NetworkDevices'] = @network_devices
+      ret['type'] = @type
+      ret['alg'] = @algorithm
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

@@ -7,27 +7,22 @@
 #
 # frozen_string_literal: true
 
+require 'base64'
 require 'json'
 
 module Comet
 
-  # StatResult is a typed class wrapper around the underlying Comet Server API data structure.
-  class StatResult
+  # WebAuthnCredentialDescriptor is a typed class wrapper around the underlying Comet Server API data structure.
+  class WebAuthnCredentialDescriptor
 
-    # @type [Number] buckets
-    attr_accessor :buckets
+    # @type [String] type
+    attr_accessor :type
 
-    # @type [Number] users
-    attr_accessor :users
+    # @type [Array<Object>] credential_id
+    attr_accessor :credential_id
 
-    # @type [Number] devices
-    attr_accessor :devices
-
-    # @type [Number] boosters
-    attr_accessor :boosters
-
-    # @type [Number] network_devices
-    attr_accessor :network_devices
+    # @type [Array<String>] transport
+    attr_accessor :transport
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -37,11 +32,9 @@ module Comet
     end
 
     def clear
-      @buckets = 0
-      @users = 0
-      @devices = 0
-      @boosters = 0
-      @network_devices = 0
+      @type = ''
+      @credential_id = []
+      @transport = []
       @unknown_json_fields = {}
     end
 
@@ -58,26 +51,23 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Buckets'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+        when 'type'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @buckets = v
-        when 'Users'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+          @type = v
+        when 'id'
+          @credential_id = Base64.decode64(v)
+        when 'transports'
+          if v.nil?
+            @transport = []
+          else
+            @transport = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
-          @users = v
-        when 'Devices'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @devices = v
-        when 'Boosters'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @boosters = v
-        when 'NetworkDevices'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @network_devices = v
+              @transport[i1] = v1
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -87,11 +77,11 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Buckets'] = @buckets
-      ret['Users'] = @users
-      ret['Devices'] = @devices
-      ret['Boosters'] = @boosters
-      ret['NetworkDevices'] = @network_devices
+      ret['type'] = @type
+      ret['id'] = Base64.strict_encode64(@credential_id)
+      unless @transport.nil?
+        ret['transports'] = @transport
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
