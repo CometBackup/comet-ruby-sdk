@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2021-12-22 v1.11.0
+- Based on 21.12.1
+- Add `AdminAccountWebauthnRegistration` endpoint for new webauthn support.
+- Deprecate `AdminACcountU2fSubmitChallenge` as U2F is ending browser support in February 2022.
+
 ## 2021-11-24 v1.10.0
 - Based on 21.9.12
 - Add support for Thai and Danish localizations
