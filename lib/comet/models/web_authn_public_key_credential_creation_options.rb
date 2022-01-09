@@ -36,7 +36,7 @@ module Comet
     # @type [Array<Comet::WebAuthnCredentialDescriptor>] credential_exclude_list
     attr_accessor :credential_exclude_list
 
-    # @type [Hash{String => Comet::interface}] extensions
+    # @type [Hash{String => Object}] extensions
     attr_accessor :extensions
 
     # @type [String] attestation
@@ -116,8 +116,7 @@ module Comet
             @extensions = {}
           else
             v.each do |k1, v1|
-              @extensions[k1] = Comet::interface.new
-              @extensions[k1].from_hash(v1)
+              @extensions[k1] = v1
             end
           end
         when 'attestation'
