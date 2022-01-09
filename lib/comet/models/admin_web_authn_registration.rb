@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby --enable-frozen-string-literal
 #
-# Copyright (c) 2020-2021 Comet Licensing Ltd.
+# Copyright (c) 2020-2022 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -21,6 +21,9 @@ module Comet
     # @type [Number] register_time
     attr_accessor :register_time
 
+    # @type [Number] type
+    attr_accessor :type
+
     # @type [Boolean] is_legacy_u2f
     attr_accessor :is_legacy_u2f
 
@@ -40,6 +43,7 @@ module Comet
     def clear
       @description = ''
       @register_time = 0
+      @type = 0
       @id = []
       @credential = Comet::WebAuthnCredential.new
       @unknown_json_fields = {}
@@ -66,6 +70,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @register_time = v
+        when 'Type'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @type = v
         when 'IsLegacyU2F'
           @is_legacy_u2f = v
         when 'ID'
@@ -84,6 +92,7 @@ module Comet
       ret = {}
       ret['Description'] = @description
       ret['RegisterTime'] = @register_time
+      ret['Type'] = @type
       unless @is_legacy_u2f.nil?
         ret['IsLegacyU2F'] = @is_legacy_u2f
       end

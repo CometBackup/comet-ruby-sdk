@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby --enable-frozen-string-literal
 #
-# Copyright (c) 2020-2021 Comet Licensing Ltd.
+# Copyright (c) 2020-2022 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -3497,6 +3497,29 @@ module Comet
           ret[k].from_hash(v)
         end
       end
+      ret
+    end
+
+    # AdminStoragePingDestination
+    #
+    # Ping a storage destination.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Storage Role to be enabled.
+    #
+    # @param [Comet::DestinationLocation] extra_data The destination location settings
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_storage_ping_destination(extra_data)
+      submit_params = {}
+      raise TypeError, "'extra_data' expected Comet::DestinationLocation, got #{extra_data.class}" unless extra_data.is_a? Comet::DestinationLocation
+
+      submit_params['ExtraData'] = extra_data.to_json
+
+      body = perform_request('api/v1/admin/storage/ping-destination', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
       ret
     end
 

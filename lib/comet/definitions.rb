@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby --enable-frozen-string-literal
 #
-# Copyright (c) 2020-2021 Comet Licensing Ltd.
+# Copyright (c) 2020-2022 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -430,13 +430,13 @@ module Comet
 
   DEFAULT_TIMEZONE = 'UTC'
 
-  APPLICATION_VERSION = '21.12.1'
+  APPLICATION_VERSION = '21.12.2'
 
   APPLICATION_VERSION_MAJOR = 21
 
   APPLICATION_VERSION_MINOR = 12
 
-  APPLICATION_VERSION_REVISION = 1
+  APPLICATION_VERSION_REVISION = 2
 
   RELEASE_CODENAME = 'Voyager'
 
@@ -457,6 +457,27 @@ module Comet
   UNKNOWN_DEVICE_ERROR = 'ERR_UNKNOWN_DEVICE'
 
   TOTPREQUIRED_ERROR = 'ERR_TOTP_REQUIRED'
+
+  # WebAuthnDeviceType:
+  WEBAUTHN_DEVICE_TYPE__UNKNOWN = 0
+
+  # WebAuthnDeviceType:
+  WEBAUTHN_DEVICE_TYPE__HARDWARE_TOKEN = 1
+
+  # WebAuthnDeviceType:
+  WEBAUTHN_DEVICE_TYPE__ANDROID = 2
+
+  # WebAuthnDeviceType:
+  WEBAUTHN_DEVICE_TYPE__APPLE = 3
+
+  # WebAuthnDeviceType:
+  WEBAUTHN_DEVICE_TYPE__TPM_GENERIC = 4
+
+  # WebAuthnDeviceType:
+  WEBAUTHN_DEVICE_TYPE__TPM_WINDOWS = 5
+
+  # WebAuthnDeviceType:
+  WEBAUTHN_DEVICE_TYPE__TPM_LINUX = 6
 
   # UpdateStatus:
   UPDATESTATUS_NOT_SEEN = 0
