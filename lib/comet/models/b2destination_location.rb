@@ -27,6 +27,7 @@ module Comet
     attr_accessor :prefix
 
     # @type [Number] max_connections
+    # @deprecated This member has been deprecated since Comet version 21.9.7
     attr_accessor :max_connections
 
     # @type [Boolean] hide_deleted_files

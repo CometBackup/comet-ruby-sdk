@@ -12,6 +12,7 @@ require 'json'
 module Comet
 
   # U2FSignRequest is a typed class wrapper around the underlying Comet Server API data structure.
+  # @deprecated This type has been deprecated since Comet version 21.12.0
   class U2FSignRequest
 
     # @type [String] challenge_id

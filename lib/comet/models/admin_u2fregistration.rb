@@ -13,6 +13,7 @@ require 'json'
 module Comet
 
   # AdminU2FRegistration is a typed class wrapper around the underlying Comet Server API data structure.
+  # @deprecated This type has been deprecated since Comet version 21.12.0
   class AdminU2FRegistration
 
     # @type [String] description

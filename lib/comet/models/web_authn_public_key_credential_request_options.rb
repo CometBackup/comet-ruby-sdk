@@ -30,7 +30,7 @@ module Comet
     # @type [String] user_verification
     attr_accessor :user_verification
 
-    # @type [Hash{String => Comet::interface}] extensions
+    # @type [Hash{String => Object}] extensions
     attr_accessor :extensions
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
@@ -93,8 +93,7 @@ module Comet
             @extensions = {}
           else
             v.each do |k1, v1|
-              @extensions[k1] = Comet::interface.new
-              @extensions[k1].from_hash(v1)
+              @extensions[k1] = v1
             end
           end
         else

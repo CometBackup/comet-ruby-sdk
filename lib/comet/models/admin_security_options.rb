@@ -27,12 +27,14 @@ module Comet
     attr_accessor :allow_password_and_totplogin
 
     # @type [Boolean] allow_password_and_u2flogin
+    # @deprecated This member has been deprecated since Comet version 21.12.0
     attr_accessor :allow_password_and_u2flogin
 
     # @type [Boolean] allow_password_and_web_authn_login
     attr_accessor :allow_password_and_web_authn_login
 
     # @type [Array<Comet::AdminU2FRegistration>] u2fregistrations
+    # @deprecated This member has been deprecated since Comet version 21.12.0
     attr_accessor :u2fregistrations
 
     # @type [Array<Comet::AdminWebAuthnRegistration>] web_authn_registrations

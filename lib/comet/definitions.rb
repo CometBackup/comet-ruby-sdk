@@ -360,22 +360,22 @@ module Comet
   STOREDOBJECTTYPE_WINEFS = 'winefs'
 
   # StoredObjectType: "file"
-  STOREDOBJECTTYPE_EMAILMESSAGE = 'emailmessage\"'
+  STOREDOBJECTTYPE_EMAILMESSAGE = 'emailmessage'
 
   # StoredObjectType: "dir"
-  STOREDOBJECTTYPE_EMAILFOLDER = 'mailfolder\"'
+  STOREDOBJECTTYPE_EMAILFOLDER = 'mailfolder'
 
   # StoredObjectType: "file"
-  STOREDOBJECTTYPE_OFFICECONTACT = 'contact\"'
+  STOREDOBJECTTYPE_OFFICECONTACT = 'contact'
 
   # StoredObjectType: "dir"
-  STOREDOBJECTTYPE_OFFICECONTACTFOLDER = 'contactfolder\"'
+  STOREDOBJECTTYPE_OFFICECONTACTFOLDER = 'contactfolder'
 
   # StoredObjectType: "file"
-  STOREDOBJECTTYPE_OFFICECALENDAREVENT = 'calendarevent\"'
+  STOREDOBJECTTYPE_OFFICECALENDAREVENT = 'calendarevent'
 
   # StoredObjectType: "dir"
-  STOREDOBJECTTYPE_OFFICECALENDAR = 'calendar\"'
+  STOREDOBJECTTYPE_OFFICECALENDAR = 'calendar'
 
   # StoredObjectType:
   STOREDOBJECTTYPE_MSSITE = 'mssite'
@@ -425,7 +425,7 @@ module Comet
   # DefaultSettingMode:
   SETTING_ENFORCED_OFF = 4
 
-  # sz.LanguageCode:
+  # LanguageCode:
   DEFAULT_LANGUAGE = 'en_US'
 
   DEFAULT_TIMEZONE = 'UTC'
@@ -444,6 +444,10 @@ module Comet
 
   PASSWORD_FORMAT_PLAINTEXT = 0
 
+  UNKNOWN_DEVICE_ERROR = 'ERR_UNKNOWN_DEVICE'
+
+  TOTPREQUIRED_ERROR = 'ERR_TOTP_REQUIRED'
+
   EMAIL_WORKER_STATE_NOT_STARTED = 0
 
   EMAIL_WORKER_STATE_STARTED = 1
@@ -453,10 +457,6 @@ module Comet
   EMAIL_WORKER_STATE_WAITING = 3
 
   EMAIL_WORKER_STATE_SENDING = 4
-
-  UNKNOWN_DEVICE_ERROR = 'ERR_UNKNOWN_DEVICE'
-
-  TOTPREQUIRED_ERROR = 'ERR_TOTP_REQUIRED'
 
   # WebAuthnDeviceType:
   WEBAUTHN_DEVICE_TYPE__UNKNOWN = 0
