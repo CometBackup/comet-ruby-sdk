@@ -74,6 +74,12 @@ module Comet
     # @type [Number] total_accounts_count
     attr_accessor :total_accounts_count
 
+    # @type [Number] total_licensed_mails_count
+    attr_accessor :total_licensed_mails_count
+
+    # @type [Number] total_unlicensed_mails_count
+    attr_accessor :total_unlicensed_mails_count
+
     # @type [String] cancellation_id
     attr_accessor :cancellation_id
 
@@ -108,6 +114,8 @@ module Comet
       @total_mails_count = 0
       @total_sites_count = 0
       @total_accounts_count = 0
+      @total_licensed_mails_count = 0
+      @total_unlicensed_mails_count = 0
       @cancellation_id = ''
       @progress = Comet::BackupJobProgress.new
       @unknown_json_fields = {}
@@ -206,6 +214,14 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @total_accounts_count = v
+        when 'TotalLicensedMailsCount'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @total_licensed_mails_count = v
+        when 'TotalUnlicensedMailsCount'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @total_unlicensed_mails_count = v
         when 'CancellationID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -249,6 +265,12 @@ module Comet
       end
       unless @total_accounts_count.nil?
         ret['TotalAccountsCount'] = @total_accounts_count
+      end
+      unless @total_licensed_mails_count.nil?
+        ret['TotalLicensedMailsCount'] = @total_licensed_mails_count
+      end
+      unless @total_unlicensed_mails_count.nil?
+        ret['TotalUnlicensedMailsCount'] = @total_unlicensed_mails_count
       end
       unless @cancellation_id.nil?
         ret['CancellationID'] = @cancellation_id

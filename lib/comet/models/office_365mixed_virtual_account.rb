@@ -50,6 +50,9 @@ module Comet
     # @type [Number] member_service_options
     attr_accessor :member_service_options
 
+    # @type [Boolean] has_license
+    attr_accessor :has_license
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -141,6 +144,8 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @member_service_options = v
+        when 'hasLicense'
+          @has_license = v
         else
           @unknown_json_fields[k] = v
         end
@@ -183,6 +188,9 @@ module Comet
       end
       unless @member_service_options.nil?
         ret['MemberServiceOptions'] = @member_service_options
+      end
+      unless @has_license.nil?
+        ret['hasLicense'] = @has_license
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
