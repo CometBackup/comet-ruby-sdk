@@ -12,6 +12,7 @@ require 'json'
 module Comet
 
   # Office365CustomSetting is a typed class wrapper around the underlying Comet Server API data structure.
+  # @deprecated This type has been deprecated since Comet version 21.9.xx
   class Office365CustomSetting
 
     # @type [String] mailbox_strategy
