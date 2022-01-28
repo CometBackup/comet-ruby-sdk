@@ -78,7 +78,9 @@ module Comet
       ret['Continuation'] = @continuation
       ret['Completed'] = @completed
       ret['Error'] = @error
-      ret['Result'] = @result
+      unless @result.nil?
+        ret['Result'] = @result
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
