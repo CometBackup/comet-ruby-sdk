@@ -86,6 +86,12 @@ module Comet
     # @type [Comet::BackupJobProgress] progress
     attr_accessor :progress
 
+    # @type [Comet::SizeMeasurement] destination_size_start
+    attr_accessor :destination_size_start
+
+    # @type [Comet::SizeMeasurement] destination_size_end
+    attr_accessor :destination_size_end
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -118,6 +124,8 @@ module Comet
       @total_unlicensed_mails_count = 0
       @cancellation_id = ''
       @progress = Comet::BackupJobProgress.new
+      @destination_size_start = Comet::SizeMeasurement.new
+      @destination_size_end = Comet::SizeMeasurement.new
       @unknown_json_fields = {}
     end
 
@@ -229,6 +237,12 @@ module Comet
         when 'Progress'
           @progress = Comet::BackupJobProgress.new
           @progress.from_hash(v)
+        when 'DestinationSizeStart'
+          @destination_size_start = Comet::SizeMeasurement.new
+          @destination_size_start.from_hash(v)
+        when 'DestinationSizeEnd'
+          @destination_size_end = Comet::SizeMeasurement.new
+          @destination_size_end.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -277,6 +291,12 @@ module Comet
       end
       unless @progress.nil?
         ret['Progress'] = @progress
+      end
+      unless @destination_size_start.nil?
+        ret['DestinationSizeStart'] = @destination_size_start
+      end
+      unless @destination_size_end.nil?
+        ret['DestinationSizeEnd'] = @destination_size_end
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
