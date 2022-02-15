@@ -56,6 +56,9 @@ module Comet
     # @type [Boolean] allow_zero_files_success
     attr_accessor :allow_zero_files_success
 
+    # @type [Number] auto_retention_level
+    attr_accessor :auto_retention_level
+
     # @type [Array<Comet::ScheduleConfig>] schedules
     attr_accessor :schedules
 
@@ -80,6 +83,7 @@ module Comet
       @destination = ''
       @stop_after = 0
       @limit_vault_speed_bps = 0
+      @auto_retention_level = 0
       @schedules = []
       @event_triggers = Comet::BackupRuleEventTriggers.new
       @unknown_json_fields = {}
@@ -167,6 +171,10 @@ module Comet
           @use_on_disk_indexes = v
         when 'AllowZeroFilesSuccess'
           @allow_zero_files_success = v
+        when 'AutoRetentionLevel'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @auto_retention_level = v
         when 'Schedules'
           if v.nil?
             @schedules = []
@@ -203,6 +211,7 @@ module Comet
       ret['ReduceDiskConcurrency'] = @reduce_disk_concurrency
       ret['UseOnDiskIndexes'] = @use_on_disk_indexes
       ret['AllowZeroFilesSuccess'] = @allow_zero_files_success
+      ret['AutoRetentionLevel'] = @auto_retention_level
       ret['Schedules'] = @schedules
       ret['EventTriggers'] = @event_triggers
       @unknown_json_fields.each do |k, v|

@@ -9,6 +9,18 @@
 
 module Comet
 
+  # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
+  BACKUPJOBAUTORETENTION_AUTOMATIC = 0
+
+  # AutoRetentionLevel: The system will run a Retention Pass after every single backup job. This is more system-intensive, but is the most responsive at freeing storage space.
+  BACKUPJOBAUTORETENTION_IMMEDIATE = 1
+
+  # AutoRetentionLevel: The system will follow the automatic ruleset for a 'High Power' device.
+  BACKUPJOBAUTORETENTION_MORE_OFTEN = 2
+
+  # AutoRetentionLevel: The system will follow the automatic ruleset for a 'Low Power' device.
+  BACKUPJOBAUTORETENTION_LESS_OFTEN = 3
+
   # JobClassification:
   JOB_CLASSIFICATION__MIN = 4000
 
