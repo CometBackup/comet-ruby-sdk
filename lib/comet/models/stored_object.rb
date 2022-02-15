@@ -20,6 +20,7 @@ module Comet
     # @type [Number] modify_time
     attr_accessor :modify_time
 
+    # One of the STOREDOBJECTTYPE_... constant values
     # @type [String] type
     attr_accessor :type
 

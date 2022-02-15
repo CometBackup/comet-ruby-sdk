@@ -12,6 +12,7 @@ require 'json'
 module Comet
 
   # JobEntry is a typed class wrapper around the underlying Comet Server API data structure.
+  # JobEntry is a single entry within a job report.
   class JobEntry
 
     # @type [Number] time

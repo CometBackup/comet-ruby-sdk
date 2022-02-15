@@ -12,6 +12,7 @@ require 'json'
 module Comet
 
   # UserProfileConfig is a typed class wrapper around the underlying Comet Server API data structure.
+  # This is the main data structure for a user's profile.
   class UserProfileConfig
 
     # @type [String] username
@@ -26,6 +27,7 @@ module Comet
     # @type [String] language_code
     attr_accessor :language_code
 
+    # Tenant
     # @type [String] organization_id
     attr_accessor :organization_id
 
@@ -38,9 +40,11 @@ module Comet
     # @type [Boolean] send_email_reports
     attr_accessor :send_email_reports
 
+    # Storage Vaults
     # @type [Hash{String => Comet::DestinationConfig}] destinations
     attr_accessor :destinations
 
+    # Protected Items
     # @type [Hash{String => Comet::SourceConfig}] sources
     attr_accessor :sources
 
@@ -62,12 +66,17 @@ module Comet
     # @type [Number] maximum_devices
     attr_accessor :maximum_devices
 
+    # If the PolicyID field is set to a non-empty string, the Comet Server will enforce the contents of
+    # the Policy field based on the matching server's policy. Otherwise if the PolicyID field is set to an
+    # empty string, the administrator may configure any custom values in the Policy field.
     # @type [String] policy_id
     attr_accessor :policy_id
 
     # @type [Comet::UserPolicy] policy
     attr_accessor :policy
 
+    # To change the user's password, use the AdminResetUserPassword API instead of accessing these fields
+    # directly. Otherwise, other encrypted fields in the user profile may become corrupted.
     # @type [Number] password_format
     attr_accessor :password_format
 
