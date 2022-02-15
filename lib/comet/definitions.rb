@@ -209,6 +209,9 @@ module Comet
   # RestoreType:
   RESTORETYPE_OFFICE365_CLOUD = 6
 
+  # RestoreType:
+  RESTORETYPE_VMDK_FILE = 7
+
   # RestoreType: RESTORETYPE_PROCESS_ARCHIVE
   RESTORETYPE_PROCESS_TARBALL = 3
 
@@ -404,6 +407,12 @@ module Comet
   # StoredObjectType:
   STOREDOBJECTTYPE_MSSITELISTDRIVEENTITY = 'mssitelistdriveentity'
 
+  # StoredObjectType:
+  STOREDOBJECTTYPE_VMDK_FILE = 'vmdkfile'
+
+  # StoredObjectType:
+  STOREDOBJECTTYPE_VMDK_DIRECTORY = 'vmdkdir'
+
   # ExtraFileExclusionOSRestriction:
   OS_ANY = 0
 
@@ -459,6 +468,8 @@ module Comet
   UNKNOWN_DEVICE_ERROR = 'ERR_UNKNOWN_DEVICE'
 
   TOTPREQUIRED_ERROR = 'ERR_TOTP_REQUIRED'
+
+  UNSUPPORT_VMDK_FILE_SYSTEM = 'ERR_UNSUPPORT_VMDK_FILE_SYSTEM'
 
   EMAIL_WORKER_STATE_NOT_STARTED = 0
 

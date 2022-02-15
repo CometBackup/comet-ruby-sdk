@@ -1633,9 +1633,10 @@ module Comet
     # @param [String] target_id The live connection GUID
     # @param [String] destination The Storage Vault ID
     # @param [String] snapshot_id The selected backup job snapshot
-    # @param [String] tree_id (Optional) Browse objects inside subdirectory of backup snapshot
+    # @param [String] tree_id (Optional) Browse objects inside subdirectory of backup snapshot. If it is for VMDK single file restore, it should be the disk image's subtree ID.
+    # @param [Comet::VMDKSnapshotViewOptions] options (Optional) Request a list of stored objects in vmdk file
     # @return [Comet::DispatcherStoredObjectsResponse]
-    def admin_dispatcher_request_stored_objects(target_id, destination, snapshot_id, tree_id = nil)
+    def admin_dispatcher_request_stored_objects(target_id, destination, snapshot_id, tree_id = nil, options = nil)
       submit_params = {}
       raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
 
@@ -1650,6 +1651,11 @@ module Comet
         raise TypeError, "'tree_id' expected String, got #{tree_id.class}" unless tree_id.is_a? String
 
         submit_params['TreeID'] = tree_id
+      end
+      unless options.nil?
+        raise TypeError, "'options' expected Comet::VMDKSnapshotViewOptions, got #{options.class}" unless options.is_a? Comet::VMDKSnapshotViewOptions
+
+        submit_params['Options'] = options.to_json
       end
 
       body = perform_request('api/v1/admin/dispatcher/request-stored-objects', submit_params)
