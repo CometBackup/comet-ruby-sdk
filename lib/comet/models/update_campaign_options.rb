@@ -12,6 +12,9 @@ require 'json'
 module Comet
 
   # UpdateCampaignOptions is a typed class wrapper around the underlying Comet Server API data structure.
+  # This data structure describes which devices should receive a remote software upgrade. Both the
+# target version criteria (UpgradeOlder/ReinstallCurrentVer/DowngradeNewer) and the target device
+# criteria (ApplyDeviceFilter/DeviceFilter) must be met in order for the remote upgrade to be applied.
   class UpdateCampaignOptions
 
     # @type [Boolean] active
@@ -26,6 +29,15 @@ module Comet
     # @type [Boolean] downgrade_newer
     attr_accessor :downgrade_newer
 
+    # @type [Boolean] force_upgrade_running
+    attr_accessor :force_upgrade_running
+
+    # @type [Boolean] apply_device_filter
+    attr_accessor :apply_device_filter
+
+    # @type [Comet::SearchClause] device_filter
+    attr_accessor :device_filter
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -34,6 +46,7 @@ module Comet
     end
 
     def clear
+      @device_filter = Comet::SearchClause.new
       @unknown_json_fields = {}
     end
 
@@ -58,6 +71,13 @@ module Comet
           @reinstall_current_ver = v
         when 'DowngradeNewer'
           @downgrade_newer = v
+        when 'ForceUpgradeRunning'
+          @force_upgrade_running = v
+        when 'ApplyDeviceFilter'
+          @apply_device_filter = v
+        when 'DeviceFilter'
+          @device_filter = Comet::SearchClause.new
+          @device_filter.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -71,6 +91,9 @@ module Comet
       ret['UpgradeOlder'] = @upgrade_older
       ret['ReinstallCurrentVer'] = @reinstall_current_ver
       ret['DowngradeNewer'] = @downgrade_newer
+      ret['ForceUpgradeRunning'] = @force_upgrade_running
+      ret['ApplyDeviceFilter'] = @apply_device_filter
+      ret['DeviceFilter'] = @device_filter
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

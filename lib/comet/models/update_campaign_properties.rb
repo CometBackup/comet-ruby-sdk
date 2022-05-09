@@ -26,6 +26,15 @@ module Comet
     # @type [Boolean] downgrade_newer
     attr_accessor :downgrade_newer
 
+    # @type [Boolean] force_upgrade_running
+    attr_accessor :force_upgrade_running
+
+    # @type [Boolean] apply_device_filter
+    attr_accessor :apply_device_filter
+
+    # @type [Comet::SearchClause] device_filter
+    attr_accessor :device_filter
+
     # @type [Number] start_time
     attr_accessor :start_time
 
@@ -40,6 +49,7 @@ module Comet
     end
 
     def clear
+      @device_filter = Comet::SearchClause.new
       @start_time = 0
       @target_version = ''
       @unknown_json_fields = {}
@@ -66,6 +76,13 @@ module Comet
           @reinstall_current_ver = v
         when 'DowngradeNewer'
           @downgrade_newer = v
+        when 'ForceUpgradeRunning'
+          @force_upgrade_running = v
+        when 'ApplyDeviceFilter'
+          @apply_device_filter = v
+        when 'DeviceFilter'
+          @device_filter = Comet::SearchClause.new
+          @device_filter.from_hash(v)
         when 'StartTime'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -87,6 +104,9 @@ module Comet
       ret['UpgradeOlder'] = @upgrade_older
       ret['ReinstallCurrentVer'] = @reinstall_current_ver
       ret['DowngradeNewer'] = @downgrade_newer
+      ret['ForceUpgradeRunning'] = @force_upgrade_running
+      ret['ApplyDeviceFilter'] = @apply_device_filter
+      ret['DeviceFilter'] = @device_filter
       ret['StartTime'] = @start_time
       ret['TargetVersion'] = @target_version
       @unknown_json_fields.each do |k, v|
