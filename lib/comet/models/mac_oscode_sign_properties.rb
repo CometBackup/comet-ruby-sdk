@@ -17,6 +17,9 @@ module Comet
     # @type [Number] level
     attr_accessor :level
 
+    # @type [Boolean] sign_locally
+    attr_accessor :sign_locally
+
     # @type [Comet::SSHConnection] sshserver
     attr_accessor :sshserver
 
@@ -35,6 +38,27 @@ module Comet
     # @type [Number] apple_idpass_format
     attr_accessor :apple_idpass_format
 
+    # @type [String] certificate_file
+    attr_accessor :certificate_file
+
+    # @type [String] app_certificate_file
+    attr_accessor :app_certificate_file
+
+    # @type [String] pfx_file_password
+    attr_accessor :pfx_file_password
+
+    # @type [Number] pfx_file_password_format
+    attr_accessor :pfx_file_password_format
+
+    # @type [String] notary_apiissuer_id
+    attr_accessor :notary_apiissuer_id
+
+    # @type [String] notary_apikey_id
+    attr_accessor :notary_apikey_id
+
+    # @type [String] notary_apikey_file
+    attr_accessor :notary_apikey_file
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -50,6 +74,13 @@ module Comet
       @apple_id = ''
       @apple_idpass = ''
       @apple_idpass_format = 0
+      @certificate_file = ''
+      @app_certificate_file = ''
+      @pfx_file_password = ''
+      @pfx_file_password_format = 0
+      @notary_apiissuer_id = ''
+      @notary_apikey_id = ''
+      @notary_apikey_file = ''
       @unknown_json_fields = {}
     end
 
@@ -70,6 +101,8 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @level = v
+        when 'SignLocally'
+          @sign_locally = v
         when 'SSHServer'
           @sshserver = Comet::SSHConnection.new
           @sshserver.from_hash(v)
@@ -93,6 +126,34 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @apple_idpass_format = v
+        when 'CertificateFile'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @certificate_file = v
+        when 'AppCertificateFile'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @app_certificate_file = v
+        when 'PfxFilePassword'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @pfx_file_password = v
+        when 'PfxFilePasswordFormat'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @pfx_file_password_format = v
+        when 'NotaryAPIIssuerID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @notary_apiissuer_id = v
+        when 'NotaryAPIKeyID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @notary_apikey_id = v
+        when 'NotaryAPIKeyFile'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @notary_apikey_file = v
         else
           @unknown_json_fields[k] = v
         end
@@ -103,12 +164,20 @@ module Comet
     def to_hash
       ret = {}
       ret['Level'] = @level
+      ret['SignLocally'] = @sign_locally
       ret['SSHServer'] = @sshserver
       ret['CertificateName'] = @certificate_name
       ret['AppCertificateName'] = @app_certificate_name
       ret['AppleID'] = @apple_id
       ret['AppleIDPass'] = @apple_idpass
       ret['AppleIDPassFormat'] = @apple_idpass_format
+      ret['CertificateFile'] = @certificate_file
+      ret['AppCertificateFile'] = @app_certificate_file
+      ret['PfxFilePassword'] = @pfx_file_password
+      ret['PfxFilePasswordFormat'] = @pfx_file_password_format
+      ret['NotaryAPIIssuerID'] = @notary_apiissuer_id
+      ret['NotaryAPIKeyID'] = @notary_apikey_id
+      ret['NotaryAPIKeyFile'] = @notary_apikey_file
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
