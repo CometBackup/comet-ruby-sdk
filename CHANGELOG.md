@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2022-05-10 v1.13.0
+- Based on 22.3.5
+- Add new `RestrictRuntime`, `FromTime`, `ToTime`, `RestrictDays`, `DaysSelect` types to ScheduleConfig to add time and day restrictions in a hourly schedule.
+- Add new `TotalVmCount` to `BackupJobDetail` API.
+- Add new fields to `MacOSCodeSignProperties` to support code signing.
+- Add new `ForceUpgradeRunning`, `ApplyDeviceFilter`, and `DeviceFilter` fields to `UpdateCampaign` types to support sending a bulk upgrade to a custom query of users
+- Add new `AdminBrandingGenerateClientSpkDsm6` and `AdminBrandingGenerateClientSpkDsm7` APIs and associated types for generating and downloading Synology SPKs
+- Add new `PathAppIconImage` field to branding options types to support branding of the app icon when installed in Synology's Package Center (and other software managers)
+- Add new constants for VMDK single file restore
+
 ## 2022-01-28 v1.12.0
 - Based on 21.12.4
 - Add `AdminStoragePingDestination` API to perform a server-side Test Connections action when configuring Storage Role
