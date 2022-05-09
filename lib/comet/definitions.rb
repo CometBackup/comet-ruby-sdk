@@ -212,6 +212,12 @@ module Comet
   # RestoreType:
   RESTORETYPE_VMDK_FILE = 7
 
+  # RestoreType:
+  RESTORETYPE_VMDK_FILE_NULL = 8
+
+  # RestoreType:
+  RESTORETYPE_VMDK_FILE_ARCHIVE = 9
+
   # RestoreType: RESTORETYPE_PROCESS_ARCHIVE
   RESTORETYPE_PROCESS_TARBALL = 3
 
@@ -412,6 +418,12 @@ module Comet
 
   # StoredObjectType:
   STOREDOBJECTTYPE_VMDK_DIRECTORY = 'vmdkdir'
+
+  # StoredObjectType:
+  STOREDOBJECTTYPE_VMDK_WINEFS = 'vmdkwinefs'
+
+  # StoredObjectType:
+  STOREDOBJECTTYPE_VMDK_SYMLINK = 'vmdksymlink'
 
   # ExtraFileExclusionOSRestriction:
   OS_ANY = 0
