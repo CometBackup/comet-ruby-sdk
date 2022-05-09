@@ -65,6 +65,9 @@ module Comet
     # @type [Number] download_size
     attr_accessor :download_size
 
+    # @type [Number] total_vm_count
+    attr_accessor :total_vm_count
+
     # @type [Number] total_mails_count
     attr_accessor :total_mails_count
 
@@ -117,6 +120,7 @@ module Comet
       @total_chunks = 0
       @upload_size = 0
       @download_size = 0
+      @total_vm_count = 0
       @total_mails_count = 0
       @total_sites_count = 0
       @total_accounts_count = 0
@@ -210,6 +214,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @download_size = v
+        when 'TotalVmCount'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @total_vm_count = v
         when 'TotalMailsCount'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -271,6 +279,9 @@ module Comet
       ret['TotalChunks'] = @total_chunks
       ret['UploadSize'] = @upload_size
       ret['DownloadSize'] = @download_size
+      unless @total_vm_count.nil?
+        ret['TotalVmCount'] = @total_vm_count
+      end
       unless @total_mails_count.nil?
         ret['TotalMailsCount'] = @total_mails_count
       end
