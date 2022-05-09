@@ -23,6 +23,21 @@ module Comet
     # @type [Number] offset
     attr_accessor :offset
 
+    # @type [Boolean] restrict_runtime
+    attr_accessor :restrict_runtime
+
+    # @type [Comet::HourSchedConfig] from_time
+    attr_accessor :from_time
+
+    # @type [Comet::HourSchedConfig] to_time
+    attr_accessor :to_time
+
+    # @type [Boolean] restrict_days
+    attr_accessor :restrict_days
+
+    # @type [Comet::DaysOfWeekConfig] days_select
+    attr_accessor :days_select
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -34,6 +49,9 @@ module Comet
       @frequency_type = 0
       @seconds_past = 0
       @offset = 0
+      @from_time = Comet::HourSchedConfig.new
+      @to_time = Comet::HourSchedConfig.new
+      @days_select = Comet::DaysOfWeekConfig.new
       @unknown_json_fields = {}
     end
 
@@ -62,6 +80,19 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @offset = v
+        when 'RestrictRuntime'
+          @restrict_runtime = v
+        when 'FromTime'
+          @from_time = Comet::HourSchedConfig.new
+          @from_time.from_hash(v)
+        when 'ToTime'
+          @to_time = Comet::HourSchedConfig.new
+          @to_time.from_hash(v)
+        when 'RestrictDays'
+          @restrict_days = v
+        when 'DaysSelect'
+          @days_select = Comet::DaysOfWeekConfig.new
+          @days_select.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -76,6 +107,11 @@ module Comet
       unless @offset.nil?
         ret['Offset'] = @offset
       end
+      ret['RestrictRuntime'] = @restrict_runtime
+      ret['FromTime'] = @from_time
+      ret['ToTime'] = @to_time
+      ret['RestrictDays'] = @restrict_days
+      ret['DaysSelect'] = @days_select
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
