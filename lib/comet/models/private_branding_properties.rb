@@ -32,6 +32,9 @@ module Comet
     # @type [String] path_header_image
     attr_accessor :path_header_image
 
+    # @type [String] path_app_icon_image
+    attr_accessor :path_app_icon_image
+
     # @type [String] package_identifier
     attr_accessor :package_identifier
 
@@ -79,6 +82,7 @@ module Comet
       @path_eula_rtf = ''
       @path_tile_png = ''
       @path_header_image = ''
+      @path_app_icon_image = ''
       @package_identifier = ''
       @windows_code_sign_pkcs12file_path = ''
       @windows_code_sign_pkcs12password_format = 0
@@ -130,6 +134,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @path_header_image = v
+        when 'PathAppIconImage'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @path_app_icon_image = v
         when 'PackageIdentifier'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -188,6 +196,7 @@ module Comet
       ret['PathEulaRtf'] = @path_eula_rtf
       ret['PathTilePng'] = @path_tile_png
       ret['PathHeaderImage'] = @path_header_image
+      ret['PathAppIconImage'] = @path_app_icon_image
       ret['PackageIdentifier'] = @package_identifier
       ret['WindowsCodeSignPKCS12FilePath'] = @windows_code_sign_pkcs12file_path
       ret['WindowsCodeSignPKCS12PasswordFormat'] = @windows_code_sign_pkcs12password_format

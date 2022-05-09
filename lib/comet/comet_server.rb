@@ -551,6 +551,52 @@ module Comet
       perform_request('api/v1/admin/branding/generate-client/macos-x86_64', submit_params)
     end
 
+    # AdminBrandingGenerateClientSpkDsm6
+    #
+    # Download software (Synology SPK for DSM 6).
+    #
+    # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
+    # This API requires the Software Build Role to be enabled.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
+    # @return [String]
+    def admin_branding_generate_client_spk_dsm_6(self_address = nil)
+      submit_params = {}
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
+        raise TypeError, "'self_address' expected String, got #{self_address.class}" unless self_address.is_a? String
+
+        submit_params['SelfAddress'] = self_address
+      end
+
+      perform_request('api/v1/admin/branding/generate-client/spk-dsm6', submit_params)
+    end
+
+    # AdminBrandingGenerateClientSpkDsm7
+    #
+    # Download software (Synology SPK for DSM 7).
+    #
+    # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
+    # This API requires the Software Build Role to be enabled.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
+    # @return [String]
+    def admin_branding_generate_client_spk_dsm_7(self_address = nil)
+      submit_params = {}
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
+        raise TypeError, "'self_address' expected String, got #{self_address.class}" unless self_address.is_a? String
+
+        submit_params['SelfAddress'] = self_address
+      end
+
+      perform_request('api/v1/admin/branding/generate-client/spk-dsm7', submit_params)
+    end
+
     # AdminBrandingGenerateClientTest
     #
     # Check if a software download is available.

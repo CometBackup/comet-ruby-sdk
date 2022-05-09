@@ -156,6 +156,8 @@ module Comet
   # FtpsModeType:
   FTPS_MODE_EXPLICIT = 2
 
+  INSTALLER_METADATA_FILE = 'installer.json'
+
   # Severity:
   SEVERITY_INFO = 'I'
 
