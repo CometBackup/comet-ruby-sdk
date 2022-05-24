@@ -81,8 +81,9 @@ end
 
 ### Running SDK test suite
 
-```ruby
-bundle exec rake rubocop
+```bash
+# safe formatting/fixing and linting
+bundle exec rake rubocop -a
 
   COMETSERVER_ADDRESS='http://127.0.0.1:8060' \
 	COMETSERVER_ADMINUSER=admin \

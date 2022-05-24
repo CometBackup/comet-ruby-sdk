@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2022-05-25 v1.14.0
+- Based on 22.3.7
+- Add new `REMOTESERVER_S3_GENERIC` `RemoteServerType`
+- add new `S3GenericVirtualStorageRole` support to the `RemoteServerAddress`
+
 ## 2022-05-10 v1.13.0
 - Based on 22.3.5
 - Add new `RestrictRuntime`, `FromTime`, `ToTime`, `RestrictDays`, `DaysSelect` types to ScheduleConfig to add time and day restrictions in a hourly schedule.

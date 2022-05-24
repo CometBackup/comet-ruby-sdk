@@ -12,7 +12,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'comet_backup_ruby_sdk'
-  spec.version       = '1.13.0'
+  spec.version       = '1.14.0'
   spec.authors       = ['Comet Licensing Ltd.']
   spec.email         = ['hello@cometbackup.com']
 
