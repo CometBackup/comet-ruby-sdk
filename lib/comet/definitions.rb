@@ -235,6 +235,9 @@ module Comet
   # RestoreArchiveFormat: SquashFS container
   RESTOREARCHIVEFORMAT_SQFS = 3
 
+  # RestoreArchiveFormat:
+  RESTOREARCHIVEFORMAT_TARZSTD = 4
+
   # RetentionMode: If this mode is set in a RetentionPolicy, then RetentionPolicy.Ranges should be ignored.
   RETENTIONMODE_KEEP_EVERYTHING = 801
 
