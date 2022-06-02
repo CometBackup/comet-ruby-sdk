@@ -41,6 +41,13 @@ module Comet
     # @type [Comet::CustomRemoteBucketSettings] custom
     attr_accessor :custom
 
+    # @type [Comet::S3GenericVirtualStorageRole] s3
+    attr_accessor :s3
+
+    # Amazon AWS - Virtual Storage Role
+    # @type [Comet::AmazonAWSVirtualStorageRoleSettings] aws
+    attr_accessor :aws
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -58,6 +65,8 @@ module Comet
       @b2 = Comet::B2VirtualStorageRoleSettings.new
       @wasabi = Comet::WasabiVirtualStorageRoleSettings.new
       @custom = Comet::CustomRemoteBucketSettings.new
+      @s3 = Comet::S3GenericVirtualStorageRole.new
+      @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
       @unknown_json_fields = {}
     end
 
@@ -106,6 +115,12 @@ module Comet
         when 'Custom'
           @custom = Comet::CustomRemoteBucketSettings.new
           @custom.from_hash(v)
+        when 'S3'
+          @s3 = Comet::S3GenericVirtualStorageRole.new
+          @s3.from_hash(v)
+        when 'AWS'
+          @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
+          @aws.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -137,6 +152,12 @@ module Comet
       end
       unless @custom.nil?
         ret['Custom'] = @custom
+      end
+      unless @s3.nil?
+        ret['S3'] = @s3
+      end
+      unless @aws.nil?
+        ret['AWS'] = @aws
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

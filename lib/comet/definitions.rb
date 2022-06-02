@@ -655,6 +655,12 @@ module Comet
   # RemoteServerType:
   REMOTESERVER_CUSTOM = 'custom'
 
+  # RemoteServerType:
+  REMOTESERVER_S3_GENERIC = 's3'
+
+  # RemoteServerType:
+  REMOTESERVER_AWS = 'aws'
+
   LDAPSECURITYMETHOD_PLAIN = 'plain'
 
   LDAPSECURITYMETHOD_LDAPS = 'ldaps'
