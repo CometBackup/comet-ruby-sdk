@@ -703,6 +703,30 @@ module Comet
   # StreamableEventType:
   SEVT__MAX = 4999
 
+  # CompressMode:
+  COMPRESS_INVALID = 0
+
+  # CompressMode:
+  COMPRESS_LVL_1 = 1
+
+  # CompressMode:
+  COMPRESS_LVL_2 = 2
+
+  # CompressMode:
+  COMPRESS_LVL_3 = 3
+
+  # CompressMode:
+  COMPRESS_LVL_4 = 4
+
+  # CompressMode:
+  COMPRESS_LVL_5 = 5
+
+  # CompressMode:
+  COMPRESS_MAX = COMPRESS_LVL_5
+
+  # CompressMode:
+  COMPRESS_DEFAULT = COMPRESS_LVL_4
+
   OFFICE365_REGION_PUBLIC = 'GlobalPublicCloud'
 
   OFFICE365_REGION_CHINA = 'ChinaCloud'
