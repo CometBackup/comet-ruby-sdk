@@ -314,8 +314,9 @@ module Comet
     # @param [String] target_password New account password
     # @param [Number] store_recovery_code (Optional) If set to 1, store and keep a password recovery code for the generated user (>= 18.3.9)
     # @param [Number] require_password_change (Optional) If set to 1, require to reset password at the first login for the generated user (>= 20.3.4)
+    # @param [String] target_organization (Optional) If present, create the user account on behalf of another organization. Only allowed for administrator accounts in the top-level organization. (>= 22.3.7)
     # @return [Comet::CometAPIResponseMessage]
-    def admin_add_user(target_user, target_password, store_recovery_code = nil, require_password_change = nil)
+    def admin_add_user(target_user, target_password, store_recovery_code = nil, require_password_change = nil, target_organization = nil)
       submit_params = {}
       raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
 
@@ -332,6 +333,11 @@ module Comet
         raise TypeError, "'require_password_change' expected Numeric, got #{require_password_change.class}" unless require_password_change.is_a? Numeric
 
         submit_params['RequirePasswordChange'] = require_password_change
+      end
+      unless target_organization.nil?
+        raise TypeError, "'target_organization' expected String, got #{target_organization.class}" unless target_organization.is_a? String
+
+        submit_params['TargetOrganization'] = target_organization
       end
 
       body = perform_request('api/v1/admin/add-user', submit_params)
@@ -352,8 +358,9 @@ module Comet
     #
     # @param [String] target_user New account username
     # @param [Comet::UserProfileConfig] profile_data New account profile
+    # @param [String] target_organization (Optional) If present, create the user account on behalf of another organization. Only allowed for administrator accounts in the top-level organization. (>= 22.3.7)
     # @return [Comet::CometAPIResponseMessage]
-    def admin_add_user_from_profile(target_user, profile_data)
+    def admin_add_user_from_profile(target_user, profile_data, target_organization = nil)
       submit_params = {}
       raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
 
@@ -361,6 +368,11 @@ module Comet
       raise TypeError, "'profile_data' expected Comet::UserProfileConfig, got #{profile_data.class}" unless profile_data.is_a? Comet::UserProfileConfig
 
       submit_params['ProfileData'] = profile_data.to_json
+      unless target_organization.nil?
+        raise TypeError, "'target_organization' expected String, got #{target_organization.class}" unless target_organization.is_a? String
+
+        submit_params['TargetOrganization'] = target_organization
+      end
 
       body = perform_request('api/v1/admin/add-user-from-profile', submit_params)
       json_body = JSON.parse body
@@ -3106,13 +3118,22 @@ module Comet
     # AdminPoliciesList
     #
     # List all policy object names.
+    # For the top-level organization, the API result includes all policies for all organizations, unless the TargetOrganization parameter is present.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
     #
+    # @param [String] target_organization (Optional) If present, list the policies belonging to another organization. Only allowed for administrator accounts in the top-level organization. (>= 22.3.7)
     # @return [Hash{String => String}]
-    def admin_policies_list
-      body = perform_request('api/v1/admin/policies/list')
+    def admin_policies_list(target_organization = nil)
+      submit_params = {}
+      unless target_organization.nil?
+        raise TypeError, "'target_organization' expected String, got #{target_organization.class}" unless target_organization.is_a? String
+
+        submit_params['TargetOrganization'] = target_organization
+      end
+
+      body = perform_request('api/v1/admin/policies/list', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = {}
@@ -3131,13 +3152,22 @@ module Comet
     # AdminPoliciesListFull
     #
     # Get all policy objects.
+    # For the top-level organization, the API result includes all policies for all organizations, unless the TargetOrganization parameter is present.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
     #
+    # @param [String] target_organization (Optional) If present, list the policies belonging to another organization. Only allowed for administrator accounts in the top-level organization. (>= 22.3.7)
     # @return [Hash{String => Comet::GroupPolicy}]
-    def admin_policies_list_full
-      body = perform_request('api/v1/admin/policies/list-full')
+    def admin_policies_list_full(target_organization = nil)
+      submit_params = {}
+      unless target_organization.nil?
+        raise TypeError, "'target_organization' expected String, got #{target_organization.class}" unless target_organization.is_a? String
+
+        submit_params['TargetOrganization'] = target_organization
+      end
+
+      body = perform_request('api/v1/admin/policies/list-full', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = {}
@@ -3272,6 +3302,7 @@ module Comet
     # Request a new Storage Vault on behalf of a user.
     # This action does not respect the "Prevent creating new Storage Vaults (via Request)" policy setting. New Storage Vaults can be requested regardless of the policy setting.
     # Prior to Comet 19.8.0, the response type was CometAPIResponseMessage (i.e. no DestinationID field in response).
+    # The StorageProvider must exist for the target user account's organization.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -3311,9 +3342,17 @@ module Comet
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
     #
+    # @param [String] target_organization (Optional) If present, list the requestable Storage Vault options belonging to another organization. Only allowed for administrator accounts in the top-level organization. (>= 22.3.7)
     # @return [Hash{String => String}]
-    def admin_request_storage_vault_providers
-      body = perform_request('api/v1/admin/request-storage-vault-providers')
+    def admin_request_storage_vault_providers(target_organization = nil)
+      submit_params = {}
+      unless target_organization.nil?
+        raise TypeError, "'target_organization' expected String, got #{target_organization.class}" unless target_organization.is_a? String
+
+        submit_params['TargetOrganization'] = target_organization
+      end
+
+      body = perform_request('api/v1/admin/request-storage-vault-providers', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = {}
@@ -3730,7 +3769,7 @@ module Comet
 
       ret_error = Comet::CometAPIResponseMessage.new
       ret_error.from_hash(obj)
-      raise Comet::APIResponseError, ret_error
+      raise Comet::APIResponseError.new(ret_error)
     end
 
     # Perform a synchronous HTTP request.
@@ -3767,7 +3806,7 @@ module Comet
 
       form_params = []
       params.each do |k, v|
-        form_params.append [k, v, { :filename => k }]
+        form_params.append [k, v, {:filename => k}]
       end
       req.set_form(form_params, 'multipart/form-data')
 
