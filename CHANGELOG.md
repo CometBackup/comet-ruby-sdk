@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2022-06-03 v1.15.0
+- Based on 22.5.0
+- Add `COMPRESS_*` compression settings for Self-Backups
+- Add `RESTOREARCHIVEFORMAT_TARZSTD` for using the tar.zst archive restore format
+- Add `target_organization` parameter to support cross-tenant operations in some API methods
+
 ## 2022-05-25 v1.14.0
 - Based on 22.3.7
 - Add new `REMOTESERVER_S3_GENERIC` `RemoteServerType`
