@@ -2192,7 +2192,9 @@ module Comet
     #
     # This API will return all jobs that either started or ended within the supplied range.
     #
-    # Incomplete jobs have an end time of `0`. You can use this API to find incomplete jobs by setting both `Start` and `End` to `0`.
+    # Incomplete jobs have an end time of `0`. You can use this API to find only incomplete jobs by setting both `Start` and `End` to `0`.
+    #
+    # Prior to Comet Server 22.6.0, additional Incomplete jobs may have been returned if you specified non-zero arguments for both `Start` and `End`.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -2986,12 +2988,14 @@ module Comet
     #
     # Delete an organization and all related users.
     #
+    # Prior to Comet 22.6.0, this API was documented as returning the OrganizationResponse type. However, it always has returned only a CometAPIResponseMessage.
+    #
     # You must supply administrator authentication credentials to use this API.
     # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     #
     # @param [String] organization_id (Optional) (No description available)
     # @param [Comet::UninstallConfig] uninstall_config (Optional) Uninstall software configuration
-    # @return [Comet::OrganizationResponse]
+    # @return [Comet::CometAPIResponseMessage]
     def admin_organization_delete(organization_id = nil, uninstall_config = nil)
       submit_params = {}
       unless organization_id.nil?
@@ -3008,7 +3012,7 @@ module Comet
       body = perform_request('api/v1/admin/organization/delete', submit_params)
       json_body = JSON.parse body
       check_status json_body
-      ret = Comet::OrganizationResponse.new
+      ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
     end
@@ -3040,6 +3044,8 @@ module Comet
     # AdminOrganizationSet
     #
     # Create or Update an Organization.
+    #
+    # Prior to Comet 22.6.0, the 'ID' and 'Organization' fields were not present in the response.
     #
     # You must supply administrator authentication credentials to use this API.
     # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
