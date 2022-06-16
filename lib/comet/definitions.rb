@@ -661,10 +661,13 @@ module Comet
   # RemoteServerType:
   REMOTESERVER_AWS = 'aws'
 
+  # LDAPSecurityMethod:
   LDAPSECURITYMETHOD_PLAIN = 'plain'
 
+  # LDAPSecurityMethod:
   LDAPSECURITYMETHOD_LDAPS = 'ldaps'
 
+  # LDAPSecurityMethod:
   LDAPSECURITYMETHOD_STARTTLS = 'starttls'
 
   # MacOSCodesignLevel:
