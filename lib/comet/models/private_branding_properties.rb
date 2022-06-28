@@ -14,6 +14,9 @@ module Comet
   # PrivateBrandingProperties is a typed class wrapper around the underlying Comet Server API data structure.
   class PrivateBrandingProperties
 
+    # @type [Number] build_mode
+    attr_accessor :build_mode
+
     # @type [String] path_ico_file
     attr_accessor :path_ico_file
 
@@ -76,6 +79,7 @@ module Comet
     end
 
     def clear
+      @build_mode = 0
       @path_ico_file = ''
       @path_icns_file = ''
       @path_menu_bar_icns_file = ''
@@ -110,6 +114,10 @@ module Comet
 
       obj.each do |k, v|
         case k
+        when 'BuildMode'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @build_mode = v
         when 'PathIcoFile'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -190,6 +198,7 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
+      ret['BuildMode'] = @build_mode
       ret['PathIcoFile'] = @path_ico_file
       ret['PathIcnsFile'] = @path_icns_file
       ret['PathMenuBarIcnsFile'] = @path_menu_bar_icns_file

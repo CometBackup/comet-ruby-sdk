@@ -53,6 +53,9 @@ module Comet
     # @type [Boolean] hide_background_logo
     attr_accessor :hide_background_logo
 
+    # @type [Number] build_mode
+    attr_accessor :build_mode
+
     # @type [String] path_ico_file
     attr_accessor :path_ico_file
 
@@ -125,6 +128,7 @@ module Comet
       @default_login_server_url = ''
       @tile_background_color = ''
       @account_register_url = ''
+      @build_mode = 0
       @path_ico_file = ''
       @path_icns_file = ''
       @path_menu_bar_icns_file = ''
@@ -205,6 +209,10 @@ module Comet
           @account_register_url = v
         when 'HideBackgroundLogo'
           @hide_background_logo = v
+        when 'BuildMode'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @build_mode = v
         when 'PathIcoFile'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -298,6 +306,7 @@ module Comet
       ret['TileBackgroundColor'] = @tile_background_color
       ret['AccountRegisterURL'] = @account_register_url
       ret['HideBackgroundLogo'] = @hide_background_logo
+      ret['BuildMode'] = @build_mode
       ret['PathIcoFile'] = @path_ico_file
       ret['PathIcnsFile'] = @path_icns_file
       ret['PathMenuBarIcnsFile'] = @path_menu_bar_icns_file

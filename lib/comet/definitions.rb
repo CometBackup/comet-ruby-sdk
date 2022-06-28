@@ -682,6 +682,12 @@ module Comet
   # MacOSCodesignLevel:
   MACOSCODESIGN_LEVEL_SIGN_NOTARISE_STAPLE = 2
 
+  # ClientBrandingBuildMode: Public-Doc: The software client will be custom-built by this Comet Server, allowing custom branding, default server URL, and codesigning.
+  CLIENTBRANDINGBUILD_CUSTOM = 0
+
+  # ClientBrandingBuildMode: Public-Doc: A pre-built software client will be served, with Comet-branding, no server URL, and Comet codesigning.
+  CLIENTBRANDINGBUILD_PREBUILT = 1
+
   # StreamableEventType:
   SEVT__MIN = 4000
 
