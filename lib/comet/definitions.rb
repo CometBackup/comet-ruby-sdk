@@ -322,6 +322,9 @@ module Comet
 
   SCHEDULE_FREQUENCY_HIGHEST = 8015
 
+  # Maximum random delay (5 hours)
+  SCHEDULE_MAX_RANDOM_DELAY_SECS = 18_000
+
   # 2^50 (1 << 50)
   SCHEDULE_MAXINT = 1_125_899_906_842_624
 
