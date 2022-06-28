@@ -32,7 +32,7 @@ module Comet
     # @type [Hash{String => Comet::WebhookOption}] webhook_options
     attr_accessor :webhook_options
 
-    # @type [Comet::AdminEmailOptions] email
+    # @type [Comet::EmailOptions] email
     attr_accessor :email
 
     # @type [Boolean] is_suspended
@@ -52,7 +52,7 @@ module Comet
       @branding = Comet::BrandingOptions.new
       @remote_storage = []
       @webhook_options = {}
-      @email = Comet::AdminEmailOptions.new
+      @email = Comet::EmailOptions.new
       @unknown_json_fields = {}
     end
 
@@ -111,7 +111,7 @@ module Comet
             end
           end
         when 'Email'
-          @email = Comet::AdminEmailOptions.new
+          @email = Comet::EmailOptions.new
           @email.from_hash(v)
         when 'IsSuspended'
           @is_suspended = v
