@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2022-06-28 v2.0.0
+- Based on 22.6.2
+- **BREAKING:** The `Organization.Email` class member is now declared as `EmailOptions` type instead of `AdminEmailOptions`. This change is fully backward-compatible on the HTTP/JSON level, but may cause issues if your application code checked this type explicitly
+- **BREAKING:** The `AdminOrganizationDeleteRequest` API's response type has changed to be `APIResponseMessage`, not `OrganizationResponse`. The Comet Server API had only ever filled in the `APIResponseMessage`-compatible fields of the `OrganizationResponse` structure, so the HTTP/JSON response is unchanged, but this may cause issues if your application code checked this type explicitly
+- Move `frozen_string_literal` declaration to the top line of all `*.rb` files
+- "Requestable" Storage Vaults have been renamed to "Storage Templates". The API endpoint is unchanged, so this is backward-compatible with older Comet Server instances
+- Document all `ServerConfigOptions` types for the `AdminMetaServerConfigSet` and `AdminMetaServerConfigGet` APIs
+ -Add new `FallbackServers` option for LDAP external authentication sources
+- Add new `RandomDelaySecs` option for job schedules
+
 ## 2022-06-03 v1.15.0
 - Based on 22.5.0
 - Add `COMPRESS_*` compression settings for Self-Backups
