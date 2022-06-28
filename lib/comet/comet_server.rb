@@ -2600,7 +2600,7 @@ module Comet
 
     # AdminMetaRemoteStorageVaultSet
     #
-    # Set Requestable Remote Storage Vault options.
+    # Set Storage template vault options.
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
@@ -3314,7 +3314,7 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] target_user The user to receive the new Storage Vault
-    # @param [String] storage_provider ID for the Requestable destination
+    # @param [String] storage_provider ID for the storage template destination
     # @param [String] self_address (Optional) The external URL for this server. Used to resolve conflicts
     # @return [Comet::RequestStorageVaultResponseMessage]
     def admin_request_storage_vault(target_user, storage_provider, self_address = nil)
@@ -3348,7 +3348,7 @@ module Comet
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
     #
-    # @param [String] target_organization (Optional) If present, list the requestable Storage Vault options belonging to another organization. Only allowed for administrator accounts in the top-level organization. (>= 22.3.7)
+    # @param [String] target_organization (Optional) If present, list the storage template options belonging to another organization. Only allowed for administrator accounts in the top-level organization. (>= 22.3.7)
     # @return [Hash{String => String}]
     def admin_request_storage_vault_providers(target_organization = nil)
       submit_params = {}
