@@ -1,11 +1,9 @@
-#!/usr/bin/env ruby --enable-frozen-string-literal
-#
+# frozen_string_literal: true
+
 # Copyright (c) 2020 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
-#
-# frozen_string_literal: true
 
 source 'https://rubygems.org'
 

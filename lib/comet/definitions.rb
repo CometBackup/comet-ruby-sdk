@@ -1,11 +1,9 @@
-#!/usr/bin/env ruby --enable-frozen-string-literal
-#
+# frozen_string_literal: true
+
 # Copyright (c) 2020-2022 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
-#
-# frozen_string_literal: true
 
 module Comet
 
@@ -471,13 +469,13 @@ module Comet
 
   DEFAULT_TIMEZONE = 'UTC'
 
-  APPLICATION_VERSION = '22.6.2'
+  APPLICATION_VERSION = '22.6.3'
 
   APPLICATION_VERSION_MAJOR = 22
 
   APPLICATION_VERSION_MINOR = 6
 
-  APPLICATION_VERSION_REVISION = 2
+  APPLICATION_VERSION_REVISION = 3
 
   RELEASE_CODENAME = 'Voyager'
 
