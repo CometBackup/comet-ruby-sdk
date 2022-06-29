@@ -7,7 +7,7 @@
 - Move `frozen_string_literal` declaration to the top line of all `*.rb` files
 - "Requestable" Storage Vaults have been renamed to "Storage Templates". The API endpoint is unchanged, so this is backward-compatible with older Comet Server instances
 - Document all `ServerConfigOptions` types for the `AdminMetaServerConfigSet` and `AdminMetaServerConfigGet` APIs
- -Add new `FallbackServers` option for LDAP external authentication sources
+- Add new `FallbackServers` option for LDAP external authentication sources
 - Add new `RandomDelaySecs` option for job schedules
 
 ## 2022-06-03 v1.15.0
@@ -19,7 +19,7 @@
 ## 2022-05-25 v1.14.0
 - Based on 22.3.7
 - Add new `REMOTESERVER_S3_GENERIC` `RemoteServerType`
-- add new `S3GenericVirtualStorageRole` support to the `RemoteServerAddress`
+- Add new `S3GenericVirtualStorageRole` support to the `RemoteServerAddress`
 
 ## 2022-05-10 v1.13.0
 - Based on 22.3.5
