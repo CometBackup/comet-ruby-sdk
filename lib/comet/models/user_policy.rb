@@ -111,6 +111,9 @@ module Comet
     # @type [Hash{String => Comet::BackupRuleConfig}] default_backup_rules
     attr_accessor :default_backup_rules
 
+    # @type [Number] random_delay_secs
+    attr_accessor :random_delay_secs
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -132,6 +135,7 @@ module Comet
       @default_sources_backup_rules = {}
       @default_sources_with_osrestriction = {}
       @default_backup_rules = {}
+      @random_delay_secs = 0
       @unknown_json_fields = {}
     end
 
@@ -266,6 +270,10 @@ module Comet
               @default_backup_rules[k1].from_hash(v1)
             end
           end
+        when 'RandomDelaySecs'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @random_delay_secs = v
         else
           @unknown_json_fields[k] = v
         end
@@ -318,6 +326,9 @@ module Comet
       ret['DefaultSourcesBackupRules'] = @default_sources_backup_rules
       ret['DefaultSourcesWithOSRestriction'] = @default_sources_with_osrestriction
       ret['DefaultBackupRules'] = @default_backup_rules
+      unless @random_delay_secs.nil?
+        ret['RandomDelaySecs'] = @random_delay_secs
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

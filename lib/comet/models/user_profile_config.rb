@@ -105,6 +105,9 @@ module Comet
     # @type [String] creation_guid
     attr_accessor :creation_guid
 
+    # @type [Comet::UserServerConfig] server_config
+    attr_accessor :server_config
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -135,6 +138,7 @@ module Comet
       @totpkey = ''
       @create_time = 0
       @creation_guid = ''
+      @server_config = Comet::UserServerConfig.new
       @unknown_json_fields = {}
     end
 
@@ -287,6 +291,9 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @creation_guid = v
+        when 'ServerConfig'
+          @server_config = Comet::UserServerConfig.new
+          @server_config.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -328,6 +335,9 @@ module Comet
       ret['RequirePasswordChange'] = @require_password_change
       ret['CreateTime'] = @create_time
       ret['CreationGUID'] = @creation_guid
+      unless @server_config.nil?
+        ret['ServerConfig'] = @server_config
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

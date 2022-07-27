@@ -36,6 +36,9 @@ module Comet
     # @type [Array<Comet::ReplicaServer>] replicate_to
     attr_accessor :replicate_to
 
+    # @type [Comet::GlobalOverrideOptions] global_overrides
+    attr_accessor :global_overrides
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -49,6 +52,7 @@ module Comet
       @prune_logs_after_days = 0
       @remote_storage = []
       @replicate_to = []
+      @global_overrides = Comet::GlobalOverrideOptions.new
       @unknown_json_fields = {}
     end
 
@@ -103,6 +107,9 @@ module Comet
               @replicate_to[i1].from_hash(v1)
             end
           end
+        when 'GlobalOverrides'
+          @global_overrides = Comet::GlobalOverrideOptions.new
+          @global_overrides.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -120,6 +127,9 @@ module Comet
       ret['PruneLogsAfterDays'] = @prune_logs_after_days
       ret['RemoteStorage'] = @remote_storage
       ret['ReplicateTo'] = @replicate_to
+      unless @global_overrides.nil?
+        ret['GlobalOverrides'] = @global_overrides
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
