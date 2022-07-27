@@ -42,6 +42,9 @@ module Comet
     # @type [String] s3subdir
     attr_accessor :s3subdir
 
+    # @type [String] s3custom_region
+    attr_accessor :s3custom_region
+
     # @type [Boolean] s3uses_v2signing
     attr_accessor :s3uses_v2signing
 
@@ -152,6 +155,7 @@ module Comet
       @s3secret_key = ''
       @s3bucket_name = ''
       @s3subdir = ''
+      @s3custom_region = ''
       @sftpserver = ''
       @sftpusername = ''
       @sftpremote_path = ''
@@ -232,6 +236,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @s3subdir = v
+        when 'S3CustomRegion'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @s3custom_region = v
         when 'S3UsesV2Signing'
           @s3uses_v2signing = v
         when 'SFTPServer'
@@ -369,6 +377,7 @@ module Comet
       ret['S3SecretKey'] = @s3secret_key
       ret['S3BucketName'] = @s3bucket_name
       ret['S3Subdir'] = @s3subdir
+      ret['S3CustomRegion'] = @s3custom_region
       ret['S3UsesV2Signing'] = @s3uses_v2signing
       ret['SFTPServer'] = @sftpserver
       ret['SFTPUsername'] = @sftpusername
