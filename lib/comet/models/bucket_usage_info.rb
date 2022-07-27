@@ -12,6 +12,9 @@ module Comet
   # BucketUsageInfo is a typed class wrapper around the underlying Comet Server API data structure.
   class BucketUsageInfo
 
+    # @type [String] access_key
+    attr_accessor :access_key
+
     # @type [Array<Number>] exists_on_servers
     attr_accessor :exists_on_servers
 
@@ -26,6 +29,7 @@ module Comet
     end
 
     def clear
+      @access_key = ''
       @exists_on_servers = []
       @in_use_by = []
       @unknown_json_fields = {}
@@ -44,6 +48,10 @@ module Comet
 
       obj.each do |k, v|
         case k
+        when 'AccessKey'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @access_key = v
         when 'ExistsOnServers'
           if v.nil?
             @exists_on_servers = []
@@ -74,6 +82,7 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
+      ret['AccessKey'] = @access_key
       ret['ExistsOnServers'] = @exists_on_servers
       ret['InUseBy'] = @in_use_by
       @unknown_json_fields.each do |k, v|

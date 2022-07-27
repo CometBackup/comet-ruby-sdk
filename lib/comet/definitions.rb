@@ -662,6 +662,9 @@ module Comet
   # RemoteServerType:
   REMOTESERVER_AWS = 'aws'
 
+  # RemoteServerType:
+  REMOTESERVER_IDRIVEE2 = 'idrivee2'
+
   # LDAPSecurityMethod:
   LDAPSECURITYMETHOD_PLAIN = 'plain'
 
