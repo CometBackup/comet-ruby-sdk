@@ -18,6 +18,9 @@ module Comet
     # @type [Boolean] overwrite_existing_files
     attr_accessor :overwrite_existing_files
 
+    # @type [Boolean] overwrite_if_newer
+    attr_accessor :overwrite_if_newer
+
     # @type [Boolean] dest_is_original_location
     attr_accessor :dest_is_original_location
 
@@ -68,6 +71,8 @@ module Comet
           @type = v
         when 'OverwriteExistingFiles'
           @overwrite_existing_files = v
+        when 'OverwriteIfNewer'
+          @overwrite_if_newer = v
         when 'DestIsOriginalLocation'
           @dest_is_original_location = v
         when 'DestPath'
@@ -103,6 +108,7 @@ module Comet
       ret = {}
       ret['Type'] = @type
       ret['OverwriteExistingFiles'] = @overwrite_existing_files
+      ret['OverwriteIfNewer'] = @overwrite_if_newer
       ret['DestIsOriginalLocation'] = @dest_is_original_location
       ret['DestPath'] = @dest_path
       ret['ExactDestPaths'] = @exact_dest_paths
