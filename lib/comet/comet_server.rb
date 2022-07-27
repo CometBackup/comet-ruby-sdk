@@ -1212,9 +1212,17 @@ module Comet
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
     #
+    # @param [String] user_name_filter (Optional) User name filter string
     # @return [Hash{String => Comet::LiveUserConnection}]
-    def admin_dispatcher_list_active
-      body = perform_request('api/v1/admin/dispatcher/list-active')
+    def admin_dispatcher_list_active(user_name_filter = nil)
+      submit_params = {}
+      unless user_name_filter.nil?
+        raise TypeError, "'user_name_filter' expected String, got #{user_name_filter.class}" unless user_name_filter.is_a? String
+
+        submit_params['UserNameFilter'] = user_name_filter
+      end
+
+      body = perform_request('api/v1/admin/dispatcher/list-active', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = {}
