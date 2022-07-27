@@ -36,6 +36,9 @@ module Comet
     # @type [String] web_url
     attr_accessor :web_url
 
+    # @type [String] user_principal_name
+    attr_accessor :user_principal_name
+
     # @type [Number] enabled_service_option
     attr_accessor :enabled_service_option
 
@@ -67,6 +70,7 @@ module Comet
       @site_id = ''
       @web_id = ''
       @web_url = ''
+      @user_principal_name = ''
       @enabled_service_option = 0
       @members = []
       @service_options = 0
@@ -119,6 +123,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @web_url = v
+        when 'UserPrincipalName'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @user_principal_name = v
         when 'EnabledServiceOption'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -174,6 +182,9 @@ module Comet
       end
       unless @web_url.nil?
         ret['WebURL'] = @web_url
+      end
+      unless @user_principal_name.nil?
+        ret['UserPrincipalName'] = @user_principal_name
       end
       unless @enabled_service_option.nil?
         ret['EnabledServiceOption'] = @enabled_service_option
