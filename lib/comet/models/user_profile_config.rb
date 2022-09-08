@@ -65,16 +65,16 @@ module Comet
     attr_accessor :maximum_devices
 
     # If the PolicyID field is set to a non-empty string, the Comet Server will enforce the contents of
-    # the Policy field based on the matching server's policy. Otherwise if the PolicyID field is set to an
-    # empty string, the administrator may configure any custom values in the Policy field.
+    # the Policy field based on the matching server's policy. Otherwise if the PolicyID field is set to
+    # an empty string, the administrator may configure any custom values in the Policy field.
     # @type [String] policy_id
     attr_accessor :policy_id
 
     # @type [Comet::UserPolicy] policy
     attr_accessor :policy
 
-    # To change the user's password, use the AdminResetUserPassword API instead of accessing these fields
-    # directly. Otherwise, other encrypted fields in the user profile may become corrupted.
+    # To change the user's password, use the AdminResetUserPassword API instead of accessing these
+    # fields directly. Otherwise, other encrypted fields in the user profile may become corrupted.
     # @type [Number] password_format
     attr_accessor :password_format
 

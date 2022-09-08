@@ -27,6 +27,12 @@ module Comet
     # @type [Boolean] allow_edit_remote_storage
     attr_accessor :allow_edit_remote_storage
 
+    # @type [Boolean] allow_edit_webhooks
+    attr_accessor :allow_edit_webhooks
+
+    # @type [Boolean] deny_constellation_role
+    attr_accessor :deny_constellation_role
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -61,6 +67,10 @@ module Comet
           @allow_edit_branding = v
         when 'AllowEditRemoteStorage'
           @allow_edit_remote_storage = v
+        when 'AllowEditWebhooks'
+          @allow_edit_webhooks = v
+        when 'DenyConstellationRole'
+          @deny_constellation_role = v
         else
           @unknown_json_fields[k] = v
         end
@@ -84,6 +94,12 @@ module Comet
       end
       unless @allow_edit_remote_storage.nil?
         ret['AllowEditRemoteStorage'] = @allow_edit_remote_storage
+      end
+      unless @allow_edit_webhooks.nil?
+        ret['AllowEditWebhooks'] = @allow_edit_webhooks
+      end
+      unless @deny_constellation_role.nil?
+        ret['DenyConstellationRole'] = @deny_constellation_role
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

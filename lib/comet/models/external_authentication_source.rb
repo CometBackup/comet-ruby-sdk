@@ -46,6 +46,9 @@ module Comet
     # @type [Comet::AmazonAWSVirtualStorageRoleSettings] aws
     attr_accessor :aws
 
+    # @type [Comet::StorjVirtualStorageRoleSetting] storj
+    attr_accessor :storj
+
     # @type [Comet::AdminUserPermissions] new_user_permissions
     attr_accessor :new_user_permissions
 
@@ -68,6 +71,7 @@ module Comet
       @custom = Comet::CustomRemoteBucketSettings.new
       @s3 = Comet::S3GenericVirtualStorageRole.new
       @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
+      @storj = Comet::StorjVirtualStorageRoleSetting.new
       @new_user_permissions = Comet::AdminUserPermissions.new
       @unknown_json_fields = {}
     end
@@ -123,6 +127,9 @@ module Comet
         when 'AWS'
           @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
           @aws.from_hash(v)
+        when 'Storj'
+          @storj = Comet::StorjVirtualStorageRoleSetting.new
+          @storj.from_hash(v)
         when 'NewUserPermissions'
           @new_user_permissions = Comet::AdminUserPermissions.new
           @new_user_permissions.from_hash(v)
@@ -163,6 +170,9 @@ module Comet
       end
       unless @aws.nil?
         ret['AWS'] = @aws
+      end
+      unless @storj.nil?
+        ret['Storj'] = @storj
       end
       ret['NewUserPermissions'] = @new_user_permissions
       @unknown_json_fields.each do |k, v|

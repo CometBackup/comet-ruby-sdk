@@ -46,6 +46,9 @@ module Comet
     # @type [Comet::AmazonAWSVirtualStorageRoleSettings] aws
     attr_accessor :aws
 
+    # @type [Comet::StorjVirtualStorageRoleSetting] storj
+    attr_accessor :storj
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -65,6 +68,7 @@ module Comet
       @custom = Comet::CustomRemoteBucketSettings.new
       @s3 = Comet::S3GenericVirtualStorageRole.new
       @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
+      @storj = Comet::StorjVirtualStorageRoleSetting.new
       @unknown_json_fields = {}
     end
 
@@ -119,6 +123,9 @@ module Comet
         when 'AWS'
           @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
           @aws.from_hash(v)
+        when 'Storj'
+          @storj = Comet::StorjVirtualStorageRoleSetting.new
+          @storj.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -156,6 +163,9 @@ module Comet
       end
       unless @aws.nil?
         ret['AWS'] = @aws
+      end
+      unless @storj.nil?
+        ret['Storj'] = @storj
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

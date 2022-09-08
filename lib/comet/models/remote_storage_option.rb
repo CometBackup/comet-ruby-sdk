@@ -46,6 +46,9 @@ module Comet
     # @type [Comet::AmazonAWSVirtualStorageRoleSettings] aws
     attr_accessor :aws
 
+    # @type [Comet::StorjVirtualStorageRoleSetting] storj
+    attr_accessor :storj
+
     # @type [Boolean] storage_limit_enabled
     attr_accessor :storage_limit_enabled
 
@@ -74,6 +77,7 @@ module Comet
       @custom = Comet::CustomRemoteBucketSettings.new
       @s3 = Comet::S3GenericVirtualStorageRole.new
       @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
+      @storj = Comet::StorjVirtualStorageRoleSetting.new
       @storage_limit_bytes = 0
       @unknown_json_fields = {}
     end
@@ -129,6 +133,9 @@ module Comet
         when 'AWS'
           @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
           @aws.from_hash(v)
+        when 'Storj'
+          @storj = Comet::StorjVirtualStorageRoleSetting.new
+          @storj.from_hash(v)
         when 'StorageLimitEnabled'
           @storage_limit_enabled = v
         when 'StorageLimitBytes'
@@ -174,6 +181,9 @@ module Comet
       end
       unless @aws.nil?
         ret['AWS'] = @aws
+      end
+      unless @storj.nil?
+        ret['Storj'] = @storj
       end
       ret['StorageLimitEnabled'] = @storage_limit_enabled
       ret['StorageLimitBytes'] = @storage_limit_bytes

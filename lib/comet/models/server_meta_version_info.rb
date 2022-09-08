@@ -48,6 +48,12 @@ module Comet
     # @type [String] server_license_hash
     attr_accessor :server_license_hash
 
+    # @type [Boolean] server_license_features_all
+    attr_accessor :server_license_features_all
+
+    # @type [Number] server_license_feature_set
+    attr_accessor :server_license_feature_set
+
     # @type [Number] license_valid_until
     attr_accessor :license_valid_until
 
@@ -93,6 +99,7 @@ module Comet
       @server_start_hash = ''
       @current_time = 0
       @server_license_hash = ''
+      @server_license_feature_set = 0
       @license_valid_until = 0
       @emails_sent_successfully = 0
       @emails_sent_errors = 0
@@ -163,6 +170,12 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @server_license_hash = v
+        when 'ServerLicenseFeaturesAll'
+          @server_license_features_all = v
+        when 'ServerLicenseFeatureSet'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @server_license_feature_set = v
         when 'LicenseValidUntil'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -230,6 +243,8 @@ module Comet
       ret['ServerStartHash'] = @server_start_hash
       ret['CurrentTime'] = @current_time
       ret['ServerLicenseHash'] = @server_license_hash
+      ret['ServerLicenseFeaturesAll'] = @server_license_features_all
+      ret['ServerLicenseFeatureSet'] = @server_license_feature_set
       ret['LicenseValidUntil'] = @license_valid_until
       ret['EmailsSentSuccessfully'] = @emails_sent_successfully
       ret['EmailsSentErrors'] = @emails_sent_errors

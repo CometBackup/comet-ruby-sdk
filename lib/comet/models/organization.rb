@@ -27,6 +27,9 @@ module Comet
     # @type [Array<Comet::RemoteStorageOption>] remote_storage
     attr_accessor :remote_storage
 
+    # @type [Comet::ConstellationRoleOptions] constellation_role
+    attr_accessor :constellation_role
+
     # @type [Hash{String => Comet::WebhookOption}] webhook_options
     attr_accessor :webhook_options
 
@@ -49,6 +52,7 @@ module Comet
       @software_build_role = Comet::SoftwareBuildRoleOptions.new
       @branding = Comet::BrandingOptions.new
       @remote_storage = []
+      @constellation_role = Comet::ConstellationRoleOptions.new
       @webhook_options = {}
       @email = Comet::EmailOptions.new
       @unknown_json_fields = {}
@@ -98,6 +102,9 @@ module Comet
               @remote_storage[i1].from_hash(v1)
             end
           end
+        when 'ConstellationRole'
+          @constellation_role = Comet::ConstellationRoleOptions.new
+          @constellation_role.from_hash(v)
         when 'WebhookOptions'
           @webhook_options = {}
           if v.nil?
@@ -127,6 +134,7 @@ module Comet
       ret['SoftwareBuildRole'] = @software_build_role
       ret['Branding'] = @branding
       ret['RemoteStorage'] = @remote_storage
+      ret['ConstellationRole'] = @constellation_role
       ret['WebhookOptions'] = @webhook_options
       ret['Email'] = @email
       ret['IsSuspended'] = @is_suspended

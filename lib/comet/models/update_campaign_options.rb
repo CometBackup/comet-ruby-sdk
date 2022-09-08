@@ -12,7 +12,8 @@ module Comet
   # UpdateCampaignOptions is a typed class wrapper around the underlying Comet Server API data structure.
   # This data structure describes which devices should receive a remote software upgrade. Both the
 # target version criteria (UpgradeOlder/ReinstallCurrentVer/DowngradeNewer) and the target device
-# criteria (ApplyDeviceFilter/DeviceFilter) must be met in order for the remote upgrade to be applied.
+# criteria (ApplyDeviceFilter/DeviceFilter) must be met in order for the remote upgrade to be
+# applied.
   class UpdateCampaignOptions
 
     # @type [Boolean] active

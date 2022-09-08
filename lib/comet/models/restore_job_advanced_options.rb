@@ -36,6 +36,33 @@ module Comet
     # @type [Comet::Office365Credential] office_365credential
     attr_accessor :office_365credential
 
+    # @type [String] username
+    attr_accessor :username
+
+    # @type [String] password
+    attr_accessor :password
+
+    # @type [String] host
+    attr_accessor :host
+
+    # @type [String] port
+    attr_accessor :port
+
+    # @type [Boolean] use_ssl
+    attr_accessor :use_ssl
+
+    # @type [Boolean] ssl_allow_invalid
+    attr_accessor :ssl_allow_invalid
+
+    # @type [String] ssl_ca_file
+    attr_accessor :ssl_ca_file
+
+    # @type [String] ssl_crt_file
+    attr_accessor :ssl_crt_file
+
+    # @type [String] ssl_key_file
+    attr_accessor :ssl_key_file
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -49,6 +76,13 @@ module Comet
       @exact_dest_paths = []
       @archive_format = 0
       @office_365credential = Comet::Office365Credential.new
+      @username = ''
+      @password = ''
+      @host = ''
+      @port = ''
+      @ssl_ca_file = ''
+      @ssl_crt_file = ''
+      @ssl_key_file = ''
       @unknown_json_fields = {}
     end
 
@@ -97,6 +131,38 @@ module Comet
         when 'Office365Credential'
           @office_365credential = Comet::Office365Credential.new
           @office_365credential.from_hash(v)
+        when 'Username'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @username = v
+        when 'Password'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @password = v
+        when 'Host'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @host = v
+        when 'Port'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @port = v
+        when 'UseSsl'
+          @use_ssl = v
+        when 'SslAllowInvalid'
+          @ssl_allow_invalid = v
+        when 'SslCaFile'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @ssl_ca_file = v
+        when 'SslCrtFile'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @ssl_crt_file = v
+        when 'SslKeyFile'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @ssl_key_file = v
         else
           @unknown_json_fields[k] = v
         end
@@ -116,6 +182,15 @@ module Comet
       unless @office_365credential.nil?
         ret['Office365Credential'] = @office_365credential
       end
+      ret['Username'] = @username
+      ret['Password'] = @password
+      ret['Host'] = @host
+      ret['Port'] = @port
+      ret['UseSsl'] = @use_ssl
+      ret['SslAllowInvalid'] = @ssl_allow_invalid
+      ret['SslCaFile'] = @ssl_ca_file
+      ret['SslCrtFile'] = @ssl_crt_file
+      ret['SslKeyFile'] = @ssl_key_file
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

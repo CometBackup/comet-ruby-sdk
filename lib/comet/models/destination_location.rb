@@ -132,6 +132,9 @@ module Comet
     # @type [Comet::B2DestinationLocation] b2
     attr_accessor :b2
 
+    # @type [Comet::StorjDestinationLocation] storj
+    attr_accessor :storj
+
     # @type [Array<Comet::DestinationLocation>] span_targets
     attr_accessor :span_targets
 
@@ -181,6 +184,7 @@ module Comet
       @localcopy_win_smbpassword_format = 0
       @swift = Comet::SwiftDestinationLocation.new
       @b2 = Comet::B2DestinationLocation.new
+      @storj = Comet::StorjDestinationLocation.new
       @span_targets = []
       @unknown_json_fields = {}
     end
@@ -346,6 +350,9 @@ module Comet
         when 'B2'
           @b2 = Comet::B2DestinationLocation.new
           @b2.from_hash(v)
+        when 'Storj'
+          @storj = Comet::StorjDestinationLocation.new
+          @storj.from_hash(v)
         when 'SpanTargets'
           if v.nil?
             @span_targets = []
@@ -407,6 +414,7 @@ module Comet
       ret['LocalcopyWinSMBPasswordFormat'] = @localcopy_win_smbpassword_format
       ret['Swift'] = @swift
       ret['B2'] = @b2
+      ret['Storj'] = @storj
       ret['SpanTargets'] = @span_targets
       ret['SpanUseStaticSlots'] = @span_use_static_slots
       @unknown_json_fields.each do |k, v|

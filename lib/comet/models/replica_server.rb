@@ -46,6 +46,9 @@ module Comet
     # @type [Comet::AmazonAWSVirtualStorageRoleSettings] aws
     attr_accessor :aws
 
+    # @type [Comet::StorjVirtualStorageRoleSetting] storj
+    attr_accessor :storj
+
     # @type [String] replica_deletion_strategy
     attr_accessor :replica_deletion_strategy
 
@@ -68,6 +71,7 @@ module Comet
       @custom = Comet::CustomRemoteBucketSettings.new
       @s3 = Comet::S3GenericVirtualStorageRole.new
       @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
+      @storj = Comet::StorjVirtualStorageRoleSetting.new
       @replica_deletion_strategy = ''
       @unknown_json_fields = {}
     end
@@ -123,6 +127,9 @@ module Comet
         when 'AWS'
           @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
           @aws.from_hash(v)
+        when 'Storj'
+          @storj = Comet::StorjVirtualStorageRoleSetting.new
+          @storj.from_hash(v)
         when 'ReplicaDeletionStrategy'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -164,6 +171,9 @@ module Comet
       end
       unless @aws.nil?
         ret['AWS'] = @aws
+      end
+      unless @storj.nil?
+        ret['Storj'] = @storj
       end
       unless @replica_deletion_strategy.nil?
         ret['ReplicaDeletionStrategy'] = @replica_deletion_strategy

@@ -199,9 +199,9 @@ module Comet
     # @param [String] u2fclient_data U2F response data supplied by hardware token
     # @param [String] u2fregistration_data U2F response data supplied by hardware token
     # @param [String] u2fversion U2F response data supplied by hardware token
-    # @param [String] description Optional description of the token
+    # @param [String] description (Optional) Description of the token
     # @return [Comet::CometAPIResponseMessage]
-    def admin_account_u2f_submit_challenge_response(u2fchallenge_id, u2fclient_data, u2fregistration_data, u2fversion, description)
+    def admin_account_u2f_submit_challenge_response(u2fchallenge_id, u2fclient_data, u2fregistration_data, u2fversion, description = nil)
       submit_params = {}
       raise TypeError, "'u2fchallenge_id' expected String, got #{u2fchallenge_id.class}" unless u2fchallenge_id.is_a? String
 
@@ -215,9 +215,11 @@ module Comet
       raise TypeError, "'u2fversion' expected String, got #{u2fversion.class}" unless u2fversion.is_a? String
 
       submit_params['U2FVersion'] = u2fversion
-      raise TypeError, "'description' expected String, got #{description.class}" unless description.is_a? String
+      unless description.nil?
+        raise TypeError, "'description' expected String, got #{description.class}" unless description.is_a? String
 
-      submit_params['Description'] = description
+        submit_params['Description'] = description
+      end
 
       body = perform_request('api/v1/admin/account/u2f/submit-challenge-response', submit_params)
       json_body = JSON.parse body
@@ -815,7 +817,6 @@ module Comet
     # Get Constellation bucket usage report (cached).
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # This API requires the Constellation Role to be enabled.
     #
     # @return [Comet::ConstellationCheckReport]
@@ -833,7 +834,6 @@ module Comet
     # Get Constellation bucket usage report (regenerate).
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # This API requires the Constellation Role to be enabled.
     #
     # @return [Comet::ConstellationCheckReport]
@@ -869,7 +869,6 @@ module Comet
     # Get Constellation status.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
     # This API requires the Constellation Role to be enabled.
     #
     # @return [Comet::ConstellationStatusAPIResponse]
@@ -2521,6 +2520,46 @@ module Comet
       ret
     end
 
+    # AdminMetaConstellationConfigGet
+    #
+    # Get Constellation configuration for the current organization.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Constellation Role to be enabled.
+    #
+    # @return [Comet::ConstellationRoleOptions]
+    def admin_meta_constellation_config_get
+      body = perform_request('api/v1/admin/meta/constellation/config/get')
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::ConstellationRoleOptions.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminMetaConstellationConfigSet
+    #
+    # Set Constellation configuration for the current organization.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Constellation Role to be enabled.
+    #
+    # @param [Comet::ConstellationRoleOptions] constellation_role_options Constellation role options to set
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_meta_constellation_config_set(constellation_role_options)
+      submit_params = {}
+      raise TypeError, "'constellation_role_options' expected Comet::ConstellationRoleOptions, got #{constellation_role_options.class}" unless constellation_role_options.is_a? Comet::ConstellationRoleOptions
+
+      submit_params['ConstellationRoleOptions'] = constellation_role_options.to_json
+
+      body = perform_request('api/v1/admin/meta/constellation/config/set', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminMetaListAvailableLogDays
     #
     # Get log files.
@@ -3390,9 +3429,9 @@ module Comet
     #
     # @param [String] target_user Selected account username
     # @param [String] new_password New account password
-    # @param [String] old_password Old account password (optional)
+    # @param [String] old_password (Optional) Old account password. Required if no recovery code is present for the user account.
     # @return [Comet::CometAPIResponseMessage]
-    def admin_reset_user_password(target_user, new_password, old_password)
+    def admin_reset_user_password(target_user, new_password, old_password = nil)
       submit_params = {}
       raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
 
@@ -3400,9 +3439,11 @@ module Comet
       raise TypeError, "'new_password' expected String, got #{new_password.class}" unless new_password.is_a? String
 
       submit_params['NewPassword'] = new_password
-      raise TypeError, "'old_password' expected String, got #{old_password.class}" unless old_password.is_a? String
+      unless old_password.nil?
+        raise TypeError, "'old_password' expected String, got #{old_password.class}" unless old_password.is_a? String
 
-      submit_params['OldPassword'] = old_password
+        submit_params['OldPassword'] = old_password
+      end
 
       body = perform_request('api/v1/admin/reset-user-password', submit_params)
       json_body = JSON.parse body
