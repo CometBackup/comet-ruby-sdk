@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2022-12-09 v4.3.0
+## 2022-12-09 v2.3.0
 - Based on 22.11.1
 - Support getCode() on exceptions to retrieve internal error code
 - New features for PSAs, remote URLs and MS SQL Server restores.
