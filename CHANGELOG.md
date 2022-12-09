@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2022-12-09 v4.3.0
+- Based on 22.11.1
+- Support getCode() on exceptions to retrieve internal error code
+- New features for PSAs, remote URLs and MS SQL Server restores.
+- New features for exporting a self backup for single tenant.
+
 ## 2022-09-08 v2.2.0
 - Based on 22.9.0
 - Add Storj.io support as a Storage Vault Location and Storage Template provider
