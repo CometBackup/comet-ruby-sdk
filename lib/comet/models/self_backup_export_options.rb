@@ -9,17 +9,8 @@ require 'json'
 
 module Comet
 
-  # SelfBackupTarget is a typed class wrapper around the underlying Comet Server API data structure.
-  class SelfBackupTarget
-
-    # @type [Array<Comet::ScheduleConfig>] schedule
-    attr_accessor :schedule
-
-    # @type [String] schedule_timezone
-    attr_accessor :schedule_timezone
-
-    # @type [Comet::RetentionPolicy] retention_policy
-    attr_accessor :retention_policy
+  # SelfBackupExportOptions is a typed class wrapper around the underlying Comet Server API data structure.
+  class SelfBackupExportOptions
 
     # @type [Comet::DestinationLocation] location
     attr_accessor :location
@@ -50,9 +41,6 @@ module Comet
     end
 
     def clear
-      @schedule = []
-      @schedule_timezone = ''
-      @retention_policy = Comet::RetentionPolicy.new
       @location = Comet::DestinationLocation.new
       @encryption_key = ''
       @encryption_key_format = 0
@@ -75,23 +63,6 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Schedule'
-          if v.nil?
-            @schedule = []
-          else
-            @schedule = Array.new(v.length)
-            v.each_with_index do |v1, i1|
-              @schedule[i1] = Comet::ScheduleConfig.new
-              @schedule[i1].from_hash(v1)
-            end
-          end
-        when 'ScheduleTimezone'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @schedule_timezone = v
-        when 'RetentionPolicy'
-          @retention_policy = Comet::RetentionPolicy.new
-          @retention_policy.from_hash(v)
         when 'Location'
           @location = Comet::DestinationLocation.new
           @location.from_hash(v)
@@ -126,9 +97,6 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Schedule'] = @schedule
-      ret['ScheduleTimezone'] = @schedule_timezone
-      ret['RetentionPolicy'] = @retention_policy
       ret['Location'] = @location
       ret['EncryptionKey'] = @encryption_key
       ret['EncryptionKeyFormat'] = @encryption_key_format

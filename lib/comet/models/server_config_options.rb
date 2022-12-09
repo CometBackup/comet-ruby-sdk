@@ -18,6 +18,9 @@ module Comet
     # @type [Hash{String => Comet::WebhookOption}] webhook_options
     attr_accessor :webhook_options
 
+    # @type [Array<Comet::PSAConfig>] psaconfigs
+    attr_accessor :psaconfigs
+
     # @type [Comet::LicenseOptions] license
     attr_accessor :license
 
@@ -76,6 +79,7 @@ module Comet
     def clear
       @experimental_options = []
       @webhook_options = {}
+      @psaconfigs = []
       @license = Comet::LicenseOptions.new
       @branding = Comet::BrandingOptions.new
       @admin_users = []
@@ -126,6 +130,16 @@ module Comet
             v.each do |k1, v1|
               @webhook_options[k1] = Comet::WebhookOption.new
               @webhook_options[k1].from_hash(v1)
+            end
+          end
+        when 'PSAConfigs'
+          if v.nil?
+            @psaconfigs = []
+          else
+            @psaconfigs = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              @psaconfigs[i1] = Comet::PSAConfig.new
+              @psaconfigs[i1].from_hash(v1)
             end
           end
         when 'License'
@@ -216,6 +230,7 @@ module Comet
         ret['ExperimentalOptions'] = @experimental_options
       end
       ret['WebhookOptions'] = @webhook_options
+      ret['PSAConfigs'] = @psaconfigs
       ret['License'] = @license
       ret['Branding'] = @branding
       ret['AdminUsers'] = @admin_users

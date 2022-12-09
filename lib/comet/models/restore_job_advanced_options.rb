@@ -63,6 +63,9 @@ module Comet
     # @type [String] ssl_key_file
     attr_accessor :ssl_key_file
 
+    # @type [Comet::MSSQLLoginArgs] ms_sql_connection
+    attr_accessor :ms_sql_connection
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -83,6 +86,7 @@ module Comet
       @ssl_ca_file = ''
       @ssl_crt_file = ''
       @ssl_key_file = ''
+      @ms_sql_connection = Comet::MSSQLLoginArgs.new
       @unknown_json_fields = {}
     end
 
@@ -163,6 +167,9 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @ssl_key_file = v
+        when 'MsSqlConnection'
+          @ms_sql_connection = Comet::MSSQLLoginArgs.new
+          @ms_sql_connection.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -191,6 +198,9 @@ module Comet
       ret['SslCaFile'] = @ssl_ca_file
       ret['SslCrtFile'] = @ssl_crt_file
       ret['SslKeyFile'] = @ssl_key_file
+      unless @ms_sql_connection.nil?
+        ret['MsSqlConnection'] = @ms_sql_connection
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

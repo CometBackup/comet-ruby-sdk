@@ -33,11 +33,17 @@ module Comet
     # @type [Hash{String => Comet::WebhookOption}] webhook_options
     attr_accessor :webhook_options
 
+    # @type [Array<Comet::PSAConfig>] psaconfigs
+    attr_accessor :psaconfigs
+
     # @type [Comet::EmailOptions] email
     attr_accessor :email
 
     # @type [Boolean] is_suspended
     attr_accessor :is_suspended
+
+    # @type [Array<String>] experimental_options
+    attr_accessor :experimental_options
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -54,7 +60,9 @@ module Comet
       @remote_storage = []
       @constellation_role = Comet::ConstellationRoleOptions.new
       @webhook_options = {}
+      @psaconfigs = []
       @email = Comet::EmailOptions.new
+      @experimental_options = []
       @unknown_json_fields = {}
     end
 
@@ -115,11 +123,32 @@ module Comet
               @webhook_options[k1].from_hash(v1)
             end
           end
+        when 'PSAConfigs'
+          if v.nil?
+            @psaconfigs = []
+          else
+            @psaconfigs = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              @psaconfigs[i1] = Comet::PSAConfig.new
+              @psaconfigs[i1].from_hash(v1)
+            end
+          end
         when 'Email'
           @email = Comet::EmailOptions.new
           @email.from_hash(v)
         when 'IsSuspended'
           @is_suspended = v
+        when 'ExperimentalOptions'
+          if v.nil?
+            @experimental_options = []
+          else
+            @experimental_options = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+
+              @experimental_options[i1] = v1
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -136,8 +165,12 @@ module Comet
       ret['RemoteStorage'] = @remote_storage
       ret['ConstellationRole'] = @constellation_role
       ret['WebhookOptions'] = @webhook_options
+      ret['PSAConfigs'] = @psaconfigs
       ret['Email'] = @email
       ret['IsSuspended'] = @is_suspended
+      unless @experimental_options.nil?
+        ret['ExperimentalOptions'] = @experimental_options
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

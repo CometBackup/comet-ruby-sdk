@@ -540,6 +540,29 @@ module Comet
       perform_request('api/v1/admin/branding/generate-client/linuxgeneric', submit_params)
     end
 
+    # AdminBrandingGenerateClientMacosArm64
+    #
+    # Download software (macOS arm64 pkg).
+    #
+    # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
+    # This API requires the Software Build Role to be enabled.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
+    # @return [String]
+    def admin_branding_generate_client_macos_arm_64(self_address = nil)
+      submit_params = {}
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
+        raise TypeError, "'self_address' expected String, got #{self_address.class}" unless self_address.is_a? String
+
+        submit_params['SelfAddress'] = self_address
+      end
+
+      perform_request('api/v1/admin/branding/generate-client/macos-arm64', submit_params)
+    end
+
     # AdminBrandingGenerateClientMacosX8664
     #
     # Download software (macOS x86_64 pkg).
@@ -1148,6 +1171,30 @@ module Comet
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::EmailReportGeneratedPreview.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherGetDefaultLoginUrl
+    #
+    # Get the default login URL for a tenant.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    #
+    # @param [String] organization_id Target organization
+    # @return [Comet::OrganizationLoginURLResponse]
+    def admin_dispatcher_get_default_login_url(organization_id)
+      submit_params = {}
+      raise TypeError, "'organization_id' expected String, got #{organization_id.class}" unless organization_id.is_a? String
+
+      submit_params['OrganizationID'] = organization_id
+
+      body = perform_request('api/v1/admin/dispatcher/get-default-login-url', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::OrganizationLoginURLResponse.new
       ret.from_hash(json_body)
       ret
     end
@@ -2011,8 +2058,9 @@ module Comet
     #
     # @param [String] target_id The live connection GUID
     # @param [String] new_url The new external URL of this server
+    # @param [Boolean] force (Optional) No checks will be done using previous URL
     # @return [Comet::CometAPIResponseMessage]
-    def admin_dispatcher_update_login_url(target_id, new_url)
+    def admin_dispatcher_update_login_url(target_id, new_url, force = nil)
       submit_params = {}
       raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
 
@@ -2020,6 +2068,9 @@ module Comet
       raise TypeError, "'new_url' expected String, got #{new_url.class}" unless new_url.is_a? String
 
       submit_params['NewURL'] = new_url
+      unless force.nil?
+        submit_params['Force'] = (force ? 1 : 0)
+      end
 
       body = perform_request('api/v1/admin/dispatcher/update-login-url', submit_params)
       json_body = JSON.parse body
@@ -2585,6 +2636,69 @@ module Comet
       ret
     end
 
+    # AdminMetaPsaConfigListGet
+    #
+    # Get the server PSA configuration.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @return [Array<Comet::PSAConfig>]
+    def admin_meta_psa_config_list_get
+      body = perform_request('api/v1/admin/meta/psa-config-list/get')
+      json_body = JSON.parse body
+      check_status json_body
+      if json_body.nil?
+        ret = []
+      else
+        ret = Array.new(json_body.length)
+        json_body.each_with_index do |v, i|
+          ret[i] = Comet::PSAConfig.new
+          ret[i].from_hash(v)
+        end
+      end
+      ret
+    end
+
+    # AdminMetaPsaConfigListSet
+    #
+    # Update the server PSA configuration.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @param [Array<Comet::PSAConfig>] psaconfig_list The replacement PSA configuration list
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_meta_psa_config_list_set(psaconfig_list)
+      submit_params = {}
+      raise TypeError, "'psaconfig_list' expected Array, got #{psaconfig_list.class}" unless psaconfig_list.is_a? Array
+
+      submit_params['PSAConfigList'] = psaconfig_list.to_json
+
+      body = perform_request('api/v1/admin/meta/psa-config-list/set', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminMetaPsaConfigListSyncNow
+    #
+    # Synchronize all PSA services now.
+    # This API applies to the current Organization's PSAConfig's only.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_meta_psa_config_list_sync_now
+      body = perform_request('api/v1/admin/meta/psa-config-list/sync-now')
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminMetaReadAllLogs
     #
     # Get a ZIP file of all of the server's log files.
@@ -3062,6 +3176,29 @@ module Comet
       ret
     end
 
+    # AdminOrganizationExport
+    #
+    # Run self-backup for a specific tenant.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    #
+    # @param [Comet::SelfBackupExportOptions] options The export config options
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_organization_export(options)
+      submit_params = {}
+      raise TypeError, "'options' expected Comet::SelfBackupExportOptions, got #{options.class}" unless options.is_a? Comet::SelfBackupExportOptions
+
+      submit_params['Options'] = options.to_json
+
+      body = perform_request('api/v1/admin/organization/export', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminOrganizationList
     #
     # List Organizations.
@@ -3474,6 +3611,23 @@ module Comet
       submit_params['TargetDevice'] = target_device
 
       body = perform_request('api/v1/admin/revoke-device', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminSelfBackupStart
+    #
+    # Run self-backup on all targets.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    #
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_self_backup_start
+      body = perform_request('api/v1/admin/self-backup/start')
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::CometAPIResponseMessage.new
