@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2022 Comet Licensing Ltd.
+# Copyright (c) 2020-2023 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -63,6 +63,9 @@ module Comet
 
     # @type [Number] maximum_devices
     attr_accessor :maximum_devices
+
+    # @type [Number] quota_office_365protected_accounts
+    attr_accessor :quota_office_365protected_accounts
 
     # If the PolicyID field is set to a non-empty string, the Comet Server will enforce the contents of
     # the Policy field based on the matching server's policy. Otherwise if the PolicyID field is set to
@@ -129,6 +132,7 @@ module Comet
       @devices = {}
       @all_protected_items_quota_bytes = 0
       @maximum_devices = 0
+      @quota_office_365protected_accounts = 0
       @policy_id = ''
       @policy = Comet::UserPolicy.new
       @password_format = 0
@@ -250,6 +254,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @maximum_devices = v
+        when 'QuotaOffice365ProtectedAccounts'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @quota_office_365protected_accounts = v
         when 'PolicyID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -321,6 +329,7 @@ module Comet
       ret['AllProtectedItemsQuotaEnabled'] = @all_protected_items_quota_enabled
       ret['AllProtectedItemsQuotaBytes'] = @all_protected_items_quota_bytes
       ret['MaximumDevices'] = @maximum_devices
+      ret['QuotaOffice365ProtectedAccounts'] = @quota_office_365protected_accounts
       ret['PolicyID'] = @policy_id
       ret['Policy'] = @policy
       ret['PasswordFormat'] = @password_format

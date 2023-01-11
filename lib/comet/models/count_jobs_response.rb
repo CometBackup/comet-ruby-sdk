@@ -9,14 +9,11 @@ require 'json'
 
 module Comet
 
-  # DefaultSourceWithOSRestriction is a typed class wrapper around the underlying Comet Server API data structure.
-  class DefaultSourceWithOSRestriction
+  # CountJobsResponse is a typed class wrapper around the underlying Comet Server API data structure.
+  class CountJobsResponse
 
-    # @type [Comet::SourceConfig] source_config
-    attr_accessor :source_config
-
-    # @type [Number] restrict_os
-    attr_accessor :restrict_os
+    # @type [Number] count
+    attr_accessor :count
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -26,8 +23,7 @@ module Comet
     end
 
     def clear
-      @source_config = Comet::SourceConfig.new
-      @restrict_os = 0
+      @count = 0
       @unknown_json_fields = {}
     end
 
@@ -44,13 +40,10 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'SourceConfig'
-          @source_config = Comet::SourceConfig.new
-          @source_config.from_hash(v)
-        when 'RestrictOS'
+        when 'Count'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
-          @restrict_os = v
+          @count = v
         else
           @unknown_json_fields[k] = v
         end
@@ -60,8 +53,7 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['SourceConfig'] = @source_config
-      ret['RestrictOS'] = @restrict_os
+      ret['Count'] = @count
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

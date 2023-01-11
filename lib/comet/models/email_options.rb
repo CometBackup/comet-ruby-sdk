@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2022 Comet Licensing Ltd.
+# Copyright (c) 2020-2023 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -12,14 +12,17 @@ module Comet
   # EmailOptions is a typed class wrapper around the underlying Comet Server API data structure.
   class EmailOptions
 
-    # @type [String] mode
-    attr_accessor :mode
-
     # @type [String] from_email
     attr_accessor :from_email
 
     # @type [String] from_name
     attr_accessor :from_name
+
+    # @type [String] mode
+    attr_accessor :mode
+
+    # @type [Array<Comet::EmailReportingOption>] email_reporting_options
+    attr_accessor :email_reporting_options
 
     # @type [String] smtphost
     attr_accessor :smtphost
@@ -47,9 +50,10 @@ module Comet
     end
 
     def clear
-      @mode = ''
       @from_email = ''
       @from_name = ''
+      @mode = ''
+      @email_reporting_options = []
       @smtphost = ''
       @smtpport = 0
       @smtpusername = ''
@@ -70,10 +74,6 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Mode'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @mode = v
         when 'FromEmail'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -82,6 +82,20 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @from_name = v
+        when 'Mode'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @mode = v
+        when 'EmailReportingOptions'
+          if v.nil?
+            @email_reporting_options = []
+          else
+            @email_reporting_options = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              @email_reporting_options[i1] = Comet::EmailReportingOption.new
+              @email_reporting_options[i1].from_hash(v1)
+            end
+          end
         when 'SMTPHost'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -111,9 +125,12 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Mode'] = @mode
       ret['FromEmail'] = @from_email
       ret['FromName'] = @from_name
+      ret['Mode'] = @mode
+      unless @email_reporting_options.nil?
+        ret['EmailReportingOptions'] = @email_reporting_options
+      end
       unless @smtphost.nil?
         ret['SMTPHost'] = @smtphost
       end

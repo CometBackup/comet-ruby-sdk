@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2022 Comet Licensing Ltd.
+# Copyright (c) 2020-2023 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -900,6 +900,29 @@ module Comet
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::ConstellationStatusAPIResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminCountJobsForCustomSearch
+    #
+    # Count jobs (for custom search).
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [Comet::SearchClause] query (No description available)
+    # @return [Comet::CountJobsResponse]
+    def admin_count_jobs_for_custom_search(query)
+      submit_params = {}
+      raise TypeError, "'query' expected Comet::SearchClause, got #{query.class}" unless query.is_a? Comet::SearchClause
+
+      submit_params['Query'] = query.to_json
+
+      body = perform_request('api/v1/admin/count-jobs-for-custom-search', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CountJobsResponse.new
       ret.from_hash(json_body)
       ret
     end
@@ -2611,6 +2634,44 @@ module Comet
       ret
     end
 
+    # AdminMetaEmailOptionsGet
+    #
+    # Get the email options.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @return [Comet::EmailOptions]
+    def admin_meta_email_options_get
+      body = perform_request('api/v1/admin/meta/email-options/get')
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::EmailOptions.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminMetaEmailOptionsSet
+    #
+    # Set the email options.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @param [Comet::EmailOptions] email_options The replacement email reporting options.
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_meta_email_options_set(email_options)
+      submit_params = {}
+      raise TypeError, "'email_options' expected Comet::EmailOptions, got #{email_options.class}" unless email_options.is_a? Comet::EmailOptions
+
+      submit_params['EmailOptions'] = email_options.to_json
+
+      body = perform_request('api/v1/admin/meta/email-options/set', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminMetaListAvailableLogDays
     #
     # Get log files.
@@ -2850,8 +2911,6 @@ module Comet
     # This allows the Comet Server web interface to support testing different email credentials during setup.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
-    # Access to this API may be prevented on a per-administrator basis.
     #
     # @param [Comet::EmailOptions] email_options Updated configuration content
     # @param [String] recipient Target email address to send test email
@@ -2866,6 +2925,29 @@ module Comet
       submit_params['Recipient'] = recipient
 
       body = perform_request('api/v1/admin/meta/send-test-email', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminMetaSendTestReport
+    #
+    # Send a test admin email report.
+    # This allows a user to send a test email report
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @param [Comet::EmailReportingOption] email_reporting_option Test email reporting option for sending
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_meta_send_test_report(email_reporting_option)
+      submit_params = {}
+      raise TypeError, "'email_reporting_option' expected Comet::EmailReportingOption, got #{email_reporting_option.class}" unless email_reporting_option.is_a? Comet::EmailReportingOption
+
+      submit_params['EmailReportingOption'] = email_reporting_option.to_json
+
+      body = perform_request('api/v1/admin/meta/send-test-report', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::CometAPIResponseMessage.new

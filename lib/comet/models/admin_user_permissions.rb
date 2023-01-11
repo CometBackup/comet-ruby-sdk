@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2022 Comet Licensing Ltd.
+# Copyright (c) 2020-2023 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -23,6 +23,9 @@ module Comet
 
     # @type [Boolean] allow_edit_branding
     attr_accessor :allow_edit_branding
+
+    # @type [Boolean] allow_edit_email_options
+    attr_accessor :allow_edit_email_options
 
     # @type [Boolean] allow_edit_remote_storage
     attr_accessor :allow_edit_remote_storage
@@ -65,6 +68,8 @@ module Comet
           @prevent_change_password = v
         when 'AllowEditBranding'
           @allow_edit_branding = v
+        when 'AllowEditEmailOptions'
+          @allow_edit_email_options = v
         when 'AllowEditRemoteStorage'
           @allow_edit_remote_storage = v
         when 'AllowEditWebhooks'
@@ -91,6 +96,9 @@ module Comet
       end
       unless @allow_edit_branding.nil?
         ret['AllowEditBranding'] = @allow_edit_branding
+      end
+      unless @allow_edit_email_options.nil?
+        ret['AllowEditEmailOptions'] = @allow_edit_email_options
       end
       unless @allow_edit_remote_storage.nil?
         ret['AllowEditRemoteStorage'] = @allow_edit_remote_storage

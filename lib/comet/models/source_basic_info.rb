@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2022 Comet Licensing Ltd.
+# Copyright (c) 2020-2023 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -14,6 +14,9 @@ module Comet
 
     # @type [String] description
     attr_accessor :description
+
+    # @type [Number] o365account_count
+    attr_accessor :o365account_count
 
     # @type [Number] size
     attr_accessor :size
@@ -30,6 +33,7 @@ module Comet
 
     def clear
       @description = ''
+      @o365account_count = 0
       @size = 0
       @override_destination_retention = {}
       @unknown_json_fields = {}
@@ -52,6 +56,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @description = v
+        when 'O365AccountCount'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @o365account_count = v
         when 'Size'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -76,6 +84,7 @@ module Comet
     def to_hash
       ret = {}
       ret['Description'] = @description
+      ret['O365AccountCount'] = @o365account_count
       ret['Size'] = @size
       unless @override_destination_retention.nil?
         ret['OverrideDestinationRetention'] = @override_destination_retention

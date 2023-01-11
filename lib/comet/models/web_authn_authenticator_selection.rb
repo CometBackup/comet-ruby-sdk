@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2022 Comet Licensing Ltd.
+# Copyright (c) 2020-2023 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -18,6 +18,9 @@ module Comet
     # @type [Boolean] require_resident_key
     attr_accessor :require_resident_key
 
+    # @type [String] resident_key
+    attr_accessor :resident_key
+
     # @type [String] user_verification
     attr_accessor :user_verification
 
@@ -30,6 +33,7 @@ module Comet
 
     def clear
       @authenticator_attachment = ''
+      @resident_key = ''
       @user_verification = ''
       @unknown_json_fields = {}
     end
@@ -53,6 +57,10 @@ module Comet
           @authenticator_attachment = v
         when 'requireResidentKey'
           @require_resident_key = v
+        when 'residentKey'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @resident_key = v
         when 'userVerification'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -71,6 +79,9 @@ module Comet
       end
       unless @require_resident_key.nil?
         ret['requireResidentKey'] = @require_resident_key
+      end
+      unless @resident_key.nil?
+        ret['residentKey'] = @resident_key
       end
       unless @user_verification.nil?
         ret['userVerification'] = @user_verification

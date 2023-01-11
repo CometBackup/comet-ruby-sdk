@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2022 Comet Licensing Ltd.
+# Copyright (c) 2020-2023 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -12,50 +12,14 @@ module Comet
   # ServerConfigOptions is a typed class wrapper around the underlying Comet Server API data structure.
   class ServerConfigOptions
 
-    # @type [Array<String>] experimental_options
-    attr_accessor :experimental_options
-
-    # @type [Hash{String => Comet::WebhookOption}] webhook_options
-    attr_accessor :webhook_options
-
-    # @type [Array<Comet::PSAConfig>] psaconfigs
-    attr_accessor :psaconfigs
-
-    # @type [Comet::LicenseOptions] license
-    attr_accessor :license
-
-    # @type [Comet::BrandingOptions] branding
-    attr_accessor :branding
-
     # @type [Array<Comet::AllowedAdminUser>] admin_users
     attr_accessor :admin_users
-
-    # @type [Hash{String => Comet::Organization}] organizations
-    attr_accessor :organizations
-
-    # @type [Hash{String => Comet::ExternalAuthenticationSource}] external_admin_user_sources
-    attr_accessor :external_admin_user_sources
-
-    # @type [Array<Comet::HTTPConnectorOptions>] listen_addresses
-    attr_accessor :listen_addresses
-
-    # @type [Boolean] trust_xforwarded_for
-    attr_accessor :trust_xforwarded_for
-
-    # @type [Comet::RatelimitOptions] iprate_limit
-    attr_accessor :iprate_limit
-
-    # @type [Comet::EmailOptions] email
-    attr_accessor :email
 
     # @type [Comet::AuthenticationRoleOptions] authentication_role
     attr_accessor :authentication_role
 
-    # @type [Comet::StorageRoleOptions] storage_role
-    attr_accessor :storage_role
-
-    # @type [Comet::SoftwareBuildRoleOptions] software_build_role
-    attr_accessor :software_build_role
+    # @type [Comet::BrandingOptions] branding
+    attr_accessor :branding
 
     # @type [Comet::ConstellationRoleOptions] constellation_role
     attr_accessor :constellation_role
@@ -63,11 +27,47 @@ module Comet
     # @type [Comet::ConstellationRoleOptions] constellation_role__legacy
     attr_accessor :constellation_role__legacy
 
+    # @type [Comet::EmailOptions] email
+    attr_accessor :email
+
+    # @type [Array<String>] experimental_options
+    attr_accessor :experimental_options
+
+    # @type [Hash{String => Comet::ExternalAuthenticationSource}] external_admin_user_sources
+    attr_accessor :external_admin_user_sources
+
+    # @type [Comet::RatelimitOptions] iprate_limit
+    attr_accessor :iprate_limit
+
+    # @type [Comet::LicenseOptions] license
+    attr_accessor :license
+
+    # @type [Array<Comet::HTTPConnectorOptions>] listen_addresses
+    attr_accessor :listen_addresses
+
+    # @type [Hash{String => Comet::Organization}] organizations
+    attr_accessor :organizations
+
+    # @type [Array<Comet::PSAConfig>] psaconfigs
+    attr_accessor :psaconfigs
+
     # @type [Comet::SelfBackupOptions] self_backup
     attr_accessor :self_backup
 
     # @type [Comet::SessionOptions] session_settings
     attr_accessor :session_settings
+
+    # @type [Comet::SoftwareBuildRoleOptions] software_build_role
+    attr_accessor :software_build_role
+
+    # @type [Comet::StorageRoleOptions] storage_role
+    attr_accessor :storage_role
+
+    # @type [Boolean] trust_xforwarded_for
+    attr_accessor :trust_xforwarded_for
+
+    # @type [Hash{String => Comet::WebhookOption}] webhook_options
+    attr_accessor :webhook_options
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -77,24 +77,24 @@ module Comet
     end
 
     def clear
-      @experimental_options = []
-      @webhook_options = {}
-      @psaconfigs = []
-      @license = Comet::LicenseOptions.new
-      @branding = Comet::BrandingOptions.new
       @admin_users = []
-      @organizations = {}
-      @external_admin_user_sources = {}
-      @listen_addresses = []
-      @iprate_limit = Comet::RatelimitOptions.new
-      @email = Comet::EmailOptions.new
       @authentication_role = Comet::AuthenticationRoleOptions.new
-      @storage_role = Comet::StorageRoleOptions.new
-      @software_build_role = Comet::SoftwareBuildRoleOptions.new
+      @branding = Comet::BrandingOptions.new
       @constellation_role = Comet::ConstellationRoleOptions.new
       @constellation_role__legacy = Comet::ConstellationRoleOptions.new
+      @email = Comet::EmailOptions.new
+      @experimental_options = []
+      @external_admin_user_sources = {}
+      @iprate_limit = Comet::RatelimitOptions.new
+      @license = Comet::LicenseOptions.new
+      @listen_addresses = []
+      @organizations = {}
+      @psaconfigs = []
       @self_backup = Comet::SelfBackupOptions.new
       @session_settings = Comet::SessionOptions.new
+      @software_build_role = Comet::SoftwareBuildRoleOptions.new
+      @storage_role = Comet::StorageRoleOptions.new
+      @webhook_options = {}
       @unknown_json_fields = {}
     end
 
@@ -111,43 +111,6 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'ExperimentalOptions'
-          if v.nil?
-            @experimental_options = []
-          else
-            @experimental_options = Array.new(v.length)
-            v.each_with_index do |v1, i1|
-              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
-
-              @experimental_options[i1] = v1
-            end
-          end
-        when 'WebhookOptions'
-          @webhook_options = {}
-          if v.nil?
-            @webhook_options = {}
-          else
-            v.each do |k1, v1|
-              @webhook_options[k1] = Comet::WebhookOption.new
-              @webhook_options[k1].from_hash(v1)
-            end
-          end
-        when 'PSAConfigs'
-          if v.nil?
-            @psaconfigs = []
-          else
-            @psaconfigs = Array.new(v.length)
-            v.each_with_index do |v1, i1|
-              @psaconfigs[i1] = Comet::PSAConfig.new
-              @psaconfigs[i1].from_hash(v1)
-            end
-          end
-        when 'License'
-          @license = Comet::LicenseOptions.new
-          @license.from_hash(v)
-        when 'Branding'
-          @branding = Comet::BrandingOptions.new
-          @branding.from_hash(v)
         when 'AdminUsers'
           if v.nil?
             @admin_users = []
@@ -158,14 +121,30 @@ module Comet
               @admin_users[i1].from_hash(v1)
             end
           end
-        when 'Organizations'
-          @organizations = {}
+        when 'AuthenticationRole'
+          @authentication_role = Comet::AuthenticationRoleOptions.new
+          @authentication_role.from_hash(v)
+        when 'Branding'
+          @branding = Comet::BrandingOptions.new
+          @branding.from_hash(v)
+        when 'ConstellationRole'
+          @constellation_role = Comet::ConstellationRoleOptions.new
+          @constellation_role.from_hash(v)
+        when 'OverseerRole'
+          @constellation_role__legacy = Comet::ConstellationRoleOptions.new
+          @constellation_role__legacy.from_hash(v)
+        when 'Email'
+          @email = Comet::EmailOptions.new
+          @email.from_hash(v)
+        when 'ExperimentalOptions'
           if v.nil?
-            @organizations = {}
+            @experimental_options = []
           else
-            v.each do |k1, v1|
-              @organizations[k1] = Comet::Organization.new
-              @organizations[k1].from_hash(v1)
+            @experimental_options = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+
+              @experimental_options[i1] = v1
             end
           end
         when 'ExternalAdminUserSources'
@@ -178,6 +157,12 @@ module Comet
               @external_admin_user_sources[k1].from_hash(v1)
             end
           end
+        when 'IPRateLimit'
+          @iprate_limit = Comet::RatelimitOptions.new
+          @iprate_limit.from_hash(v)
+        when 'License'
+          @license = Comet::LicenseOptions.new
+          @license.from_hash(v)
         when 'ListenAddresses'
           if v.nil?
             @listen_addresses = []
@@ -188,35 +173,50 @@ module Comet
               @listen_addresses[i1].from_hash(v1)
             end
           end
-        when 'TrustXForwardedFor'
-          @trust_xforwarded_for = v
-        when 'IPRateLimit'
-          @iprate_limit = Comet::RatelimitOptions.new
-          @iprate_limit.from_hash(v)
-        when 'Email'
-          @email = Comet::EmailOptions.new
-          @email.from_hash(v)
-        when 'AuthenticationRole'
-          @authentication_role = Comet::AuthenticationRoleOptions.new
-          @authentication_role.from_hash(v)
-        when 'StorageRole'
-          @storage_role = Comet::StorageRoleOptions.new
-          @storage_role.from_hash(v)
-        when 'SoftwareBuildRole'
-          @software_build_role = Comet::SoftwareBuildRoleOptions.new
-          @software_build_role.from_hash(v)
-        when 'ConstellationRole'
-          @constellation_role = Comet::ConstellationRoleOptions.new
-          @constellation_role.from_hash(v)
-        when 'OverseerRole'
-          @constellation_role__legacy = Comet::ConstellationRoleOptions.new
-          @constellation_role__legacy.from_hash(v)
+        when 'Organizations'
+          @organizations = {}
+          if v.nil?
+            @organizations = {}
+          else
+            v.each do |k1, v1|
+              @organizations[k1] = Comet::Organization.new
+              @organizations[k1].from_hash(v1)
+            end
+          end
+        when 'PSAConfigs'
+          if v.nil?
+            @psaconfigs = []
+          else
+            @psaconfigs = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              @psaconfigs[i1] = Comet::PSAConfig.new
+              @psaconfigs[i1].from_hash(v1)
+            end
+          end
         when 'SelfBackup'
           @self_backup = Comet::SelfBackupOptions.new
           @self_backup.from_hash(v)
         when 'SessionSettings'
           @session_settings = Comet::SessionOptions.new
           @session_settings.from_hash(v)
+        when 'SoftwareBuildRole'
+          @software_build_role = Comet::SoftwareBuildRoleOptions.new
+          @software_build_role.from_hash(v)
+        when 'StorageRole'
+          @storage_role = Comet::StorageRoleOptions.new
+          @storage_role.from_hash(v)
+        when 'TrustXForwardedFor'
+          @trust_xforwarded_for = v
+        when 'WebhookOptions'
+          @webhook_options = {}
+          if v.nil?
+            @webhook_options = {}
+          else
+            v.each do |k1, v1|
+              @webhook_options[k1] = Comet::WebhookOption.new
+              @webhook_options[k1].from_hash(v1)
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -226,29 +226,29 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      unless @experimental_options.nil?
-        ret['ExperimentalOptions'] = @experimental_options
-      end
-      ret['WebhookOptions'] = @webhook_options
-      ret['PSAConfigs'] = @psaconfigs
-      ret['License'] = @license
-      ret['Branding'] = @branding
       ret['AdminUsers'] = @admin_users
-      ret['Organizations'] = @organizations
-      ret['ExternalAdminUserSources'] = @external_admin_user_sources
-      ret['ListenAddresses'] = @listen_addresses
-      ret['TrustXForwardedFor'] = @trust_xforwarded_for
-      ret['IPRateLimit'] = @iprate_limit
-      ret['Email'] = @email
       ret['AuthenticationRole'] = @authentication_role
-      ret['StorageRole'] = @storage_role
-      ret['SoftwareBuildRole'] = @software_build_role
+      ret['Branding'] = @branding
       ret['ConstellationRole'] = @constellation_role
       unless @constellation_role__legacy.nil?
         ret['OverseerRole'] = @constellation_role__legacy
       end
+      ret['Email'] = @email
+      unless @experimental_options.nil?
+        ret['ExperimentalOptions'] = @experimental_options
+      end
+      ret['ExternalAdminUserSources'] = @external_admin_user_sources
+      ret['IPRateLimit'] = @iprate_limit
+      ret['License'] = @license
+      ret['ListenAddresses'] = @listen_addresses
+      ret['Organizations'] = @organizations
+      ret['PSAConfigs'] = @psaconfigs
       ret['SelfBackup'] = @self_backup
       ret['SessionSettings'] = @session_settings
+      ret['SoftwareBuildRole'] = @software_build_role
+      ret['StorageRole'] = @storage_role
+      ret['TrustXForwardedFor'] = @trust_xforwarded_for
+      ret['WebhookOptions'] = @webhook_options
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

@@ -9,17 +9,20 @@ require 'json'
 
 module Comet
 
-  # WebhookOption is a typed class wrapper around the underlying Comet Server API data structure.
-  class WebhookOption
+  # EmailReportingOption is a typed class wrapper around the underlying Comet Server API data structure.
+  class EmailReportingOption
 
-    # @type [String] url
-    attr_accessor :url
+    # @type [Comet::EmailReportConfig] email_report_config
+    attr_accessor :email_report_config
 
-    # @type [Array<Number>] white_listed_event_types
-    attr_accessor :white_listed_event_types
+    # @type [String] language_code
+    attr_accessor :language_code
 
-    # @type [Hash{String => String}] custom_headers
-    attr_accessor :custom_headers
+    # @type [String] local_timezone
+    attr_accessor :local_timezone
+
+    # @type [Array<String>] recipients
+    attr_accessor :recipients
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -29,9 +32,10 @@ module Comet
     end
 
     def clear
-      @url = ''
-      @white_listed_event_types = []
-      @custom_headers = {}
+      @email_report_config = Comet::EmailReportConfig.new
+      @language_code = ''
+      @local_timezone = ''
+      @recipients = []
       @unknown_json_fields = {}
     end
 
@@ -48,30 +52,26 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'URL'
+        when 'EmailReportConfig'
+          @email_report_config = Comet::EmailReportConfig.new
+          @email_report_config.from_hash(v)
+        when 'LanguageCode'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @url = v
-        when 'WhiteListedEventTypes'
-          if v.nil?
-            @white_listed_event_types = []
-          else
-            @white_listed_event_types = Array.new(v.length)
-            v.each_with_index do |v1, i1|
-              raise TypeError, "'v1' expected Numeric, got #{v1.class}" unless v1.is_a? Numeric
+          @language_code = v
+        when 'LocalTimezone'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-              @white_listed_event_types[i1] = v1
-            end
-          end
-        when 'CustomHeaders'
-          @custom_headers = {}
+          @local_timezone = v
+        when 'Recipients'
           if v.nil?
-            @custom_headers = {}
+            @recipients = []
           else
-            v.each do |k1, v1|
+            @recipients = Array.new(v.length)
+            v.each_with_index do |v1, i1|
               raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
-              @custom_headers[k1] = v1
+              @recipients[i1] = v1
             end
           end
         else
@@ -83,9 +83,10 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['URL'] = @url
-      ret['WhiteListedEventTypes'] = @white_listed_event_types
-      ret['CustomHeaders'] = @custom_headers
+      ret['EmailReportConfig'] = @email_report_config
+      ret['LanguageCode'] = @language_code
+      ret['LocalTimezone'] = @local_timezone
+      ret['Recipients'] = @recipients
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2022 Comet Licensing Ltd.
+# Copyright (c) 2020-2023 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -481,15 +481,15 @@ module Comet
 
   DEFAULT_TIMEZONE = 'UTC'
 
-  APPLICATION_VERSION = '22.11.2'
+  APPLICATION_VERSION = '22.12.2'
 
   APPLICATION_VERSION_MAJOR = 22
 
-  APPLICATION_VERSION_MINOR = 11
+  APPLICATION_VERSION_MINOR = 12
 
   APPLICATION_VERSION_REVISION = 2
 
-  RELEASE_CODENAME = 'Ananke'
+  RELEASE_CODENAME = 'Voyager'
 
   ENCRYPTIONMETHOD_UNCONFIGURED = 0
 
@@ -639,7 +639,7 @@ module Comet
   SEARCHOPERATOR_BOOL_NIS = 'bool_nis'
 
   # EmailDeliveryType:
-  EMAIL_DELIVERY_NONE = ''
+  EMAIL_DELIVERY_INHERIT = ''
 
   # EmailDeliveryType:
   EMAIL_DELIVERY_MX_DIRECT = 'builtin'
@@ -650,8 +650,15 @@ module Comet
   # EmailDeliveryType:
   EMAIL_DELIVERY_SMTP_SSL = 'smtp-ssl'
 
+  # EmailDeliveryType:
+  EMAIL_DELIVERY_DISABLED = 'disabled'
+
   # EmailDeliveryType: Legacy alias
   EMAIL_DELIVERY_BUILTIN = EMAIL_DELIVERY_MX_DIRECT
+
+  # EmailDeliveryType: changed for clarity
+  # @deprecated This const has been deprecated since Comet version 22.12.1
+  EMAIL_DELIVERY_NONE = EMAIL_DELIVERY_INHERIT
 
   # RemoteServerType:
   REMOTESERVER_COMET = 'comet'

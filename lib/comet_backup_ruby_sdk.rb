@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2022 Comet Licensing Ltd.
+# Copyright (c) 2020-2023 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -49,6 +49,7 @@ require_relative 'comet/models/constellation_stats'
 require_relative 'comet/models/constellation_status_apiresponse'
 require_relative 'comet/models/content_measurement'
 require_relative 'comet/models/content_measurement_component'
+require_relative 'comet/models/count_jobs_response'
 require_relative 'comet/models/create_group_policy_response'
 require_relative 'comet/models/custom_remote_bucket_settings'
 require_relative 'comet/models/days_of_week_config'
@@ -67,6 +68,7 @@ require_relative 'comet/models/edbfile_info'
 require_relative 'comet/models/email_options'
 require_relative 'comet/models/email_report_config'
 require_relative 'comet/models/email_report_generated_preview'
+require_relative 'comet/models/email_reporting_option'
 require_relative 'comet/models/external_authentication_source'
 require_relative 'comet/models/external_ldapauthentication_source_server'
 require_relative 'comet/models/external_ldapauthentication_source_settings'
