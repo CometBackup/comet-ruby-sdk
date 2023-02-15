@@ -55,6 +55,9 @@ module Comet
     # @type [Boolean] is_suspended
     attr_accessor :is_suspended
 
+    # @type [Number] last_suspended
+    attr_accessor :last_suspended
+
     # @type [Boolean] all_protected_items_quota_enabled
     attr_accessor :all_protected_items_quota_enabled
 
@@ -130,6 +133,7 @@ module Comet
       @sources = {}
       @backup_rules = {}
       @devices = {}
+      @last_suspended = 0
       @all_protected_items_quota_bytes = 0
       @maximum_devices = 0
       @quota_office_365protected_accounts = 0
@@ -244,6 +248,10 @@ module Comet
           end
         when 'IsSuspended'
           @is_suspended = v
+        when 'LastSuspended'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @last_suspended = v
         when 'AllProtectedItemsQuotaEnabled'
           @all_protected_items_quota_enabled = v
         when 'AllProtectedItemsQuotaBytes'
@@ -326,6 +334,9 @@ module Comet
       ret['BackupRules'] = @backup_rules
       ret['Devices'] = @devices
       ret['IsSuspended'] = @is_suspended
+      unless @last_suspended.nil?
+        ret['LastSuspended'] = @last_suspended
+      end
       ret['AllProtectedItemsQuotaEnabled'] = @all_protected_items_quota_enabled
       ret['AllProtectedItemsQuotaBytes'] = @all_protected_items_quota_bytes
       ret['MaximumDevices'] = @maximum_devices

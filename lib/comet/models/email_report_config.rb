@@ -18,6 +18,9 @@ module Comet
     # @type [Array<Comet::ScheduleConfig>] summary_frequency
     attr_accessor :summary_frequency
 
+    # @type [Comet::TimeSpan] time_span
+    attr_accessor :time_span
+
     # @type [Comet::SearchClause] filter
     attr_accessor :filter
 
@@ -31,6 +34,7 @@ module Comet
     def clear
       @report_type = 0
       @summary_frequency = []
+      @time_span = Comet::TimeSpan.new
       @filter = Comet::SearchClause.new
       @unknown_json_fields = {}
     end
@@ -62,6 +66,9 @@ module Comet
               @summary_frequency[i1].from_hash(v1)
             end
           end
+        when 'TimeSpan'
+          @time_span = Comet::TimeSpan.new
+          @time_span.from_hash(v)
         when 'Filter'
           @filter = Comet::SearchClause.new
           @filter.from_hash(v)
@@ -76,6 +83,9 @@ module Comet
       ret = {}
       ret['ReportType'] = @report_type
       ret['SummaryFrequency'] = @summary_frequency
+      unless @time_span.nil?
+        ret['TimeSpan'] = @time_span
+      end
       ret['Filter'] = @filter
       @unknown_json_fields.each do |k, v|
         ret[k] = v

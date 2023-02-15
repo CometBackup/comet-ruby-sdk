@@ -9,23 +9,14 @@ require 'json'
 
 module Comet
 
-  # PSAConfig is a typed class wrapper around the underlying Comet Server API data structure.
-  class PSAConfig
+  # TimeSpan is a typed class wrapper around the underlying Comet Server API data structure.
+  class TimeSpan
 
-    # @type [Boolean] alerts_disabled
-    attr_accessor :alerts_disabled
+    # @type [Number] frequency_type
+    attr_accessor :frequency_type
 
-    # @type [Hash{String => String}] custom_headers
-    attr_accessor :custom_headers
-
-    # @type [String] partner_key
-    attr_accessor :partner_key
-
-    # @type [Number] type
-    attr_accessor :type
-
-    # @type [String] url
-    attr_accessor :url
+    # @type [Number] seconds
+    attr_accessor :seconds
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -35,10 +26,8 @@ module Comet
     end
 
     def clear
-      @custom_headers = {}
-      @partner_key = ''
-      @type = 0
-      @url = ''
+      @frequency_type = 0
+      @seconds = 0
       @unknown_json_fields = {}
     end
 
@@ -55,31 +44,14 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'AlertsDisabled'
-          @alerts_disabled = v
-        when 'CustomHeaders'
-          @custom_headers = {}
-          if v.nil?
-            @custom_headers = {}
-          else
-            v.each do |k1, v1|
-              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
-
-              @custom_headers[k1] = v1
-            end
-          end
-        when 'PartnerKey'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @partner_key = v
-        when 'Type'
+        when 'FrequencyType'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
-          @type = v
-        when 'URL'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+          @frequency_type = v
+        when 'Seconds'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
-          @url = v
+          @seconds = v
         else
           @unknown_json_fields[k] = v
         end
@@ -89,15 +61,8 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['AlertsDisabled'] = @alerts_disabled
-      unless @custom_headers.nil?
-        ret['CustomHeaders'] = @custom_headers
-      end
-      unless @partner_key.nil?
-        ret['PartnerKey'] = @partner_key
-      end
-      ret['Type'] = @type
-      ret['URL'] = @url
+      ret['FrequencyType'] = @frequency_type
+      ret['Seconds'] = @seconds
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

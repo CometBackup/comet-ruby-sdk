@@ -28,6 +28,7 @@ module Comet
     attr_accessor :authentication_db
 
     # @type [String] mongo_shell_path
+    # @deprecated This member has been deprecated since Comet version 22.12.3
     attr_accessor :mongo_shell_path
 
     # @type [String] mongodump_path

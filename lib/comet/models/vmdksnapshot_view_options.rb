@@ -21,6 +21,9 @@ module Comet
     # @type [String] list_path
     attr_accessor :list_path
 
+    # @type [String] partition_name
+    attr_accessor :partition_name
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -31,6 +34,7 @@ module Comet
     def clear
       @partition_guid = ''
       @list_path = ''
+      @partition_name = ''
       @unknown_json_fields = {}
     end
 
@@ -57,6 +61,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @list_path = v
+        when 'PartitionName'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @partition_name = v
         else
           @unknown_json_fields[k] = v
         end
@@ -69,6 +77,7 @@ module Comet
       ret['Enabled'] = @enabled
       ret['PartitionGUID'] = @partition_guid
       ret['ListPath'] = @list_path
+      ret['PartitionName'] = @partition_name
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

@@ -9,23 +9,23 @@ require 'json'
 
 module Comet
 
-  # PSAConfig is a typed class wrapper around the underlying Comet Server API data structure.
-  class PSAConfig
+  # SingleFieldSource is a typed class wrapper around the underlying Comet Server API data structure.
+  class SingleFieldSource
 
-    # @type [Boolean] alerts_disabled
-    attr_accessor :alerts_disabled
+    # @type [String] field_name
+    attr_accessor :field_name
 
-    # @type [Hash{String => String}] custom_headers
-    attr_accessor :custom_headers
+    # @type [String] field_type
+    attr_accessor :field_type
 
-    # @type [String] partner_key
-    attr_accessor :partner_key
+    # @type [Boolean] bool_val
+    attr_accessor :bool_val
 
-    # @type [Number] type
-    attr_accessor :type
+    # @type [Number] int_val
+    attr_accessor :int_val
 
-    # @type [String] url
-    attr_accessor :url
+    # @type [String] str_val
+    attr_accessor :str_val
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -35,10 +35,10 @@ module Comet
     end
 
     def clear
-      @custom_headers = {}
-      @partner_key = ''
-      @type = 0
-      @url = ''
+      @field_name = ''
+      @field_type = ''
+      @int_val = 0
+      @str_val = ''
       @unknown_json_fields = {}
     end
 
@@ -55,31 +55,24 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'AlertsDisabled'
-          @alerts_disabled = v
-        when 'CustomHeaders'
-          @custom_headers = {}
-          if v.nil?
-            @custom_headers = {}
-          else
-            v.each do |k1, v1|
-              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
-
-              @custom_headers[k1] = v1
-            end
-          end
-        when 'PartnerKey'
+        when 'FieldName'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @partner_key = v
-        when 'Type'
+          @field_name = v
+        when 'FieldType'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @field_type = v
+        when 'BoolVal'
+          @bool_val = v
+        when 'IntVal'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
-          @type = v
-        when 'URL'
+          @int_val = v
+        when 'StrVal'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @url = v
+          @str_val = v
         else
           @unknown_json_fields[k] = v
         end
@@ -89,15 +82,11 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['AlertsDisabled'] = @alerts_disabled
-      unless @custom_headers.nil?
-        ret['CustomHeaders'] = @custom_headers
-      end
-      unless @partner_key.nil?
-        ret['PartnerKey'] = @partner_key
-      end
-      ret['Type'] = @type
-      ret['URL'] = @url
+      ret['FieldName'] = @field_name
+      ret['FieldType'] = @field_type
+      ret['BoolVal'] = @bool_val
+      ret['IntVal'] = @int_val
+      ret['StrVal'] = @str_val
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

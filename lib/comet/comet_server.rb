@@ -388,7 +388,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [String] target_user the username of the admin to be deleted
     # @return [Comet::CometAPIResponseMessage]
@@ -412,7 +412,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @return [Array<Comet::AllowedAdminUser>]
     def admin_admin_user_list
@@ -437,7 +437,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [String] target_user the username for this new admin
     # @param [String] target_password the password for this new admin user
@@ -874,7 +874,7 @@ module Comet
     # Prune unused buckets.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     # This API requires the Constellation Role to be enabled.
     #
     # @return [Comet::CometAPIResponseMessage]
@@ -1204,7 +1204,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [String] organization_id Target organization
     # @return [Comet::OrganizationLoginURLResponse]
@@ -2533,7 +2533,7 @@ module Comet
     # AdminMetaBrandingConfigSet
     #
     # Set Branding configuration.
-    # Note that file resources must be provided using a resource URI I.E `"resource://05ba0b90ee66bda433169581188aba8d29faa938f9464cccd651a02fdf2e5b57"`. See AdminMetaResourceNew for the API documentation to create new file resources.
+    # Note that file resources must be provided using a resource URI, i.e `"resource://05ba0b90ee66bda433169581188aba8d29faa938f9464cccd651a02fdf2e5b57"`. See AdminMetaResourceNew for the API documentation to create new file resources.
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
@@ -2639,6 +2639,7 @@ module Comet
     # Get the email options.
     #
     # You must supply administrator authentication credentials to use this API.
+    # Access to this API may be prevented on a per-administrator basis.
     #
     # @return [Comet::EmailOptions]
     def admin_meta_email_options_get
@@ -2655,6 +2656,7 @@ module Comet
     # Set the email options.
     #
     # You must supply administrator authentication credentials to use this API.
+    # Access to this API may be prevented on a per-administrator basis.
     #
     # @param [Comet::EmailOptions] email_options The replacement email reporting options.
     # @return [Comet::CometAPIResponseMessage]
@@ -2677,7 +2679,7 @@ module Comet
     # Get log files.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @return [Array<Number>]
     def admin_meta_list_available_log_days
@@ -2767,7 +2769,7 @@ module Comet
     # This API does not automatically convert line endings; around the 18.3.2 timeframe, log content may even contain mixed line-endings.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @return [String]
     def admin_meta_read_all_logs
@@ -2781,7 +2783,7 @@ module Comet
     # This API does not automatically convert line endings; around the 18.3.2 timeframe, log content may even contain mixed line-endings.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [Number] log A log day, selected from the options returned by the Get Log Files API
     # @return [String]
@@ -2892,7 +2894,7 @@ module Comet
     # Prior to 18.9.2, this API terminated the server immediately without returning a response. In 18.9.2 and later, it returns a successful response before shutting down.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     # Access to this API may be prevented on a per-administrator basis.
     #
     # @return [Comet::CometAPIResponseMessage]
@@ -2911,6 +2913,7 @@ module Comet
     # This allows the Comet Server web interface to support testing different email credentials during setup.
     #
     # You must supply administrator authentication credentials to use this API.
+    # Access to this API may be prevented on a per-administrator basis.
     #
     # @param [Comet::EmailOptions] email_options Updated configuration content
     # @param [String] recipient Target email address to send test email
@@ -2938,6 +2941,7 @@ module Comet
     # This allows a user to send a test email report
     #
     # You must supply administrator authentication credentials to use this API.
+    # Access to this API may be prevented on a per-administrator basis.
     #
     # @param [Comet::EmailReportingOption] email_reporting_option Test email reporting option for sending
     # @return [Comet::CometAPIResponseMessage]
@@ -2961,7 +2965,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @return [Comet::ServerConfigOptions]
     def admin_meta_server_config_get
@@ -2980,7 +2984,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @return [Array<String>]
     def admin_meta_server_config_network_interfaces
@@ -3009,7 +3013,7 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [Comet::ServerConfigOptions] config Updated configuration content
     # @return [Comet::CometAPIResponseMessage]
@@ -3035,7 +3039,7 @@ module Comet
     # Prior to 18.9.2, this API terminated the server immediately without returning a response. In 18.9.2 and later, it returns a successful response before shutting down.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     # Access to this API may be prevented on a per-administrator basis.
     #
     # @return [Comet::CometAPIResponseMessage]
@@ -3114,6 +3118,7 @@ module Comet
     # Get the server webhook configuration.
     #
     # You must supply administrator authentication credentials to use this API.
+    # Access to this API may be prevented on a per-administrator basis.
     #
     # @return [Hash{String => Comet::WebhookOption}]
     def admin_meta_webhook_options_get
@@ -3138,6 +3143,7 @@ module Comet
     # Calling this endpoint will interrupt any messages currently queued for existing webhook destinations.
     #
     # You must supply administrator authentication credentials to use this API.
+    # Access to this API may be prevented on a per-administrator basis.
     #
     # @param [Hash{String => Comet::WebhookOption}] webhook_options The replacement webhook target options.
     # @return [Comet::CometAPIResponseMessage]
@@ -3232,7 +3238,7 @@ module Comet
     # Prior to Comet 22.6.0, this API was documented as returning the OrganizationResponse type. However, it always has returned only a CometAPIResponseMessage.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [String] organization_id (Optional) (No description available)
     # @param [Comet::UninstallConfig] uninstall_config (Optional) Uninstall software configuration
@@ -3263,7 +3269,7 @@ module Comet
     # Run self-backup for a specific tenant.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [Comet::SelfBackupExportOptions] options The export config options
     # @return [Comet::CometAPIResponseMessage]
@@ -3286,7 +3292,7 @@ module Comet
     # List Organizations.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @return [Hash{String => Comet::Organization}]
     def admin_organization_list
@@ -3312,7 +3318,7 @@ module Comet
     # Prior to Comet 22.6.0, the 'ID' and 'Organization' fields were not present in the response.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [String] organization_id (Optional) (No description available)
     # @param [Comet::Organization] organization (Optional) (No description available)
@@ -3548,7 +3554,7 @@ module Comet
     # Get Replication status.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @return [Array<Comet::ReplicatorStateAPIResponse>]
     def admin_replication_state
@@ -3705,7 +3711,7 @@ module Comet
     # Run self-backup on all targets.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @return [Comet::CometAPIResponseMessage]
     def admin_self_backup_start
@@ -3838,7 +3844,7 @@ module Comet
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
     # This API requires the Storage Role to be enabled.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [String] bucket_id (Optional) (This parameter is not used)
     # @return [Comet::StorageFreeSpaceInfo]
@@ -3889,7 +3895,7 @@ module Comet
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
     # This API requires the Storage Role to be enabled.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [Comet::DestinationLocation] extra_data The destination location settings
     # @return [Comet::CometAPIResponseMessage]
@@ -3957,7 +3963,7 @@ module Comet
     # Start a new software update campaign.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     # This API requires the Software Build Role to be enabled.
     # This API requires the Auth Role to be enabled.
     #
@@ -3982,7 +3988,7 @@ module Comet
     # Get current campaign status.
     #
     # You must supply administrator authentication credentials to use this API.
-    # This API is only available for administrator accounts in the top-level Organization, not in any other Organization.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     # This API requires the Software Build Role to be enabled.
     # This API requires the Auth Role to be enabled.
     #
