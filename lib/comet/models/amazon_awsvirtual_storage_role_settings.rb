@@ -21,6 +21,15 @@ module Comet
     # @type [String] secret_key
     attr_accessor :secret_key
 
+    # @type [Boolean] use_object_lock
+    attr_accessor :use_object_lock
+
+    # @type [Number] object_lock_days
+    attr_accessor :object_lock_days
+
+    # @type [Boolean] remove_deleted
+    attr_accessor :remove_deleted
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -32,6 +41,7 @@ module Comet
       @master_bucket = ''
       @access_key = ''
       @secret_key = ''
+      @object_lock_days = 0
       @unknown_json_fields = {}
     end
 
@@ -60,6 +70,14 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @secret_key = v
+        when 'UseObjectLock'
+          @use_object_lock = v
+        when 'ObjectLockDays'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @object_lock_days = v
+        when 'RemoveDeleted'
+          @remove_deleted = v
         else
           @unknown_json_fields[k] = v
         end
@@ -72,6 +90,9 @@ module Comet
       ret['MasterBucket'] = @master_bucket
       ret['AccessKey'] = @access_key
       ret['SecretKey'] = @secret_key
+      ret['UseObjectLock'] = @use_object_lock
+      ret['ObjectLockDays'] = @object_lock_days
+      ret['RemoveDeleted'] = @remove_deleted
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

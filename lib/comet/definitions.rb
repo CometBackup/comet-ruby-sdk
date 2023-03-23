@@ -496,13 +496,13 @@ module Comet
 
   DEFAULT_TIMEZONE = 'UTC'
 
-  APPLICATION_VERSION = '22.12.8'
+  APPLICATION_VERSION = '23.3.1'
 
-  APPLICATION_VERSION_MAJOR = 22
+  APPLICATION_VERSION_MAJOR = 23
 
-  APPLICATION_VERSION_MINOR = 12
+  APPLICATION_VERSION_MINOR = 3
 
-  APPLICATION_VERSION_REVISION = 8
+  APPLICATION_VERSION_REVISION = 1
 
   RELEASE_CODENAME = 'Voyager'
 
@@ -714,6 +714,22 @@ module Comet
 
   # LDAPSecurityMethod:
   LDAPSECURITYMETHOD_STARTTLS = 'starttls'
+
+  # WindowsCodesignMethod: When upgrading from a version of Comet Server prior to 22.12.7, this option will be automatically converted to a more specific type..
+  # @deprecated This const has been deprecated since Comet version 22.12.7
+  WINDOWSCODESIGN_METHOD_AUTO = 0
+
+  # WindowsCodesignMethod:
+  WINDOWSCODESIGN_METHOD_DISABLED = 1
+
+  # WindowsCodesignMethod:
+  WINDOWSCODESIGN_METHOD_PKCS12FILE = 2
+
+  # WindowsCodesignMethod:
+  WINDOWSCODESIGN_METHOD_PKCS11HSM = 3
+
+  # WindowsCodesignMethod:
+  WINDOWSCODESIGN_METHOD_AZUREKEYVAULT = 4
 
   # MacOSCodesignLevel:
   MACOSCODESIGN_LEVEL_SIGN = 0

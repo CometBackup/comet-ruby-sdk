@@ -12,6 +12,9 @@ module Comet
   # WindowsCodeSignProperties is a typed class wrapper around the underlying Comet Server API data structure.
   class WindowsCodeSignProperties
 
+    # @type [Number] windows_code_sign_method
+    attr_accessor :windows_code_sign_method
+
     # @type [String] windows_code_sign_pkcs12file_path
     attr_accessor :windows_code_sign_pkcs12file_path
 
@@ -28,6 +31,7 @@ module Comet
     attr_accessor :windows_code_sign_pkcs11module
 
     # @type [String] windows_code_sign_pkcs11certfile
+    # @deprecated This member has been deprecated since Comet version 22.12.7
     attr_accessor :windows_code_sign_pkcs11certfile
 
     # @type [String] windows_code_sign_pkcs11key_id
@@ -39,6 +43,24 @@ module Comet
     # @type [String] windows_code_sign_pkcs11password
     attr_accessor :windows_code_sign_pkcs11password
 
+    # @type [String] windows_code_sign_azure_vault_name
+    attr_accessor :windows_code_sign_azure_vault_name
+
+    # @type [String] windows_code_sign_azure_cert_name
+    attr_accessor :windows_code_sign_azure_cert_name
+
+    # @type [String] windows_code_sign_azure_app_id
+    attr_accessor :windows_code_sign_azure_app_id
+
+    # @type [Number] windows_code_sign_azure_app_secret_format
+    attr_accessor :windows_code_sign_azure_app_secret_format
+
+    # @type [String] windows_code_sign_azure_app_secret
+    attr_accessor :windows_code_sign_azure_app_secret
+
+    # @type [String] windows_code_sign_azure_tenant_id
+    attr_accessor :windows_code_sign_azure_tenant_id
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -47,6 +69,7 @@ module Comet
     end
 
     def clear
+      @windows_code_sign_method = 0
       @windows_code_sign_pkcs12file_path = ''
       @windows_code_sign_pkcs12password_format = 0
       @windows_code_sign_pkcs12password = ''
@@ -56,6 +79,12 @@ module Comet
       @windows_code_sign_pkcs11key_id = ''
       @windows_code_sign_pkcs11password_format = 0
       @windows_code_sign_pkcs11password = ''
+      @windows_code_sign_azure_vault_name = ''
+      @windows_code_sign_azure_cert_name = ''
+      @windows_code_sign_azure_app_id = ''
+      @windows_code_sign_azure_app_secret_format = 0
+      @windows_code_sign_azure_app_secret = ''
+      @windows_code_sign_azure_tenant_id = ''
       @unknown_json_fields = {}
     end
 
@@ -72,6 +101,10 @@ module Comet
 
       obj.each do |k, v|
         case k
+        when 'WindowsCodeSignMethod'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @windows_code_sign_method = v
         when 'WindowsCodeSignPKCS12FilePath'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -108,6 +141,30 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @windows_code_sign_pkcs11password = v
+        when 'WindowsCodeSignAzureVaultName'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @windows_code_sign_azure_vault_name = v
+        when 'WindowsCodeSignAzureCertName'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @windows_code_sign_azure_cert_name = v
+        when 'WindowsCodeSignAzureAppID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @windows_code_sign_azure_app_id = v
+        when 'WindowsCodeSignAzureAppSecretFormat'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @windows_code_sign_azure_app_secret_format = v
+        when 'WindowsCodeSignAzureAppSecret'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @windows_code_sign_azure_app_secret = v
+        when 'WindowsCodeSignAzureTenantID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @windows_code_sign_azure_tenant_id = v
         else
           @unknown_json_fields[k] = v
         end
@@ -117,6 +174,7 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
+      ret['WindowsCodeSignMethod'] = @windows_code_sign_method
       ret['WindowsCodeSignPKCS12FilePath'] = @windows_code_sign_pkcs12file_path
       ret['WindowsCodeSignPKCS12PasswordFormat'] = @windows_code_sign_pkcs12password_format
       ret['WindowsCodeSignPKCS12Password'] = @windows_code_sign_pkcs12password
@@ -126,6 +184,12 @@ module Comet
       ret['WindowsCodeSignPKCS11KeyID'] = @windows_code_sign_pkcs11key_id
       ret['WindowsCodeSignPKCS11PasswordFormat'] = @windows_code_sign_pkcs11password_format
       ret['WindowsCodeSignPKCS11Password'] = @windows_code_sign_pkcs11password
+      ret['WindowsCodeSignAzureVaultName'] = @windows_code_sign_azure_vault_name
+      ret['WindowsCodeSignAzureCertName'] = @windows_code_sign_azure_cert_name
+      ret['WindowsCodeSignAzureAppID'] = @windows_code_sign_azure_app_id
+      ret['WindowsCodeSignAzureAppSecretFormat'] = @windows_code_sign_azure_app_secret_format
+      ret['WindowsCodeSignAzureAppSecret'] = @windows_code_sign_azure_app_secret
+      ret['WindowsCodeSignAzureTenantID'] = @windows_code_sign_azure_tenant_id
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

@@ -2161,12 +2161,24 @@ module Comet
     # This API requires the Auth Role to be enabled.
     #
     # @param [String] job_id Selected job ID
+    # @param [String] min_severity (Optional) Return only job log entries with equal or higher severity
+    # @param [String] message_contains (Optional) Return only job log entries that contain exact string
     # @return [Array<Comet::JobEntry>]
-    def admin_get_job_log_entries(job_id)
+    def admin_get_job_log_entries(job_id, min_severity = nil, message_contains = nil)
       submit_params = {}
       raise TypeError, "'job_id' expected String, got #{job_id.class}" unless job_id.is_a? String
 
       submit_params['JobID'] = job_id
+      unless min_severity.nil?
+        raise TypeError, "'min_severity' expected String, got #{min_severity.class}" unless min_severity.is_a? String
+
+        submit_params['MinSeverity'] = min_severity
+      end
+      unless message_contains.nil?
+        raise TypeError, "'message_contains' expected String, got #{message_contains.class}" unless message_contains.is_a? String
+
+        submit_params['MessageContains'] = message_contains
+      end
 
       body = perform_request('api/v1/admin/get-job-log-entries', submit_params)
       json_body = JSON.parse body

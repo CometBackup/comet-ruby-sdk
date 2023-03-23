@@ -48,6 +48,12 @@ module Comet
     # @type [Boolean] s3uses_v2signing
     attr_accessor :s3uses_v2signing
 
+    # @type [Boolean] s3remove_deleted
+    attr_accessor :s3remove_deleted
+
+    # @type [Number] s3object_lock_days
+    attr_accessor :s3object_lock_days
+
     # @type [String] sftpserver
     attr_accessor :sftpserver
 
@@ -159,6 +165,7 @@ module Comet
       @s3bucket_name = ''
       @s3subdir = ''
       @s3custom_region = ''
+      @s3object_lock_days = 0
       @sftpserver = ''
       @sftpusername = ''
       @sftpremote_path = ''
@@ -246,6 +253,12 @@ module Comet
           @s3custom_region = v
         when 'S3UsesV2Signing'
           @s3uses_v2signing = v
+        when 'S3RemoveDeleted'
+          @s3remove_deleted = v
+        when 'S3ObjectLockDays'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @s3object_lock_days = v
         when 'SFTPServer'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -386,6 +399,8 @@ module Comet
       ret['S3Subdir'] = @s3subdir
       ret['S3CustomRegion'] = @s3custom_region
       ret['S3UsesV2Signing'] = @s3uses_v2signing
+      ret['S3RemoveDeleted'] = @s3remove_deleted
+      ret['S3ObjectLockDays'] = @s3object_lock_days
       ret['SFTPServer'] = @sftpserver
       ret['SFTPUsername'] = @sftpusername
       ret['SFTPRemotePath'] = @sftpremote_path
