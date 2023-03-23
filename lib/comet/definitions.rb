@@ -7,6 +7,14 @@
 
 module Comet
 
+  APPLICATION_VERSION = '23.3.1'
+
+  APPLICATION_VERSION_MAJOR = 23
+
+  APPLICATION_VERSION_MINOR = 3
+
+  APPLICATION_VERSION_REVISION = 1
+
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
 
@@ -18,6 +26,155 @@ module Comet
 
   # AutoRetentionLevel: The system will follow the automatic ruleset for a 'Low Power' device.
   BACKUPJOBAUTORETENTION_LESS_OFTEN = 3
+
+  # ClientBrandingBuildMode: Public-Doc: The software client will be custom-built by this Comet Server, allowing custom branding, default server URL, and codesigning.
+  CLIENTBRANDINGBUILD_CUSTOM = 0
+
+  # ClientBrandingBuildMode: Public-Doc: A pre-built software client will be served, with Comet-branding, no server URL, and Comet codesigning.
+  CLIENTBRANDINGBUILD_PREBUILT = 1
+
+  # CompressMode:
+  COMPRESS_INVALID = 0
+
+  # CompressMode:
+  COMPRESS_LVL_1 = 1
+
+  # CompressMode:
+  COMPRESS_LVL_2 = 2
+
+  # CompressMode:
+  COMPRESS_LVL_3 = 3
+
+  # CompressMode:
+  COMPRESS_LVL_4 = 4
+
+  # CompressMode:
+  COMPRESS_LVL_5 = 5
+
+  # CompressMode:
+  COMPRESS_MAX = COMPRESS_LVL_5
+
+  # CompressMode:
+  COMPRESS_DEFAULT = COMPRESS_LVL_4
+
+  # LanguageCode:
+  DEFAULT_LANGUAGE = 'en_US'
+
+  DEFAULT_TIMEZONE = 'UTC'
+
+  # SftpAuthMode:
+  DESTINATION_SFTP_AUTHMODE_NATIVE = 0
+
+  # SftpAuthMode:
+  DESTINATION_SFTP_AUTHMODE_PASSWORD = 1
+
+  # SftpAuthMode:
+  DESTINATION_SFTP_AUTHMODE_PRIVATEKEY = 2
+
+  DESTINATIONTYPE___INVALID = 0
+
+  DESTINATIONTYPE_S3 = 1000
+
+  DESTINATIONTYPE_SFTP = 1001
+
+  DESTINATIONTYPE_LOCALCOPY = 1002
+
+  DESTINATIONTYPE_COMET = 1003
+
+  DESTINATIONTYPE_FTP = 1004
+
+  DESTINATIONTYPE_AZUREBLOB = 1005
+
+  DESTINATIONTYPE_SPANNED = 1006
+
+  DESTINATIONTYPE_SWIFT = 1007
+
+  DESTINATIONTYPE_B2 = 1008
+
+  DESTINATIONTYPE_STORJ = 1009
+
+  DESTINATIONTYPE_LATEST = 1100
+
+  DESTINATIONTYPE_ALL = 1101
+
+  EMAIL_WORKER_STATE_NOT_STARTED = 0
+
+  EMAIL_WORKER_STATE_STARTED = 1
+
+  EMAIL_WORKER_STATE_CALCULATING = 2
+
+  EMAIL_WORKER_STATE_WAITING = 3
+
+  EMAIL_WORKER_STATE_SENDING = 4
+
+  # EmailDeliveryType:
+  EMAIL_DELIVERY_INHERIT = ''
+
+  # EmailDeliveryType:
+  EMAIL_DELIVERY_MX_DIRECT = 'builtin'
+
+  # EmailDeliveryType:
+  EMAIL_DELIVERY_SMTP = 'smtp'
+
+  # EmailDeliveryType:
+  EMAIL_DELIVERY_SMTP_SSL = 'smtp-ssl'
+
+  # EmailDeliveryType:
+  EMAIL_DELIVERY_DISABLED = 'disabled'
+
+  # EmailDeliveryType: Legacy alias
+  EMAIL_DELIVERY_BUILTIN = EMAIL_DELIVERY_MX_DIRECT
+
+  # EmailDeliveryType: changed for clarity
+  # @deprecated This const has been deprecated since Comet version 22.12.1
+  EMAIL_DELIVERY_NONE = EMAIL_DELIVERY_INHERIT
+
+  # EmailReportType:
+  EMAILREPORTTYPE_IMMEDIATE = 0
+
+  # EmailReportType:
+  EMAILREPORTTYPE_SUMMARY = 1
+
+  # EmailReportType:
+  EMAILREPORTTYPE_GROUPED_STATUS = 2
+
+  # EmailReportType:
+  EMAILREPORTTYPE_RECENT_ACTIVITY = 3
+
+  ENCRYPTIONMETHOD_UNCONFIGURED = 0
+
+  ENGINE_BUILTIN_FILE = 'engine1/file'
+
+  ENGINE_BUILTIN_STDOUT = 'engine1/stdout'
+
+  ENGINE_BUILTIN_MYSQL = 'engine1/mysql'
+
+  ENGINE_BUILTIN_SYSTEMSTATE = 'engine1/systemstate'
+
+  ENGINE_BUILTIN_MSSQL = 'engine1/mssql'
+
+  ENGINE_BUILTIN_WINDOWSSYSTEM = 'engine1/windowssystem'
+
+  ENGINE_BUILTIN_EXCHANGEEDB = 'engine1/exchangeedb'
+
+  ENGINE_BUILTIN_VSSWRITER = 'engine1/vsswriter'
+
+  ENGINE_BUILTIN_HYPERV = 'engine1/hyperv'
+
+  ENGINE_BUILTIN_WINDISK = 'engine1/windisk'
+
+  ENGINE_BUILTIN_MONGODB = 'engine1/mongodb'
+
+  ENGINE_BUILTIN_MSOFFICE = 'engine1/winmsofficemail'
+
+  # FtpsModeType:
+  FTPS_MODE_PLAINTEXT = 0
+
+  # FtpsModeType:
+  FTPS_MODE_IMPLICIT = 1
+
+  # FtpsModeType:
+  FTPS_MODE_EXPLICIT = 2
 
   # JobClassification:
   JOB_CLASSIFICATION__MIN = 4000
@@ -115,73 +272,23 @@ module Comet
   # JobStatus:
   JOB_STATUS_FAILED__MAX = 7999
 
-  DESTINATIONTYPE___INVALID = 0
+  # LDAPSecurityMethod:
+  LDAPSECURITYMETHOD_PLAIN = 'plain'
 
-  DESTINATIONTYPE_S3 = 1000
+  # LDAPSecurityMethod:
+  LDAPSECURITYMETHOD_LDAPS = 'ldaps'
 
-  DESTINATIONTYPE_SFTP = 1001
+  # LDAPSecurityMethod:
+  LDAPSECURITYMETHOD_STARTTLS = 'starttls'
 
-  DESTINATIONTYPE_LOCALCOPY = 1002
+  # MacOSCodesignLevel:
+  MACOSCODESIGN_LEVEL_SIGN = 0
 
-  DESTINATIONTYPE_COMET = 1003
+  # MacOSCodesignLevel:
+  MACOSCODESIGN_LEVEL_SIGN_NOTARISE = 1
 
-  DESTINATIONTYPE_FTP = 1004
-
-  DESTINATIONTYPE_AZUREBLOB = 1005
-
-  DESTINATIONTYPE_SPANNED = 1006
-
-  DESTINATIONTYPE_SWIFT = 1007
-
-  DESTINATIONTYPE_B2 = 1008
-
-  DESTINATIONTYPE_STORJ = 1009
-
-  DESTINATIONTYPE_LATEST = 1100
-
-  DESTINATIONTYPE_ALL = 1101
-
-  # EmailReportType:
-  EMAILREPORTTYPE_IMMEDIATE = 0
-
-  # EmailReportType:
-  EMAILREPORTTYPE_SUMMARY = 1
-
-  # EmailReportType:
-  EMAILREPORTTYPE_GROUPED_STATUS = 2
-
-  # EmailReportType:
-  EMAILREPORTTYPE_RECENT_ACTIVITY = 3
-
-  # FtpsModeType:
-  FTPS_MODE_PLAINTEXT = 0
-
-  # FtpsModeType:
-  FTPS_MODE_IMPLICIT = 1
-
-  # FtpsModeType:
-  FTPS_MODE_EXPLICIT = 2
-
-  # Severity:
-  SEVERITY_INFO = 'I'
-
-  # Severity:
-  SEVERITY_WARNING = 'W'
-
-  # Severity:
-  SEVERITY_ERROR = 'E'
-
-  MONGODB_DEFAULT_PORT = 27_017
-
-  SERVICE_CALENDAR = 1
-
-  SERVICE_CONTACT = 2
-
-  SERVICE_MAIL = 4
-
-  SERVICE_SHAREPOINT = 8
-
-  SERVICE_ONEDRIVE = 16
+  # MacOSCodesignLevel:
+  MACOSCODESIGN_LEVEL_SIGN_NOTARISE_STAPLE = 2
 
   MIXED_VIRTUAL_ACCOUNT_TYPE_USER = 1
 
@@ -190,6 +297,127 @@ module Comet
   MIXED_VIRTUAL_ACCOUNT_TYPE_TEAM_GROUP = 3
 
   MIXED_VIRTUAL_ACCOUNT_TYPE_SHAREPOINT_ONLY = 4
+
+  MONGODB_DEFAULT_PORT = 27_017
+
+  # MSSQLAuthMode:
+  MSSQL_AUTH_WINDOWS = 'windows'
+
+  # MSSQLAuthMode:
+  MSSQL_AUTH_NATIVE = 'native'
+
+  # MSSQLMethod:
+  MSSQL_METHOD_OLEDB_NATIVE = 'OLEDB_NATIVE'
+
+  # MSSQLMethod:
+  MSSQL_METHOD_OLEDB_32 = 'OLEDB_32'
+
+  # MSSQLRestoreOpt:
+  MSSQL_RESTORE_RECOVERY = 'RECOVERY'
+
+  # MSSQLRestoreOpt:
+  MSSQL_RESTORE_NORECOVERY = 'NO_RECOVERY'
+
+  OFFICE365_REGION_PUBLIC = 'GlobalPublicCloud'
+
+  OFFICE365_REGION_CHINA = 'ChinaCloud'
+
+  OFFICE365_REGION_GERMANY = 'GermanCloud'
+
+  OFFICE365_REGION_US_GOVT = 'USGovtGccCloud'
+
+  OFFICE365_REGION_US_DOD = 'USGovtGccDoDCloud'
+
+  # ExtraFileExclusionOSRestriction:
+  OS_ANY = 0
+
+  # ExtraFileExclusionOSRestriction:
+  OS_ONLY_WINDOWS = 1
+
+  # ExtraFileExclusionOSRestriction:
+  OS_ONLY_WINDOWS_X8632 = 2
+
+  # ExtraFileExclusionOSRestriction:
+  OS_ONLY_WINDOWS_X8664 = 3
+
+  # ExtraFileExclusionOSRestriction:
+  OS_ONLY_MACOS = 4
+
+  # ExtraFileExclusionOSRestriction:
+  OS_ONLY_LINUX = 5
+
+  PASSWORD_FORMAT_PLAINTEXT = 0
+
+  # PSAType:
+  PSA_TYPE_GENERIC = 0
+
+  # PSAType:
+  PSA_TYPE_GRADIENT = 1
+
+  RELEASE_CODENAME = 'Voyager'
+
+  # RemoteServerType:
+  REMOTESERVER_COMET = 'comet'
+
+  # RemoteServerType:
+  REMOTESERVER_LDAP = 'ldap'
+
+  # RemoteServerType:
+  REMOTESERVER_B2 = 'b2'
+
+  # RemoteServerType:
+  REMOTESERVER_WASABI = 'wasabi'
+
+  # RemoteServerType:
+  REMOTESERVER_CUSTOM = 'custom'
+
+  # RemoteServerType:
+  REMOTESERVER_S3_GENERIC = 's3'
+
+  # RemoteServerType:
+  REMOTESERVER_AWS = 'aws'
+
+  # RemoteServerType:
+  REMOTESERVER_STORJ = 'storj'
+
+  # RemoteServerType:
+  REMOTESERVER_IDRIVEE2 = 'idrivee2'
+
+  # ReplicatorState:
+  REPLICATOR_STATE_NONE = 0
+
+  # ReplicatorState:
+  REPLICATOR_STATE_FILE_LIST_WORKER_STARTED = 1
+
+  # ReplicatorState:
+  REPLICATOR_STATE_FILE_LIST_SYNC_RUNNING = 2
+
+  # ReplicatorState:
+  REPLICATOR_STATE_FILE_LIST_SYNC_FINISHED = 4
+
+  # ReplicatorState:
+  REPLICATOR_STATE_WORKERS_STARTED = 8
+
+  # ReplicatorDisplayClass:
+  REPLICATOR_DISPLAYCLASS_STORAGE = 100
+
+  # ReplicatorDisplayClass:
+  REPLICATOR_DISPLAYCLASS_USER = 101
+
+  # RestoreArchiveFormat:
+  RESTOREARCHIVEFORMAT_TAR = 0
+
+  # RestoreArchiveFormat:
+  RESTOREARCHIVEFORMAT_TARGZ = 1
+
+  # RestoreArchiveFormat:
+  RESTOREARCHIVEFORMAT_ZIP = 2
+
+  # RestoreArchiveFormat: SquashFS container
+  RESTOREARCHIVEFORMAT_SQFS = 3
+
+  # RestoreArchiveFormat:
+  RESTOREARCHIVEFORMAT_TARZSTD = 4
 
   # RestoreType:
   RESTORETYPE_INVALID = -1
@@ -232,21 +460,6 @@ module Comet
 
   # RestoreType: RESTORETYPE_PROCESS_ARCHIVE
   RESTORETYPE_PROCESS_TARBALL = 3
-
-  # RestoreArchiveFormat:
-  RESTOREARCHIVEFORMAT_TAR = 0
-
-  # RestoreArchiveFormat:
-  RESTOREARCHIVEFORMAT_TARGZ = 1
-
-  # RestoreArchiveFormat:
-  RESTOREARCHIVEFORMAT_ZIP = 2
-
-  # RestoreArchiveFormat: SquashFS container
-  RESTOREARCHIVEFORMAT_SQFS = 3
-
-  # RestoreArchiveFormat:
-  RESTOREARCHIVEFORMAT_TARZSTD = 4
 
   # RetentionMode: If this mode is set in a RetentionPolicy, then RetentionPolicy.Ranges should be ignored.
   RETENTIONMODE_KEEP_EVERYTHING = 801
@@ -292,24 +505,6 @@ module Comet
 
   RETENTIONRANGE_MAXINT = 1_125_899_906_842_624
 
-  # SftpAuthMode:
-  DESTINATION_SFTP_AUTHMODE_NATIVE = 0
-
-  # SftpAuthMode:
-  DESTINATION_SFTP_AUTHMODE_PASSWORD = 1
-
-  # SftpAuthMode:
-  DESTINATION_SFTP_AUTHMODE_PRIVATEKEY = 2
-
-  # SSHAuthMode:
-  SSHCONNECTION_AUTHMODE__INVALID = 0
-
-  # SSHAuthMode:
-  SSHCONNECTION_AUTHMODE_PASSWORD = 1
-
-  # SSHAuthMode: n.b. change values
-  SSHCONNECTION_AUTHMODE_PRIVATEKEY = 2
-
   SCHEDULE_FREQUENCY_LOWEST = 8010
 
   # epoch time
@@ -338,47 +533,142 @@ module Comet
   # 2^50 (1 << 50)
   SCHEDULE_MAXINT = 1_125_899_906_842_624
 
-  ENGINE_BUILTIN_FILE = 'engine1/file'
+  # SearchClauseType:
+  SEARCHCLAUSE_RULE = ''
 
-  ENGINE_BUILTIN_STDOUT = 'engine1/stdout'
+  # SearchClauseType:
+  SEARCHCLAUSE_AND = 'and'
 
-  ENGINE_BUILTIN_MYSQL = 'engine1/mysql'
+  # SearchClauseType:
+  SEARCHCLAUSE_OR = 'or'
 
-  ENGINE_BUILTIN_SYSTEMSTATE = 'engine1/systemstate'
+  # SearchClauseType:
+  SEARCHCLAUSE_NOT_AND = 'not_and'
 
-  ENGINE_BUILTIN_MSSQL = 'engine1/mssql'
+  # SearchClauseType:
+  SEARCHCLAUSE_NOT_OR = 'not_or'
 
-  ENGINE_BUILTIN_WINDOWSSYSTEM = 'engine1/windowssystem'
+  SEARCHOPERATOR_STRING_EQ = 'str_eq'
 
-  ENGINE_BUILTIN_EXCHANGEEDB = 'engine1/exchangeedb'
+  SEARCHOPERATOR_STRING_NEQ = 'str_neq'
 
-  ENGINE_BUILTIN_VSSWRITER = 'engine1/vsswriter'
+  SEARCHOPERATOR_STRING_CONTAINS = 'str_contains'
 
-  ENGINE_BUILTIN_HYPERV = 'engine1/hyperv'
+  SEARCHOPERATOR_STRING_NCONTAINS = 'str_ncontains'
 
-  ENGINE_BUILTIN_WINDISK = 'engine1/windisk'
+  SEARCHOPERATOR_STRING_STARTSWITH = 'str_startswith'
 
-  ENGINE_BUILTIN_MONGODB = 'engine1/mongodb'
+  SEARCHOPERATOR_STRING_NSTARTSWITH = 'str_nstartswith'
 
-  ENGINE_BUILTIN_MSOFFICE = 'engine1/winmsofficemail'
+  SEARCHOPERATOR_STRING_ENDSWITH = 'str_endswith'
 
-  # MSSQLAuthMode:
-  MSSQL_AUTH_WINDOWS = 'windows'
+  SEARCHOPERATOR_STRING_NENDSWITH = 'str_nendswith'
 
-  # MSSQLAuthMode:
-  MSSQL_AUTH_NATIVE = 'native'
+  SEARCHOPERATOR_STRING_EQ_CI = 'str_eq_ci'
 
-  # MSSQLMethod:
-  MSSQL_METHOD_OLEDB_NATIVE = 'OLEDB_NATIVE'
+  SEARCHOPERATOR_STRING_NEQ_CI = 'str_neq_ci'
 
-  # MSSQLMethod:
-  MSSQL_METHOD_OLEDB_32 = 'OLEDB_32'
+  SEARCHOPERATOR_STRING_CONTAINS_CI = 'str_contains_ci'
 
-  # MSSQLRestoreOpt:
-  MSSQL_RESTORE_RECOVERY = 'RECOVERY'
+  SEARCHOPERATOR_STRING_NCONTAINS_CI = 'str_ncontains_ci'
 
-  # MSSQLRestoreOpt:
-  MSSQL_RESTORE_NORECOVERY = 'NO_RECOVERY'
+  SEARCHOPERATOR_STRING_STARTSWITH_CI = 'str_startswith_ci'
+
+  SEARCHOPERATOR_STRING_NSTARTSWITH_CI = 'str_nstartswith_ci'
+
+  SEARCHOPERATOR_STRING_ENDSWITH_CI = 'str_endswith_ci'
+
+  SEARCHOPERATOR_STRING_NENDSWITH_CI = 'str_nendswith_ci'
+
+  SEARCHOPERATOR_STRING_REGEXMATCH = 'str_regexmatch'
+
+  SEARCHOPERATOR_STRING_NREGEXMATCH = 'str_nregexmatch'
+
+  SEARCHOPERATOR_INT_EQ = 'int_eq'
+
+  SEARCHOPERATOR_INT_NEQ = 'int_neq'
+
+  SEARCHOPERATOR_INT_GT = 'int_gt'
+
+  SEARCHOPERATOR_INT_GTE = 'int_gte'
+
+  SEARCHOPERATOR_INT_LT = 'int_lt'
+
+  SEARCHOPERATOR_INT_LTE = 'int_lte'
+
+  SEARCHOPERATOR_BOOL_IS = 'bool_is'
+
+  SEARCHOPERATOR_BOOL_NIS = 'bool_nis'
+
+  SERVICE_CALENDAR = 1
+
+  SERVICE_CONTACT = 2
+
+  SERVICE_MAIL = 4
+
+  SERVICE_SHAREPOINT = 8
+
+  SERVICE_ONEDRIVE = 16
+
+  # DefaultSettingMode:
+  SETTING_SYSTEM_DEFAULT = 0
+
+  # DefaultSettingMode:
+  SETTING_OPTIONAL_DEFAULT_ON = 1
+
+  # DefaultSettingMode:
+  SETTING_OPTIONAL_DEFAULT_OFF = 2
+
+  # DefaultSettingMode:
+  SETTING_ENFORCED_ON = 3
+
+  # DefaultSettingMode:
+  SETTING_ENFORCED_OFF = 4
+
+  # Severity:
+  SEVERITY_INFO = 'I'
+
+  # Severity:
+  SEVERITY_WARNING = 'W'
+
+  # Severity:
+  SEVERITY_ERROR = 'E'
+
+  # StreamableEventType:
+  SEVT__MIN = 4000
+
+  # StreamableEventType: Event is emitted when the webhook is registered, or when the server starts up. The Data associated is ServerMetaVersionInfo
+  SEVT_META_HELLO = 4000
+
+  # StreamableEventType: Data is the profile object
+  SEVT_ACCOUNT_NEW = 4100
+
+  # StreamableEventType: Data is the username
+  SEVT_ACCOUNT_REMOVED = 4101
+
+  # StreamableEventType: Data is the profile object
+  SEVT_ACCOUNT_UPDATED = 4102
+
+  # StreamableEventType:
+  SEVT_JOB_NEW = 4200
+
+  # StreamableEventType:
+  SEVT_JOB_COMPLETED = 4201
+
+  # StreamableEventType: Data is the string bucket ref
+  SEVT_BUCKET_NEW = 4300
+
+  # StreamableEventType:
+  SEVT__MAX = 4999
+
+  # SSHAuthMode:
+  SSHCONNECTION_AUTHMODE__INVALID = 0
+
+  # SSHAuthMode:
+  SSHCONNECTION_AUTHMODE_PASSWORD = 1
+
+  # SSHAuthMode: n.b. change values
+  SSHCONNECTION_AUTHMODE_PRIVATEKEY = 2
 
   # StoredObjectType:
   STOREDOBJECTTYPE_FILE = 'file'
@@ -458,77 +748,33 @@ module Comet
   # StoredObjectType:
   STOREDOBJECTTYPE_VHDX_MBR_PARTITION = 'vhdxpartitionmbr'
 
-  # ExtraFileExclusionOSRestriction:
-  OS_ANY = 0
+  TOTPREQUIRED_ERROR = 'ERR_TOTP_REQUIRED'
 
-  # ExtraFileExclusionOSRestriction:
-  OS_ONLY_WINDOWS = 1
+  # UpdateStatus:
+  UPDATESTATUS_NOT_SEEN = 0
 
-  # ExtraFileExclusionOSRestriction:
-  OS_ONLY_WINDOWS_X8632 = 2
+  # UpdateStatus:
+  UPDATESTATUS_INELIGIBLE = 1
 
-  # ExtraFileExclusionOSRestriction:
-  OS_ONLY_WINDOWS_X8664 = 3
+  # UpdateStatus:
+  UPDATESTATUS_PENDING = 2
 
-  # ExtraFileExclusionOSRestriction:
-  OS_ONLY_MACOS = 4
+  # UpdateStatus:
+  UPDATESTATUS_REQUEST_MADE = 3
 
-  # ExtraFileExclusionOSRestriction:
-  OS_ONLY_LINUX = 5
+  # UpdateStatus: Device reconnected with bad version
+  UPDATESTATUS_UPDATE_FAILED = 4
 
-  # DefaultSettingMode:
-  SETTING_SYSTEM_DEFAULT = 0
-
-  # DefaultSettingMode:
-  SETTING_OPTIONAL_DEFAULT_ON = 1
-
-  # DefaultSettingMode:
-  SETTING_OPTIONAL_DEFAULT_OFF = 2
-
-  # DefaultSettingMode:
-  SETTING_ENFORCED_ON = 3
-
-  # DefaultSettingMode:
-  SETTING_ENFORCED_OFF = 4
-
-  # LanguageCode:
-  DEFAULT_LANGUAGE = 'en_US'
-
-  DEFAULT_TIMEZONE = 'UTC'
-
-  APPLICATION_VERSION = '23.3.1'
-
-  APPLICATION_VERSION_MAJOR = 23
-
-  APPLICATION_VERSION_MINOR = 3
-
-  APPLICATION_VERSION_REVISION = 1
-
-  RELEASE_CODENAME = 'Voyager'
-
-  ENCRYPTIONMETHOD_UNCONFIGURED = 0
-
-  PASSWORD_FORMAT_PLAINTEXT = 0
+  # UpdateStatus:
+  UPDATESTATUS_UPDATE_CONFIRMED = 5
 
   UNKNOWN_DEVICE_ERROR = 'ERR_UNKNOWN_DEVICE'
 
-  TOTPREQUIRED_ERROR = 'ERR_TOTP_REQUIRED'
+  UNSUPPORT_VHDX_FILE_SYSTEM = 'ERR_UNSUPPORT_VHDX_FILE_SYSTEM'
 
   UNSUPPORT_VMDK_FILE_SYSTEM = 'ERR_UNSUPPORT_VMDK_FILE_SYSTEM'
 
-  UNSUPPORT_VHDX_FILE_SYSTEM = 'ERR_UNSUPPORT_VHDX_FILE_SYSTEM'
-
   VHDX_PARTITON_READ_ERR_MSG = 'ERR_VHDX_PARTITION'
-
-  EMAIL_WORKER_STATE_NOT_STARTED = 0
-
-  EMAIL_WORKER_STATE_STARTED = 1
-
-  EMAIL_WORKER_STATE_CALCULATING = 2
-
-  EMAIL_WORKER_STATE_WAITING = 3
-
-  EMAIL_WORKER_STATE_SENDING = 4
 
   # WebAuthnDeviceType:
   WEBAUTHN_DEVICE_TYPE__UNKNOWN = 0
@@ -551,170 +797,6 @@ module Comet
   # WebAuthnDeviceType:
   WEBAUTHN_DEVICE_TYPE__TPM_LINUX = 6
 
-  # UpdateStatus:
-  UPDATESTATUS_NOT_SEEN = 0
-
-  # UpdateStatus:
-  UPDATESTATUS_INELIGIBLE = 1
-
-  # UpdateStatus:
-  UPDATESTATUS_PENDING = 2
-
-  # UpdateStatus:
-  UPDATESTATUS_REQUEST_MADE = 3
-
-  # UpdateStatus: Device reconnected with bad version
-  UPDATESTATUS_UPDATE_FAILED = 4
-
-  # UpdateStatus:
-  UPDATESTATUS_UPDATE_CONFIRMED = 5
-
-  # ReplicatorState:
-  REPLICATOR_STATE_NONE = 0
-
-  # ReplicatorState:
-  REPLICATOR_STATE_FILE_LIST_WORKER_STARTED = 1
-
-  # ReplicatorState:
-  REPLICATOR_STATE_FILE_LIST_SYNC_RUNNING = 2
-
-  # ReplicatorState:
-  REPLICATOR_STATE_FILE_LIST_SYNC_FINISHED = 4
-
-  # ReplicatorState:
-  REPLICATOR_STATE_WORKERS_STARTED = 8
-
-  # ReplicatorDisplayClass:
-  REPLICATOR_DISPLAYCLASS_STORAGE = 100
-
-  # ReplicatorDisplayClass:
-  REPLICATOR_DISPLAYCLASS_USER = 101
-
-  # SearchClauseType:
-  SEARCHCLAUSE_RULE = ''
-
-  # SearchClauseType:
-  SEARCHCLAUSE_AND = 'and'
-
-  # SearchClauseType:
-  SEARCHCLAUSE_OR = 'or'
-
-  # SearchClauseType:
-  SEARCHCLAUSE_NOT_AND = 'not_and'
-
-  # SearchClauseType:
-  SEARCHCLAUSE_NOT_OR = 'not_or'
-
-  SEARCHOPERATOR_STRING_EQ = 'str_eq'
-
-  SEARCHOPERATOR_STRING_NEQ = 'str_neq'
-
-  SEARCHOPERATOR_STRING_CONTAINS = 'str_contains'
-
-  SEARCHOPERATOR_STRING_NCONTAINS = 'str_ncontains'
-
-  SEARCHOPERATOR_STRING_STARTSWITH = 'str_startswith'
-
-  SEARCHOPERATOR_STRING_NSTARTSWITH = 'str_nstartswith'
-
-  SEARCHOPERATOR_STRING_ENDSWITH = 'str_endswith'
-
-  SEARCHOPERATOR_STRING_NENDSWITH = 'str_nendswith'
-
-  SEARCHOPERATOR_STRING_EQ_CI = 'str_eq_ci'
-
-  SEARCHOPERATOR_STRING_NEQ_CI = 'str_neq_ci'
-
-  SEARCHOPERATOR_STRING_CONTAINS_CI = 'str_contains_ci'
-
-  SEARCHOPERATOR_STRING_NCONTAINS_CI = 'str_ncontains_ci'
-
-  SEARCHOPERATOR_STRING_STARTSWITH_CI = 'str_startswith_ci'
-
-  SEARCHOPERATOR_STRING_NSTARTSWITH_CI = 'str_nstartswith_ci'
-
-  SEARCHOPERATOR_STRING_ENDSWITH_CI = 'str_endswith_ci'
-
-  SEARCHOPERATOR_STRING_NENDSWITH_CI = 'str_nendswith_ci'
-
-  SEARCHOPERATOR_STRING_REGEXMATCH = 'str_regexmatch'
-
-  SEARCHOPERATOR_STRING_NREGEXMATCH = 'str_nregexmatch'
-
-  SEARCHOPERATOR_INT_EQ = 'int_eq'
-
-  SEARCHOPERATOR_INT_NEQ = 'int_neq'
-
-  SEARCHOPERATOR_INT_GT = 'int_gt'
-
-  SEARCHOPERATOR_INT_GTE = 'int_gte'
-
-  SEARCHOPERATOR_INT_LT = 'int_lt'
-
-  SEARCHOPERATOR_INT_LTE = 'int_lte'
-
-  SEARCHOPERATOR_BOOL_IS = 'bool_is'
-
-  SEARCHOPERATOR_BOOL_NIS = 'bool_nis'
-
-  # EmailDeliveryType:
-  EMAIL_DELIVERY_INHERIT = ''
-
-  # EmailDeliveryType:
-  EMAIL_DELIVERY_MX_DIRECT = 'builtin'
-
-  # EmailDeliveryType:
-  EMAIL_DELIVERY_SMTP = 'smtp'
-
-  # EmailDeliveryType:
-  EMAIL_DELIVERY_SMTP_SSL = 'smtp-ssl'
-
-  # EmailDeliveryType:
-  EMAIL_DELIVERY_DISABLED = 'disabled'
-
-  # EmailDeliveryType: Legacy alias
-  EMAIL_DELIVERY_BUILTIN = EMAIL_DELIVERY_MX_DIRECT
-
-  # EmailDeliveryType: changed for clarity
-  # @deprecated This const has been deprecated since Comet version 22.12.1
-  EMAIL_DELIVERY_NONE = EMAIL_DELIVERY_INHERIT
-
-  # RemoteServerType:
-  REMOTESERVER_COMET = 'comet'
-
-  # RemoteServerType:
-  REMOTESERVER_LDAP = 'ldap'
-
-  # RemoteServerType:
-  REMOTESERVER_B2 = 'b2'
-
-  # RemoteServerType:
-  REMOTESERVER_WASABI = 'wasabi'
-
-  # RemoteServerType:
-  REMOTESERVER_CUSTOM = 'custom'
-
-  # RemoteServerType:
-  REMOTESERVER_S3_GENERIC = 's3'
-
-  # RemoteServerType:
-  REMOTESERVER_AWS = 'aws'
-
-  # RemoteServerType:
-  REMOTESERVER_STORJ = 'storj'
-
-  # RemoteServerType:
-  REMOTESERVER_IDRIVEE2 = 'idrivee2'
-
-  # LDAPSecurityMethod:
-  LDAPSECURITYMETHOD_PLAIN = 'plain'
-
-  # LDAPSecurityMethod:
-  LDAPSECURITYMETHOD_LDAPS = 'ldaps'
-
-  # LDAPSecurityMethod:
-  LDAPSECURITYMETHOD_STARTTLS = 'starttls'
-
   # WindowsCodesignMethod: When upgrading from a version of Comet Server prior to 22.12.7, this option will be automatically converted to a more specific type..
   # @deprecated This const has been deprecated since Comet version 22.12.7
   WINDOWSCODESIGN_METHOD_AUTO = 0
@@ -730,87 +812,5 @@ module Comet
 
   # WindowsCodesignMethod:
   WINDOWSCODESIGN_METHOD_AZUREKEYVAULT = 4
-
-  # MacOSCodesignLevel:
-  MACOSCODESIGN_LEVEL_SIGN = 0
-
-  # MacOSCodesignLevel:
-  MACOSCODESIGN_LEVEL_SIGN_NOTARISE = 1
-
-  # MacOSCodesignLevel:
-  MACOSCODESIGN_LEVEL_SIGN_NOTARISE_STAPLE = 2
-
-  # ClientBrandingBuildMode: Public-Doc: The software client will be custom-built by this Comet Server, allowing custom branding, default server URL, and codesigning.
-  CLIENTBRANDINGBUILD_CUSTOM = 0
-
-  # ClientBrandingBuildMode: Public-Doc: A pre-built software client will be served, with Comet-branding, no server URL, and Comet codesigning.
-  CLIENTBRANDINGBUILD_PREBUILT = 1
-
-  # StreamableEventType:
-  SEVT__MIN = 4000
-
-  # StreamableEventType: Event is emitted when the webhook is registered, or when the server starts up. The Data associated is ServerMetaVersionInfo
-  SEVT_META_HELLO = 4000
-
-  # StreamableEventType: Data is the profile object
-  SEVT_ACCOUNT_NEW = 4100
-
-  # StreamableEventType: Data is the username
-  SEVT_ACCOUNT_REMOVED = 4101
-
-  # StreamableEventType: Data is the profile object
-  SEVT_ACCOUNT_UPDATED = 4102
-
-  # StreamableEventType:
-  SEVT_JOB_NEW = 4200
-
-  # StreamableEventType:
-  SEVT_JOB_COMPLETED = 4201
-
-  # StreamableEventType: Data is the string bucket ref
-  SEVT_BUCKET_NEW = 4300
-
-  # StreamableEventType:
-  SEVT__MAX = 4999
-
-  # PSAType:
-  PSA_TYPE_GENERIC = 0
-
-  # PSAType:
-  PSA_TYPE_GRADIENT = 1
-
-  # CompressMode:
-  COMPRESS_INVALID = 0
-
-  # CompressMode:
-  COMPRESS_LVL_1 = 1
-
-  # CompressMode:
-  COMPRESS_LVL_2 = 2
-
-  # CompressMode:
-  COMPRESS_LVL_3 = 3
-
-  # CompressMode:
-  COMPRESS_LVL_4 = 4
-
-  # CompressMode:
-  COMPRESS_LVL_5 = 5
-
-  # CompressMode:
-  COMPRESS_MAX = COMPRESS_LVL_5
-
-  # CompressMode:
-  COMPRESS_DEFAULT = COMPRESS_LVL_4
-
-  OFFICE365_REGION_PUBLIC = 'GlobalPublicCloud'
-
-  OFFICE365_REGION_CHINA = 'ChinaCloud'
-
-  OFFICE365_REGION_GERMANY = 'GermanCloud'
-
-  OFFICE365_REGION_US_GOVT = 'USGovtGccCloud'
-
-  OFFICE365_REGION_US_DOD = 'USGovtGccDoDCloud'
 
 end
