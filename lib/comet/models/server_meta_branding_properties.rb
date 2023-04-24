@@ -27,6 +27,9 @@ module Comet
     # @type [String] top_color
     attr_accessor :top_color
 
+    # @type [String] accent_color
+    attr_accessor :accent_color
+
     # @type [Boolean] hide_news_area
     attr_accessor :hide_news_area
 
@@ -54,6 +57,7 @@ module Comet
       @product_name = ''
       @image_etag = ''
       @top_color = ''
+      @accent_color = ''
       @prune_logs_after_days = 0
       @expired_in_seconds = 0
       @unknown_json_fields = {}
@@ -90,6 +94,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @top_color = v
+        when 'AccentColor'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @accent_color = v
         when 'HideNewsArea'
           @hide_news_area = v
         when 'AllowUnauthenticatedDownloads'
@@ -118,6 +126,7 @@ module Comet
       ret['HasImage'] = @has_image
       ret['ImageEtag'] = @image_etag
       ret['TopColor'] = @top_color
+      ret['AccentColor'] = @accent_color
       ret['HideNewsArea'] = @hide_news_area
       ret['AllowUnauthenticatedDownloads'] = @allow_unauthenticated_downloads
       ret['AllowAuthenticatedDownloads'] = @allow_authenticated_downloads

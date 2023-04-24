@@ -9,26 +9,32 @@ require 'json'
 
 module Comet
 
-  # GroupPolicy is a typed class wrapper around the underlying Comet Server API data structure.
-  class GroupPolicy
+  # SearchResultFileInfo is a typed class wrapper around the underlying Comet Server API data structure.
+  class SearchResultFileInfo
 
-    # @type [String] description
-    attr_accessor :description
+    # @type [String] path
+    attr_accessor :path
 
-    # @type [String] organization_id
-    attr_accessor :organization_id
+    # @type [String] name
+    attr_accessor :name
 
-    # @type [Comet::UserPolicy] policy
-    attr_accessor :policy
+    # @type [String] type
+    attr_accessor :type
 
-    # @type [Boolean] default_user_policy
-    attr_accessor :default_user_policy
+    # @type [String] mode
+    attr_accessor :mode
 
-    # @type [Number] created_date
-    attr_accessor :created_date
+    # @type [String] mtime
+    attr_accessor :mtime
 
-    # @type [Number] modified_date
-    attr_accessor :modified_date
+    # @type [String] atime
+    attr_accessor :atime
+
+    # @type [String] ctime
+    attr_accessor :ctime
+
+    # @type [Number] size
+    attr_accessor :size
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -38,11 +44,14 @@ module Comet
     end
 
     def clear
-      @description = ''
-      @organization_id = ''
-      @policy = Comet::UserPolicy.new
-      @created_date = 0
-      @modified_date = 0
+      @path = ''
+      @name = ''
+      @type = ''
+      @mode = ''
+      @mtime = ''
+      @atime = ''
+      @ctime = ''
+      @size = 0
       @unknown_json_fields = {}
     end
 
@@ -59,27 +68,38 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Description'
+        when 'path'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @description = v
-        when 'OrganizationID'
+          @path = v
+        when 'name'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @organization_id = v
-        when 'Policy'
-          @policy = Comet::UserPolicy.new
-          @policy.from_hash(v)
-        when 'DefaultUserPolicy'
-          @default_user_policy = v
-        when 'CreatedDate'
+          @name = v
+        when 'type'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @type = v
+        when 'mode'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @mode = v
+        when 'mtime'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @mtime = v
+        when 'atime'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @atime = v
+        when 'ctime'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @ctime = v
+        when 'size'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
-          @created_date = v
-        when 'ModifiedDate'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @modified_date = v
+          @size = v
         else
           @unknown_json_fields[k] = v
         end
@@ -89,12 +109,14 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Description'] = @description
-      ret['OrganizationID'] = @organization_id
-      ret['Policy'] = @policy
-      ret['DefaultUserPolicy'] = @default_user_policy
-      ret['CreatedDate'] = @created_date
-      ret['ModifiedDate'] = @modified_date
+      ret['path'] = @path
+      ret['name'] = @name
+      ret['type'] = @type
+      ret['mode'] = @mode
+      ret['mtime'] = @mtime
+      ret['atime'] = @atime
+      ret['ctime'] = @ctime
+      ret['size'] = @size
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

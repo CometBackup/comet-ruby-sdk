@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.3.1'
+  APPLICATION_VERSION = '23.3.5'
 
   APPLICATION_VERSION_MAJOR = 23
 
   APPLICATION_VERSION_MINOR = 3
 
-  APPLICATION_VERSION_REVISION = 1
+  APPLICATION_VERSION_REVISION = 5
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -26,6 +26,14 @@ module Comet
 
   # AutoRetentionLevel: The system will follow the automatic ruleset for a 'Low Power' device.
   BACKUPJOBAUTORETENTION_LESS_OFTEN = 3
+
+  BRANDINGSTYLETYPE_AUTO_LEGACY = 0
+
+  BRANDINGSTYLETYPE_DEFAULT = 1
+
+  BRANDINGSTYLETYPE_CUSTOM_TEXT = 2
+
+  BRANDINGSTYLETYPE_CUSTOM_LOGO = 3
 
   # ClientBrandingBuildMode: Public-Doc: The software client will be custom-built by this Comet Server, allowing custom branding, default server URL, and codesigning.
   CLIENTBRANDINGBUILD_CUSTOM = 0

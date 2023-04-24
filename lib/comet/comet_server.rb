@@ -2017,6 +2017,41 @@ module Comet
       ret
     end
 
+    # AdminDispatcherSearchSnapshots
+    #
+    # Search storage vault snapshots.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [String] destination_id The Storage Vault GUID
+    # @param [Array<String>] snapshot_ids Snapshots to search
+    # @param [Comet::SearchClause] filter The search filter
+    # @return [Comet::SearchSnapshotsResponse]
+    def admin_dispatcher_search_snapshots(target_id, destination_id, snapshot_ids, filter)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'destination_id' expected String, got #{destination_id.class}" unless destination_id.is_a? String
+
+      submit_params['DestinationID'] = destination_id
+      raise TypeError, "'snapshot_ids' expected Array, got #{snapshot_ids.class}" unless snapshot_ids.is_a? Array
+
+      submit_params['SnapshotIDs'] = snapshot_ids.to_json
+      raise TypeError, "'filter' expected Comet::SearchClause, got #{filter.class}" unless filter.is_a? Comet::SearchClause
+
+      submit_params['Filter'] = filter.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/search-snapshots', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::SearchSnapshotsResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherUninstallSoftware
     #
     # Instruct a live connected device to self-uninstall the software.
@@ -2848,6 +2883,29 @@ module Comet
       submit_params['RemoteStorageOptions'] = remote_storage_options.to_json
 
       body = perform_request('api/v1/admin/meta/remote-storage-vault/set', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminMetaRemoteStorageVaultTest
+    #
+    # Test the connection to the storage template.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # Access to this API may be prevented on a per-administrator basis.
+    #
+    # @param [Comet::RemoteStorageOption] template_options Storage Template Vault Options
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_meta_remote_storage_vault_test(template_options)
+      submit_params = {}
+      raise TypeError, "'template_options' expected Comet::RemoteStorageOption, got #{template_options.class}" unless template_options.is_a? Comet::RemoteStorageOption
+
+      submit_params['TemplateOptions'] = template_options.to_json
+
+      body = perform_request('api/v1/admin/meta/remote-storage-vault/test', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::CometAPIResponseMessage.new

@@ -27,6 +27,9 @@ module Comet
     # @type [Boolean] exclude_jobs_db
     attr_accessor :exclude_jobs_db
 
+    # @type [Boolean] include_server_logs
+    attr_accessor :include_server_logs
+
     # @type [String] restrict_to_single_org_id
     attr_accessor :restrict_to_single_org_id
 
@@ -80,6 +83,8 @@ module Comet
           @compression = v
         when 'ExcludeJobsDB'
           @exclude_jobs_db = v
+        when 'IncludeServerLogs'
+          @include_server_logs = v
         when 'RestrictToSingleOrgID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -102,6 +107,7 @@ module Comet
       ret['EncryptionKeyFormat'] = @encryption_key_format
       ret['Compression'] = @compression
       ret['ExcludeJobsDB'] = @exclude_jobs_db
+      ret['IncludeServerLogs'] = @include_server_logs
       unless @restrict_to_single_org_id.nil?
         ret['RestrictToSingleOrgID'] = @restrict_to_single_org_id
       end

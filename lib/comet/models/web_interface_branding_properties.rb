@@ -12,6 +12,9 @@ module Comet
   # WebInterfaceBrandingProperties is a typed class wrapper around the underlying Comet Server API data structure.
   class WebInterfaceBrandingProperties
 
+    # @type [Number] branding_style_type
+    attr_accessor :branding_style_type
+
     # @type [String] brand_name
     attr_accessor :brand_name
 
@@ -20,6 +23,9 @@ module Comet
 
     # @type [String] top_color
     attr_accessor :top_color
+
+    # @type [String] accent_color
+    attr_accessor :accent_color
 
     # @type [String] favicon
     attr_accessor :favicon
@@ -35,9 +41,11 @@ module Comet
     end
 
     def clear
+      @branding_style_type = 0
       @brand_name = ''
       @logo_image = ''
       @top_color = ''
+      @accent_color = ''
       @favicon = ''
       @unknown_json_fields = {}
     end
@@ -55,6 +63,10 @@ module Comet
 
       obj.each do |k, v|
         case k
+        when 'BrandingStyleType'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @branding_style_type = v
         when 'BrandName'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -67,6 +79,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @top_color = v
+        when 'AccentColor'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @accent_color = v
         when 'Favicon'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -82,9 +98,11 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
+      ret['BrandingStyleType'] = @branding_style_type
       ret['BrandName'] = @brand_name
       ret['LogoImage'] = @logo_image
       ret['TopColor'] = @top_color
+      ret['AccentColor'] = @accent_color
       ret['Favicon'] = @favicon
       ret['HideNewsArea'] = @hide_news_area
       @unknown_json_fields.each do |k, v|
