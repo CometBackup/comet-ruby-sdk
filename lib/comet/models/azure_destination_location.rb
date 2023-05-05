@@ -21,6 +21,7 @@ module Comet
     # @type [String] azbcontainer
     attr_accessor :azbcontainer
 
+    # The base URL for the Azure Blob Storage service. Leave blank to use the global default URL.
     # @type [String] azbrealm
     attr_accessor :azbrealm
 

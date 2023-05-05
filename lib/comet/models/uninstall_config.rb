@@ -10,11 +10,15 @@ require 'json'
 module Comet
 
   # UninstallConfig is a typed class wrapper around the underlying Comet Server API data structure.
+  # UninstallConfig allows configuring whether the target device will be uninstalled or not.
   class UninstallConfig
 
+    # If this option is true, the target device will receive a message asking it to uninstall the Comet
+    # Backup app.
     # @type [Boolean] uninstall_flag
     attr_accessor :uninstall_flag
 
+    # This controls the "Remove all user settings from this device" option.
     # @type [Boolean] remove_config_file
     attr_accessor :remove_config_file
 

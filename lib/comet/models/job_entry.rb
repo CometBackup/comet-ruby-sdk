@@ -13,9 +13,11 @@ module Comet
   # JobEntry is a single entry within a job report.
   class JobEntry
 
+    # Unix timestamp in seconds
     # @type [Number] time
     attr_accessor :time
 
+    # One of the SEVERITY_ constants.
     # @type [String] severity
     attr_accessor :severity
 

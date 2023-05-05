@@ -10,23 +10,30 @@ require 'json'
 module Comet
 
   # BackupRuleConfig is a typed class wrapper around the underlying Comet Server API data structure.
+  # A backup rule connects one source Protected Item and one destination Storage Vault, with multiple
+# time schedules or event triggers
   class BackupRuleConfig
 
     # @type [String] description
     attr_accessor :description
 
+    # Unix timestamp in seconds
     # @type [Number] create_time
     attr_accessor :create_time
 
+    # Unix timestamp in seconds. The caller is responsible for updating this themselves.
     # @type [Number] modify_time
     attr_accessor :modify_time
 
+    # Custom commands to run before the job
     # @type [Array<String>] pre_exec
     attr_accessor :pre_exec
 
+    # Custom commands to run after taking a disk snapshot
     # @type [Array<String>] thaw_exec
     attr_accessor :thaw_exec
 
+    # Custom commands to run after the job
     # @type [Array<String>] post_exec
     attr_accessor :post_exec
 
@@ -39,21 +46,27 @@ module Comet
     # @type [Boolean] skip_already_running
     attr_accessor :skip_already_running
 
+    # If Zero: disabled
     # @type [Number] stop_after
     attr_accessor :stop_after
 
+    # If Zero: disabled
     # @type [Number] limit_vault_speed_bps
     attr_accessor :limit_vault_speed_bps
 
+    # Default disabled
     # @type [Boolean] reduce_disk_concurrency
     attr_accessor :reduce_disk_concurrency
 
+    # Default disabled
     # @type [Boolean] use_on_disk_indexes
     attr_accessor :use_on_disk_indexes
 
+    # Default disabled
     # @type [Boolean] allow_zero_files_success
     attr_accessor :allow_zero_files_success
 
+    # If Zero: default Automatic (BACKUPJOBAUTORETENTION_AUTOMATIC)
     # @type [Number] auto_retention_level
     attr_accessor :auto_retention_level
 

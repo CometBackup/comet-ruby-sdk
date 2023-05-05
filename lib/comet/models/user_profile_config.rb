@@ -13,15 +13,22 @@ module Comet
   # This is the main data structure for a user's profile.
   class UserProfileConfig
 
+    # The name for this account. It uniquely identifies this UserProfileConfig across the entire Comet
+    # Server. It cannot be changed directly.
     # @type [String] username
     attr_accessor :username
 
+    # A longer descriptive name for this account. It is not necessarily unique to the Comet Server. The
+    # end-user might be able to change it inside the Comet Backup desktop app.
     # @type [String] account_name
     attr_accessor :account_name
 
+    # Timezone in IANA format. Individual devices may declare a more specific timezone in the Devices
+    # field.
     # @type [String] local_timezone
     attr_accessor :local_timezone
 
+    # One of the supported languages, such as en_US (DEFAULT_LANGUAGE).
     # @type [String] language_code
     attr_accessor :language_code
 
@@ -29,12 +36,17 @@ module Comet
     # @type [String] organization_id
     attr_accessor :organization_id
 
+    # A list of email addresses to send reports to.
     # @type [Array<String>] emails
     attr_accessor :emails
 
+    # By default, all the email addresses in the Emails field will receieve the policy-default or
+    # server-wide-default style of email report. Add an override for a specific email address in here to
+    # allow customizing the email report that will be received.
     # @type [Hash{String => Comet::UserCustomEmailSettings}] override_email_settings
     attr_accessor :override_email_settings
 
+    # This option can be used to control whether any email reports are sent.
     # @type [Boolean] send_email_reports
     attr_accessor :send_email_reports
 
@@ -46,27 +58,41 @@ module Comet
     # @type [Hash{String => Comet::SourceConfig}] sources
     attr_accessor :sources
 
+    # Schedules
     # @type [Hash{String => Comet::BackupRuleConfig}] backup_rules
     attr_accessor :backup_rules
 
+    # Devices
+    # To revoke a device, use the AdminRevokeDevice API instead of accessing these fields directly. This
+    # API can also remove associated Protected Items, uninstall the remote device, and disconnect its
+    # live connection.
     # @type [Hash{String => Comet::DeviceConfig}] devices
     attr_accessor :devices
 
     # @type [Boolean] is_suspended
     attr_accessor :is_suspended
 
+    # Unix timestamp in seconds. Zero if the device is not suspended.
     # @type [Number] last_suspended
     attr_accessor :last_suspended
 
+    # A limit on the total Size of all Protected Items in this account. The number of bytes should be
+    # configured in AllProtectedItemsQuotaBytes.
     # @type [Boolean] all_protected_items_quota_enabled
     attr_accessor :all_protected_items_quota_enabled
 
+    # A limit on the total Size of all Protected Items in this account. It is enforced if
+    # AllProtectedItemsQuotaEnabled is true.
     # @type [Number] all_protected_items_quota_bytes
     attr_accessor :all_protected_items_quota_bytes
 
+    # A limit on the total number of devices registered in this account. Set to zero to allow unlimited
+    # devices.
     # @type [Number] maximum_devices
     attr_accessor :maximum_devices
 
+    # A limit on the total number of Office 365 Protected Accounts across all Office 365 Protected Items
+    # in this account. Set to zero to allow unlimited Office 365 Protected Accounts.
     # @type [Number] quota_office_365protected_accounts
     attr_accessor :quota_office_365protected_accounts
 
@@ -76,6 +102,8 @@ module Comet
     # @type [String] policy_id
     attr_accessor :policy_id
 
+    # The Policy field contains a read-only copy of the effective Policy that is applied to this user
+    # account.
     # @type [Comet::UserPolicy] policy
     attr_accessor :policy
 
@@ -87,6 +115,9 @@ module Comet
     # @type [String] password_hash
     attr_accessor :password_hash
 
+    # If this field is empty, the "Allow administrator to reset my password" feature is turned off. If
+    # this field is filled, it contains a cryptographic root of trust that can decrypt and re-encrypt
+    # other secrets in this profile.
     # @type [String] password_recovery
     attr_accessor :password_recovery
 
@@ -102,15 +133,20 @@ module Comet
     # @type [String] totpkey
     attr_accessor :totpkey
 
+    # This field is available in Comet 20.3.4 and later.
     # @type [Boolean] require_password_change
     attr_accessor :require_password_change
 
+    # Unix timestamp in seconds
     # @type [Number] create_time
     attr_accessor :create_time
 
+    # A random GUID that is allocated when the user profile is created for the first time. You can use
+    # this to help disambiguate users with the same username across multiple Comet Servers.
     # @type [String] creation_guid
     attr_accessor :creation_guid
 
+    # Additional server-wide settings that are enforced for this user profile
     # @type [Comet::UserServerConfig] server_config
     attr_accessor :server_config
 

@@ -21,12 +21,15 @@ module Comet
     # @type [Number] modify_time
     attr_accessor :modify_time
 
+    # Custom commands to run before the job
     # @type [Array<String>] pre_exec
     attr_accessor :pre_exec
 
+    # Custom commands to run after taking a disk snapshot
     # @type [Array<String>] thaw_exec
     attr_accessor :thaw_exec
 
+    # Custom commands to run after the job
     # @type [Array<String>] post_exec
     attr_accessor :post_exec
 
@@ -63,6 +66,7 @@ module Comet
     # @type [String] s3custom_region
     attr_accessor :s3custom_region
 
+    # If true, use legacy v2 signing. If false (default), use modern v4 signing
     # @type [Boolean] s3uses_v2signing
     attr_accessor :s3uses_v2signing
 
@@ -81,6 +85,7 @@ module Comet
     # @type [String] sftpremote_path
     attr_accessor :sftpremote_path
 
+    # One of the DESTINATION_SFTP_AUTHMODE_ constants
     # @type [Number] sftpauth_mode
     attr_accessor :sftpauth_mode
 
@@ -111,6 +116,7 @@ module Comet
     # @type [String] ftpcustom_base_directory
     attr_accessor :ftpcustom_base_directory
 
+    # One of the FTPS_MODE_ constants.
     # @type [Number] ftpsmode
     attr_accessor :ftpsmode
 
@@ -132,6 +138,7 @@ module Comet
     # @type [String] azbcontainer
     attr_accessor :azbcontainer
 
+    # The base URL for the Azure Blob Storage service. Leave blank to use the global default URL.
     # @type [String] azbrealm
     attr_accessor :azbrealm
 
@@ -165,18 +172,23 @@ module Comet
     # @type [Boolean] span_use_static_slots
     attr_accessor :span_use_static_slots
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] encryption_key_encryption_method
     attr_accessor :encryption_key_encryption_method
 
     # @type [String] encrypted_encryption_key
     attr_accessor :encrypted_encryption_key
 
+    # Unix timestamp in seconds. If zero, the Storage Vault has not yet been initialized for the first
+    # time.
     # @type [Number] repo_init_timestamp
     attr_accessor :repo_init_timestamp
 
+    # Storage Vault quota
     # @type [Boolean] storage_limit_enabled
     attr_accessor :storage_limit_enabled
 
+    # Storage Vault quota
     # @type [Number] storage_limit_bytes
     attr_accessor :storage_limit_bytes
 
@@ -186,6 +198,7 @@ module Comet
     # @type [Comet::RetentionPolicy] default_retention
     attr_accessor :default_retention
 
+    # The "Prevent users from viewing the actual storage type" option
     # @type [Boolean] rebrand_storage
     attr_accessor :rebrand_storage
 

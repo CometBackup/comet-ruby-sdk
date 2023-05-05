@@ -18,24 +18,35 @@ module Comet
     # @type [String] device_id
     attr_accessor :device_id
 
+    # The Comet Backup software version that this live-connected device reports that it is running. It
+    # takes the format "MAJOR.MINOR.PATCH", such as "23.2.0". See the APPLICATION_VERSION constant for
+    # more information.
     # @type [String] reported_version
     attr_accessor :reported_version
 
+    # The operating system of the device. It is one of the PLATFORM_ constants; then a forwardslash (/);
+    # then the device's GOARCH.
     # @type [String] reported_platform
     attr_accessor :reported_platform
 
+    # The operating system of the device, in extended detail.
     # @type [Comet::OSInfo] reported_platform_version
     attr_accessor :reported_platform_version
 
+    # The reported timezone of the device, in IANA format.
     # @type [String] device_time_zone
     attr_accessor :device_time_zone
 
+    # The live-connected device's remote IP address, as seen from the Comet Server.
     # @type [String] ipaddress
     attr_accessor :ipaddress
 
+    # Unix timestamp, in seconds.
     # @type [Number] connection_time
     attr_accessor :connection_time
 
+    # The current state of the "Allow administrator to view my files" client-side option. If this option
+    # is refused, some live-connected actions will be refused by the device.
     # @type [Boolean] allows_filenames
     attr_accessor :allows_filenames
 

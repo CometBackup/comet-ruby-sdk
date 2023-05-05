@@ -12,24 +12,30 @@ module Comet
   # SwiftDestinationLocation is a typed class wrapper around the underlying Comet Server API data structure.
   class SwiftDestinationLocation
 
+    # Username or UserID or Application Credential name or Application Credential ID, or blank for token
+    # authentication
     # @type [String] username
     attr_accessor :username
 
+    # User Password, or Application Credential Key, or token if the Username field is blank
     # @type [String] apikey
     attr_accessor :apikey
 
     # @type [String] region
     attr_accessor :region
 
+    # Mandatory
     # @type [String] auth_url
     attr_accessor :auth_url
 
     # @type [String] domain
     attr_accessor :domain
 
+    # Tenant name (v2) or Project name (v3)
     # @type [String] tenant
     attr_accessor :tenant
 
+    # Project domain name (v3)
     # @type [String] tenant_domain
     attr_accessor :tenant_domain
 
@@ -40,6 +46,7 @@ module Comet
     attr_accessor :trust_id
 
     # @type [String] auth_token
+    # @deprecated This member has been deprecated since Comet version 17.8.0
     attr_accessor :auth_token
 
     # @type [String] prefix

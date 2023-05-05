@@ -18,6 +18,7 @@ module Comet
     # @type [String] sshusername
     attr_accessor :sshusername
 
+    # One of the SSHCONNECTION_AUTHMODE_ constants
     # @type [Number] sshauth_mode
     attr_accessor :sshauth_mode
 

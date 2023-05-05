@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.3.5'
+  APPLICATION_VERSION = '23.3.7'
 
   APPLICATION_VERSION_MAJOR = 23
 
   APPLICATION_VERSION_MINOR = 3
 
-  APPLICATION_VERSION_REVISION = 5
+  APPLICATION_VERSION_REVISION = 7
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -35,48 +35,48 @@ module Comet
 
   BRANDINGSTYLETYPE_CUSTOM_LOGO = 3
 
-  # ClientBrandingBuildMode: Public-Doc: The software client will be custom-built by this Comet Server, allowing custom branding, default server URL, and codesigning.
+  # ClientBrandingBuildMode: The software client will be custom-built by this Comet Server, allowing custom branding, default server URL, and codesigning.
   CLIENTBRANDINGBUILD_CUSTOM = 0
 
-  # ClientBrandingBuildMode: Public-Doc: A pre-built software client will be served, with Comet-branding, no server URL, and Comet codesigning.
+  # ClientBrandingBuildMode: A pre-built software client will be served, with Comet-branding, no server URL, and Comet codesigning.
   CLIENTBRANDINGBUILD_PREBUILT = 1
 
-  # CompressMode:
+  # CompressMode
   COMPRESS_INVALID = 0
 
-  # CompressMode:
+  # CompressMode
   COMPRESS_LVL_1 = 1
 
-  # CompressMode:
+  # CompressMode
   COMPRESS_LVL_2 = 2
 
-  # CompressMode:
+  # CompressMode
   COMPRESS_LVL_3 = 3
 
-  # CompressMode:
+  # CompressMode
   COMPRESS_LVL_4 = 4
 
-  # CompressMode:
+  # CompressMode
   COMPRESS_LVL_5 = 5
 
-  # CompressMode:
+  # CompressMode
   COMPRESS_MAX = COMPRESS_LVL_5
 
-  # CompressMode:
+  # CompressMode
   COMPRESS_DEFAULT = COMPRESS_LVL_4
 
-  # LanguageCode:
+  # LanguageCode
   DEFAULT_LANGUAGE = 'en_US'
 
   DEFAULT_TIMEZONE = 'UTC'
 
-  # SftpAuthMode:
+  # SftpAuthMode
   DESTINATION_SFTP_AUTHMODE_NATIVE = 0
 
-  # SftpAuthMode:
+  # SftpAuthMode
   DESTINATION_SFTP_AUTHMODE_PASSWORD = 1
 
-  # SftpAuthMode:
+  # SftpAuthMode
   DESTINATION_SFTP_AUTHMODE_PRIVATEKEY = 2
 
   DESTINATIONTYPE___INVALID = 0
@@ -105,95 +105,112 @@ module Comet
 
   DESTINATIONTYPE_ALL = 1101
 
+  # The Comet Server is still starting up and has not yet checked whether any email reports are due to be sent.
   EMAIL_WORKER_STATE_NOT_STARTED = 0
 
+  # The Comet Server is still starting up and has not yet checked whether any email reports are due to be sent.
   EMAIL_WORKER_STATE_STARTED = 1
 
+  # The Comet Server is currently searching through email report configuration, to determine when the next email report is due to be sent.
   EMAIL_WORKER_STATE_CALCULATING = 2
 
+  # The Comet Server knows when the next scheduled email report is due to be sent, and is waiting until that time.
   EMAIL_WORKER_STATE_WAITING = 3
 
+  # The Comet Server is currently sending a scheduled email report.
   EMAIL_WORKER_STATE_SENDING = 4
 
-  # EmailDeliveryType:
+  # EmailDeliveryType: If this is for the top-level Organization, email is disabled. If this is for an Organization, use the parent's email settings.
   EMAIL_DELIVERY_INHERIT = ''
 
-  # EmailDeliveryType:
+  # EmailDeliveryType
   EMAIL_DELIVERY_MX_DIRECT = 'builtin'
 
-  # EmailDeliveryType:
+  # EmailDeliveryType
   EMAIL_DELIVERY_SMTP = 'smtp'
 
-  # EmailDeliveryType:
+  # EmailDeliveryType
   EMAIL_DELIVERY_SMTP_SSL = 'smtp-ssl'
 
-  # EmailDeliveryType:
+  # EmailDeliveryType
   EMAIL_DELIVERY_DISABLED = 'disabled'
 
-  # EmailDeliveryType: Legacy alias
+  # EmailDeliveryType: Legacy alias for EMAIL_DELIVERY_MX_DIRECT
   EMAIL_DELIVERY_BUILTIN = EMAIL_DELIVERY_MX_DIRECT
 
-  # EmailDeliveryType: changed for clarity
+  # EmailDeliveryType: Legacy alias for EMAIL_DELIVERY_INHERIT
   # @deprecated This const has been deprecated since Comet version 22.12.1
   EMAIL_DELIVERY_NONE = EMAIL_DELIVERY_INHERIT
 
-  # EmailReportType:
+  # EmailReportType
   EMAILREPORTTYPE_IMMEDIATE = 0
 
-  # EmailReportType:
+  # EmailReportType
   EMAILREPORTTYPE_SUMMARY = 1
 
-  # EmailReportType:
+  # EmailReportType
   EMAILREPORTTYPE_GROUPED_STATUS = 2
 
-  # EmailReportType:
+  # EmailReportType
   EMAILREPORTTYPE_RECENT_ACTIVITY = 3
 
   ENCRYPTIONMETHOD_UNCONFIGURED = 0
 
+  # Files and Folders
   ENGINE_BUILTIN_FILE = 'engine1/file'
 
+  # Program Output
   ENGINE_BUILTIN_STDOUT = 'engine1/stdout'
 
+  # MySQL
   ENGINE_BUILTIN_MYSQL = 'engine1/mysql'
 
+  # Windows Server System State
   ENGINE_BUILTIN_SYSTEMSTATE = 'engine1/systemstate'
 
+  # Microsoft SQL Server
   ENGINE_BUILTIN_MSSQL = 'engine1/mssql'
 
+  # Windows System Backup
   ENGINE_BUILTIN_WINDOWSSYSTEM = 'engine1/windowssystem'
 
+  # Microsoft Exchange Server
   ENGINE_BUILTIN_EXCHANGEEDB = 'engine1/exchangeedb'
 
+  # Application-Aware Writer
   ENGINE_BUILTIN_VSSWRITER = 'engine1/vsswriter'
 
+  # Microsoft Hyper-V
   ENGINE_BUILTIN_HYPERV = 'engine1/hyperv'
 
+  # Disk Image
   ENGINE_BUILTIN_WINDISK = 'engine1/windisk'
 
+  # MongoDB
   ENGINE_BUILTIN_MONGODB = 'engine1/mongodb'
 
+  # Office 365
   ENGINE_BUILTIN_MSOFFICE = 'engine1/winmsofficemail'
 
-  # FtpsModeType:
+  # FtpsModeType
   FTPS_MODE_PLAINTEXT = 0
 
-  # FtpsModeType:
+  # FtpsModeType
   FTPS_MODE_IMPLICIT = 1
 
-  # FtpsModeType:
+  # FtpsModeType
   FTPS_MODE_EXPLICIT = 2
 
-  # JobClassification:
+  # JobClassification
   JOB_CLASSIFICATION__MIN = 4000
 
-  # JobClassification:
+  # JobClassification
   JOB_CLASSIFICATION_UNKNOWN = 4000
 
-  # JobClassification:
+  # JobClassification
   JOB_CLASSIFICATION_BACKUP = 4001
 
-  # JobClassification:
+  # JobClassification
   JOB_CLASSIFICATION_RESTORE = 4002
 
   # JobClassification: Automatic or manual retention cleaning pass.
@@ -211,91 +228,91 @@ module Comet
   # JobClassification: Software update
   JOB_CLASSIFICATION_UPDATE = 4007
 
-  # JobClassification:
+  # JobClassification
   JOB_CLASSIFICATION_IMPORT = 4008
 
   # JobClassification: Repair indexes
   JOB_CLASSIFICATION_REINDEX = 4009
 
-  # JobClassification:
+  # JobClassification
   JOB_CLASSIFICATION_DEEPVERIFY = 4010
 
   # JobClassification: Software uninstall
   JOB_CLASSIFICATION_UNINSTALL = 4011
 
-  # JobClassification:
+  # JobClassification
   JOB_CLASSIFICATION__MAX = 4999
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_STOP_SUCCESS__MIN = 5000
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_STOP_SUCCESS = 5000
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_STOP_SUCCESS__MAX = 5999
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_RUNNING__MIN = 6000
 
   # JobStatus: Unused
   JOB_STATUS_RUNNING_INDETERMINATE = 6000
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_RUNNING_ACTIVE = 6001
 
   # JobStatus: A backup job that was marked as stopped or abandoned, but has somehow continued to run
   JOB_STATUS_RUNNING_REVIVED = 6002
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_RUNNING__MAX = 6999
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_FAILED__MIN = 7000
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_FAILED_TIMEOUT = 7000
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_FAILED_WARNING = 7001
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_FAILED_ERROR = 7002
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_FAILED_QUOTA = 7003
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_FAILED_SCHEDULEMISSED = 7004
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_FAILED_CANCELLED = 7005
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_FAILED_SKIPALREADYRUNNING = 7006
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_FAILED_ABANDONED = 7007
 
-  # JobStatus:
+  # JobStatus
   JOB_STATUS_FAILED__MAX = 7999
 
-  # LDAPSecurityMethod:
+  # LDAPSecurityMethod
   LDAPSECURITYMETHOD_PLAIN = 'plain'
 
-  # LDAPSecurityMethod:
+  # LDAPSecurityMethod
   LDAPSECURITYMETHOD_LDAPS = 'ldaps'
 
-  # LDAPSecurityMethod:
+  # LDAPSecurityMethod
   LDAPSECURITYMETHOD_STARTTLS = 'starttls'
 
-  # MacOSCodesignLevel:
+  # MacOSCodesignLevel
   MACOSCODESIGN_LEVEL_SIGN = 0
 
-  # MacOSCodesignLevel:
+  # MacOSCodesignLevel
   MACOSCODESIGN_LEVEL_SIGN_NOTARISE = 1
 
-  # MacOSCodesignLevel:
+  # MacOSCodesignLevel
   MACOSCODESIGN_LEVEL_SIGN_NOTARISE_STAPLE = 2
 
   MIXED_VIRTUAL_ACCOUNT_TYPE_USER = 1
@@ -308,22 +325,22 @@ module Comet
 
   MONGODB_DEFAULT_PORT = 27_017
 
-  # MSSQLAuthMode:
+  # MSSQLAuthMode
   MSSQL_AUTH_WINDOWS = 'windows'
 
-  # MSSQLAuthMode:
+  # MSSQLAuthMode
   MSSQL_AUTH_NATIVE = 'native'
 
-  # MSSQLMethod:
+  # MSSQLMethod: On Windows x86_64, use the native x86_64 driver.
   MSSQL_METHOD_OLEDB_NATIVE = 'OLEDB_NATIVE'
 
-  # MSSQLMethod:
+  # MSSQLMethod: On Windows x86_64, use an x86_32 OLEDB driver.
   MSSQL_METHOD_OLEDB_32 = 'OLEDB_32'
 
-  # MSSQLRestoreOpt:
+  # MSSQLRestoreOpt
   MSSQL_RESTORE_RECOVERY = 'RECOVERY'
 
-  # MSSQLRestoreOpt:
+  # MSSQLRestoreOpt
   MSSQL_RESTORE_NORECOVERY = 'NO_RECOVERY'
 
   OFFICE365_REGION_PUBLIC = 'GlobalPublicCloud'
@@ -336,137 +353,138 @@ module Comet
 
   OFFICE365_REGION_US_DOD = 'USGovtGccDoDCloud'
 
-  # ExtraFileExclusionOSRestriction:
+  # ExtraFileExclusionOSRestriction: Applies to any device
   OS_ANY = 0
 
-  # ExtraFileExclusionOSRestriction:
+  # ExtraFileExclusionOSRestriction: Applies to all Windows devices, regardless of CPU type
   OS_ONLY_WINDOWS = 1
 
-  # ExtraFileExclusionOSRestriction:
+  # ExtraFileExclusionOSRestriction: Applies to Windows devices with x86_32 CPU
   OS_ONLY_WINDOWS_X8632 = 2
 
-  # ExtraFileExclusionOSRestriction:
+  # ExtraFileExclusionOSRestriction: Applies to Windows devices with x86_64 CPU
   OS_ONLY_WINDOWS_X8664 = 3
 
-  # ExtraFileExclusionOSRestriction:
+  # ExtraFileExclusionOSRestriction: Applies to macOS devices, regardless of CPU type
   OS_ONLY_MACOS = 4
 
-  # ExtraFileExclusionOSRestriction:
+  # ExtraFileExclusionOSRestriction: Applies to Linux devices (including Synology DSM), regardless of CPU type
   OS_ONLY_LINUX = 5
 
+  # When resetting a password with the API, set the PasswordFormat to this value. The Comet Server will re-hash the credential automatically.
   PASSWORD_FORMAT_PLAINTEXT = 0
 
-  # PSAType:
+  # PSAType
   PSA_TYPE_GENERIC = 0
 
-  # PSAType:
+  # PSAType
   PSA_TYPE_GRADIENT = 1
 
   RELEASE_CODENAME = 'Voyager'
 
-  # RemoteServerType:
+  # RemoteServerType
   REMOTESERVER_COMET = 'comet'
 
-  # RemoteServerType:
+  # RemoteServerType
   REMOTESERVER_LDAP = 'ldap'
 
-  # RemoteServerType:
+  # RemoteServerType
   REMOTESERVER_B2 = 'b2'
 
-  # RemoteServerType:
+  # RemoteServerType
   REMOTESERVER_WASABI = 'wasabi'
 
-  # RemoteServerType:
+  # RemoteServerType
   REMOTESERVER_CUSTOM = 'custom'
 
-  # RemoteServerType:
+  # RemoteServerType
   REMOTESERVER_S3_GENERIC = 's3'
 
-  # RemoteServerType:
+  # RemoteServerType
   REMOTESERVER_AWS = 'aws'
 
-  # RemoteServerType:
+  # RemoteServerType
   REMOTESERVER_STORJ = 'storj'
 
-  # RemoteServerType:
+  # RemoteServerType
   REMOTESERVER_IDRIVEE2 = 'idrivee2'
 
-  # ReplicatorState:
+  # ReplicatorState
   REPLICATOR_STATE_NONE = 0
 
-  # ReplicatorState:
+  # ReplicatorState
   REPLICATOR_STATE_FILE_LIST_WORKER_STARTED = 1
 
-  # ReplicatorState:
+  # ReplicatorState
   REPLICATOR_STATE_FILE_LIST_SYNC_RUNNING = 2
 
-  # ReplicatorState:
+  # ReplicatorState
   REPLICATOR_STATE_FILE_LIST_SYNC_FINISHED = 4
 
-  # ReplicatorState:
+  # ReplicatorState
   REPLICATOR_STATE_WORKERS_STARTED = 8
 
-  # ReplicatorDisplayClass:
+  # ReplicatorDisplayClass
   REPLICATOR_DISPLAYCLASS_STORAGE = 100
 
-  # ReplicatorDisplayClass:
+  # ReplicatorDisplayClass
   REPLICATOR_DISPLAYCLASS_USER = 101
 
-  # RestoreArchiveFormat:
+  # RestoreArchiveFormat
   RESTOREARCHIVEFORMAT_TAR = 0
 
-  # RestoreArchiveFormat:
+  # RestoreArchiveFormat
   RESTOREARCHIVEFORMAT_TARGZ = 1
 
-  # RestoreArchiveFormat:
+  # RestoreArchiveFormat
   RESTOREARCHIVEFORMAT_ZIP = 2
 
   # RestoreArchiveFormat: SquashFS container
   RESTOREARCHIVEFORMAT_SQFS = 3
 
-  # RestoreArchiveFormat:
+  # RestoreArchiveFormat
   RESTOREARCHIVEFORMAT_TARZSTD = 4
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_INVALID = -1
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_FILE = 0
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_NULL = 1
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_PROCESS_PERFILE = 2
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_PROCESS_ARCHIVE = 3
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_WINDISK = 4
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_FILE_ARCHIVE = 5
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_OFFICE365_CLOUD = 6
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_VMDK_FILE = 7
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_VMDK_FILE_NULL = 8
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_VMDK_FILE_ARCHIVE = 9
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_MYSQL = 10
 
-  # RestoreType:
+  # RestoreType
   RESTORETYPE_MSSQL = 11
 
-  # RestoreType: RESTORETYPE_PROCESS_ARCHIVE
+  # RestoreType: Legacy name alias - Prefer to use RESTORETYPE_PROCESS_ARCHIVE since multiple archive file formats are supported within this single RESTORETYPE_
   RESTORETYPE_PROCESS_TARBALL = 3
 
   # RetentionMode: If this mode is set in a RetentionPolicy, then RetentionPolicy.Ranges should be ignored.
@@ -475,7 +493,7 @@ module Comet
   # RetentionMode: Delete everything except for jobs matching the ranges in RetentionPolicy.Ranges.
   RETENTIONMODE_DELETE_EXCEPT = 802
 
-  # RetentionRangeType:
+  # RetentionRangeType
   RETENTIONRANGE__LOWEST = 900
 
   # RetentionRangeType: Uses Jobs
@@ -490,7 +508,8 @@ module Comet
   # RetentionRangeType: Uses Days
   RETENTIONRANGE_FIRST_JOB_FOR_EACH_LAST_X_DAYS = 903
 
-  # RetentionRangeType: Removed
+  # RetentionRangeType
+  # @deprecated This const has been deprecated since Comet version 17.2.0
   RETENTIONRANGE__RESERVED904 = 904
 
   # RetentionRangeType: Uses Months, MonthOffset
@@ -508,29 +527,29 @@ module Comet
   # RetentionRangeType: Uses Jobs
   RETENTIONRANGE_LAST_X_BACKUPS_ONE_FOR_EACH_MONTH = 909
 
-  # RetentionRangeType:
+  # RetentionRangeType
   RETENTIONRANGE__HIGHEST = 909
 
   RETENTIONRANGE_MAXINT = 1_125_899_906_842_624
 
   SCHEDULE_FREQUENCY_LOWEST = 8010
 
-  # epoch time
+  # SecondsPast should be a Unix timestamp, in seconds
   SCHEDULE_FREQUENCY_ONCEONLY = 8010
 
-  # seconds past 00:00 local time
+  # SecondsPast is the number of seconds past 00:00, in the device's local timezone.
   SCHEDULE_FREQUENCY_DAILY = 8011
 
-  # seconds past *:00 local time
+  # SecondsPast is the number of seconds past *:00, in the device's local timezone.
   SCHEDULE_FREQUENCY_HOURLY = 8012
 
-  # seconds past 00:00 Sunday, local time
+  # SecondsPast is the number of seconds past 00:00 Sunday, in the device's local timezone.
   SCHEDULE_FREQUENCY_WEEKLY = 8013
 
-  # seconds past 00:00 1st, local time
+  # SecondsPast is the number of seconds past 00:00 1st, in the device's local timezone.
   SCHEDULE_FREQUENCY_MONTHLY = 8014
 
-  # SecondsPast: number of seconds per period. Offset: Shunt seconds after unix epoch
+  # SecondsPast is the number of seconds per period. Offset: Shunt seconds after unix epoch
   SCHEDULE_FREQUENCY_PERIODIC = 8015
 
   SCHEDULE_FREQUENCY_HIGHEST = 8015
@@ -538,22 +557,21 @@ module Comet
   # Maximum random delay (5 hours)
   SCHEDULE_MAX_RANDOM_DELAY_SECS = 18_000
 
-  # 2^50 (1 << 50)
   SCHEDULE_MAXINT = 1_125_899_906_842_624
 
-  # SearchClauseType:
+  # SearchClauseType
   SEARCHCLAUSE_RULE = ''
 
-  # SearchClauseType:
+  # SearchClauseType
   SEARCHCLAUSE_AND = 'and'
 
-  # SearchClauseType:
+  # SearchClauseType
   SEARCHCLAUSE_OR = 'or'
 
-  # SearchClauseType:
+  # SearchClauseType
   SEARCHCLAUSE_NOT_AND = 'not_and'
 
-  # SearchClauseType:
+  # SearchClauseType
   SEARCHCLAUSE_NOT_OR = 'not_or'
 
   SEARCHOPERATOR_STRING_EQ = 'str_eq'
@@ -618,34 +636,34 @@ module Comet
 
   SERVICE_ONEDRIVE = 16
 
-  # DefaultSettingMode:
+  # DefaultSettingMode
   SETTING_SYSTEM_DEFAULT = 0
 
-  # DefaultSettingMode:
+  # DefaultSettingMode
   SETTING_OPTIONAL_DEFAULT_ON = 1
 
-  # DefaultSettingMode:
+  # DefaultSettingMode
   SETTING_OPTIONAL_DEFAULT_OFF = 2
 
-  # DefaultSettingMode:
+  # DefaultSettingMode
   SETTING_ENFORCED_ON = 3
 
-  # DefaultSettingMode:
+  # DefaultSettingMode
   SETTING_ENFORCED_OFF = 4
 
-  # Severity:
+  # Severity
   SEVERITY_INFO = 'I'
 
-  # Severity:
+  # Severity
   SEVERITY_WARNING = 'W'
 
-  # Severity:
+  # Severity
   SEVERITY_ERROR = 'E'
 
-  # StreamableEventType:
+  # StreamableEventType
   SEVT__MIN = 4000
 
-  # StreamableEventType: Event is emitted when the webhook is registered, or when the server starts up. The Data associated is ServerMetaVersionInfo
+  # StreamableEventType: This event is emitted when the webhook is registered, or when the server starts up. The Data associated is ServerMetaVersionInfo
   SEVT_META_HELLO = 4000
 
   # StreamableEventType: Data is the profile object
@@ -657,125 +675,127 @@ module Comet
   # StreamableEventType: Data is the profile object
   SEVT_ACCOUNT_UPDATED = 4102
 
-  # StreamableEventType:
+  # StreamableEventType
   SEVT_JOB_NEW = 4200
 
-  # StreamableEventType:
+  # StreamableEventType
   SEVT_JOB_COMPLETED = 4201
 
   # StreamableEventType: Data is the string bucket ref
   SEVT_BUCKET_NEW = 4300
 
-  # StreamableEventType:
+  # StreamableEventType
   SEVT__MAX = 4999
 
-  # SSHAuthMode:
+  # SSHAuthMode
   SSHCONNECTION_AUTHMODE__INVALID = 0
 
-  # SSHAuthMode:
+  # SSHAuthMode
   SSHCONNECTION_AUTHMODE_PASSWORD = 1
 
-  # SSHAuthMode: n.b. change values
+  # SSHAuthMode
   SSHCONNECTION_AUTHMODE_PRIVATEKEY = 2
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_FILE = 'file'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_DIRECTORY = 'dir'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_SYMLINK = 'symlink'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_UNIXBLOCKDEVICE = 'dev'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_UNIXCHARDEVICE = 'chardev'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_UNIXFIFO = 'fifo'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_UNIXSOCKET = 'socket'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_WINEFS = 'winefs'
 
-  # StoredObjectType: "file"
+  # StoredObjectType
   STOREDOBJECTTYPE_EMAILMESSAGE = 'emailmessage'
 
-  # StoredObjectType: "dir"
+  # StoredObjectType
   STOREDOBJECTTYPE_EMAILFOLDER = 'mailfolder'
 
-  # StoredObjectType: "file"
+  # StoredObjectType
   STOREDOBJECTTYPE_OFFICECONTACT = 'contact'
 
-  # StoredObjectType: "dir"
+  # StoredObjectType
   STOREDOBJECTTYPE_OFFICECONTACTFOLDER = 'contactfolder'
 
-  # StoredObjectType: "file"
+  # StoredObjectType
   STOREDOBJECTTYPE_OFFICECALENDAREVENT = 'calendarevent'
 
-  # StoredObjectType: "dir"
+  # StoredObjectType
   STOREDOBJECTTYPE_OFFICECALENDAR = 'calendar'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_MSSITE = 'mssite'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_MSSITE_TEAM = 'mssiteteam'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_MSSITELISTENTITY = 'mssitelistentity'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_MSSITEITEMENTITY = 'mssiteitementity'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_MSSITELISTDRIVEENTITY = 'mssitelistdriveentity'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_VMDK_FILE = 'vmdkfile'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_VMDK_DIRECTORY = 'vmdkdir'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_VMDK_WINEFS = 'vmdkwinefs'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_VMDK_SYMLINK = 'vmdksymlink'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_VIRTUALIMAGE_DISK = 'virtualimagedisk'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_VHDX_GPT_PARTITION = 'vhdxpartitiongpt'
 
-  # StoredObjectType:
+  # StoredObjectType
   STOREDOBJECTTYPE_VHDX_MBR_PARTITION = 'vhdxpartitionmbr'
 
+  # If an API response returns in failure, but it includes this value in the CometAPIResponseMessage->Message parameter, it indicates that your supplied authentication was insufficient, and you must supply additional two-factor authentication credentials.
   TOTPREQUIRED_ERROR = 'ERR_TOTP_REQUIRED'
 
-  # UpdateStatus:
+  # UpdateStatus
   UPDATESTATUS_NOT_SEEN = 0
 
-  # UpdateStatus:
+  # UpdateStatus: The selected device does not meet the filter criteria from the Bulk Update Campaign's configuration.
   UPDATESTATUS_INELIGIBLE = 1
 
-  # UpdateStatus:
+  # UpdateStatus
   UPDATESTATUS_PENDING = 2
 
-  # UpdateStatus:
+  # UpdateStatus: The device has made a live connection and it meets the filter criteria. A live connection message has been sent asking it to perform the software upgrade.
   UPDATESTATUS_REQUEST_MADE = 3
 
-  # UpdateStatus: Device reconnected with bad version
+  # UpdateStatus: An update signal was sent to the device, but when it reconnected, it did not advertise the target software version. It's likely that the update failed - please check the device's Update log for more information.
   UPDATESTATUS_UPDATE_FAILED = 4
 
-  # UpdateStatus:
+  # UpdateStatus: The device has successfully updated to the target version.
   UPDATESTATUS_UPDATE_CONFIRMED = 5
 
+  # If an API response returns in failure, but it includes this value in the CometAPIResponseMessage->Message parameter, it indicates that the specified Device ID was invalid or not found.
   UNKNOWN_DEVICE_ERROR = 'ERR_UNKNOWN_DEVICE'
 
   UNSUPPORT_VHDX_FILE_SYSTEM = 'ERR_UNSUPPORT_VHDX_FILE_SYSTEM'
@@ -784,41 +804,41 @@ module Comet
 
   VHDX_PARTITON_READ_ERR_MSG = 'ERR_VHDX_PARTITION'
 
-  # WebAuthnDeviceType:
+  # WebAuthnDeviceType
   WEBAUTHN_DEVICE_TYPE__UNKNOWN = 0
 
-  # WebAuthnDeviceType:
+  # WebAuthnDeviceType
   WEBAUTHN_DEVICE_TYPE__HARDWARE_TOKEN = 1
 
-  # WebAuthnDeviceType:
+  # WebAuthnDeviceType
   WEBAUTHN_DEVICE_TYPE__ANDROID = 2
 
-  # WebAuthnDeviceType:
+  # WebAuthnDeviceType
   WEBAUTHN_DEVICE_TYPE__APPLE = 3
 
-  # WebAuthnDeviceType:
+  # WebAuthnDeviceType
   WEBAUTHN_DEVICE_TYPE__TPM_GENERIC = 4
 
-  # WebAuthnDeviceType:
+  # WebAuthnDeviceType
   WEBAUTHN_DEVICE_TYPE__TPM_WINDOWS = 5
 
-  # WebAuthnDeviceType:
+  # WebAuthnDeviceType
   WEBAUTHN_DEVICE_TYPE__TPM_LINUX = 6
 
   # WindowsCodesignMethod: When upgrading from a version of Comet Server prior to 22.12.7, this option will be automatically converted to a more specific type..
   # @deprecated This const has been deprecated since Comet version 22.12.7
   WINDOWSCODESIGN_METHOD_AUTO = 0
 
-  # WindowsCodesignMethod:
+  # WindowsCodesignMethod: Do not perform Authenticode codesigning
   WINDOWSCODESIGN_METHOD_DISABLED = 1
 
-  # WindowsCodesignMethod:
+  # WindowsCodesignMethod: Use a configured PKCS#12 key file for Authenticode codesigning
   WINDOWSCODESIGN_METHOD_PKCS12FILE = 2
 
-  # WindowsCodesignMethod:
+  # WindowsCodesignMethod: Use a configured PKCS#11 hardware security module (HSM) for Authenticode codesigning
   WINDOWSCODESIGN_METHOD_PKCS11HSM = 3
 
-  # WindowsCodesignMethod:
+  # WindowsCodesignMethod: Use a configured Azure Key Vault for Authenticode codesigning
   WINDOWSCODESIGN_METHOD_AZUREKEYVAULT = 4
 
 end

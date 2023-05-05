@@ -15,54 +15,72 @@ module Comet
     # @type [Number] type
     attr_accessor :type
 
+    # For RESTORETYPE_FILE
     # @type [Boolean] overwrite_existing_files
     attr_accessor :overwrite_existing_files
 
+    # For RESTORETYPE_FILE. If set, OverwriteExistingFiles must be true
     # @type [Boolean] overwrite_if_newer
     attr_accessor :overwrite_if_newer
 
+    # For RESTORETYPE_FILE. If set, DestPath must be blank
     # @type [Boolean] dest_is_original_location
     attr_accessor :dest_is_original_location
 
+    # For RESTORETYPE_FILE or RESTORETYPE_PROCESS_xxx
     # @type [String] dest_path
     attr_accessor :dest_path
 
+    # For RESTORETYPE_WINDISK only. Must have one entry for each selected restore path
     # @type [Array<String>] exact_dest_paths
     attr_accessor :exact_dest_paths
 
+    # For RESTORETYPE_FILE_ARCHIVE or RESTORETYPE_PROCESS_ARCHIVE. Default 0 is *.tar, for backward
+    # compatibility
     # @type [Number] archive_format
     attr_accessor :archive_format
 
+    # For RESTORETYPE_OFFICE365_CLOUD.
     # @type [Comet::Office365Credential] office_365credential
     attr_accessor :office_365credential
 
+    # For RESTORETYPE_MYSQL
     # @type [String] username
     attr_accessor :username
 
+    # For RESTORETYPE_MYSQL
     # @type [String] password
     attr_accessor :password
 
+    # For RESTORETYPE_MYSQL
     # @type [String] host
     attr_accessor :host
 
+    # For RESTORETYPE_MYSQL
     # @type [String] port
     attr_accessor :port
 
+    # For RESTORETYPE_MYSQL
     # @type [Boolean] use_ssl
     attr_accessor :use_ssl
 
+    # For RESTORETYPE_MYSQL i.e.: Self signed certs
     # @type [Boolean] ssl_allow_invalid
     attr_accessor :ssl_allow_invalid
 
+    # For RESTORETYPE_MYSQL
     # @type [String] ssl_ca_file
     attr_accessor :ssl_ca_file
 
+    # For RESTORETYPE_MYSQL
     # @type [String] ssl_crt_file
     attr_accessor :ssl_crt_file
 
+    # For RESTORETYPE_MYSQL
     # @type [String] ssl_key_file
     attr_accessor :ssl_key_file
 
+    # For RESTORETYPE_MSSQL.
     # @type [Comet::MSSQLLoginArgs] ms_sql_connection
     attr_accessor :ms_sql_connection
 

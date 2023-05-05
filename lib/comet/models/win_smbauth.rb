@@ -12,15 +12,21 @@ module Comet
   # WinSMBAuth is a typed class wrapper around the underlying Comet Server API data structure.
   class WinSMBAuth
 
+    # The UNC path for the Windows network share (SMB).
     # @type [String] share_path
     attr_accessor :share_path
 
+    # The username to log in to the Windows network share (SMB).
     # @type [String] username
     attr_accessor :username
 
+    # The password might be hashed. To set this in cleartext, set PasswordFormat to 0
+    # (PASSWORD_FORMAT_PLAINTEXT).
     # @type [String] password
     attr_accessor :password
 
+    # The hash algorithm that is used for the Password field. It is one of the PASSWORD_FORMAT_
+    # constants.
     # @type [Number] password_format
     attr_accessor :password_format
 

@@ -12,9 +12,12 @@ module Comet
   # BackupRuleEventTriggers is a typed class wrapper around the underlying Comet Server API data structure.
   class BackupRuleEventTriggers
 
+    # The "When PC Starts" option
     # @type [Boolean] on_pcboot
     attr_accessor :on_pcboot
 
+    # The "If the last job was Missed" option. In Comet 23.12.3 and later, this condition is evaluated
+    # when the PC starts and/or when the live connection is resumed.
     # @type [Boolean] on_pcboot_if_last_job_missed
     attr_accessor :on_pcboot_if_last_job_missed
 

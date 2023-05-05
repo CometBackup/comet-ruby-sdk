@@ -12,6 +12,8 @@ module Comet
   # UserOnServer is a typed class wrapper around the underlying Comet Server API data structure.
   class UserOnServer
 
+    # The server where this user was found. The 0-based indexes here correspond to the entries inside
+    # ConstellationRoleOptions->Servers.
     # @type [Number] server_id
     attr_accessor :server_id
 

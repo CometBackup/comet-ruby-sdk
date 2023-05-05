@@ -18,6 +18,7 @@ module Comet
     # @type [Array<String>] targets
     attr_accessor :targets
 
+    # This field is available in Comet 18.6.2 and later.
     # @type [Array<String>] target_names
     attr_accessor :target_names
 

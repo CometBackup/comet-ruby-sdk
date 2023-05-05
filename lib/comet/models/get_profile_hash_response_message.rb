@@ -12,6 +12,7 @@ module Comet
   # GetProfileHashResponseMessage is a typed class wrapper around the underlying Comet Server API data structure.
   class GetProfileHashResponseMessage
 
+    # If the operation was successful, the status will be in the 200-299 range.
     # @type [Number] status
     attr_accessor :status
 

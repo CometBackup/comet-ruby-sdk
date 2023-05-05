@@ -12,9 +12,11 @@ module Comet
   # B2DestinationLocation is a typed class wrapper around the underlying Comet Server API data structure.
   class B2DestinationLocation
 
+    # Key ID
     # @type [String] account_id
     attr_accessor :account_id
 
+    # Application Key
     # @type [String] key
     attr_accessor :key
 
@@ -28,6 +30,9 @@ module Comet
     # @deprecated This member has been deprecated since Comet version 21.9.7
     attr_accessor :max_connections
 
+    # Hide files instead of deleting them. This can be used for ransomware protection if (A) the B2
+    # credentials have the hideFile permission but not the deleteFile permission, and (B) you use the
+    # Backblaze B2 server-side lifecycle policies to clean up old hidden files.
     # @type [Boolean] hide_deleted_files
     attr_accessor :hide_deleted_files
 

@@ -27,6 +27,7 @@ module Comet
     # @type [String] ftpcustom_base_directory
     attr_accessor :ftpcustom_base_directory
 
+    # One of the FTPS_MODE_ constants.
     # @type [Number] ftpsmode
     attr_accessor :ftpsmode
 

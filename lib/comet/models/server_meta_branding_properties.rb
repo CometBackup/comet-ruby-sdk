@@ -18,9 +18,13 @@ module Comet
     # @type [String] product_name
     attr_accessor :product_name
 
+    # If true, this Comet Server has an image configured for its main logo. You can access it from the
+    # /gen/logo.img endpoint. If false, this Comet Server has text configured for its main logo.
     # @type [Boolean] has_image
     attr_accessor :has_image
 
+    # A value that will change if the branding image (/gen/logo.img) changes. You can use this as a
+    # cache key.
     # @type [String] image_etag
     attr_accessor :image_etag
 

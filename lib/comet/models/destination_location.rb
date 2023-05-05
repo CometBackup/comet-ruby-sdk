@@ -45,6 +45,7 @@ module Comet
     # @type [String] s3custom_region
     attr_accessor :s3custom_region
 
+    # If true, use legacy v2 signing. If false (default), use modern v4 signing
     # @type [Boolean] s3uses_v2signing
     attr_accessor :s3uses_v2signing
 
@@ -63,6 +64,7 @@ module Comet
     # @type [String] sftpremote_path
     attr_accessor :sftpremote_path
 
+    # One of the DESTINATION_SFTP_AUTHMODE_ constants
     # @type [Number] sftpauth_mode
     attr_accessor :sftpauth_mode
 
@@ -93,6 +95,7 @@ module Comet
     # @type [String] ftpcustom_base_directory
     attr_accessor :ftpcustom_base_directory
 
+    # One of the FTPS_MODE_ constants.
     # @type [Number] ftpsmode
     attr_accessor :ftpsmode
 
@@ -114,6 +117,7 @@ module Comet
     # @type [String] azbcontainer
     attr_accessor :azbcontainer
 
+    # The base URL for the Azure Blob Storage service. Leave blank to use the global default URL.
     # @type [String] azbrealm
     attr_accessor :azbrealm
 

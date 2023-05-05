@@ -21,12 +21,16 @@ module Comet
     # @type [Comet::UserPolicy] policy
     attr_accessor :policy
 
+    # DefaultUserPolicy marks that this UserPolicy should be applied to all new users. The Comet Server
+    # will ensure that only one policy can be set as default.
     # @type [Boolean] default_user_policy
     attr_accessor :default_user_policy
 
+    # Unix timestamp in seconds. May be zero for Policies created prior to Comet 23.3.3.
     # @type [Number] created_date
     attr_accessor :created_date
 
+    # Unix timestamp in seconds. May be zero for Policies created prior to Comet 23.3.3.
     # @type [Number] modified_date
     attr_accessor :modified_date
 

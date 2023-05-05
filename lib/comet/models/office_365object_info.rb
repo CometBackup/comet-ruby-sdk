@@ -21,6 +21,7 @@ module Comet
     # @type [String] type
     attr_accessor :type
 
+    # May be an email address or a SharePoint site URL
     # @type [String] value
     attr_accessor :value
 

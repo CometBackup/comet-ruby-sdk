@@ -24,9 +24,12 @@ module Comet
     # @type [Boolean] downgrade_newer
     attr_accessor :downgrade_newer
 
+    # Choose whether this bulk upgrade campaign is allowed to interrupt a running backup job.
     # @type [Boolean] force_upgrade_running
     attr_accessor :force_upgrade_running
 
+    # If true, then the UserFilter will be used to restrict which accounts and devices will be eligible
+    # for the software update. If false, all users and devices will be eligible for the software update.
     # @type [Boolean] apply_device_filter
     attr_accessor :apply_device_filter
 

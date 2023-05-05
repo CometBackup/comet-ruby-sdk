@@ -28,6 +28,7 @@ module Comet
     attr_accessor :software_build_role
 
     # @type [Boolean] constellation_role__legacy
+    # @deprecated This member has been deprecated since Comet version 18.2.0 "Overseer Role" was the old name for the Constellation Role. This field is a duplicate of ConstellationRole for backward compatibility with earlier API consumers.
     attr_accessor :constellation_role__legacy
 
     # @type [Boolean] constellation_role
@@ -36,15 +37,22 @@ module Comet
     # @type [Array<String>] experimental_options
     attr_accessor :experimental_options
 
+    # Unix timestamp, in seconds.
     # @type [Number] server_start_time
     attr_accessor :server_start_time
 
+    # A GUID that was randomly generated when this Comet Server started up. You can check this value to
+    # see if the Comet Server has restarted.
     # @type [String] server_start_hash
     attr_accessor :server_start_hash
 
+    # The current time on the Comet Server host machine. Unix timestamp, in seconds. You can check this
+    # value to see if clock drift is occuring.
     # @type [Number] current_time
     attr_accessor :current_time
 
+    # A hash derived from the Comet Server's serial number. You can check this value to see if two Comet
+    # Server endpoints point to an identical server.
     # @type [String] server_license_hash
     attr_accessor :server_license_hash
 

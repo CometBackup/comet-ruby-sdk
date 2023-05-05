@@ -18,12 +18,16 @@ module Comet
     # @type [Number] registration_time
     attr_accessor :registration_time
 
+    # The operating system that the device uses.
     # @type [Comet::OSInfo] platform_version
     attr_accessor :platform_version
 
+    # Minimal information about the device's private Protected Items, so that other devices can safely
+    # run retention passes on a shared Storage Vault.
     # @type [Hash{String => Comet::SourceBasicInfo}] sources
     attr_accessor :sources
 
+    # The device's reported timezone in IANA format.
     # @type [String] device_timezone
     attr_accessor :device_timezone
 

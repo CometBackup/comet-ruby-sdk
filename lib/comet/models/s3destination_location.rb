@@ -33,6 +33,7 @@ module Comet
     # @type [String] s3custom_region
     attr_accessor :s3custom_region
 
+    # If true, use legacy v2 signing. If false (default), use modern v4 signing
     # @type [Boolean] s3uses_v2signing
     attr_accessor :s3uses_v2signing
 

@@ -15,6 +15,8 @@ module Comet
     # @type [String] access_key
     attr_accessor :access_key
 
+    # The servers where this bucket was found. The 0-based indexes here correspond to the entries inside
+    # ConstellationRoleOptions->Servers.
     # @type [Array<Number>] exists_on_servers
     attr_accessor :exists_on_servers
 

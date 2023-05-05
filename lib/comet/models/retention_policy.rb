@@ -12,6 +12,7 @@ module Comet
   # RetentionPolicy is a typed class wrapper around the underlying Comet Server API data structure.
   class RetentionPolicy
 
+    # One of the RETENTIONMODE_ constants
     # @type [Number] mode
     attr_accessor :mode
 

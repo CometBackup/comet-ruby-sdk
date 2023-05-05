@@ -13,6 +13,7 @@ module Comet
   # @deprecated This type has been deprecated since Comet version 21.12.0
   class U2FRegistrationChallengeResponse
 
+    # If the operation was successful, the status will be in the 200-299 range.
     # @type [Number] status
     attr_accessor :status
 

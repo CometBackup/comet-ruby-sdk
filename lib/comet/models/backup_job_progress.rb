@@ -18,6 +18,7 @@ module Comet
     # @type [Number] sent_time
     attr_accessor :sent_time
 
+    # The typo is preserved for backwards-compatibility reasons.
     # @type [Number] recieved_time
     attr_accessor :recieved_time
 

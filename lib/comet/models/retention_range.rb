@@ -30,6 +30,7 @@ module Comet
     # @type [Number] months
     attr_accessor :months
 
+    # 0: Sunday, 6: Saturday
     # @type [Number] week_offset
     attr_accessor :week_offset
 

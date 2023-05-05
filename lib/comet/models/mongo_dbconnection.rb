@@ -27,6 +27,8 @@ module Comet
     # @type [String] authentication_db
     attr_accessor :authentication_db
 
+    # Prior to Comet 22.12.3, must be a filesystem path to `mongo` (n.b. not `mongosh`). In Comet >=
+    # 22.12.3, not used.
     # @type [String] mongo_shell_path
     # @deprecated This member has been deprecated since Comet version 22.12.3
     attr_accessor :mongo_shell_path

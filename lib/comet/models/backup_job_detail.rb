@@ -24,15 +24,19 @@ module Comet
     # @type [Number] status
     attr_accessor :status
 
+    # Unix timestamp in seconds
     # @type [Number] start_time
     attr_accessor :start_time
 
+    # Unix timestamp in seconds. Will be zero if the job is still running.
     # @type [Number] end_time
     attr_accessor :end_time
 
+    # The Protected Item that this job is for
     # @type [String] source_guid
     attr_accessor :source_guid
 
+    # The Storage Vault that this job is for
     # @type [String] destination_guid
     attr_accessor :destination_guid
 
@@ -63,33 +67,43 @@ module Comet
     # @type [Number] download_size
     attr_accessor :download_size
 
+    # For Hyper-V and VMware backup jobs, the total number of virtual machines.
     # @type [Number] total_vm_count
     attr_accessor :total_vm_count
 
+    # For Office 365 backup jobs, the total number of mailboxes.
     # @type [Number] total_mails_count
     attr_accessor :total_mails_count
 
+    # For Office 365 backup jobs, the total number of SharePoint sites.
     # @type [Number] total_sites_count
     attr_accessor :total_sites_count
 
+    # For Office 365 backup jobs, the calculated effective number of protected accounts.
     # @type [Number] total_accounts_count
     attr_accessor :total_accounts_count
 
+    # For Office 365 backup jobs, the number of licensed mailboxes.
     # @type [Number] total_licensed_mails_count
     attr_accessor :total_licensed_mails_count
 
+    # For Office 365 backup jobs, the number of unlicensed mailboxes.
     # @type [Number] total_unlicensed_mails_count
     attr_accessor :total_unlicensed_mails_count
 
     # @type [String] cancellation_id
     attr_accessor :cancellation_id
 
+    # If this backup job is still running, additional partial-progress information may be present in
+    # this field.
     # @type [Comet::BackupJobProgress] progress
     attr_accessor :progress
 
+    # The size of the Storage Vault, as measured at the start of the job.
     # @type [Comet::SizeMeasurement] destination_size_start
     attr_accessor :destination_size_start
 
+    # The size of the Storage Vault, as measured at the end of the job.
     # @type [Comet::SizeMeasurement] destination_size_end
     attr_accessor :destination_size_end
 

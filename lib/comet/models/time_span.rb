@@ -12,9 +12,11 @@ module Comet
   # TimeSpan is a typed class wrapper around the underlying Comet Server API data structure.
   class TimeSpan
 
+    # SCHEDULE_FREQUENCY_<TYPE>
     # @type [Number] frequency_type
     attr_accessor :frequency_type
 
+    # Used for Periodic and Once Only
     # @type [Number] seconds
     attr_accessor :seconds
 

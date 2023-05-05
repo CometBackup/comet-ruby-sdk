@@ -12,12 +12,16 @@ module Comet
   # VMDKSnapshotViewOptions is a typed class wrapper around the underlying Comet Server API data structure.
   class VMDKSnapshotViewOptions
 
+    # Request a list of stored objects in vmdk file. It should be always true for restoring single files
+    # from vmdk file
     # @type [Boolean] enabled
     attr_accessor :enabled
 
+    # The vmdk filename inside subdirectory of disk image, should be end with .vmdk
     # @type [String] partition_guid
     attr_accessor :partition_guid
 
+    # Browse objects' paths inside vmdk file
     # @type [String] list_path
     attr_accessor :list_path
 

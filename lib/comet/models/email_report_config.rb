@@ -12,12 +12,15 @@ module Comet
   # EmailReportConfig is a typed class wrapper around the underlying Comet Server API data structure.
   class EmailReportConfig
 
+    # One of the EMAILREPORTTYPE_ constants
     # @type [Number] report_type
     attr_accessor :report_type
 
+    # Used as a list of scheduled times to send
     # @type [Array<Comet::ScheduleConfig>] summary_frequency
     attr_accessor :summary_frequency
 
+    # Used to the determine the time bounds of a report
     # @type [Comet::TimeSpan] time_span
     attr_accessor :time_span
 

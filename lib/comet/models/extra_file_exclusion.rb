@@ -12,12 +12,16 @@ module Comet
   # ExtraFileExclusion is a typed class wrapper around the underlying Comet Server API data structure.
   class ExtraFileExclusion
 
+    # The glob or regular expression to exclude from backup jobs
     # @type [String] exclude
     attr_accessor :exclude
 
+    # Choose whether the 'Exclude' parameter will be treated as a regular expression (true) or a glob
+    # (false)
     # @type [Boolean] regex
     attr_accessor :regex
 
+    # Either OS_ANY or one of the OS_ONLY constants
     # @type [Number] restrict_os
     attr_accessor :restrict_os
 

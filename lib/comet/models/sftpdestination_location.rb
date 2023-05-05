@@ -21,6 +21,7 @@ module Comet
     # @type [String] sftpremote_path
     attr_accessor :sftpremote_path
 
+    # One of the DESTINATION_SFTP_AUTHMODE_ constants
     # @type [Number] sftpauth_mode
     attr_accessor :sftpauth_mode
 

@@ -18,6 +18,7 @@ module Comet
     # @type [String] from_name
     attr_accessor :from_name
 
+    # One of the EMAIL_DELIVERY_ constants
     # @type [String] mode
     attr_accessor :mode
 
