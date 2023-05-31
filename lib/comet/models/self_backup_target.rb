@@ -15,6 +15,7 @@ module Comet
     # @type [Array<Comet::ScheduleConfig>] schedule
     attr_accessor :schedule
 
+    # Timezone in IANA format
     # @type [String] schedule_timezone
     attr_accessor :schedule_timezone
 
@@ -30,9 +31,12 @@ module Comet
     # @type [Number] encryption_key_format
     attr_accessor :encryption_key_format
 
+    # One of the COMPRESS_LVL_ constants
     # @type [Number] compression
     attr_accessor :compression
 
+    # The jobs database is often the largest component of the Server Self-Backup archive. By excluding
+    # it, you could run the Server Self-Backup more often.
     # @type [Boolean] exclude_jobs_db
     attr_accessor :exclude_jobs_db
 

@@ -10,6 +10,7 @@ require 'json'
 module Comet
 
   # UserProfileFragment is a typed class wrapper around the underlying Comet Server API data structure.
+  # @deprecated This type has been deprecated since Comet version 23.3.5
   class UserProfileFragment
 
     # @type [String] username

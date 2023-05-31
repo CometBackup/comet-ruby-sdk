@@ -18,9 +18,11 @@ module Comet
     # @type [String] port
     attr_accessor :port
 
+    # Optional
     # @type [String] username
     attr_accessor :username
 
+    # Optional
     # @type [String] password
     attr_accessor :password
 

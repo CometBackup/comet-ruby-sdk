@@ -35,6 +35,7 @@ module Comet
     # @type [Comet::EmailOptions] email
     attr_accessor :email
 
+    # An array of GUIDs that can enable additional early-access functionality
     # @type [Array<String>] experimental_options
     attr_accessor :experimental_options
 
@@ -47,18 +48,22 @@ module Comet
     # @type [Comet::LicenseOptions] license
     attr_accessor :license
 
+    # Configure ip, port, and SSL settings for this self-hosted Comet Server.
     # @type [Array<Comet::HTTPConnectorOptions>] listen_addresses
     attr_accessor :listen_addresses
 
+    # Tenants
     # @type [Hash{String => Comet::Organization}] organizations
     attr_accessor :organizations
 
     # @type [Array<Comet::PSAConfig>] psaconfigs
     attr_accessor :psaconfigs
 
+    # Automatically create backup zip files of this Comet Server's configuration
     # @type [Comet::SelfBackupOptions] self_backup
     attr_accessor :self_backup
 
+    # Control how long admin accounts can remain logged in to the Comet Server web interface
     # @type [Comet::SessionOptions] session_settings
     attr_accessor :session_settings
 
@@ -68,11 +73,17 @@ module Comet
     # @type [Comet::StorageRoleOptions] storage_role
     attr_accessor :storage_role
 
+    # If true, the X-Forwarded-For header will be trusted for the purposes of IP allowlisting. This
+    # should only be enabled when you explicitly configure Comet Server behind a reverse proxy,
+    # otherwise it could allow malicious users to bypass the IP allowlist.
     # @type [Boolean] trust_xforwarded_for
     attr_accessor :trust_xforwarded_for
 
     # @type [Hash{String => Comet::WebhookOption}] webhook_options
     attr_accessor :webhook_options
+
+    # @type [Hash{String => Comet::FileOption}] audit_file_options
+    attr_accessor :audit_file_options
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -100,6 +111,7 @@ module Comet
       @software_build_role = Comet::SoftwareBuildRoleOptions.new
       @storage_role = Comet::StorageRoleOptions.new
       @webhook_options = {}
+      @audit_file_options = {}
       @unknown_json_fields = {}
     end
 
@@ -222,6 +234,16 @@ module Comet
               @webhook_options[k1].from_hash(v1)
             end
           end
+        when 'AuditFileOptions'
+          @audit_file_options = {}
+          if v.nil?
+            @audit_file_options = {}
+          else
+            v.each do |k1, v1|
+              @audit_file_options[k1] = Comet::FileOption.new
+              @audit_file_options[k1].from_hash(v1)
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -254,6 +276,7 @@ module Comet
       ret['StorageRole'] = @storage_role
       ret['TrustXForwardedFor'] = @trust_xforwarded_for
       ret['WebhookOptions'] = @webhook_options
+      ret['AuditFileOptions'] = @audit_file_options
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

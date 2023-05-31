@@ -21,19 +21,23 @@ module Comet
     # @type [String] ftppassword
     attr_accessor :ftppassword
 
+    # If true, store data in the default home directory given by the FTP server. If false, store data in
+    # the FTPCustomBaseDirectory path.
     # @type [Boolean] ftpbase_use_home_directory
     attr_accessor :ftpbase_use_home_directory
 
+    # If FTPBaseUseHomeDirectory is false, this field controls the path where data is stored.
     # @type [String] ftpcustom_base_directory
     attr_accessor :ftpcustom_base_directory
 
-    # One of the FTPS_MODE_ constants.
+    # Control whether this is plaintext FTP or secure FTPS by using one of the FTPS_MODE_ constants.
     # @type [Number] ftpsmode
     attr_accessor :ftpsmode
 
     # @type [Number] ftpport
     attr_accessor :ftpport
 
+    # If set to zero, uses a system default value that is not unlimited.
     # @type [Number] ftpmax_connections
     attr_accessor :ftpmax_connections
 

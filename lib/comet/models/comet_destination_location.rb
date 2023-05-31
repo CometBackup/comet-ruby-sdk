@@ -12,6 +12,7 @@ module Comet
   # CometDestinationLocation is a typed class wrapper around the underlying Comet Server API data structure.
   class CometDestinationLocation
 
+    # The URL for the target Comet Server Storage Role, including http/https and trailing slash
     # @type [String] comet_server
     attr_accessor :comet_server
 

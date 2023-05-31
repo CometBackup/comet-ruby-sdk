@@ -10,14 +10,23 @@ require 'json'
 module Comet
 
   # Office365CustomSettingV2 is a typed class wrapper around the underlying Comet Server API data structure.
+  # Office365CustomSettingV2 is used in the EngineProps for an Office 365 Protected Item (see
+# ENGINE_BUILTIN_MSOFFICE).
+  # This type is available in Comet 21.9.xx and later.
   class Office365CustomSettingV2
 
+    # If true, then backup the entire Office 365 Tenant except the selected members. If false, backup
+    # the selected members only.
     # @type [Boolean] organization
     attr_accessor :organization
 
+    # Key can be the ID of user, group or SharePoint
+    # Value is a bitset of the SERVICE_ constants, to select which services to back up for this member.
     # @type [Hash{String => Number}] backup_options
     attr_accessor :backup_options
 
+    # Key must be a group ID
+    # Value is a bitset of the SERVICE_ constants, to select which services to back up for this member.
     # @type [Hash{String => Number}] member_backup_options
     attr_accessor :member_backup_options
 

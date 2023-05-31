@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.3.7'
+  APPLICATION_VERSION = '23.5.0'
 
   APPLICATION_VERSION_MAJOR = 23
 
-  APPLICATION_VERSION_MINOR = 3
+  APPLICATION_VERSION_MINOR = 5
 
-  APPLICATION_VERSION_REVISION = 7
+  APPLICATION_VERSION_REVISION = 0
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -27,12 +27,16 @@ module Comet
   # AutoRetentionLevel: The system will follow the automatic ruleset for a 'Low Power' device.
   BACKUPJOBAUTORETENTION_LESS_OFTEN = 3
 
+  # If set, will be automatically replaced with one of the other BRANDINGSTYLETYPE_ constants after next server upgrade.
   BRANDINGSTYLETYPE_AUTO_LEGACY = 0
 
+  # Use Comet company branding and colours for all web interface branding
   BRANDINGSTYLETYPE_DEFAULT = 1
 
+  # Use custom branding and colours, with text in the main logo area.
   BRANDINGSTYLETYPE_CUSTOM_TEXT = 2
 
+  # Use custom branding and colours, with a supplied image in the main logo area.
   BRANDINGSTYLETYPE_CUSTOM_LOGO = 3
 
   # ClientBrandingBuildMode: The software client will be custom-built by this Comet Server, allowing custom branding, default server URL, and codesigning.
@@ -81,28 +85,40 @@ module Comet
 
   DESTINATIONTYPE___INVALID = 0
 
+  # S3-compatible, or a specific S3 service such as AWS S3, Wasabi, or iDrive e2
   DESTINATIONTYPE_S3 = 1000
 
+  # SFTP protocol
   DESTINATIONTYPE_SFTP = 1001
 
+  # Local Path
   DESTINATIONTYPE_LOCALCOPY = 1002
 
+  # The Comet Server Storage Role protocol
   DESTINATIONTYPE_COMET = 1003
 
+  # FTP protocol
   DESTINATIONTYPE_FTP = 1004
 
+  # Azure Blob Storage
   DESTINATIONTYPE_AZUREBLOB = 1005
 
+  # Spanned
   DESTINATIONTYPE_SPANNED = 1006
 
+  # Openstack Swift
   DESTINATIONTYPE_SWIFT = 1007
 
+  # Backblaze B2 (Native API)
   DESTINATIONTYPE_B2 = 1008
 
+  # Storj
   DESTINATIONTYPE_STORJ = 1009
 
+  # When defining a schedule via policy, use this option to dynamically select the Storage Vault that was created most recently.
   DESTINATIONTYPE_LATEST = 1100
 
+  # When defining a schedule via policy, use this option to create a schedule for each Storage Vault in the user's profile.
   DESTINATIONTYPE_ALL = 1101
 
   # The Comet Server is still starting up and has not yet checked whether any email reports are due to be sent.
@@ -192,25 +208,25 @@ module Comet
   # Office 365
   ENGINE_BUILTIN_MSOFFICE = 'engine1/winmsofficemail'
 
-  # FtpsModeType
+  # FtpsModeType: Use plain FTP, do not use FTPS.
   FTPS_MODE_PLAINTEXT = 0
 
-  # FtpsModeType
+  # FtpsModeType: Use implicit FTPS, immediately creating a secure SSL/TLS channel before any data is sent. This usually requires a different port on the FTP server. It is generally advised to use explicit mode instead.
   FTPS_MODE_IMPLICIT = 1
 
-  # FtpsModeType
+  # FtpsModeType: Use explicit FTPS, first creating an insecure connection and then upgrading to SSL/TLS using AUTH TLS (like STARTTLS).
   FTPS_MODE_EXPLICIT = 2
 
-  # JobClassification
+  # JobClassification: All BackupJobDetail.Classification fields will fall in the 4xxx range.
   JOB_CLASSIFICATION__MIN = 4000
 
   # JobClassification
   JOB_CLASSIFICATION_UNKNOWN = 4000
 
-  # JobClassification
+  # JobClassification: This is a backup job.
   JOB_CLASSIFICATION_BACKUP = 4001
 
-  # JobClassification
+  # JobClassification: This is a restore job.
   JOB_CLASSIFICATION_RESTORE = 4002
 
   # JobClassification: Automatic or manual retention cleaning pass.
@@ -228,13 +244,13 @@ module Comet
   # JobClassification: Software update
   JOB_CLASSIFICATION_UPDATE = 4007
 
-  # JobClassification
+  # JobClassification: Importing settings from another installed product
   JOB_CLASSIFICATION_IMPORT = 4008
 
   # JobClassification: Repair indexes
   JOB_CLASSIFICATION_REINDEX = 4009
 
-  # JobClassification
+  # JobClassification: Deep Verify
   JOB_CLASSIFICATION_DEEPVERIFY = 4010
 
   # JobClassification: Software uninstall
@@ -243,7 +259,7 @@ module Comet
   # JobClassification
   JOB_CLASSIFICATION__MAX = 4999
 
-  # JobStatus
+  # JobStatus: If the BackupJobDetail.Status field is a 5xxx code, the job has stopped for a successful reason.
   JOB_STATUS_STOP_SUCCESS__MIN = 5000
 
   # JobStatus
@@ -252,7 +268,7 @@ module Comet
   # JobStatus
   JOB_STATUS_STOP_SUCCESS__MAX = 5999
 
-  # JobStatus
+  # JobStatus: If the BackupJobDetail.Status field is a 6xxx code, the job is still running.
   JOB_STATUS_RUNNING__MIN = 6000
 
   # JobStatus: Unused
@@ -267,7 +283,7 @@ module Comet
   # JobStatus
   JOB_STATUS_RUNNING__MAX = 6999
 
-  # JobStatus
+  # JobStatus: If the BackupJobDetail.Status field is a 7xxx code, the job has stopped for an unsuccessful reason.
   JOB_STATUS_FAILED__MIN = 7000
 
   # JobStatus
@@ -306,13 +322,13 @@ module Comet
   # LDAPSecurityMethod
   LDAPSECURITYMETHOD_STARTTLS = 'starttls'
 
-  # MacOSCodesignLevel
+  # MacOSCodesignLevel: Sign only
   MACOSCODESIGN_LEVEL_SIGN = 0
 
-  # MacOSCodesignLevel
+  # MacOSCodesignLevel: Sign and notarize
   MACOSCODESIGN_LEVEL_SIGN_NOTARISE = 1
 
-  # MacOSCodesignLevel
+  # MacOSCodesignLevel: Sign, notarize, and staple
   MACOSCODESIGN_LEVEL_SIGN_NOTARISE_STAPLE = 2
 
   MIXED_VIRTUAL_ACCOUNT_TYPE_USER = 1
@@ -380,7 +396,7 @@ module Comet
   # PSAType
   PSA_TYPE_GRADIENT = 1
 
-  RELEASE_CODENAME = 'Voyager'
+  RELEASE_CODENAME = 'Thebe'
 
   # RemoteServerType
   REMOTESERVER_COMET = 'comet'
@@ -430,58 +446,58 @@ module Comet
   # ReplicatorDisplayClass
   REPLICATOR_DISPLAYCLASS_USER = 101
 
-  # RestoreArchiveFormat
+  # RestoreArchiveFormat: Tar file format
   RESTOREARCHIVEFORMAT_TAR = 0
 
-  # RestoreArchiveFormat
+  # RestoreArchiveFormat: Compressed Tar.gz (.tgz) file format
   RESTOREARCHIVEFORMAT_TARGZ = 1
 
-  # RestoreArchiveFormat
+  # RestoreArchiveFormat: Zip file format
   RESTOREARCHIVEFORMAT_ZIP = 2
 
   # RestoreArchiveFormat: SquashFS container
   RESTOREARCHIVEFORMAT_SQFS = 3
 
-  # RestoreArchiveFormat
+  # RestoreArchiveFormat: Compressed Tar.zstd (.tzst) file format
   RESTOREARCHIVEFORMAT_TARZSTD = 4
 
   # RestoreType
   RESTORETYPE_INVALID = -1
 
-  # RestoreType
+  # RestoreType: Restore as files and folders
   RESTORETYPE_FILE = 0
 
-  # RestoreType
+  # RestoreType: Download and reconstruct files, but do not save them (for test purposes)
   RESTORETYPE_NULL = 1
 
-  # RestoreType
+  # RestoreType: Stream each restored file into the target command stdin. The target command may be executed multiple times, once for each restored file.
   RESTORETYPE_PROCESS_PERFILE = 2
 
-  # RestoreType
+  # RestoreType: Stream an archive of each restored file into the target command stdin. The target command will be executed only once.
   RESTORETYPE_PROCESS_ARCHIVE = 3
 
-  # RestoreType
+  # RestoreType: Restore partitions back to the physical disk
   RESTORETYPE_WINDISK = 4
 
-  # RestoreType
+  # RestoreType: Restore selected files and folders as a single compressed archive
   RESTORETYPE_FILE_ARCHIVE = 5
 
-  # RestoreType
+  # RestoreType: Restore selected Office 365 emails, contacts, calendars, and SharePoint/OneDrive data directly to the Office 365 cloud service
   RESTORETYPE_OFFICE365_CLOUD = 6
 
-  # RestoreType
+  # RestoreType: Granular restore of single files from within a Disk Image or Hyper-V backup
   RESTORETYPE_VMDK_FILE = 7
 
-  # RestoreType
+  # RestoreType: Granular restore of single files from within a Disk Image or Hyper-V backup, downloading and reconstructing files, but without saving them (for test purposes)
   RESTORETYPE_VMDK_FILE_NULL = 8
 
-  # RestoreType
+  # RestoreType: Granular restore of single files from within a Disk Image or Hyper-V backup, creating an archive file of all selected files
   RESTORETYPE_VMDK_FILE_ARCHIVE = 9
 
-  # RestoreType
+  # RestoreType: Stream restore as SQL statements into a target MySQL server
   RESTORETYPE_MYSQL = 10
 
-  # RestoreType
+  # RestoreType: Stream restore as T-SQL BACKUP output into a target Microsoft SQL Server
   RESTORETYPE_MSSQL = 11
 
   # RestoreType: Legacy name alias - Prefer to use RESTORETYPE_PROCESS_ARCHIVE since multiple archive file formats are supported within this single RESTORETYPE_
@@ -626,14 +642,19 @@ module Comet
 
   SEARCHOPERATOR_BOOL_NIS = 'bool_nis'
 
+  # 0000 0001. If this value is present in the bitset, then the Calendar service is selected for backup.
   SERVICE_CALENDAR = 1
 
+  # 0000 0010. If this value is present in the bitset, then the Contact service is selected for backup.
   SERVICE_CONTACT = 2
 
+  # 0000 0100. If this value is present in the bitset, then the Mail service is selected for backup.
   SERVICE_MAIL = 4
 
+  # 0000 1000. If this value is present in the bitset, then the SharePoint service is selected for backup.
   SERVICE_SHAREPOINT = 8
 
+  # 0001 0000. If this value is present in the bitset, then the OneDrive service is selected for backup.
   SERVICE_ONEDRIVE = 16
 
   # DefaultSettingMode
@@ -663,26 +684,110 @@ module Comet
   # StreamableEventType
   SEVT__MIN = 4000
 
-  # StreamableEventType: This event is emitted when the webhook is registered, or when the server starts up. The Data associated is ServerMetaVersionInfo
+  # StreamableEventType: New websocket connection. Data is typically ServerMetaVersionInfo
   SEVT_META_HELLO = 4000
 
-  # StreamableEventType: Data is the profile object
+  # StreamableEventType: User created. Data is the profile object
   SEVT_ACCOUNT_NEW = 4100
 
-  # StreamableEventType: Data is the username
+  # StreamableEventType: User deleted
   SEVT_ACCOUNT_REMOVED = 4101
 
-  # StreamableEventType: Data is the profile object
+  # StreamableEventType: User updated. Data is the profile object
   SEVT_ACCOUNT_UPDATED = 4102
 
-  # StreamableEventType
+  # StreamableEventType: User authentication succeeded. Only emitted for non-session requests. Resource is the requested path
+  SEVT_ACCOUNT_LOGIN = 4103
+
+  # StreamableEventType: User authentication failed. Only emitted if the user exists. Resource is the requested path
+  SEVT_ACCOUNT_LOGIN_FAILED = 4104
+
+  # StreamableEventType: User session token created. Data is the session object
+  SEVT_ACCOUNT_SESSION_START = 4105
+
+  # StreamableEventType: User session token deleted
+  SEVT_ACCOUNT_SESSION_REVOKE = 4106
+
+  # StreamableEventType: User session token expired
+  SEVT_ACCOUNT_SESSION_EXPIRE = 4107
+
+  # StreamableEventType: Admin created. Data is the profile object
+  SEVT_ACCOUNT_ADMIN_NEW = 4150
+
+  # StreamableEventType: Admin deleted
+  SEVT_ACCOUNT_ADMIN_REMOVED = 4151
+
+  # StreamableEventType: Admin updated
+  SEVT_ACCOUNT_ADMIN_UPDATED = 4152
+
+  # StreamableEventType: Admin authentication suceeded. Only emitted for non-session requests. Resource is the requested path
+  SEVT_ACCOUNT_ADMIN_LOGIN = 4153
+
+  # StreamableEventType: Admin authentication failed. Only emitted if the admin exists. Resource is the request path
+  SEVT_ACCOUNT_ADMIN_LOGIN_FAILED = 4154
+
+  # StreamableEventType: Admin session token created. Data is the session object
+  SEVT_ACCOUNT_ADMIN_SESSION_START = 4155
+
+  # StreamableEventType: Admin session token deleted
+  SEVT_ACCOUNT_ADMIN_SESSION_REVOKE = 4156
+
+  # StreamableEventType: Admin session token expired
+  SEVT_ACCOUNT_ADMIN_SESSION_EXPIRE = 4157
+
+  # StreamableEventType: New backup job started. Data is the job object
   SEVT_JOB_NEW = 4200
 
-  # StreamableEventType
+  # StreamableEventType: Backup job completed. Data is the job object
   SEVT_JOB_COMPLETED = 4201
 
-  # StreamableEventType: Data is the string bucket ref
+  # StreamableEventType: New bucket created
   SEVT_BUCKET_NEW = 4300
+
+  # StreamableEventType: Bucket deleted
+  SEVT_BUCKET_REMOVED = 4301
+
+  # StreamableEventType: Server started
+  SEVT_SERVER_STARTED = 4400
+
+  # StreamableEventType: Server restarting (pending)
+  SEVT_SERVER_RESTARTED = 4401
+
+  # StreamableEventType: Server shutting down (pending)
+  SEVT_SERVER_SHUTDOWN = 4402
+
+  # StreamableEventType: Server configuration has been updated. Data is the server config object
+  SEVT_SERVER_UPDATED = 4403
+
+  # StreamableEventType: Tenant created. Data is the tenant object
+  SEVT_TENANT_NEW = 4500
+
+  # StreamableEventType: Tenant deleted
+  SEVT_TENANT_REMOVED = 4501
+
+  # StreamableEventType: Tenant updated. Data is the tenant object
+  SEVT_TENANT_UPDATED = 4502
+
+  # StreamableEventType: Policy created. Data is the policy object
+  SEVT_POLICY_NEW = 4600
+
+  # StreamableEventType: Policy deleted
+  SEVT_POLICY_REMOVED = 4601
+
+  # StreamableEventType: Policy updated. Data is the policy object
+  SEVT_POLICY_UPDATED = 4602
+
+  # StreamableEventType: Device created. Data is device object
+  SEVT_DEVICE_NEW = 4700
+
+  # StreamableEventType: Device deleted
+  SEVT_DEVICE_REMOVED = 4701
+
+  # StreamableEventType: Device live connection started
+  SEVT_DEVICE_LIVE_CONNECT = 4702
+
+  # StreamableEventType: Device live connection ended
+  SEVT_DEVICE_LIVE_DISCONNECT = 4703
 
   # StreamableEventType
   SEVT__MAX = 4999
@@ -774,6 +879,24 @@ module Comet
   # StoredObjectType
   STOREDOBJECTTYPE_VHDX_MBR_PARTITION = 'vhdxpartitionmbr'
 
+  # StreamLevel: Event data contains full data types
+  STREAM_LEVEL_FULL = 'full'
+
+  # StreamLevel: Event data contains nothing
+  STREAM_LEVEL_NONE = 'none'
+
+  # StreamerType
+  STREAMER_TYPE_INTERNAL = 'internal'
+
+  # StreamerType
+  STREAMER_TYPE_WEBHOOK = 'webhook'
+
+  # StreamerType
+  STREAMER_TYPE_WEBSOCKET = 'websocket'
+
+  # StreamerType
+  STREAMER_TYPE_FILE = 'file'
+
   # If an API response returns in failure, but it includes this value in the CometAPIResponseMessage->Message parameter, it indicates that your supplied authentication was insufficient, and you must supply additional two-factor authentication credentials.
   TOTPREQUIRED_ERROR = 'ERR_TOTP_REQUIRED'
 
@@ -825,7 +948,7 @@ module Comet
   # WebAuthnDeviceType
   WEBAUTHN_DEVICE_TYPE__TPM_LINUX = 6
 
-  # WindowsCodesignMethod: When upgrading from a version of Comet Server prior to 22.12.7, this option will be automatically converted to a more specific type..
+  # WindowsCodesignMethod: When upgrading from a version of Comet Server prior to 22.12.7, this option will be automatically converted to a more specific type.
   # @deprecated This const has been deprecated since Comet version 22.12.7
   WINDOWSCODESIGN_METHOD_AUTO = 0
 

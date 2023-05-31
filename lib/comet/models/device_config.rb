@@ -15,6 +15,7 @@ module Comet
     # @type [String] friendly_name
     attr_accessor :friendly_name
 
+    # Unix timestamp in seconds
     # @type [Number] registration_time
     attr_accessor :registration_time
 

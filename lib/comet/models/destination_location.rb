@@ -10,11 +10,16 @@ require 'json'
 module Comet
 
   # DestinationLocation is a typed class wrapper around the underlying Comet Server API data structure.
+  # DestinationLocation describes the underlying storage location for a Storage Vault.
+# Prior to Comet 17.3.3 this was an embedded part of the DestinationConfig type.
+  # This type is available in Comet 17.3.3 and later.
   class DestinationLocation
 
+    # One of the DESTINATIONTYPE_ constants
     # @type [Number] destination_type
     attr_accessor :destination_type
 
+    # The URL for the target Comet Server Storage Role, including http/https and trailing slash
     # @type [String] comet_server
     attr_accessor :comet_server
 
@@ -61,6 +66,7 @@ module Comet
     # @type [String] sftpusername
     attr_accessor :sftpusername
 
+    # The directory on the SFTP server in which data is stored.
     # @type [String] sftpremote_path
     attr_accessor :sftpremote_path
 
@@ -68,15 +74,21 @@ module Comet
     # @type [Number] sftpauth_mode
     attr_accessor :sftpauth_mode
 
+    # For use with DESTINATION_SFTP_AUTHMODE_PASSWORD only: the SSH password to connect with
     # @type [String] sftppassword
     attr_accessor :sftppassword
 
+    # For use with DESTINATION_SFTP_AUTHMODE_PRIVATEKEY only: the SSH private key to connect with, in
+    # OpenSSH format.
     # @type [String] sftpprivate_key
     attr_accessor :sftpprivate_key
 
+    # If true, then the SFTPCustomAuth_KnownHostsFile will be used to verify the remote SSH server's
+    # host key, using Trust On First Use (TOFU).
     # @type [Boolean] sftpcustom_auth__use_known_hosts_file
     attr_accessor :sftpcustom_auth__use_known_hosts_file
 
+    # If SFTPCustomAuth_UseKnownHostFile is true, the path to the SSH known_hosts file.
     # @type [String] sftpcustom_auth__known_hosts_file
     attr_accessor :sftpcustom_auth__known_hosts_file
 
@@ -89,19 +101,23 @@ module Comet
     # @type [String] ftppassword
     attr_accessor :ftppassword
 
+    # If true, store data in the default home directory given by the FTP server. If false, store data in
+    # the FTPCustomBaseDirectory path.
     # @type [Boolean] ftpbase_use_home_directory
     attr_accessor :ftpbase_use_home_directory
 
+    # If FTPBaseUseHomeDirectory is false, this field controls the path where data is stored.
     # @type [String] ftpcustom_base_directory
     attr_accessor :ftpcustom_base_directory
 
-    # One of the FTPS_MODE_ constants.
+    # Control whether this is plaintext FTP or secure FTPS by using one of the FTPS_MODE_ constants.
     # @type [Number] ftpsmode
     attr_accessor :ftpsmode
 
     # @type [Number] ftpport
     attr_accessor :ftpport
 
+    # If set to zero, uses a system default value that is not unlimited.
     # @type [Number] ftpmax_connections
     attr_accessor :ftpmax_connections
 
@@ -127,12 +143,17 @@ module Comet
     # @type [String] localcopy_path
     attr_accessor :localcopy_path
 
+    # If logging in to a Windows network share (SMB/CIFS) is required, enter the username here.
     # @type [String] localcopy_win_smbusername
     attr_accessor :localcopy_win_smbusername
 
+    # If logging in to a Windows network share (SMB/CIFS) is required, enter the password here. The
+    # password may be hashed as per the LocalcopyWinSMBPasswordFormat field.
     # @type [String] localcopy_win_smbpassword
     attr_accessor :localcopy_win_smbpassword
 
+    # One of the PASSWORD_FORMAT_ constants. It controls the hash format of the LocalcopyWinSMBPassword
+    # field.
     # @type [Number] localcopy_win_smbpassword_format
     attr_accessor :localcopy_win_smbpassword_format
 
@@ -145,9 +166,20 @@ module Comet
     # @type [Comet::StorjDestinationLocation] storj
     attr_accessor :storj
 
+    # A list of underlying destinations, that will be combined and presented as one.
     # @type [Array<Comet::DestinationLocation>] span_targets
     attr_accessor :span_targets
 
+    # If true, this Spanned destination will use a consistent hashing scheme
+    # to immediately find specific files on exactly one of the target destinations.
+    # In the Static Slots mode, the span targets cannot be moved or merged, and
+    # the files must always remain in their original location.
+    #
+    # If false, the Spanned destination system will search all targets to find
+    # the requested file. This is slightly slower, but allows you to freely merge,
+    # split, and reorder the underlying destination locations.
+    #
+    # The default option is false.
     # @type [Boolean] span_use_static_slots
     attr_accessor :span_use_static_slots
 

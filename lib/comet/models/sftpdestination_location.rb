@@ -18,6 +18,7 @@ module Comet
     # @type [String] sftpusername
     attr_accessor :sftpusername
 
+    # The directory on the SFTP server in which data is stored.
     # @type [String] sftpremote_path
     attr_accessor :sftpremote_path
 
@@ -25,15 +26,21 @@ module Comet
     # @type [Number] sftpauth_mode
     attr_accessor :sftpauth_mode
 
+    # For use with DESTINATION_SFTP_AUTHMODE_PASSWORD only: the SSH password to connect with
     # @type [String] sftppassword
     attr_accessor :sftppassword
 
+    # For use with DESTINATION_SFTP_AUTHMODE_PRIVATEKEY only: the SSH private key to connect with, in
+    # OpenSSH format.
     # @type [String] sftpprivate_key
     attr_accessor :sftpprivate_key
 
+    # If true, then the SFTPCustomAuth_KnownHostsFile will be used to verify the remote SSH server's
+    # host key, using Trust On First Use (TOFU).
     # @type [Boolean] sftpcustom_auth__use_known_hosts_file
     attr_accessor :sftpcustom_auth__use_known_hosts_file
 
+    # If SFTPCustomAuth_UseKnownHostFile is true, the path to the SSH known_hosts file.
     # @type [String] sftpcustom_auth__known_hosts_file
     attr_accessor :sftpcustom_auth__known_hosts_file
 

@@ -10,6 +10,9 @@ require 'json'
 module Comet
 
   # BackupJobAdvancedOptions is a typed class wrapper around the underlying Comet Server API data structure.
+  # BackupJobAdvancedOptions control additional advanced options for running a backup job. They can be
+# specified as part of a schedule in the BackupRuleConfig type, or supplied immediately when running
+# a job.
   class BackupJobAdvancedOptions
 
     # @type [Boolean] skip_already_running

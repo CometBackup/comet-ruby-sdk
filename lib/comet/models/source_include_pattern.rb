@@ -10,11 +10,16 @@ require 'json'
 module Comet
 
   # SourceIncludePattern is a typed class wrapper around the underlying Comet Server API data structure.
+  # SourceIncludePattern is used for pattern inclusions for File and Folder Protected Items
+# (ENGINE_BUILTIN_FILE).
+# It should be marshalled as JSON and then stored in the PINCLUDE / RINCLUDE EngineProp keys.
   class SourceIncludePattern
 
+    # The filesystem path to search within, for matches
     # @type [String] top_directory
     attr_accessor :top_directory
 
+    # The pattern (glob or regex format) to match
     # @type [String] value
     attr_accessor :value
 

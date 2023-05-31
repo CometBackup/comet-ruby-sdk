@@ -15,6 +15,18 @@ module Comet
     # @type [Number] bytes
     attr_accessor :bytes
 
+    # A list of strings describing which groups of snapshots rely on reaching this component of data.
+    # The strings may take the following formats:
+    # - source_id/CURRENT - this data is required by the most recent backup job snapshot for the listed
+    # Protected Item source.
+    # - source_id/HISTORIC - this data is required by an older backup job snapshot for the listed
+    # Protected Item source.
+    # - TRUNCATED/* - there are too many separate components to show, and this component represents data
+    # that is used by some other combination of components. If present, it will be the only entry in the
+    # UsedBy array.
+    # - the empty string - this amount of data is not currently referenced by any backup job snapshots.
+    # If that remains the case by the next retention pass, this much data will be deleted to free up
+    # space. If present, it will be the only entry in the UsedBy array.
     # @type [Array<String>] used_by
     attr_accessor :used_by
 

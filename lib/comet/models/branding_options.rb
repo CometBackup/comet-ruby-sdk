@@ -12,6 +12,8 @@ module Comet
   # BrandingOptions is a typed class wrapper around the underlying Comet Server API data structure.
   class BrandingOptions
 
+    # One of the BRANDINGSTYLETYPE_ constants
+    # This field is available in Comet 23.3.3 and later.
     # @type [Number] branding_style_type
     attr_accessor :branding_style_type
 

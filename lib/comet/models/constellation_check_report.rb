@@ -12,9 +12,11 @@ module Comet
   # ConstellationCheckReport is a typed class wrapper around the underlying Comet Server API data structure.
   class ConstellationCheckReport
 
+    # Unix timestamp in seconds
     # @type [Number] check_started
     attr_accessor :check_started
 
+    # Unix timestamp in seconds
     # @type [Number] check_completed
     attr_accessor :check_completed
 

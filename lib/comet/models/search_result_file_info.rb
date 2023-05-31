@@ -10,29 +10,41 @@ require 'json'
 module Comet
 
   # SearchResultFileInfo is a typed class wrapper around the underlying Comet Server API data structure.
+  # SearchResultFileInfo describes a single result entry when searching for files within a Storage
+# Vault snapshot.
   class SearchResultFileInfo
 
+    # Path to the file within the selected snapshot, using forwardslash (/) separators
     # @type [String] path
     attr_accessor :path
 
+    # Filename
     # @type [String] name
     attr_accessor :name
 
+    # One of the STOREDOBJECTTYPE_ constants
     # @type [String] type
     attr_accessor :type
 
     # @type [String] mode
     attr_accessor :mode
 
-    # @type [String] mtime
-    attr_accessor :mtime
+    # Timestamp in RFC3339 format with subsecond precision and time zone offset. See the Golang
+    # time.RFC3339Nano for more information.
+    # @type [String] mod_time
+    attr_accessor :mod_time
 
-    # @type [String] atime
-    attr_accessor :atime
+    # Timestamp in RFC3339 format with subsecond precision and time zone offset. See the Golang
+    # time.RFC3339Nano for more information.
+    # @type [String] access_time
+    attr_accessor :access_time
 
-    # @type [String] ctime
-    attr_accessor :ctime
+    # Timestamp in RFC3339 format with subsecond precision and time zone offset. See the Golang
+    # time.RFC3339Nano for more information.
+    # @type [String] change_time
+    attr_accessor :change_time
 
+    # Bytes
     # @type [Number] size
     attr_accessor :size
 
@@ -48,9 +60,9 @@ module Comet
       @name = ''
       @type = ''
       @mode = ''
-      @mtime = ''
-      @atime = ''
-      @ctime = ''
+      @mod_time = ''
+      @access_time = ''
+      @change_time = ''
       @size = 0
       @unknown_json_fields = {}
     end
@@ -87,15 +99,15 @@ module Comet
         when 'mtime'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @mtime = v
+          @mod_time = v
         when 'atime'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @atime = v
+          @access_time = v
         when 'ctime'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @ctime = v
+          @change_time = v
         when 'size'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -112,11 +124,21 @@ module Comet
       ret['path'] = @path
       ret['name'] = @name
       ret['type'] = @type
-      ret['mode'] = @mode
-      ret['mtime'] = @mtime
-      ret['atime'] = @atime
-      ret['ctime'] = @ctime
-      ret['size'] = @size
+      unless @mode.nil?
+        ret['mode'] = @mode
+      end
+      unless @mod_time.nil?
+        ret['mtime'] = @mod_time
+      end
+      unless @access_time.nil?
+        ret['atime'] = @access_time
+      end
+      unless @change_time.nil?
+        ret['ctime'] = @change_time
+      end
+      unless @size.nil?
+        ret['size'] = @size
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

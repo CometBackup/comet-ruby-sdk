@@ -18,6 +18,7 @@ module Comet
     # @type [Number] o365account_count
     attr_accessor :o365account_count
 
+    # Bytes
     # @type [Number] size
     attr_accessor :size
 

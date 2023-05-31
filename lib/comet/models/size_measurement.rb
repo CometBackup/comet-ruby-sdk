@@ -12,12 +12,15 @@ module Comet
   # SizeMeasurement is a typed class wrapper around the underlying Comet Server API data structure.
   class SizeMeasurement
 
+    # Bytes
     # @type [Number] size
     attr_accessor :size
 
+    # Unix timestamp in seconds
     # @type [Number] measure_started
     attr_accessor :measure_started
 
+    # Unix timestamp in seconds
     # @type [Number] measure_completed
     attr_accessor :measure_completed
 

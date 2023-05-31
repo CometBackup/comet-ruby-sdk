@@ -12,13 +12,16 @@ module Comet
   # BackupJobProgress is a typed class wrapper around the underlying Comet Server API data structure.
   class BackupJobProgress
 
+    # This field will always increase monotonically, exactly once, for every change to the
+    # BackupJobProgress for a given backup job.
     # @type [Number] counter
     attr_accessor :counter
 
+    # Unix timestamp in seconds
     # @type [Number] sent_time
     attr_accessor :sent_time
 
-    # The typo is preserved for backwards-compatibility reasons.
+    # Unix timestamp in seconds. The typo is preserved for backwards-compatibility reasons.
     # @type [Number] recieved_time
     attr_accessor :recieved_time
 

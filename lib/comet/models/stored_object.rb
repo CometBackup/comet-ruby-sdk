@@ -12,9 +12,11 @@ module Comet
   # StoredObject is a typed class wrapper around the underlying Comet Server API data structure.
   class StoredObject
 
+    # The name of the stored object. It is unique within this directory tree.
     # @type [String] name
     attr_accessor :name
 
+    # Unix timestamp in seconds
     # @type [Number] modify_time
     attr_accessor :modify_time
 
@@ -22,9 +24,12 @@ module Comet
     # @type [String] type
     attr_accessor :type
 
+    # If this StoredObject represents a directory, this value can be used to recursively select the
+    # directory contents.
     # @type [String] subtree
     attr_accessor :subtree
 
+    # Bytes
     # @type [Number] size
     attr_accessor :size
 
@@ -46,9 +51,11 @@ module Comet
     # @type [Boolean] has_attachments
     attr_accessor :has_attachments
 
+    # Unix timestamp in seconds
     # @type [Number] start_time
     attr_accessor :start_time
 
+    # Unix timestamp in seconds
     # @type [Number] end_time
     attr_accessor :end_time
 

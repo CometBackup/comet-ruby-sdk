@@ -10,6 +10,8 @@ require 'json'
 module Comet
 
   # AzureDestinationLocation is a typed class wrapper around the underlying Comet Server API data structure.
+  # AzureDestinationLocation allows configuring connection settings for storage locations using the
+# Azure Blob Storage API (DESTINATIONTYPE_AZURE).
   class AzureDestinationLocation
 
     # @type [String] azbaccount_name

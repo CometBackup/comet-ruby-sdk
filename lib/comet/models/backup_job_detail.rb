@@ -91,6 +91,7 @@ module Comet
     # @type [Number] total_unlicensed_mails_count
     attr_accessor :total_unlicensed_mails_count
 
+    # If this field is present, it is possible to request cancellation of this job via the API.
     # @type [String] cancellation_id
     attr_accessor :cancellation_id
 

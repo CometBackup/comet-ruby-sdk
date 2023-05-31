@@ -10,6 +10,8 @@ require 'json'
 module Comet
 
   # B2DestinationLocation is a typed class wrapper around the underlying Comet Server API data structure.
+  # B2DestinationLocation allows configuring connection settings for storage locations using the
+# Backblaze B2 native API (DESTINATIONTYPE_B2).
   class B2DestinationLocation
 
     # Key ID

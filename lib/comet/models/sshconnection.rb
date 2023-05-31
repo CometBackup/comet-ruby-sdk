@@ -22,15 +22,21 @@ module Comet
     # @type [Number] sshauth_mode
     attr_accessor :sshauth_mode
 
+    # For use with SSHCONNECTION_AUTHMODE_PASSWORD only: the SSH password to connect with
     # @type [String] sshpassword
     attr_accessor :sshpassword
 
+    # For use with SSHCONNECTION_AUTHMODE_PRIVATEKEY only: the SSH private key to connect with, in
+    # OpenSSH format.
     # @type [String] sshprivate_key
     attr_accessor :sshprivate_key
 
+    # If true, then the SSHCustomAuth_KnownHostsFile will be used to verify the remote SSH server's host
+    # key, using Trust On First Use (TOFU).
     # @type [Boolean] sshcustom_auth__use_known_hosts_file
     attr_accessor :sshcustom_auth__use_known_hosts_file
 
+    # If SSHCustomAuth_UseKnownHostsFile is true, the path to the SSH known_hosts file.
     # @type [String] sshcustom_auth__known_hosts_file
     attr_accessor :sshcustom_auth__known_hosts_file
 

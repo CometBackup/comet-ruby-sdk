@@ -27,6 +27,8 @@ module Comet
     # @type [Boolean] method_is_oledb_32bit
     attr_accessor :method_is_oledb_32bit
 
+    # If this MSSQLLoginArgs structure is used for a restore job (RestoreJobAdvancedOptions) using
+    # RESTORETYPE_MSSQL, then, this field controls the RECOVERY / NO RECOVERY option state.
     # @type [Boolean] restore_no_recovery
     attr_accessor :restore_no_recovery
 

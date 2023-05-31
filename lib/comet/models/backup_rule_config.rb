@@ -37,9 +37,11 @@ module Comet
     # @type [Array<String>] post_exec
     attr_accessor :post_exec
 
+    # The source Protected Item ID to back up from, during this schedule
     # @type [String] source
     attr_accessor :source
 
+    # The destination Storage Vault ID to back up to, during this schedule
     # @type [String] destination
     attr_accessor :destination
 
@@ -70,9 +72,11 @@ module Comet
     # @type [Number] auto_retention_level
     attr_accessor :auto_retention_level
 
+    # Scheduled start times
     # @type [Array<Comet::ScheduleConfig>] schedules
     attr_accessor :schedules
 
+    # Other events that will cause this scheduled job to start
     # @type [Comet::BackupRuleEventTriggers] event_triggers
     attr_accessor :event_triggers
 

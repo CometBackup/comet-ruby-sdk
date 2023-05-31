@@ -51,18 +51,23 @@ module Comet
     attr_accessor :send_email_reports
 
     # Storage Vaults
+    # The string keys can be any unique key. Using a GUID is recommended, but optional.
     # @type [Hash{String => Comet::DestinationConfig}] destinations
     attr_accessor :destinations
 
     # Protected Items
+    # The string keys can be any unique key. Using a GUID is recommended, but optional.
     # @type [Hash{String => Comet::SourceConfig}] sources
     attr_accessor :sources
 
     # Schedules
+    # The string keys can be any unique key. Using a GUID is recommended, but optional.
     # @type [Hash{String => Comet::BackupRuleConfig}] backup_rules
     attr_accessor :backup_rules
 
     # Devices
+    # The string keys are the device's ID. The device ID is generated automatically based on a mix of
+    # hardware and software identifiers on the installed PC.
     # To revoke a device, use the AdminRevokeDevice API instead of accessing these fields directly. This
     # API can also remove associated Protected Items, uninstall the remote device, and disconnect its
     # live connection.
@@ -107,6 +112,7 @@ module Comet
     # @type [Comet::UserPolicy] policy
     attr_accessor :policy
 
+    # One of the PASSWORD_FORMAT_ constants
     # To change the user's password, use the AdminResetUserPassword API instead of accessing these
     # fields directly. Otherwise, other encrypted fields in the user profile may become corrupted.
     # @type [Number] password_format
@@ -124,9 +130,12 @@ module Comet
     # @type [Boolean] allow_password_login
     attr_accessor :allow_password_login
 
+    # If true, then TOTP is required to open the desktop app or the Comet Server web interface with this
+    # user's credentials.
     # @type [Boolean] allow_password_and_totplogin
     attr_accessor :allow_password_and_totplogin
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] totpkey_encryption_format
     attr_accessor :totpkey_encryption_format
 

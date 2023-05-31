@@ -12,6 +12,7 @@ module Comet
   # MacOSCodeSignProperties is a typed class wrapper around the underlying Comet Server API data structure.
   class MacOSCodeSignProperties
 
+    # One of the MACOSCODESIGN_LEVEL_ constants
     # @type [Number] level
     attr_accessor :level
 

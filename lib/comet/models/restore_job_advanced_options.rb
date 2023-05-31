@@ -12,6 +12,7 @@ module Comet
   # RestoreJobAdvancedOptions is a typed class wrapper around the underlying Comet Server API data structure.
   class RestoreJobAdvancedOptions
 
+    # One of the RESTORETYPE_ constants
     # @type [Number] type
     attr_accessor :type
 

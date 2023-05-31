@@ -12,9 +12,20 @@ module Comet
   # SpannedDestinationLocation is a typed class wrapper around the underlying Comet Server API data structure.
   class SpannedDestinationLocation
 
+    # A list of underlying destinations, that will be combined and presented as one.
     # @type [Array<Comet::DestinationLocation>] span_targets
     attr_accessor :span_targets
 
+    # If true, this Spanned destination will use a consistent hashing scheme
+    # to immediately find specific files on exactly one of the target destinations.
+    # In the Static Slots mode, the span targets cannot be moved or merged, and
+    # the files must always remain in their original location.
+    #
+    # If false, the Spanned destination system will search all targets to find
+    # the requested file. This is slightly slower, but allows you to freely merge,
+    # split, and reorder the underlying destination locations.
+    #
+    # The default option is false.
     # @type [Boolean] span_use_static_slots
     attr_accessor :span_use_static_slots
 

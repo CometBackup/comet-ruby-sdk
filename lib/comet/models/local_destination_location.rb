@@ -15,12 +15,17 @@ module Comet
     # @type [String] localcopy_path
     attr_accessor :localcopy_path
 
+    # If logging in to a Windows network share (SMB/CIFS) is required, enter the username here.
     # @type [String] localcopy_win_smbusername
     attr_accessor :localcopy_win_smbusername
 
+    # If logging in to a Windows network share (SMB/CIFS) is required, enter the password here. The
+    # password may be hashed as per the LocalcopyWinSMBPasswordFormat field.
     # @type [String] localcopy_win_smbpassword
     attr_accessor :localcopy_win_smbpassword
 
+    # One of the PASSWORD_FORMAT_ constants. It controls the hash format of the LocalcopyWinSMBPassword
+    # field.
     # @type [Number] localcopy_win_smbpassword_format
     attr_accessor :localcopy_win_smbpassword_format
 

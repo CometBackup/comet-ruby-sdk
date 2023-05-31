@@ -12,6 +12,10 @@ module Comet
   # DefaultEmailReportPolicy is a typed class wrapper around the underlying Comet Server API data structure.
   class DefaultEmailReportPolicy
 
+    # If true, the email reports will use the custom configuration that is defined in
+    # UserCustomEmailSettings / Reports fields.
+    # If false, the email reports will use configuration from the policy setting if present, or else
+    # from the built-in system default email report configuration.
     # @type [Boolean] should_override_default_reports
     attr_accessor :should_override_default_reports
 

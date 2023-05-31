@@ -21,9 +21,11 @@ module Comet
     # @type [String] last_successful_deep_verify__guid
     attr_accessor :last_successful_deep_verify__guid
 
+    # Unix timestamp in seconds
     # @type [Number] last_successful_deep_verify__start_time
     attr_accessor :last_successful_deep_verify__start_time
 
+    # Unix timestamp in seconds
     # @type [Number] last_successful_deep_verify__end_time
     attr_accessor :last_successful_deep_verify__end_time
 

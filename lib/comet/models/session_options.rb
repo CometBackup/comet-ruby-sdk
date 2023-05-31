@@ -12,6 +12,8 @@ module Comet
   # SessionOptions is a typed class wrapper around the underlying Comet Server API data structure.
   class SessionOptions
 
+    # The number of seconds, after which an administrator should be automatically logged out of the
+    # Comet Server web interface. If zero, will be replaced with DEFAULT_SESSIONTIMEOUT.
     # @type [Number] expired_in_seconds
     attr_accessor :expired_in_seconds
 
