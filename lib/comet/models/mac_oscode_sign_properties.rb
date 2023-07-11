@@ -22,9 +22,13 @@ module Comet
     # @type [Comet::SSHConnection] sshserver
     attr_accessor :sshserver
 
+    # "Developer ID Installer" certificate, either a local filepath or a resource:// URI. Used for
+    # signing the final flat *.pkg.
     # @type [String] certificate_name
     attr_accessor :certificate_name
 
+    # "Developer ID Application" certificate, either a local filepath or a resource:// URI. Used for
+    # signing internal binaries if Notary is enabled
     # @type [String] app_certificate_name
     attr_accessor :app_certificate_name
 
@@ -34,6 +38,7 @@ module Comet
     # @type [String] apple_idpass
     attr_accessor :apple_idpass
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] apple_idpass_format
     attr_accessor :apple_idpass_format
 
@@ -46,6 +51,7 @@ module Comet
     # @type [String] pfx_file_password
     attr_accessor :pfx_file_password
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] pfx_file_password_format
     attr_accessor :pfx_file_password_format
 

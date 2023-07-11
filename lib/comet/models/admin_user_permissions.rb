@@ -36,6 +36,34 @@ module Comet
     # @type [Boolean] deny_constellation_role
     attr_accessor :deny_constellation_role
 
+    # This field is available in Comet 23.6.0 and later.
+    # @type [Boolean] deny_view_server_history
+    attr_accessor :deny_view_server_history
+
+    # This field is available in Comet 23.6.0 and later.
+    # @type [Boolean] deny_view_server_info
+    attr_accessor :deny_view_server_info
+
+    # This field is available in Comet 23.6.0 and later.
+    # @type [Boolean] prevent_request_storage_vault
+    attr_accessor :prevent_request_storage_vault
+
+    # This field is available in Comet 23.6.0 and later.
+    # @type [Boolean] prevent_add_custom_storage_vault
+    attr_accessor :prevent_add_custom_storage_vault
+
+    # This field is available in Comet 23.6.0 and later.
+    # @type [Boolean] hide_cloud_storage_branding
+    attr_accessor :hide_cloud_storage_branding
+
+    # This field is available in Comet 23.6.0 and later.
+    # @type [Boolean] should_restrict_provider_list
+    attr_accessor :should_restrict_provider_list
+
+    # This field is available in Comet 23.6.0 and later.
+    # @type [Array<Number>] allowed_providers_when_restricted
+    attr_accessor :allowed_providers_when_restricted
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -44,6 +72,7 @@ module Comet
     end
 
     def clear
+      @allowed_providers_when_restricted = []
       @unknown_json_fields = {}
     end
 
@@ -76,6 +105,29 @@ module Comet
           @allow_edit_webhooks = v
         when 'DenyConstellationRole'
           @deny_constellation_role = v
+        when 'DenyViewServerHistory'
+          @deny_view_server_history = v
+        when 'DenyViewServerInfo'
+          @deny_view_server_info = v
+        when 'PreventRequestStorageVault'
+          @prevent_request_storage_vault = v
+        when 'PreventAddCustomStorageVault'
+          @prevent_add_custom_storage_vault = v
+        when 'HideCloudStorageBranding'
+          @hide_cloud_storage_branding = v
+        when 'ShouldRestrictProviderList'
+          @should_restrict_provider_list = v
+        when 'AllowedProvidersWhenRestricted'
+          if v.nil?
+            @allowed_providers_when_restricted = []
+          else
+            @allowed_providers_when_restricted = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              raise TypeError, "'v1' expected Numeric, got #{v1.class}" unless v1.is_a? Numeric
+
+              @allowed_providers_when_restricted[i1] = v1
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -108,6 +160,27 @@ module Comet
       end
       unless @deny_constellation_role.nil?
         ret['DenyConstellationRole'] = @deny_constellation_role
+      end
+      unless @deny_view_server_history.nil?
+        ret['DenyViewServerHistory'] = @deny_view_server_history
+      end
+      unless @deny_view_server_info.nil?
+        ret['DenyViewServerInfo'] = @deny_view_server_info
+      end
+      unless @prevent_request_storage_vault.nil?
+        ret['PreventRequestStorageVault'] = @prevent_request_storage_vault
+      end
+      unless @prevent_add_custom_storage_vault.nil?
+        ret['PreventAddCustomStorageVault'] = @prevent_add_custom_storage_vault
+      end
+      unless @hide_cloud_storage_branding.nil?
+        ret['HideCloudStorageBranding'] = @hide_cloud_storage_branding
+      end
+      unless @should_restrict_provider_list.nil?
+        ret['ShouldRestrictProviderList'] = @should_restrict_provider_list
+      end
+      unless @allowed_providers_when_restricted.nil?
+        ret['AllowedProvidersWhenRestricted'] = @allowed_providers_when_restricted
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

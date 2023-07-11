@@ -13,6 +13,7 @@ module Comet
   # WebAuthnPublicKeyCredentialRequestOptions is a typed class wrapper around the underlying Comet Server API data structure.
   class WebAuthnPublicKeyCredentialRequestOptions
 
+    # When this field is expressed as a WebAuthnPublicKeyCredentialRequestOptions class instance, this field may contain binary data. When this field is expressed as JSON, the field is expressed as base64. The marshalling methods on this class will automatically perform base64 conversion as necessary.
     # @type [Array<Object>] challenge
     attr_accessor :challenge
 

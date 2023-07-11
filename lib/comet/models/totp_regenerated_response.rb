@@ -19,12 +19,15 @@ module Comet
     # @type [String] message
     attr_accessor :message
 
+    # A data URI of an image of a TOTP code (e.g. "data:image/png;base64,AAA...")
     # @type [String] image
     attr_accessor :image
 
+    # This field is available in Comet 18.9.9 and later.
     # @type [String] url
     attr_accessor :url
 
+    # This field is available in Comet 20.3.2 and later.
     # @type [String] profile_hash
     attr_accessor :profile_hash
 

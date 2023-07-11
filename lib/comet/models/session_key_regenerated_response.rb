@@ -22,6 +22,8 @@ module Comet
     # @type [String] session_key
     attr_accessor :session_key
 
+    # e.g. "admin" or "user"
+    # This field is available in Comet 18.12.3 and later.
     # @type [String] session_type
     attr_accessor :session_type
 

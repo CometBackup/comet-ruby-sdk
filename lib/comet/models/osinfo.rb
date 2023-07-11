@@ -10,16 +10,30 @@ require 'json'
 module Comet
 
   # OSInfo is a typed class wrapper around the underlying Comet Server API data structure.
+  # OSInfo represents the common set of version information between all operating systems
   class OSInfo
 
+    # The primary version number (e.g. on Windows: 1703 / 2009, on Linux: 20.04 / 22.04)
     # @type [String] version
     attr_accessor :version
 
+    # The primary presentation name (e.g. "Windows 10 Pro", "debian", "Synology DSM")
     # @type [String] distribution
     attr_accessor :distribution
 
+    # The detailed build number (e.g. 19043)
     # @type [String] build
     attr_accessor :build
+
+    # The GOOS value
+    # This field is available in Comet 23.6.0 and later.
+    # @type [String] os
+    attr_accessor :os
+
+    # The GOARCH value
+    # This field is available in Comet 23.6.0 and later.
+    # @type [String] arch
+    attr_accessor :arch
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -32,6 +46,8 @@ module Comet
       @version = ''
       @distribution = ''
       @build = ''
+      @os = ''
+      @arch = ''
       @unknown_json_fields = {}
     end
 
@@ -60,6 +76,14 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @build = v
+        when 'os'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @os = v
+        when 'arch'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @arch = v
         else
           @unknown_json_fields[k] = v
         end
@@ -77,6 +101,12 @@ module Comet
       end
       unless @build.nil?
         ret['build'] = @build
+      end
+      unless @os.nil?
+        ret['os'] = @os
+      end
+      unless @arch.nil?
+        ret['arch'] = @arch
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

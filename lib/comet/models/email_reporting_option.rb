@@ -15,9 +15,11 @@ module Comet
     # @type [Comet::EmailReportConfig] email_report_config
     attr_accessor :email_report_config
 
+    # A supported language code (e.g. "en_US" or the DEFAULT_LANGUAGE constant)
     # @type [String] language_code
     attr_accessor :language_code
 
+    # The timezone in IANA format (e.g. "Pacific/Auckland" or the DEFAULT_TIMEZONE constant)
     # @type [String] local_timezone
     attr_accessor :local_timezone
 

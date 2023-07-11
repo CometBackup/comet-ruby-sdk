@@ -32,6 +32,10 @@ module Comet
     # @type [String] device_timezone
     attr_accessor :device_timezone
 
+    # This field is available in Comet 23.6.0 and later.
+    # @type [String] client_version
+    attr_accessor :client_version
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -45,6 +49,7 @@ module Comet
       @platform_version = Comet::OSInfo.new
       @sources = {}
       @device_timezone = ''
+      @client_version = ''
       @unknown_json_fields = {}
     end
 
@@ -86,6 +91,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @device_timezone = v
+        when 'ClientVersion'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @client_version = v
         else
           @unknown_json_fields[k] = v
         end
@@ -107,6 +116,9 @@ module Comet
       end
       unless @device_timezone.nil?
         ret['DeviceTimezone'] = @device_timezone
+      end
+      unless @client_version.nil?
+        ret['ClientVersion'] = @client_version
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

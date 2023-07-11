@@ -1983,8 +1983,11 @@ module Comet
     # @param [Comet::RestoreJobAdvancedOptions] options Restore targets
     # @param [String] snapshot (Optional) If present, restore a specific snapshot. Otherwise, restore the latest snapshot for the selected Protected Item + Storage Vault pair
     # @param [Array<String>] paths (Optional) If present, restore these paths only. Otherwise, restore all data
+    # @param [Number] known_file_count (Optional) The number of files to restore, if known. Supplying this means we don't need to walk the entire tree just to find the file count and will speed up the restoration process.
+    # @param [Number] known_byte_count (Optional) The total size in bytes of files to restore, if known. Supplying this means we don't need to walk the entire tree just to find the total file size and will speed up the restoration process.
+    # @param [Number] known_dir_count (Optional) The number of directories to restore, if known. Supplying this means we don't need to walk the entire tree just to find the number of directories and will speed up the restoration process.
     # @return [Comet::CometAPIResponseMessage]
-    def admin_dispatcher_run_restore_custom(target_id, source, destination, options, snapshot = nil, paths = nil)
+    def admin_dispatcher_run_restore_custom(target_id, source, destination, options, snapshot = nil, paths = nil, known_file_count = nil, known_byte_count = nil, known_dir_count = nil)
       submit_params = {}
       raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
 
@@ -2007,6 +2010,21 @@ module Comet
         raise TypeError, "'paths' expected Array, got #{paths.class}" unless paths.is_a? Array
 
         submit_params['Paths'] = paths.to_json
+      end
+      unless known_file_count.nil?
+        raise TypeError, "'known_file_count' expected Numeric, got #{known_file_count.class}" unless known_file_count.is_a? Numeric
+
+        submit_params['KnownFileCount'] = known_file_count
+      end
+      unless known_byte_count.nil?
+        raise TypeError, "'known_byte_count' expected Numeric, got #{known_byte_count.class}" unless known_byte_count.is_a? Numeric
+
+        submit_params['KnownByteCount'] = known_byte_count
+      end
+      unless known_dir_count.nil?
+        raise TypeError, "'known_dir_count' expected Numeric, got #{known_dir_count.class}" unless known_dir_count.is_a? Numeric
+
+        submit_params['KnownDirCount'] = known_dir_count
       end
 
       body = perform_request('api/v1/admin/dispatcher/run-restore-custom', submit_params)

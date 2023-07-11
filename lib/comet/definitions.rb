@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.5.0'
+  APPLICATION_VERSION = '23.6.5'
 
   APPLICATION_VERSION_MAJOR = 23
 
-  APPLICATION_VERSION_MINOR = 5
+  APPLICATION_VERSION_MINOR = 6
 
-  APPLICATION_VERSION_REVISION = 0
+  APPLICATION_VERSION_REVISION = 5
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -396,7 +396,7 @@ module Comet
   # PSAType
   PSA_TYPE_GRADIENT = 1
 
-  RELEASE_CODENAME = 'Thebe'
+  RELEASE_CODENAME = 'Voyager'
 
   # RemoteServerType
   REMOTESERVER_COMET = 'comet'
@@ -575,13 +575,13 @@ module Comet
 
   SCHEDULE_MAXINT = 1_125_899_906_842_624
 
-  # SearchClauseType
+  # SearchClauseType: The search clause is an explicit rule
   SEARCHCLAUSE_RULE = ''
 
-  # SearchClauseType
+  # SearchClauseType: All of the ClauseChildren must match
   SEARCHCLAUSE_AND = 'and'
 
-  # SearchClauseType
+  # SearchClauseType: At least one of the ClauseChildren must match
   SEARCHCLAUSE_OR = 'or'
 
   # SearchClauseType
@@ -590,56 +590,82 @@ module Comet
   # SearchClauseType
   SEARCHCLAUSE_NOT_OR = 'not_or'
 
+  # String equals (case sensitive)
   SEARCHOPERATOR_STRING_EQ = 'str_eq'
 
+  # String does not equal (case sensitive)
   SEARCHOPERATOR_STRING_NEQ = 'str_neq'
 
+  # String contains anywhere (case sensitive)
   SEARCHOPERATOR_STRING_CONTAINS = 'str_contains'
 
+  # String does not contain anywhere (case sensitive)
   SEARCHOPERATOR_STRING_NCONTAINS = 'str_ncontains'
 
+  # String starts with prefix (case sensitive)
   SEARCHOPERATOR_STRING_STARTSWITH = 'str_startswith'
 
+  # String does not start with prefix (case sensitive)
   SEARCHOPERATOR_STRING_NSTARTSWITH = 'str_nstartswith'
 
+  # String ends with suffix (case sensitive)
   SEARCHOPERATOR_STRING_ENDSWITH = 'str_endswith'
 
+  # String does not end with suffix (case sensitive)
   SEARCHOPERATOR_STRING_NENDSWITH = 'str_nendswith'
 
+  # String equals (case insensitive)
   SEARCHOPERATOR_STRING_EQ_CI = 'str_eq_ci'
 
+  # String does not equal (case insensitive)
   SEARCHOPERATOR_STRING_NEQ_CI = 'str_neq_ci'
 
+  # String contains anywhere (case sensitive)
   SEARCHOPERATOR_STRING_CONTAINS_CI = 'str_contains_ci'
 
+  # String does not contain anywhere (case sensitive)
   SEARCHOPERATOR_STRING_NCONTAINS_CI = 'str_ncontains_ci'
 
+  # String starts with prefix (case sensitive)
   SEARCHOPERATOR_STRING_STARTSWITH_CI = 'str_startswith_ci'
 
+  # String does not start with (case sensitive)
   SEARCHOPERATOR_STRING_NSTARTSWITH_CI = 'str_nstartswith_ci'
 
+  # String ends with suffix (case sensitive)
   SEARCHOPERATOR_STRING_ENDSWITH_CI = 'str_endswith_ci'
 
+  # String does not end with suffix (case sensitive)
   SEARCHOPERATOR_STRING_NENDSWITH_CI = 'str_nendswith_ci'
 
+  # String matches provided regular expression (using Go regex syntax)
   SEARCHOPERATOR_STRING_REGEXMATCH = 'str_regexmatch'
 
+  # String does not match provided regular expression (using Go regex syntax)
   SEARCHOPERATOR_STRING_NREGEXMATCH = 'str_nregexmatch'
 
+  # Integer field is equal to value
   SEARCHOPERATOR_INT_EQ = 'int_eq'
 
+  # Integer field is not equal to value
   SEARCHOPERATOR_INT_NEQ = 'int_neq'
 
+  # Integer field is greater than value
   SEARCHOPERATOR_INT_GT = 'int_gt'
 
+  # Integer field is greater than or equal to value
   SEARCHOPERATOR_INT_GTE = 'int_gte'
 
+  # Integer field is less than value
   SEARCHOPERATOR_INT_LT = 'int_lt'
 
+  # Integer field is less than or equal to value
   SEARCHOPERATOR_INT_LTE = 'int_lte'
 
+  # Boolean field matches value
   SEARCHOPERATOR_BOOL_IS = 'bool_is'
 
+  # Boolean field does not match value
   SEARCHOPERATOR_BOOL_NIS = 'bool_nis'
 
   # 0000 0001. If this value is present in the bitset, then the Calendar service is selected for backup.

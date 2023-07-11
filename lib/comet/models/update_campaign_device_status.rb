@@ -12,6 +12,7 @@ module Comet
   # UpdateCampaignDeviceStatus is a typed class wrapper around the underlying Comet Server API data structure.
   class UpdateCampaignDeviceStatus
 
+    # One of the UPDATESTATUS_ constants
     # @type [Number] status
     attr_accessor :status
 

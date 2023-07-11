@@ -12,15 +12,19 @@ module Comet
   # SoftwareUpdateNewsResponse is a typed class wrapper around the underlying Comet Server API data structure.
   class SoftwareUpdateNewsResponse
 
+    # The latest "Quarterly" release version of Comet known to the account.cometbackup.com system.
     # @type [String] latest_stable
     attr_accessor :latest_stable
 
+    # The latest "Voyager" release version of Comet known to the account.cometbackup.com system.
     # @type [String] latest_prerelease
     attr_accessor :latest_prerelease
 
+    # A URL linking to the Comet Server downloads page.
     # @type [String] downloads_url
     attr_accessor :downloads_url
 
+    # An array of recent news items written by Comet Backup staff. Entries are english plaintext.
     # @type [Array<String>] whats_new
     attr_accessor :whats_new
 

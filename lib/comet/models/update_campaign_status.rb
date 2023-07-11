@@ -36,6 +36,7 @@ module Comet
     # @type [Comet::SearchClause] device_filter
     attr_accessor :device_filter
 
+    # Unix timestamp, in seconds
     # @type [Number] start_time
     attr_accessor :start_time
 

@@ -22,6 +22,7 @@ module Comet
     # @type [String] display_name
     attr_accessor :display_name
 
+    # When this field is expressed as a WebAuthnUserEntity class instance, this field may contain binary data. When this field is expressed as JSON, the field is expressed as base64. The marshalling methods on this class will automatically perform base64 conversion as necessary.
     # @type [Array<Object>] id
     attr_accessor :id
 

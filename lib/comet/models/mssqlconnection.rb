@@ -12,6 +12,7 @@ module Comet
   # MSSQLConnection is a typed class wrapper around the underlying Comet Server API data structure.
   class MSSQLConnection
 
+    # One of the MSSQL_AUTH_ constants (e.g. "windows" or "native")
     # @type [String] type
     attr_accessor :type
 
@@ -22,11 +23,13 @@ module Comet
     attr_accessor :password
 
     # @type [String] hostname
+    # @deprecated This member has been deprecated since Comet version Unused
     attr_accessor :hostname
 
     # @type [String] instance_name
     attr_accessor :instance_name
 
+    # One of the MSSQL_METHOD_ constants, to control using x86_32 or x86_64 OLEDB drivers
     # @type [String] method
     attr_accessor :method
 

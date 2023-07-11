@@ -10,6 +10,8 @@ require 'json'
 module Comet
 
   # SourceBasicInfo is a typed class wrapper around the underlying Comet Server API data structure.
+  # SourceBasicInfo is the minimal amount of information one device knows about another device's
+# Protected Items, in order to safely perform retention passes on their behalf.
   class SourceBasicInfo
 
     # @type [String] description

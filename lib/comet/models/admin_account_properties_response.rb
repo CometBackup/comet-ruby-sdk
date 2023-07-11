@@ -18,6 +18,7 @@ module Comet
     # @type [Comet::AdminUserPermissions] permissions
     attr_accessor :permissions
 
+    # This field is available in Comet 18.9.9 and later.
     # @type [Comet::AdminSecurityOptions] security
     attr_accessor :security
 

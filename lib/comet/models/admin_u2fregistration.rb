@@ -17,9 +17,11 @@ module Comet
     # @type [String] description
     attr_accessor :description
 
+    # Unix timestamp, in seconds.
     # @type [Number] register_time
     attr_accessor :register_time
 
+    # When this field is expressed as a AdminU2FRegistration class instance, this field may contain binary data. When this field is expressed as JSON, the field is expressed as base64. The marshalling methods on this class will automatically perform base64 conversion as necessary.
     # @type [Array<Object>] registration
     attr_accessor :registration
 

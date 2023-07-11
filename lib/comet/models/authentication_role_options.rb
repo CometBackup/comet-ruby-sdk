@@ -15,12 +15,14 @@ module Comet
     # @type [Boolean] role_enabled
     attr_accessor :role_enabled
 
+    # One of the INTEGRITYCHECK_ constants
     # @type [Number] database_check_level
     attr_accessor :database_check_level
 
     # @type [Boolean] generate_missed_backup_events
     attr_accessor :generate_missed_backup_events
 
+    # Unix timestamp in seconds, before which no Missed jobs are created
     # @type [Number] no_missed_backup_events_before
     attr_accessor :no_missed_backup_events_before
 

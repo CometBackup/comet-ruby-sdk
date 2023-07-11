@@ -42,6 +42,7 @@ module Comet
     # @type [Hash{String => Comet::ExternalAuthenticationSource}] external_admin_user_sources
     attr_accessor :external_admin_user_sources
 
+    # The Comet Server can enforce a bandwidth limit based on the target IP address
     # @type [Comet::RatelimitOptions] iprate_limit
     attr_accessor :iprate_limit
 

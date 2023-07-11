@@ -15,9 +15,11 @@ module Comet
     # @type [String] organization_id
     attr_accessor :organization_id
 
+    # Unix timestamp, in seconds.
     # @type [Number] create_time
     attr_accessor :create_time
 
+    # One of the PASSWORD_FORMAT_ constants
     # @type [Number] read_write_key_format
     attr_accessor :read_write_key_format
 

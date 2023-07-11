@@ -18,6 +18,7 @@ module Comet
     # @type [Number] port
     attr_accessor :port
 
+    # One of the LDAPSECURITYMETHOD_ constants (e.g. "plain" / "ldaps" / "starttls")
     # @type [String] security_method
     attr_accessor :security_method
 

@@ -19,6 +19,7 @@ module Comet
     attr_accessor :storage
 
     # @type [Array<Comet::LocalStorageDirectory>] local_storage__legacy
+    # @deprecated This member has been deprecated since Comet version 17.3.5
     attr_accessor :local_storage__legacy
 
     # @type [Array<Comet::ReplicaServer>] replicate_to

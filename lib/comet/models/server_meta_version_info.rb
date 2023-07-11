@@ -62,6 +62,7 @@ module Comet
     # @type [Number] server_license_feature_set
     attr_accessor :server_license_feature_set
 
+    # Unix timestamp, in seconds.
     # @type [Number] license_valid_until
     attr_accessor :license_valid_until
 
@@ -89,6 +90,7 @@ module Comet
     # @type [Boolean] scheduled_email_thread_last_wake_sent_emails
     attr_accessor :scheduled_email_thread_last_wake_sent_emails
 
+    # This field is available in Comet 21.3.2 and later.
     # @type [Array<Comet::SelfBackupStatistics>] self_backup
     attr_accessor :self_backup
 

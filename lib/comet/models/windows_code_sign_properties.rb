@@ -12,12 +12,14 @@ module Comet
   # WindowsCodeSignProperties is a typed class wrapper around the underlying Comet Server API data structure.
   class WindowsCodeSignProperties
 
+    # One of the WINDOWSCODESIGN_METHOD_ constants
     # @type [Number] windows_code_sign_method
     attr_accessor :windows_code_sign_method
 
     # @type [String] windows_code_sign_pkcs12file_path
     attr_accessor :windows_code_sign_pkcs12file_path
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] windows_code_sign_pkcs12password_format
     attr_accessor :windows_code_sign_pkcs12password_format
 
@@ -37,6 +39,7 @@ module Comet
     # @type [String] windows_code_sign_pkcs11key_id
     attr_accessor :windows_code_sign_pkcs11key_id
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] windows_code_sign_pkcs11password_format
     attr_accessor :windows_code_sign_pkcs11password_format
 
@@ -52,6 +55,7 @@ module Comet
     # @type [String] windows_code_sign_azure_app_id
     attr_accessor :windows_code_sign_azure_app_id
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] windows_code_sign_azure_app_secret_format
     attr_accessor :windows_code_sign_azure_app_secret_format
 

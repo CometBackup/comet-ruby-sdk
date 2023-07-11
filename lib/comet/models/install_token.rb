@@ -15,18 +15,23 @@ module Comet
     # @type [String] username
     attr_accessor :username
 
+    # The URL of the Comet Server (Auth Role) for the target user to log in to.
     # @type [String] server
     attr_accessor :server
 
+    # The token for use with the "/TOKEN=" silent install flag.
     # @type [String] token
     attr_accessor :token
 
+    # Unix timestamp, in seconds.
     # @type [Number] create_time
     attr_accessor :create_time
 
+    # If the token has been used, it cannot be used again.
     # @type [Boolean] used
     attr_accessor :used
 
+    # Unix timestamp, in seconds.
     # @type [Number] expire_time
     attr_accessor :expire_time
 

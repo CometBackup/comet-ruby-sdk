@@ -28,6 +28,7 @@ module Comet
     # @type [String] encryption_key
     attr_accessor :encryption_key
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] encryption_key_format
     attr_accessor :encryption_key_format
 

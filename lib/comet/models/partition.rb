@@ -15,6 +15,7 @@ module Comet
     # @type [String] device_name
     attr_accessor :device_name
 
+    # The name of the filesystem used on this partition (e.g. "NTFS")
     # @type [String] filesystem
     attr_accessor :filesystem
 
@@ -30,12 +31,16 @@ module Comet
     # @type [Array<String>] mount_points
     attr_accessor :mount_points
 
+    # Bytes. The partition's offset within the DeviceName. It will be zero if this partition has a
+    # direct DeviceName handle.
     # @type [Number] read_offset
     attr_accessor :read_offset
 
+    # Bytes
     # @type [Number] size
     attr_accessor :size
 
+    # Bytes. Only present for supported filesystems that are currently mounted by the OS
     # @type [Number] used_size
     attr_accessor :used_size
 

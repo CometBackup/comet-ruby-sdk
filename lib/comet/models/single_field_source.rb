@@ -15,6 +15,7 @@ module Comet
     # @type [String] field_name
     attr_accessor :field_name
 
+    # One of "bool" / "int" / "string"
     # @type [String] field_type
     attr_accessor :field_type
 

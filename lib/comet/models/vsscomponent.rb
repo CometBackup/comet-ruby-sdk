@@ -18,6 +18,7 @@ module Comet
     # @type [String] name
     attr_accessor :name
 
+    # "VSS_CT_DATABASE" or "VSS_CT_FILEGROUP"
     # @type [String] ctype
     attr_accessor :ctype
 

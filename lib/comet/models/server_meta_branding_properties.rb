@@ -28,9 +28,11 @@ module Comet
     # @type [String] image_etag
     attr_accessor :image_etag
 
+    # Colour in RGB hex format (e.g. "#FFFFFF")
     # @type [String] top_color
     attr_accessor :top_color
 
+    # Colour in RGB hex format (e.g. "#FFFFFF")
     # @type [String] accent_color
     attr_accessor :accent_color
 

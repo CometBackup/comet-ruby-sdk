@@ -12,18 +12,22 @@ module Comet
   # PSAConfig is a typed class wrapper around the underlying Comet Server API data structure.
   class PSAConfig
 
+    # For PSA_TYPE_GRADIENT. Defaults to enabled
     # @type [Boolean] alerts_disabled
     attr_accessor :alerts_disabled
 
     # @type [Hash{String => String}] custom_headers
     attr_accessor :custom_headers
 
+    # Specified credentials for the target PSA
     # @type [String] partner_key
     attr_accessor :partner_key
 
+    # One of the PSA_TYPE_ constants
     # @type [Number] type
     attr_accessor :type
 
+    # For PSA_TYPE_GENERIC
     # @type [String] url
     attr_accessor :url
 

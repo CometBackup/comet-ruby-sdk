@@ -15,6 +15,7 @@ module Comet
     # @type [String] organization_id
     attr_accessor :organization_id
 
+    # Unix timestamp, in seconds.
     # @type [Number] date_time
     attr_accessor :date_time
 

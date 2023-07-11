@@ -21,6 +21,7 @@ module Comet
     # @type [Number] create_time
     attr_accessor :create_time
 
+    # This field is available in Comet 20.12.4 and later.
     # @type [Boolean] has_original_path_info
     attr_accessor :has_original_path_info
 

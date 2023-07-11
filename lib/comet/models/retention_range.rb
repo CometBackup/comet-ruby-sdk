@@ -10,11 +10,15 @@ require 'json'
 module Comet
 
   # RetentionRange is a typed class wrapper around the underlying Comet Server API data structure.
+  # The Type field controls which fields of this data type are used. For additional information, see
+# the notes on the RETENTIONRANGE_ constants.
   class RetentionRange
 
+    # One of the RETENTIONRANGE_ constants
     # @type [Number] type
     attr_accessor :type
 
+    # Unix timestamp, in seconds. Used by RETENTIONRANGE_NEWER_THAN_X.
     # @type [Number] timestamp
     attr_accessor :timestamp
 
@@ -34,6 +38,10 @@ module Comet
     # @type [Number] week_offset
     attr_accessor :week_offset
 
+    # 1: 1st, 31: 31st
+    # Prior to Comet version 23.6.2, 31 was treated as 30.
+    # For months that do not have a day equal to the specified offset, no backup will be retained.
+    # For example, if the offset is set to 30, no backup will be kept for February.
     # @type [Number] month_offset
     attr_accessor :month_offset
 

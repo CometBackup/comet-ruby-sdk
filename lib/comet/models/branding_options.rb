@@ -59,6 +59,7 @@ module Comet
     # @type [Boolean] hide_background_logo
     attr_accessor :hide_background_logo
 
+    # One of the CLIENTBRANDINGBUILD_ constants
     # @type [Number] build_mode
     attr_accessor :build_mode
 
@@ -86,12 +87,14 @@ module Comet
     # @type [String] package_identifier
     attr_accessor :package_identifier
 
+    # One of the WINDOWSCODESIGN_METHOD_ constants
     # @type [Number] windows_code_sign_method
     attr_accessor :windows_code_sign_method
 
     # @type [String] windows_code_sign_pkcs12file_path
     attr_accessor :windows_code_sign_pkcs12file_path
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] windows_code_sign_pkcs12password_format
     attr_accessor :windows_code_sign_pkcs12password_format
 
@@ -111,6 +114,7 @@ module Comet
     # @type [String] windows_code_sign_pkcs11key_id
     attr_accessor :windows_code_sign_pkcs11key_id
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] windows_code_sign_pkcs11password_format
     attr_accessor :windows_code_sign_pkcs11password_format
 
@@ -126,6 +130,7 @@ module Comet
     # @type [String] windows_code_sign_azure_app_id
     attr_accessor :windows_code_sign_azure_app_id
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] windows_code_sign_azure_app_secret_format
     attr_accessor :windows_code_sign_azure_app_secret_format
 

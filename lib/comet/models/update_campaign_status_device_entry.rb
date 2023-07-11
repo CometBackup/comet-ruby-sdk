@@ -18,6 +18,7 @@ module Comet
     # @type [String] device_id
     attr_accessor :device_id
 
+    # One of the UPDATESTATUS_ constants
     # @type [Number] status
     attr_accessor :status
 

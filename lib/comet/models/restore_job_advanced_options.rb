@@ -41,6 +41,16 @@ module Comet
     # @type [Number] archive_format
     attr_accessor :archive_format
 
+    # Corresponds to the "Allow partial file restores (zero-out unrecoverable data)" option
+    # This field is available in Comet 23.6.4 and later.
+    # @type [Boolean] skip_unreadable_chunks
+    attr_accessor :skip_unreadable_chunks
+
+    # Corresponds to the "Prefer temporary files instead of RAM (slower)" option
+    # This field is available in Comet 23.6.4 and later.
+    # @type [Boolean] on_disk_indexes_key
+    attr_accessor :on_disk_indexes_key
+
     # For RESTORETYPE_OFFICE365_CLOUD.
     # @type [Comet::Office365Credential] office_365credential
     attr_accessor :office_365credential
@@ -151,6 +161,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @archive_format = v
+        when 'SkipUnreadableChunks'
+          @skip_unreadable_chunks = v
+        when 'OnDiskIndexesKey'
+          @on_disk_indexes_key = v
         when 'Office365Credential'
           @office_365credential = Comet::Office365Credential.new
           @office_365credential.from_hash(v)
@@ -205,6 +219,8 @@ module Comet
       ret['DestPath'] = @dest_path
       ret['ExactDestPaths'] = @exact_dest_paths
       ret['ArchiveFormat'] = @archive_format
+      ret['SkipUnreadableChunks'] = @skip_unreadable_chunks
+      ret['OnDiskIndexesKey'] = @on_disk_indexes_key
       unless @office_365credential.nil?
         ret['Office365Credential'] = @office_365credential
       end

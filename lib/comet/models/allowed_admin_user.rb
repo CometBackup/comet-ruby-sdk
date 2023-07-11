@@ -21,6 +21,7 @@ module Comet
     # @type [String] external_authentication_source
     attr_accessor :external_authentication_source
 
+    # One of the PASSWORD_FORMAT_ constants
     # @type [Number] password_format
     attr_accessor :password_format
 
@@ -47,12 +48,15 @@ module Comet
     # @type [Array<Comet::AdminWebAuthnRegistration>] web_authn_registrations
     attr_accessor :web_authn_registrations
 
+    # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] totpkey_encryption_format
     attr_accessor :totpkey_encryption_format
 
     # @type [String] totpkey
     attr_accessor :totpkey
 
+    # A regular expression in Go regex syntax, for which IP addresses are allowed to authenticate as
+    # this admin account
     # @type [String] ipwhitelist
     attr_accessor :ipwhitelist
 

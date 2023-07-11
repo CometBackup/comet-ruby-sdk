@@ -89,6 +89,17 @@ module Comet
     # @type [Hash{String => String}] engine_props
     attr_accessor :engine_props
 
+    # If set, this SourceConfig was added from a Policy with the specified ID.
+    # This field is available in Comet 23.6.0 and later.
+    # @type [String] policy_source_id
+    attr_accessor :policy_source_id
+
+    # For a Policy-defined SourceConfig, this field controls whether the Protected Item will stay linked
+    # with the policy.
+    # This field is available in Comet 23.6.0 and later.
+    # @type [Boolean] existing_user_update
+    attr_accessor :existing_user_update
+
     # By default, backup jobs from this Protected Item will be subject
     # to the overall retention policy for the Storage Vault. You can override the policy
     # for specific Storage Vaults by putting their destination ID as a key here.
@@ -115,6 +126,7 @@ module Comet
       @thaw_exec = []
       @post_exec = []
       @engine_props = {}
+      @policy_source_id = ''
       @override_destination_retention = {}
       @statistics = Comet::SourceStatistics.new
       @unknown_json_fields = {}
@@ -197,6 +209,12 @@ module Comet
               @engine_props[k1] = v1
             end
           end
+        when 'PolicySourceID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @policy_source_id = v
+        when 'ExistingUserUpdate'
+          @existing_user_update = v
         when 'OverrideDestinationRetention'
           @override_destination_retention = {}
           if v.nil?
@@ -228,6 +246,8 @@ module Comet
       ret['ThawExec'] = @thaw_exec
       ret['PostExec'] = @post_exec
       ret['EngineProps'] = @engine_props
+      ret['PolicySourceID'] = @policy_source_id
+      ret['ExistingUserUpdate'] = @existing_user_update
       unless @override_destination_retention.nil?
         ret['OverrideDestinationRetention'] = @override_destination_retention
       end

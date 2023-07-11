@@ -12,12 +12,17 @@ module Comet
   # ConstellationStats is a typed class wrapper around the underlying Comet Server API data structure.
   class ConstellationStats
 
+    # Unix timestamp, in seconds.
     # @type [Number] last_check_start
     attr_accessor :last_check_start
 
+    # The total number of Constellation bucket report scans that have been performed since this Comet
+    # Server was last restarted
     # @type [Number] total_checks_started
     attr_accessor :total_checks_started
 
+    # The total number of buckets that Constellation has successfully deleted since this Comet Server
+    # was last restarted
     # @type [Number] total_buckets_deleted
     attr_accessor :total_buckets_deleted
 
