@@ -99,6 +99,9 @@ module Comet
     # @type [Boolean] prevent_protected_item_retention
     attr_accessor :prevent_protected_item_retention
 
+    # @type [Boolean] allow_edit_object_lock_retention
+    attr_accessor :allow_edit_object_lock_retention
+
     # @type [Hash{String => Comet::SourceConfig}] default_sources
     attr_accessor :default_sources
 
@@ -230,6 +233,8 @@ module Comet
           @enforce_storage_vault_retention = v
         when 'PreventProtectedItemRetention'
           @prevent_protected_item_retention = v
+        when 'AllowEditObjectLockRetention'
+          @allow_edit_object_lock_retention = v
         when 'DefaultSources'
           @default_sources = {}
           if v.nil?
@@ -322,6 +327,7 @@ module Comet
       ret['DefaultStorageVaultRetention'] = @default_storage_vault_retention
       ret['EnforceStorageVaultRetention'] = @enforce_storage_vault_retention
       ret['PreventProtectedItemRetention'] = @prevent_protected_item_retention
+      ret['AllowEditObjectLockRetention'] = @allow_edit_object_lock_retention
       ret['DefaultSources'] = @default_sources
       ret['DefaultSourcesBackupRules'] = @default_sources_backup_rules
       ret['DefaultSourcesWithOSRestriction'] = @default_sources_with_osrestriction

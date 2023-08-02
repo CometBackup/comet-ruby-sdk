@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.6.5'
+  APPLICATION_VERSION = '23.6.9'
 
   APPLICATION_VERSION_MAJOR = 23
 
   APPLICATION_VERSION_MINOR = 6
 
-  APPLICATION_VERSION_REVISION = 5
+  APPLICATION_VERSION_REVISION = 9
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -390,6 +390,15 @@ module Comet
   # When resetting a password with the API, set the PasswordFormat to this value. The Comet Server will re-hash the credential automatically.
   PASSWORD_FORMAT_PLAINTEXT = 0
 
+  # OidcProvider
+  PROVIDER_GENERIC = 'oidc'
+
+  # OidcProvider
+  PROVIDER_AZUREADV2 = 'azure-ad-v2'
+
+  # OidcProvider
+  PROVIDER_GOOGLE = 'google'
+
   # PSAType
   PSA_TYPE_GENERIC = 0
 
@@ -403,6 +412,9 @@ module Comet
 
   # RemoteServerType
   REMOTESERVER_LDAP = 'ldap'
+
+  # RemoteServerType
+  REMOTESERVER_OIDC = 'oidc'
 
   # RemoteServerType
   REMOTESERVER_B2 = 'b2'
@@ -974,8 +986,8 @@ module Comet
   # WebAuthnDeviceType
   WEBAUTHN_DEVICE_TYPE__TPM_LINUX = 6
 
-  # WindowsCodesignMethod: When upgrading from a version of Comet Server prior to 22.12.7, this option will be automatically converted to a more specific type.
-  # @deprecated This const has been deprecated since Comet version 22.12.7
+  # WindowsCodesignMethod: When upgrading from a version of Comet Server prior to 23.3.0, this option will be automatically converted to a more specific type.
+  # @deprecated This const has been deprecated since Comet version 23.3.0
   WINDOWSCODESIGN_METHOD_AUTO = 0
 
   # WindowsCodesignMethod: Do not perform Authenticode codesigning

@@ -41,11 +41,14 @@ module Comet
     # @type [Number] archive_format
     attr_accessor :archive_format
 
+    # Default disabled. For RESTORETYPE_FILE and RESTORETYPE_WINDISK. Used to continue the restore job
+    # when unreadable data chunks are found.
     # Corresponds to the "Allow partial file restores (zero-out unrecoverable data)" option
     # This field is available in Comet 23.6.4 and later.
     # @type [Boolean] skip_unreadable_chunks
     attr_accessor :skip_unreadable_chunks
 
+    # Default disabled. Used to store the index files on disk instead of in memory.
     # Corresponds to the "Prefer temporary files instead of RAM (slower)" option
     # This field is available in Comet 23.6.4 and later.
     # @type [Boolean] on_disk_indexes_key

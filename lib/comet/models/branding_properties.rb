@@ -84,8 +84,8 @@ module Comet
     # @type [String] windows_code_sign_pkcs11module
     attr_accessor :windows_code_sign_pkcs11module
 
+    # This field was deprecated between 23.3.0 and 23.6.x, but is now used again.
     # @type [String] windows_code_sign_pkcs11certfile
-    # @deprecated This member has been deprecated since Comet version 22.12.7
     attr_accessor :windows_code_sign_pkcs11certfile
 
     # @type [String] windows_code_sign_pkcs11key_id

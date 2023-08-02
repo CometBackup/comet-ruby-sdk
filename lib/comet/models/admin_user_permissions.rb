@@ -33,6 +33,9 @@ module Comet
     # @type [Boolean] allow_edit_webhooks
     attr_accessor :allow_edit_webhooks
 
+    # @type [Boolean] allow_edit_external_auth_sources
+    attr_accessor :allow_edit_external_auth_sources
+
     # @type [Boolean] deny_constellation_role
     attr_accessor :deny_constellation_role
 
@@ -103,6 +106,8 @@ module Comet
           @allow_edit_remote_storage = v
         when 'AllowEditWebhooks'
           @allow_edit_webhooks = v
+        when 'AllowEditExternalAuthSources'
+          @allow_edit_external_auth_sources = v
         when 'DenyConstellationRole'
           @deny_constellation_role = v
         when 'DenyViewServerHistory'
@@ -157,6 +162,9 @@ module Comet
       end
       unless @allow_edit_webhooks.nil?
         ret['AllowEditWebhooks'] = @allow_edit_webhooks
+      end
+      unless @allow_edit_external_auth_sources.nil?
+        ret['AllowEditExternalAuthSources'] = @allow_edit_external_auth_sources
       end
       unless @deny_constellation_role.nil?
         ret['DenyConstellationRole'] = @deny_constellation_role

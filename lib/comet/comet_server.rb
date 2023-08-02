@@ -136,6 +136,28 @@ module Comet
       ret
     end
 
+    # AdminAccountSessionUpgrade
+    #
+    # Upgrade a session key which is pending an MFA upgrade to a full session key.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @param [String] session_key The session key to upgrade
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_account_session_upgrade(session_key)
+      submit_params = {}
+      raise TypeError, "'session_key' expected String, got #{session_key.class}" unless session_key.is_a? String
+
+      submit_params['SessionKey'] = session_key
+
+      body = perform_request('api/v1/admin/account/session-upgrade', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminAccountSetProperties
     #
     # Update settings for your own admin account.
@@ -2181,6 +2203,102 @@ module Comet
       end
 
       body = perform_request('api/v1/admin/dispatcher/update-software', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminExternalAuthSourcesDelete
+    #
+    # Delete an external admin authentication source.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @param [String] source_id (No description available)
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_external_auth_sources_delete(source_id)
+      submit_params = {}
+      raise TypeError, "'source_id' expected String, got #{source_id.class}" unless source_id.is_a? String
+
+      submit_params['SourceID'] = source_id
+
+      body = perform_request('api/v1/admin/external-auth-sources/delete', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminExternalAuthSourcesGet
+    #
+    # Get a map of all external admin authentication sources.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @return [Hash{String => Comet::ExternalAuthenticationSource}]
+    def admin_external_auth_sources_get
+      body = perform_request('api/v1/admin/external-auth-sources/get')
+      json_body = JSON.parse body
+      check_status json_body
+      ret = {}
+      if json_body.nil?
+        ret = {}
+      else
+        json_body.each do |k, v|
+          ret[k] = Comet::ExternalAuthenticationSource.new
+          ret[k].from_hash(v)
+        end
+      end
+      ret
+    end
+
+    # AdminExternalAuthSourcesNew
+    #
+    # Create an external admin authentication source.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @param [Comet::ExternalAuthenticationSource] source (No description available)
+    # @param [String] source_id (Optional) (No description available)
+    # @return [Comet::ExternalAuthenticationSourceResponse]
+    def admin_external_auth_sources_new(source, source_id = nil)
+      submit_params = {}
+      raise TypeError, "'source' expected Comet::ExternalAuthenticationSource, got #{source.class}" unless source.is_a? Comet::ExternalAuthenticationSource
+
+      submit_params['Source'] = source.to_json
+      unless source_id.nil?
+        raise TypeError, "'source_id' expected String, got #{source_id.class}" unless source_id.is_a? String
+
+        submit_params['SourceID'] = source_id
+      end
+
+      body = perform_request('api/v1/admin/external-auth-sources/new', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::ExternalAuthenticationSourceResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminExternalAuthSourcesSet
+    #
+    # Updates the current tenant's external admin authentication sources. This will set all.
+    # sources for the tenant; none will be preserved.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @param [Hash{String => Comet::ExternalAuthenticationSource}] sources (No description available)
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_external_auth_sources_set(sources)
+      submit_params = {}
+      raise TypeError, "'sources' expected Hash, got #{sources.class}" unless sources.is_a? Hash
+
+      submit_params['Sources'] = sources.to_json
+
+      body = perform_request('api/v1/admin/external-auth-sources/set', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::CometAPIResponseMessage.new

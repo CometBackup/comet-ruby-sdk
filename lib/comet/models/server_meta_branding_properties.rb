@@ -51,6 +51,9 @@ module Comet
     # @type [Number] expired_in_seconds
     attr_accessor :expired_in_seconds
 
+    # @type [Array<Comet::ExternalAuthenticationSourceDisplay>] external_authentication_sources
+    attr_accessor :external_authentication_sources
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -66,6 +69,7 @@ module Comet
       @accent_color = ''
       @prune_logs_after_days = 0
       @expired_in_seconds = 0
+      @external_authentication_sources = []
       @unknown_json_fields = {}
     end
 
@@ -118,6 +122,16 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @expired_in_seconds = v
+        when 'ExternalAuthenticationSources'
+          if v.nil?
+            @external_authentication_sources = []
+          else
+            @external_authentication_sources = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              @external_authentication_sources[i1] = Comet::ExternalAuthenticationSourceDisplay.new
+              @external_authentication_sources[i1].from_hash(v1)
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -138,6 +152,9 @@ module Comet
       ret['AllowAuthenticatedDownloads'] = @allow_authenticated_downloads
       ret['PruneLogsAfterDays'] = @prune_logs_after_days
       ret['ExpiredInSeconds'] = @expired_in_seconds
+      unless @external_authentication_sources.nil?
+        ret['ExternalAuthenticationSources'] = @external_authentication_sources
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

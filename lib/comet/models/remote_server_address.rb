@@ -30,6 +30,9 @@ module Comet
     # @type [Comet::ExternalLDAPAuthenticationSourceSettings] ldap
     attr_accessor :ldap
 
+    # @type [Comet::OidcConfig] oidc
+    attr_accessor :oidc
+
     # @type [Comet::B2VirtualStorageRoleSettings] b2
     attr_accessor :b2
 
@@ -63,6 +66,7 @@ module Comet
       @username = ''
       @password = ''
       @ldap = Comet::ExternalLDAPAuthenticationSourceSettings.new
+      @oidc = Comet::OidcConfig.new
       @b2 = Comet::B2VirtualStorageRoleSettings.new
       @wasabi = Comet::WasabiVirtualStorageRoleSettings.new
       @custom = Comet::CustomRemoteBucketSettings.new
@@ -108,6 +112,9 @@ module Comet
         when 'LDAP'
           @ldap = Comet::ExternalLDAPAuthenticationSourceSettings.new
           @ldap.from_hash(v)
+        when 'OIDC'
+          @oidc = Comet::OidcConfig.new
+          @oidc.from_hash(v)
         when 'B2'
           @b2 = Comet::B2VirtualStorageRoleSettings.new
           @b2.from_hash(v)
@@ -148,6 +155,9 @@ module Comet
       end
       unless @ldap.nil?
         ret['LDAP'] = @ldap
+      end
+      unless @oidc.nil?
+        ret['OIDC'] = @oidc
       end
       unless @b2.nil?
         ret['B2'] = @b2
