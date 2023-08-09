@@ -4100,7 +4100,6 @@ module Comet
     #
     # You must supply administrator authentication credentials to use this API.
     # Access to this API may be prevented on a per-administrator basis.
-    # This API requires the Storage Role to be enabled.
     # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
     #
     # @param [Comet::DestinationLocation] extra_data The destination location settings

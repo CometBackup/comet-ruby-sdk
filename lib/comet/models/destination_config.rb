@@ -183,6 +183,10 @@ module Comet
     # @type [Comet::B2DestinationLocation] b2
     attr_accessor :b2
 
+    # This field is available in Comet 23.6.9 and later.
+    # @type [Comet::WebDavDestinationLocation] web_dav
+    attr_accessor :web_dav
+
     # @type [Comet::StorjDestinationLocation] storj
     attr_accessor :storj
 
@@ -286,6 +290,7 @@ module Comet
       @localcopy_win_smbpassword_format = 0
       @swift = Comet::SwiftDestinationLocation.new
       @b2 = Comet::B2DestinationLocation.new
+      @web_dav = Comet::WebDavDestinationLocation.new
       @storj = Comet::StorjDestinationLocation.new
       @span_targets = []
       @encryption_key_encryption_method = 0
@@ -509,6 +514,9 @@ module Comet
         when 'B2'
           @b2 = Comet::B2DestinationLocation.new
           @b2.from_hash(v)
+        when 'WebDav'
+          @web_dav = Comet::WebDavDestinationLocation.new
+          @web_dav.from_hash(v)
         when 'Storj'
           @storj = Comet::StorjDestinationLocation.new
           @storj.from_hash(v)
@@ -607,6 +615,7 @@ module Comet
       ret['LocalcopyWinSMBPasswordFormat'] = @localcopy_win_smbpassword_format
       ret['Swift'] = @swift
       ret['B2'] = @b2
+      ret['WebDav'] = @web_dav
       ret['Storj'] = @storj
       ret['SpanTargets'] = @span_targets
       ret['SpanUseStaticSlots'] = @span_use_static_slots

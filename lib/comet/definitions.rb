@@ -115,6 +115,8 @@ module Comet
   # Storj
   DESTINATIONTYPE_STORJ = 1009
 
+  DESTINATIONTYPE_WEBDAV = 1010
+
   # When defining a schedule via policy, use this option to dynamically select the Storage Vault that was created most recently.
   DESTINATIONTYPE_LATEST = 1100
 
