@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.6.9'
+  APPLICATION_VERSION = '23.8.0'
 
   APPLICATION_VERSION_MAJOR = 23
 
-  APPLICATION_VERSION_MINOR = 6
+  APPLICATION_VERSION_MINOR = 8
 
-  APPLICATION_VERSION_REVISION = 9
+  APPLICATION_VERSION_REVISION = 0
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -264,7 +264,7 @@ module Comet
   # JobStatus: If the BackupJobDetail.Status field is a 5xxx code, the job has stopped for a successful reason.
   JOB_STATUS_STOP_SUCCESS__MIN = 5000
 
-  # JobStatus
+  # JobStatus: The job is complete and was successful.
   JOB_STATUS_STOP_SUCCESS = 5000
 
   # JobStatus
@@ -276,10 +276,10 @@ module Comet
   # JobStatus: Unused
   JOB_STATUS_RUNNING_INDETERMINATE = 6000
 
-  # JobStatus
+  # JobStatus: The last information the server received from the device is that the job is currently running.
   JOB_STATUS_RUNNING_ACTIVE = 6001
 
-  # JobStatus: A backup job that was marked as stopped or abandoned, but has somehow continued to run
+  # JobStatus: The job was thought to have been in an Abandoned state but updated the Comet Server with a running status.
   JOB_STATUS_RUNNING_REVIVED = 6002
 
   # JobStatus
@@ -291,25 +291,25 @@ module Comet
   # JobStatus
   JOB_STATUS_FAILED_TIMEOUT = 7000
 
-  # JobStatus
+  # JobStatus: The job is complete but there was a problem that may have resulted in issues with the expected result.
   JOB_STATUS_FAILED_WARNING = 7001
 
-  # JobStatus
+  # JobStatus: There was an error during the job and it did not fully complete.
   JOB_STATUS_FAILED_ERROR = 7002
 
-  # JobStatus
+  # JobStatus: During a backup job either the "All protected items" quota or "Storage Vault" quota was exceeded.
   JOB_STATUS_FAILED_QUOTA = 7003
 
-  # JobStatus
+  # JobStatus: The job did not start at its scheduled time.
   JOB_STATUS_FAILED_SCHEDULEMISSED = 7004
 
-  # JobStatus
+  # JobStatus: The job was cancelled manually, a device shutdown was detected, or the backup time limit was reached.
   JOB_STATUS_FAILED_CANCELLED = 7005
 
-  # JobStatus
+  # JobStatus: The backup job was skipped as there was already a backup running and the "Skip if already running" option was enabled.
   JOB_STATUS_FAILED_SKIPALREADYRUNNING = 7006
 
-  # JobStatus
+  # JobStatus: The job has stopped unexpectedly or has been manually marked as abandoned by an admin.
   JOB_STATUS_FAILED_ABANDONED = 7007
 
   # JobStatus
@@ -407,7 +407,7 @@ module Comet
   # PSAType
   PSA_TYPE_GRADIENT = 1
 
-  RELEASE_CODENAME = 'Voyager'
+  RELEASE_CODENAME = 'Adrastea'
 
   # RemoteServerType
   REMOTESERVER_COMET = 'comet'
