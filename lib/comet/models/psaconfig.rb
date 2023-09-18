@@ -31,6 +31,9 @@ module Comet
     # @type [String] url
     attr_accessor :url
 
+    # @type [Comet::PSAGroupedBy] grouped_by
+    attr_accessor :grouped_by
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -43,6 +46,7 @@ module Comet
       @partner_key = ''
       @type = 0
       @url = ''
+      @grouped_by = Comet::PSAGroupedBy.new
       @unknown_json_fields = {}
     end
 
@@ -84,6 +88,9 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @url = v
+        when 'GroupedBy'
+          @grouped_by = Comet::PSAGroupedBy.new
+          @grouped_by.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -102,6 +109,7 @@ module Comet
       end
       ret['Type'] = @type
       ret['URL'] = @url
+      ret['GroupedBy'] = @grouped_by
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

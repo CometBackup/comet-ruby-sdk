@@ -27,8 +27,11 @@ module Comet
     # @type [String] secret_key
     attr_accessor :secret_key
 
-    # @type [Boolean] use_object_lock
-    attr_accessor :use_object_lock
+    # @type [Boolean] use_object_lock__legacy__do_not_use
+    attr_accessor :use_object_lock__legacy__do_not_use
+
+    # @type [Number] object_lock_mode
+    attr_accessor :object_lock_mode
 
     # @type [Number] object_lock_days
     attr_accessor :object_lock_days
@@ -49,6 +52,7 @@ module Comet
       @master_bucket = ''
       @access_key = ''
       @secret_key = ''
+      @object_lock_mode = 0
       @object_lock_days = 0
       @unknown_json_fields = {}
     end
@@ -87,7 +91,11 @@ module Comet
 
           @secret_key = v
         when 'UseObjectLock'
-          @use_object_lock = v
+          @use_object_lock__legacy__do_not_use = v
+        when 'ObjectLockMode'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @object_lock_mode = v
         when 'ObjectLockDays'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -108,7 +116,8 @@ module Comet
       ret['MasterBucket'] = @master_bucket
       ret['AccessKey'] = @access_key
       ret['SecretKey'] = @secret_key
-      ret['UseObjectLock'] = @use_object_lock
+      ret['UseObjectLock'] = @use_object_lock__legacy__do_not_use
+      ret['ObjectLockMode'] = @object_lock_mode
       ret['ObjectLockDays'] = @object_lock_days
       ret['RemoveDeleted'] = @remove_deleted
       @unknown_json_fields.each do |k, v|

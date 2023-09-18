@@ -77,6 +77,9 @@ module Comet
     # @type [Boolean] s3remove_deleted
     attr_accessor :s3remove_deleted
 
+    # @type [Number] s3object_lock_mode
+    attr_accessor :s3object_lock_mode
+
     # @type [Number] s3object_lock_days
     attr_accessor :s3object_lock_days
 
@@ -264,6 +267,7 @@ module Comet
       @s3bucket_name = ''
       @s3subdir = ''
       @s3custom_region = ''
+      @s3object_lock_mode = 0
       @s3object_lock_days = 0
       @sftpserver = ''
       @sftpusername = ''
@@ -406,6 +410,10 @@ module Comet
           @s3uses_v2signing = v
         when 'S3RemoveDeleted'
           @s3remove_deleted = v
+        when 'S3ObjectLockMode'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @s3object_lock_mode = v
         when 'S3ObjectLockDays'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -586,6 +594,7 @@ module Comet
       ret['S3CustomRegion'] = @s3custom_region
       ret['S3UsesV2Signing'] = @s3uses_v2signing
       ret['S3RemoveDeleted'] = @s3remove_deleted
+      ret['S3ObjectLockMode'] = @s3object_lock_mode
       ret['S3ObjectLockDays'] = @s3object_lock_days
       ret['SFTPServer'] = @sftpserver
       ret['SFTPUsername'] = @sftpusername

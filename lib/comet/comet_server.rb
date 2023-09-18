@@ -2617,6 +2617,121 @@ module Comet
       ret
     end
 
+    # AdminInstallationDispatchDropConnection
+    #
+    # Instruct a live connected device to disconnect.
+    # The device will terminate its live-connection process and will not reconnect.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] device_id The live connection Device GUID
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_installation_dispatch_drop_connection(device_id)
+      submit_params = {}
+      raise TypeError, "'device_id' expected String, got #{device_id.class}" unless device_id.is_a? String
+
+      submit_params['DeviceID'] = device_id
+
+      body = perform_request('api/v1/admin/installation/dispatch/drop-connection', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminInstallationDispatchRegisterDevice
+    #
+    # Instruct an unregistered device to authenticate with a given user.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] device_id The live connection Device GUID
+    # @param [String] target_user Selected account username
+    # @param [String] target_password Selected account password
+    # @param [String] target_totpcode (Optional) Selected account TOTP code
+    # @return [String]
+    def admin_installation_dispatch_register_device(device_id, target_user, target_password, target_totpcode = nil)
+      submit_params = {}
+      raise TypeError, "'device_id' expected String, got #{device_id.class}" unless device_id.is_a? String
+
+      submit_params['DeviceID'] = device_id
+      raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
+
+      submit_params['TargetUser'] = target_user
+      raise TypeError, "'target_password' expected String, got #{target_password.class}" unless target_password.is_a? String
+
+      submit_params['TargetPassword'] = target_password
+      unless target_totpcode.nil?
+        raise TypeError, "'target_totpcode' expected String, got #{target_totpcode.class}" unless target_totpcode.is_a? String
+
+        submit_params['TargetTOTPCode'] = target_totpcode
+      end
+
+      body = perform_request('api/v1/admin/installation/dispatch/register-device', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      raise TypeError, "'json_body' expected String, got #{json_body.class}" unless json_body.is_a? String
+
+      ret = json_body
+      ret
+    end
+
+    # AdminInstallationListActive
+    #
+    # List live connected devices in lobby mode.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @return [Hash{String => Comet::RegistrationLobbyConnection}]
+    def admin_installation_list_active
+      body = perform_request('api/v1/admin/installation/list-active')
+      json_body = JSON.parse body
+      check_status json_body
+      ret = {}
+      if json_body.nil?
+        ret = {}
+      else
+        json_body.each do |k, v|
+          ret[k] = Comet::RegistrationLobbyConnection.new
+          ret[k].from_hash(v)
+        end
+      end
+      ret
+    end
+
+    # AdminJobAbandon
+    #
+    # Mark a running job as abandoned.
+    # This will change the status of a running job to abandoned.
+    # This is intended to be used on jobs which are definitely no longer running but are stuck in the running state; it will not attempt to cancel the job. If the job is detected to still be running after being marked as abandoned, it will be revived.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_user Username
+    # @param [String] job_id Job ID
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_job_abandon(target_user, job_id)
+      submit_params = {}
+      raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
+
+      submit_params['TargetUser'] = target_user
+      raise TypeError, "'job_id' expected String, got #{job_id.class}" unless job_id.is_a? String
+
+      submit_params['JobID'] = job_id
+
+      body = perform_request('api/v1/admin/job/abandon', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminJobCancel
     #
     # Cancel a running job.

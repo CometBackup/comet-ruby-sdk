@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.8.0'
+  APPLICATION_VERSION = '23.9.2'
 
   APPLICATION_VERSION_MAJOR = 23
 
-  APPLICATION_VERSION_MINOR = 8
+  APPLICATION_VERSION_MINOR = 9
 
-  APPLICATION_VERSION_REVISION = 0
+  APPLICATION_VERSION_REVISION = 2
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -361,6 +361,12 @@ module Comet
   # MSSQLRestoreOpt
   MSSQL_RESTORE_NORECOVERY = 'NO_RECOVERY'
 
+  OBJECT_LOCK_LEGACY = 0
+
+  OBJECT_LOCK_ON = 1
+
+  OBJECT_LOCK_OFF = 2
+
   OFFICE365_REGION_PUBLIC = 'GlobalPublicCloud'
 
   OFFICE365_REGION_CHINA = 'ChinaCloud'
@@ -407,7 +413,7 @@ module Comet
   # PSAType
   PSA_TYPE_GRADIENT = 1
 
-  RELEASE_CODENAME = 'Adrastea'
+  RELEASE_CODENAME = 'Voyager'
 
   # RemoteServerType
   REMOTESERVER_COMET = 'comet'
@@ -829,6 +835,12 @@ module Comet
   # StreamableEventType: Device live connection ended
   SEVT_DEVICE_LIVE_DISCONNECT = 4703
 
+  # StreamableEventType: Device connected to registration lobby
+  SEVT_DEVICE_LOBBY_CONNECT = 4704
+
+  # StreamableEventType: Device disconnected from registration lobby
+  SEVT_DEVICE_LOBBY_DISCONNECT = 4705
+
   # StreamableEventType
   SEVT__MAX = 4999
 
@@ -957,6 +969,8 @@ module Comet
 
   # UpdateStatus: The device has successfully updated to the target version.
   UPDATESTATUS_UPDATE_CONFIRMED = 5
+
+  USERNAME_MAX_LENGTH = 255
 
   # If an API response returns in failure, but it includes this value in the CometAPIResponseMessage->Message parameter, it indicates that the specified Device ID was invalid or not found.
   UNKNOWN_DEVICE_ERROR = 'ERR_UNKNOWN_DEVICE'
