@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.9.2'
+  APPLICATION_VERSION = '23.9.5'
 
   APPLICATION_VERSION_MAJOR = 23
 
   APPLICATION_VERSION_MINOR = 9
 
-  APPLICATION_VERSION_REVISION = 2
+  APPLICATION_VERSION_REVISION = 5
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -520,6 +520,9 @@ module Comet
   # RestoreType: Stream restore as T-SQL BACKUP output into a target Microsoft SQL Server
   RESTORETYPE_MSSQL = 11
 
+  # RestoreType: Restore disk image backup as VMware-compatible virtual disks
+  RESTORETYPE_WINDISK_ESXI = 12
+
   # RestoreType: Legacy name alias - Prefer to use RESTORETYPE_PROCESS_ARCHIVE since multiple archive file formats are supported within this single RESTORETYPE_
   RESTORETYPE_PROCESS_TARBALL = 3
 
@@ -730,7 +733,7 @@ module Comet
   # StreamableEventType
   SEVT__MIN = 4000
 
-  # StreamableEventType: New websocket connection. Data is typically ServerMetaVersionInfo
+  # StreamableEventType: New event stream connection. Data is typically ServerMetaVersionInfo
   SEVT_META_HELLO = 4000
 
   # StreamableEventType: User created. Data is the profile object
@@ -766,7 +769,7 @@ module Comet
   # StreamableEventType: Admin updated
   SEVT_ACCOUNT_ADMIN_UPDATED = 4152
 
-  # StreamableEventType: Admin authentication suceeded. Only emitted for non-session requests. Resource is the requested path
+  # StreamableEventType: Admin authentication succeeded. Only emitted for non-session requests. Resource is the requested path
   SEVT_ACCOUNT_ADMIN_LOGIN = 4153
 
   # StreamableEventType: Admin authentication failed. Only emitted if the admin exists. Resource is the request path

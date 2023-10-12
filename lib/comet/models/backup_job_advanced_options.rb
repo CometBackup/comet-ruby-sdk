@@ -42,6 +42,9 @@ module Comet
     # @type [Number] auto_retention_level
     attr_accessor :auto_retention_level
 
+    # @type [String] log_level
+    attr_accessor :log_level
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -53,6 +56,7 @@ module Comet
       @stop_after = 0
       @limit_vault_speed_bps = 0
       @auto_retention_level = 0
+      @log_level = ''
       @unknown_json_fields = {}
     end
 
@@ -89,6 +93,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @auto_retention_level = v
+        when 'LogLevel'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @log_level = v
         else
           @unknown_json_fields[k] = v
         end
@@ -105,6 +113,7 @@ module Comet
       ret['UseOnDiskIndexes'] = @use_on_disk_indexes
       ret['AllowZeroFilesSuccess'] = @allow_zero_files_success
       ret['AutoRetentionLevel'] = @auto_retention_level
+      ret['LogLevel'] = @log_level
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
