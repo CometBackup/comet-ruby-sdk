@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.9.5'
+  APPLICATION_VERSION = '23.9.6'
 
   APPLICATION_VERSION_MAJOR = 23
 
   APPLICATION_VERSION_MINOR = 9
 
-  APPLICATION_VERSION_REVISION = 5
+  APPLICATION_VERSION_REVISION = 6
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -417,6 +417,9 @@ module Comet
 
   # RemoteServerType
   REMOTESERVER_COMET = 'comet'
+
+  # RemoteServerType
+  REMOTESERVER_COMET_STORAGE = 'cometstorage'
 
   # RemoteServerType
   REMOTESERVER_LDAP = 'ldap'

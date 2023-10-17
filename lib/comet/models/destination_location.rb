@@ -190,6 +190,9 @@ module Comet
     # @type [Boolean] span_use_static_slots
     attr_accessor :span_use_static_slots
 
+    # @type [String] tag
+    attr_accessor :tag
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -238,6 +241,7 @@ module Comet
       @web_dav = Comet::WebDavDestinationLocation.new
       @storj = Comet::StorjDestinationLocation.new
       @span_targets = []
+      @tag = ''
       @unknown_json_fields = {}
     end
 
@@ -430,6 +434,10 @@ module Comet
           end
         when 'SpanUseStaticSlots'
           @span_use_static_slots = v
+        when 'Tag'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @tag = v
         else
           @unknown_json_fields[k] = v
         end
@@ -486,6 +494,7 @@ module Comet
       ret['Storj'] = @storj
       ret['SpanTargets'] = @span_targets
       ret['SpanUseStaticSlots'] = @span_use_static_slots
+      ret['Tag'] = @tag
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

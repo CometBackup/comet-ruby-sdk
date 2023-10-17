@@ -210,6 +210,9 @@ module Comet
     # @type [Boolean] span_use_static_slots
     attr_accessor :span_use_static_slots
 
+    # @type [String] tag
+    attr_accessor :tag
+
     # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] encryption_key_encryption_method
     attr_accessor :encryption_key_encryption_method
@@ -297,6 +300,7 @@ module Comet
       @web_dav = Comet::WebDavDestinationLocation.new
       @storj = Comet::StorjDestinationLocation.new
       @span_targets = []
+      @tag = ''
       @encryption_key_encryption_method = 0
       @encrypted_encryption_key = ''
       @repo_init_timestamp = 0
@@ -540,6 +544,10 @@ module Comet
           end
         when 'SpanUseStaticSlots'
           @span_use_static_slots = v
+        when 'Tag'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @tag = v
         when 'EncryptionKeyEncryptionMethod'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -628,6 +636,7 @@ module Comet
       ret['Storj'] = @storj
       ret['SpanTargets'] = @span_targets
       ret['SpanUseStaticSlots'] = @span_use_static_slots
+      ret['Tag'] = @tag
       ret['EncryptionKeyEncryptionMethod'] = @encryption_key_encryption_method
       ret['EncryptedEncryptionKey'] = @encrypted_encryption_key
       ret['RepoInitTimestamp'] = @repo_init_timestamp
