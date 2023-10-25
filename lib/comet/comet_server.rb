@@ -1644,6 +1644,34 @@ module Comet
       ret
     end
 
+    # AdminDispatcherRequestBrowseVmware
+    #
+    # Request a list of VMware vSphere virtual machines.
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::VMwareConnection] credentials The VMware vSphere connection settings
+    # @return [Comet::BrowseVMwareResponse]
+    def admin_dispatcher_request_browse_vmware(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::VMwareConnection, got #{credentials.class}" unless credentials.is_a? Comet::VMwareConnection
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-vmware', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseVMwareResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherRequestBrowseVssAaw
     #
     # Request a list of installed VSS Writers (Application-Aware Writers) from a live connected device.

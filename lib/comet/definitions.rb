@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.9.6'
+  APPLICATION_VERSION = '23.9.7'
 
   APPLICATION_VERSION_MAJOR = 23
 
   APPLICATION_VERSION_MINOR = 9
 
-  APPLICATION_VERSION_REVISION = 6
+  APPLICATION_VERSION_REVISION = 7
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -210,6 +210,9 @@ module Comet
   # Office 365
   ENGINE_BUILTIN_MSOFFICE = 'engine1/winmsofficemail'
 
+  # VMware
+  ENGINE_BUILTIN_VMWARE = 'engine1/vmware'
+
   # FtpsModeType: Use plain FTP, do not use FTPS.
   FTPS_MODE_PLAINTEXT = 0
 
@@ -218,6 +221,17 @@ module Comet
 
   # FtpsModeType: Use explicit FTPS, first creating an insecure connection and then upgrading to SSL/TLS using AUTH TLS (like STARTTLS).
   FTPS_MODE_EXPLICIT = 2
+
+  # Back up Hyper-V virtual machines using VSS mode. This includes all previous snapshots.
+  HYPERV_METHOD_VSS = 'vss'
+
+  # Back up Hyper-V virtual machines using WMI mode. This includes the latest snapshot data only.
+  # This const is available in Comet 23.9.8 and later.
+  HYPERV_METHOD_WMI_COPY = 'copy'
+
+  # Back up Hyper-V virtual machines using WMI mode with RCT acceleration. This includes the latest snapshot data only.
+  # This const is available in Comet 23.9.8 and later.
+  HYPERV_METHOD_WMI_CBT = 'wmi'
 
   # JobClassification: All BackupJobDetail.Classification fields will fall in the 4xxx range.
   JOB_CLASSIFICATION__MIN = 4000
@@ -984,6 +998,30 @@ module Comet
   UNSUPPORT_VHDX_FILE_SYSTEM = 'ERR_UNSUPPORT_VHDX_FILE_SYSTEM'
 
   UNSUPPORT_VMDK_FILE_SYSTEM = 'ERR_UNSUPPORT_VMDK_FILE_SYSTEM'
+
+  # VMwareConnectionType
+  VMWARE_CONNECTION_SSH = 'ssh'
+
+  # VMwareConnectionType
+  VMWARE_CONNECTION_VSPHERE = 'vsphere'
+
+  # VmwareSnapshotType
+  VMWARE_SNAPSHOT_FAST = ''
+
+  # VmwareSnapshotType
+  VMWARE_SNAPSHOT_QUIESCE = 'quiesce'
+
+  # VmwareSnapshotType
+  VMWARE_SNAPSHOT_MEMORY = 'memory'
+
+  # VmwareBackupType
+  VMWARE_BACKUP_FULL = 'full'
+
+  # VmwareBackupType
+  VMWARE_BACKUP_CBT = 'cbt'
+
+  # VmwareBackupType
+  VMWARE_BACKUP_COPY = 'copy'
 
   VHDX_PARTITON_READ_ERR_MSG = 'ERR_VHDX_PARTITION'
 
