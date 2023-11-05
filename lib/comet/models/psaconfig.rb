@@ -16,10 +16,11 @@ module Comet
     # @type [Boolean] alerts_disabled
     attr_accessor :alerts_disabled
 
+    # Custom headers to send with each PSA request
     # @type [Hash{String => String}] custom_headers
     attr_accessor :custom_headers
 
-    # Specified credentials for the target PSA
+    # Specified API key for the target PSA
     # @type [String] partner_key
     attr_accessor :partner_key
 
@@ -27,7 +28,7 @@ module Comet
     # @type [Number] type
     attr_accessor :type
 
-    # For PSA_TYPE_GENERIC
+    # The URL or subdomain for outbound PSA requests
     # @type [String] url
     attr_accessor :url
 

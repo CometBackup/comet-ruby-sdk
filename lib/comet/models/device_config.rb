@@ -36,6 +36,10 @@ module Comet
     # @type [String] client_version
     attr_accessor :client_version
 
+    # This field is available in Comet 23.9.8 and later.
+    # @type [String] syncro_uuid
+    attr_accessor :syncro_uuid
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -50,6 +54,7 @@ module Comet
       @sources = {}
       @device_timezone = ''
       @client_version = ''
+      @syncro_uuid = ''
       @unknown_json_fields = {}
     end
 
@@ -95,6 +100,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @client_version = v
+        when 'SyncroUUID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @syncro_uuid = v
         else
           @unknown_json_fields[k] = v
         end
@@ -119,6 +128,9 @@ module Comet
       end
       unless @client_version.nil?
         ret['ClientVersion'] = @client_version
+      end
+      unless @syncro_uuid.nil?
+        ret['SyncroUUID'] = @syncro_uuid
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
