@@ -5,6 +5,10 @@
 - Based on Comet 23.9.9
 - Add Syncro support
 
+## 2023-11-03 v2.20.0
+
+- (This release is identical to the v2.19.0 release version.)
+
 ## 2023-11-03 v2.19.0
 
 - Based on Comet 23.9.8
@@ -205,7 +209,7 @@ virtual disks
 
 ## 2021-09-08 v1.7.0
 - Based on Comet 21.9.1
-- Support new `device_timezone` field on the `DeviceConfig` class. 
+- Support new `device_timezone` field on the `DeviceConfig` class.
 - Add `admin_dispatcher_ping_destination` api method
 - Add support for new retention range type constants: `RETENTIONRANGE_LAST_X_BACKUPS_ONE_FOR_EACH_DAY`
 - Add support for new retention range type constants: `RETENTIONRANGE_LAST_X_BACKUPS_ONE_FOR_EACH_WEEK`
