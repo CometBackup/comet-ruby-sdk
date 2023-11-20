@@ -17,6 +17,7 @@ module Comet
     attr_accessor :connection_type
 
     # @type [Comet::SSHConnection] ssh
+    # @deprecated This member has been deprecated since Comet version 23.9.11
     attr_accessor :ssh
 
     # @type [Comet::VSphereConnection] vsphere

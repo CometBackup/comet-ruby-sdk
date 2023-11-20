@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.9.9'
+  APPLICATION_VERSION = '23.9.11'
 
   APPLICATION_VERSION_MAJOR = 23
 
   APPLICATION_VERSION_MINOR = 9
 
-  APPLICATION_VERSION_REVISION = 9
+  APPLICATION_VERSION_REVISION = 11
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -420,6 +420,9 @@ module Comet
 
   # OidcProvider
   PROVIDER_GOOGLE = 'google'
+
+  # OidcProvider
+  PROVIDER_DASHBOARD = 'dashboard'
 
   # PSAType
   PSA_TYPE_GENERIC = 0
@@ -1003,6 +1006,7 @@ module Comet
   UNSUPPORT_VMDK_FILE_SYSTEM = 'ERR_UNSUPPORT_VMDK_FILE_SYSTEM'
 
   # VMwareConnectionType
+  # @deprecated This const has been deprecated since Comet version 23.9.11
   VMWARE_CONNECTION_SSH = 'ssh'
 
   # VMwareConnectionType
@@ -1024,6 +1028,7 @@ module Comet
   VMWARE_BACKUP_CBT = 'cbt'
 
   # VmwareBackupType
+  # @deprecated This const has been deprecated since Comet version 23.9.11
   VMWARE_BACKUP_COPY = 'copy'
 
   VHDX_PARTITON_READ_ERR_MSG = 'ERR_VHDX_PARTITION'

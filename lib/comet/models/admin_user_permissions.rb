@@ -67,6 +67,10 @@ module Comet
     # @type [Array<Number>] allowed_providers_when_restricted
     attr_accessor :allowed_providers_when_restricted
 
+    # This field is available in Comet 23.9.11 and later.
+    # @type [Array<String>] allowed_user_policies
+    attr_accessor :allowed_user_policies
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -76,6 +80,7 @@ module Comet
 
     def clear
       @allowed_providers_when_restricted = []
+      @allowed_user_policies = []
       @unknown_json_fields = {}
     end
 
@@ -131,6 +136,17 @@ module Comet
               raise TypeError, "'v1' expected Numeric, got #{v1.class}" unless v1.is_a? Numeric
 
               @allowed_providers_when_restricted[i1] = v1
+            end
+          end
+        when 'AllowedUserPolicies'
+          if v.nil?
+            @allowed_user_policies = []
+          else
+            @allowed_user_policies = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+
+              @allowed_user_policies[i1] = v1
             end
           end
         else
@@ -189,6 +205,9 @@ module Comet
       end
       unless @allowed_providers_when_restricted.nil?
         ret['AllowedProvidersWhenRestricted'] = @allowed_providers_when_restricted
+      end
+      unless @allowed_user_policies.nil?
+        ret['AllowedUserPolicies'] = @allowed_user_policies
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
