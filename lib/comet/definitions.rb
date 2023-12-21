@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.11.2'
+  APPLICATION_VERSION = '23.12.1'
 
   APPLICATION_VERSION_MAJOR = 23
 
-  APPLICATION_VERSION_MINOR = 11
+  APPLICATION_VERSION_MINOR = 12
 
-  APPLICATION_VERSION_REVISION = 2
+  APPLICATION_VERSION_REVISION = 1
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -433,7 +433,7 @@ module Comet
   # PSAType
   PSA_TYPE_SYNCRO = 2
 
-  RELEASE_CODENAME = 'Saturn'
+  RELEASE_CODENAME = 'Voyager'
 
   # RemoteServerType
   REMOTESERVER_COMET = 'comet'
