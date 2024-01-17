@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2023 Comet Licensing Ltd.
+# Copyright (c) 2020-2024 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
 
 module Comet
 
-  APPLICATION_VERSION = '23.12.1'
+  APPLICATION_VERSION = '23.12.3'
 
   APPLICATION_VERSION_MAJOR = 23
 
   APPLICATION_VERSION_MINOR = 12
 
-  APPLICATION_VERSION_REVISION = 1
+  APPLICATION_VERSION_REVISION = 3
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
