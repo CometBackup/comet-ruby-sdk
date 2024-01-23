@@ -539,6 +539,29 @@ module Comet
       perform_request('api/v1/admin/branding/generate-client/by-platform', submit_params)
     end
 
+    # AdminBrandingGenerateClientLinuxDeb
+    #
+    # Download software (Linux Debian Package).
+    #
+    # This API requires administrator authentication credentials, unless the server is configured to allow unauthenticated software downloads.
+    # This API requires the Software Build Role to be enabled.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] self_address (Optional) The external URL of this server, used to resolve conflicts
+    # @return [String]
+    def admin_branding_generate_client_linux_deb(self_address = nil)
+      submit_params = {}
+      if self_address.nil?
+        submit_params['SelfAddress'] = @server_address
+      else
+        raise TypeError, "'self_address' expected String, got #{self_address.class}" unless self_address.is_a? String
+
+        submit_params['SelfAddress'] = self_address
+      end
+
+      perform_request('api/v1/admin/branding/generate-client/linux-deb', submit_params)
+    end
+
     # AdminBrandingGenerateClientLinuxgeneric
     #
     # Download software (Linux Server .run).
