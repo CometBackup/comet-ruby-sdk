@@ -47,6 +47,10 @@ module Comet
     # @type [Boolean] deny_view_server_info
     attr_accessor :deny_view_server_info
 
+    # This field is available in Comet 24.3.2 and later.
+    # @type [Boolean] prevent_delete_storage_vault
+    attr_accessor :prevent_delete_storage_vault
+
     # This field is available in Comet 23.6.0 and later.
     # @type [Boolean] prevent_request_storage_vault
     attr_accessor :prevent_request_storage_vault
@@ -119,6 +123,8 @@ module Comet
           @deny_view_server_history = v
         when 'DenyViewServerInfo'
           @deny_view_server_info = v
+        when 'PreventDeleteStorageVault'
+          @prevent_delete_storage_vault = v
         when 'PreventRequestStorageVault'
           @prevent_request_storage_vault = v
         when 'PreventAddCustomStorageVault'
@@ -190,6 +196,9 @@ module Comet
       end
       unless @deny_view_server_info.nil?
         ret['DenyViewServerInfo'] = @deny_view_server_info
+      end
+      unless @prevent_delete_storage_vault.nil?
+        ret['PreventDeleteStorageVault'] = @prevent_delete_storage_vault
       end
       unless @prevent_request_storage_vault.nil?
         ret['PreventRequestStorageVault'] = @prevent_request_storage_vault

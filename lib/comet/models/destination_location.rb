@@ -173,6 +173,9 @@ module Comet
     # @type [Comet::StorjDestinationLocation] storj
     attr_accessor :storj
 
+    # @type [Comet::SMBDestinationLocation] smb
+    attr_accessor :smb
+
     # A list of underlying destinations, that will be combined and presented as one.
     # @type [Array<Comet::DestinationLocation>] span_targets
     attr_accessor :span_targets
@@ -240,6 +243,7 @@ module Comet
       @b2 = Comet::B2DestinationLocation.new
       @web_dav = Comet::WebDavDestinationLocation.new
       @storj = Comet::StorjDestinationLocation.new
+      @smb = Comet::SMBDestinationLocation.new
       @span_targets = []
       @tag = ''
       @unknown_json_fields = {}
@@ -422,6 +426,9 @@ module Comet
         when 'Storj'
           @storj = Comet::StorjDestinationLocation.new
           @storj.from_hash(v)
+        when 'SMB'
+          @smb = Comet::SMBDestinationLocation.new
+          @smb.from_hash(v)
         when 'SpanTargets'
           if v.nil?
             @span_targets = []
@@ -492,6 +499,7 @@ module Comet
       ret['B2'] = @b2
       ret['WebDav'] = @web_dav
       ret['Storj'] = @storj
+      ret['SMB'] = @smb
       ret['SpanTargets'] = @span_targets
       ret['SpanUseStaticSlots'] = @span_use_static_slots
       ret['Tag'] = @tag

@@ -3145,6 +3145,26 @@ module Comet
       perform_request('api/v1/admin/meta/read-logs', submit_params)
     end
 
+    # AdminMetaReadSelectLogs
+    #
+    # Get logs file content.
+    # On non-Windows platforms, log content uses LF line endings. On Windows, Comet changed from LF to CRLF line endings in 18.3.2.
+    # This API does not automatically convert line endings; around the 18.3.2 timeframe, log content may even contain mixed line-endings.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API is only available for top-level administrator accounts, not for Tenant administrator accounts.
+    #
+    # @param [Array<Number>] logs An array of log days, selected from the options returned by the Get Log Files API
+    # @return [String]
+    def admin_meta_read_select_logs(logs)
+      submit_params = {}
+      raise TypeError, "'logs' expected Array, got #{logs.class}" unless logs.is_a? Array
+
+      submit_params['Logs'] = logs.to_json
+
+      perform_request('api/v1/admin/meta/read-select-logs', submit_params)
+    end
+
     # AdminMetaRemoteStorageVaultGet
     #
     # Get Requesting Remote Storage Vault Config.
@@ -3316,12 +3336,18 @@ module Comet
     # Access to this API may be prevented on a per-administrator basis.
     #
     # @param [Comet::EmailReportingOption] email_reporting_option Test email reporting option for sending
+    # @param [String] target_organization (Optional) If present, Testing email with a target organization. Only allowed for top-level admins. (>= 24.3.0)
     # @return [Comet::CometAPIResponseMessage]
-    def admin_meta_send_test_report(email_reporting_option)
+    def admin_meta_send_test_report(email_reporting_option, target_organization = nil)
       submit_params = {}
       raise TypeError, "'email_reporting_option' expected Comet::EmailReportingOption, got #{email_reporting_option.class}" unless email_reporting_option.is_a? Comet::EmailReportingOption
 
       submit_params['EmailReportingOption'] = email_reporting_option.to_json
+      unless target_organization.nil?
+        raise TypeError, "'target_organization' expected String, got #{target_organization.class}" unless target_organization.is_a? String
+
+        submit_params['TargetOrganization'] = target_organization
+      end
 
       body = perform_request('api/v1/admin/meta/send-test-report', submit_params)
       json_body = JSON.parse body

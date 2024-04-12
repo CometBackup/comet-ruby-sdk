@@ -12,6 +12,13 @@ module Comet
   # AmazonAWSVirtualStorageRoleSettings is a typed class wrapper around the underlying Comet Server API data structure.
   class AmazonAWSVirtualStorageRoleSettings
 
+    # If set, the Storage Template will generate Storage Vaults pointing to a subdirectory within this
+    # bucket. A single dynamic IAM policy will cover all created Storage Vaults.
+    # This is preferable for platforms that have limits on the total number of IAM policies. However, it
+    # requires a high level of IAM compatibility.
+    # If left blank, the Storage Template will generate Storage Vaults pointing to new, separate S3
+    # buckets each time. An additional IAM policy is created for each new Storage Vault.
+    # This is preferable for platforms that have a lower level of IAM compatibility.
     # @type [String] master_bucket
     attr_accessor :master_bucket
 
@@ -22,14 +29,21 @@ module Comet
     attr_accessor :secret_key
 
     # @type [Boolean] use_object_lock__legacy__do_not_use
+    # @deprecated This member has been deprecated since Comet version 23.x.x
     attr_accessor :use_object_lock__legacy__do_not_use
 
+    # Control whether the resulting Storage Vaults are configured for Object Lock. One of the
+    # OBJECT_LOCK_ constants
     # @type [Number] object_lock_mode
     attr_accessor :object_lock_mode
 
     # @type [Number] object_lock_days
     attr_accessor :object_lock_days
 
+    # Control whether the "Allow removal of deleted files" checkbox is enabled for Storage Vaults
+    # generated from this Storage Template.
+    # When configuring a Storage Template from the Comet Server web interface, this field is set
+    # automatically for Storage Templates using Object Lock.
     # @type [Boolean] remove_deleted
     attr_accessor :remove_deleted
 

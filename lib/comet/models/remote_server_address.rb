@@ -18,12 +18,15 @@ module Comet
     # @type [String] description
     attr_accessor :description
 
+    # For use with Comet Server (Storage Role / Auth Role)
     # @type [String] remote_address
     attr_accessor :remote_address
 
+    # For use with Comet Server (Storage Role / Auth Role)
     # @type [String] username
     attr_accessor :username
 
+    # For use with Comet Server (Storage Role / Auth Role)
     # @type [String] password
     attr_accessor :password
 
@@ -33,24 +36,37 @@ module Comet
     # @type [Comet::OidcConfig] oidc
     attr_accessor :oidc
 
+    # Backblaze B2 (Storage Template / Constellation)
     # @type [Comet::B2VirtualStorageRoleSettings] b2
     attr_accessor :b2
 
+    # Wasabi, or Comet Storage powered by Wasabi (Storage Template / Constellation)
     # @type [Comet::WasabiVirtualStorageRoleSettings] wasabi
     attr_accessor :wasabi
 
+    # Custom Remote Bucket HTTP protocol (Storage Template)
     # @type [Comet::CustomRemoteBucketSettings] custom
     attr_accessor :custom
 
+    # IDrive e2, or Custom IAM-compatible (Storage Template / Constellation)
     # @type [Comet::S3GenericVirtualStorageRole] s3
     attr_accessor :s3
 
-    # Amazon AWS - Virtual Storage Role
+    # Amazon AWS (Storage Template / Constellation)
     # @type [Comet::AmazonAWSVirtualStorageRoleSettings] aws
     attr_accessor :aws
 
+    # Storj (Storage Template / Constellation)
     # @type [Comet::StorjVirtualStorageRoleSetting] storj
     attr_accessor :storj
+
+    # Impossible Cloud Partner API (Storage Template / Constellation)
+    # @type [Comet::ImpossibleCloudPartnerTemplateSettings] imp_partner
+    attr_accessor :imp_partner
+
+    # Impossible Cloud IAM API (Storage Template / Constellation)
+    # @type [Comet::ImpossibleCloudIAMTemplateSettings] imp_user
+    attr_accessor :imp_user
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -73,6 +89,8 @@ module Comet
       @s3 = Comet::S3GenericVirtualStorageRole.new
       @aws = Comet::AmazonAWSVirtualStorageRoleSettings.new
       @storj = Comet::StorjVirtualStorageRoleSetting.new
+      @imp_partner = Comet::ImpossibleCloudPartnerTemplateSettings.new
+      @imp_user = Comet::ImpossibleCloudIAMTemplateSettings.new
       @unknown_json_fields = {}
     end
 
@@ -133,6 +151,12 @@ module Comet
         when 'Storj'
           @storj = Comet::StorjVirtualStorageRoleSetting.new
           @storj.from_hash(v)
+        when 'ImpPartner'
+          @imp_partner = Comet::ImpossibleCloudPartnerTemplateSettings.new
+          @imp_partner.from_hash(v)
+        when 'ImpUser'
+          @imp_user = Comet::ImpossibleCloudIAMTemplateSettings.new
+          @imp_user.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -176,6 +200,12 @@ module Comet
       end
       unless @storj.nil?
         ret['Storj'] = @storj
+      end
+      unless @imp_partner.nil?
+        ret['ImpPartner'] = @imp_partner
+      end
+      unless @imp_user.nil?
+        ret['ImpUser'] = @imp_user
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

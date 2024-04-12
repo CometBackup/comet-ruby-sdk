@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '23.12.3'
+  APPLICATION_VERSION = '24.3.5'
 
-  APPLICATION_VERSION_MAJOR = 23
+  APPLICATION_VERSION_MAJOR = 24
 
-  APPLICATION_VERSION_MINOR = 12
+  APPLICATION_VERSION_MINOR = 3
 
-  APPLICATION_VERSION_REVISION = 3
+  APPLICATION_VERSION_REVISION = 5
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -116,6 +116,9 @@ module Comet
   DESTINATIONTYPE_STORJ = 1009
 
   DESTINATIONTYPE_WEBDAV = 1010
+
+  # SMB Path
+  DESTINATIONTYPE_SMB = 1011
 
   # When defining a schedule via policy, use this option to dynamically select the Storage Vault that was created most recently.
   DESTINATIONTYPE_LATEST = 1100
@@ -375,6 +378,9 @@ module Comet
   # MSSQLRestoreOpt
   MSSQL_RESTORE_NORECOVERY = 'NO_RECOVERY'
 
+  # Enable Object Lock capability if the corresponding Days field is greater than zero.
+New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
+  # @deprecated This const has been deprecated since Comet version 23.x.x
   OBJECT_LOCK_LEGACY = 0
 
   OBJECT_LOCK_ON = 1
@@ -435,38 +441,44 @@ module Comet
 
   RELEASE_CODENAME = 'Voyager'
 
-  # RemoteServerType
+  # RemoteServerType: Comet Server
   REMOTESERVER_COMET = 'comet'
 
-  # RemoteServerType
+  # RemoteServerType: Comet Storage powered by Wasabi
   REMOTESERVER_COMET_STORAGE = 'cometstorage'
 
-  # RemoteServerType
+  # RemoteServerType: LDAP (Lightweight Directory Access Protocol)
   REMOTESERVER_LDAP = 'ldap'
 
-  # RemoteServerType
+  # RemoteServerType: OpenID Connect
   REMOTESERVER_OIDC = 'oidc'
 
-  # RemoteServerType
+  # RemoteServerType: Backblaze B2
   REMOTESERVER_B2 = 'b2'
 
-  # RemoteServerType
+  # RemoteServerType: Wasabi Cloud Storage
   REMOTESERVER_WASABI = 'wasabi'
 
-  # RemoteServerType
+  # RemoteServerType: Custom Remote Bucket HTTP protocol
   REMOTESERVER_CUSTOM = 'custom'
 
-  # RemoteServerType
+  # RemoteServerType: Custom IAM-Compatible
   REMOTESERVER_S3_GENERIC = 's3'
 
-  # RemoteServerType
+  # RemoteServerType: Amazon Web Services
   REMOTESERVER_AWS = 'aws'
 
-  # RemoteServerType
+  # RemoteServerType: Storj DCS
   REMOTESERVER_STORJ = 'storj'
 
-  # RemoteServerType
+  # RemoteServerType: IDrive e2
   REMOTESERVER_IDRIVEE2 = 'idrivee2'
+
+  # RemoteServerType: Impossible Cloud (Partner API)
+  REMOTESERVER_IMPOSSIBLECLOUD_PARTNER = 'impossiblecloud-partner'
+
+  # RemoteServerType: Impossible Cloud
+  REMOTESERVER_IMPOSSIBLECLOUD_IAM = 'impossiblecloud-iam'
 
   # ReplicatorState
   REPLICATOR_STATE_NONE = 0
@@ -745,6 +757,9 @@ module Comet
   SETTING_ENFORCED_OFF = 4
 
   # Severity
+  SEVERITY_DEBUG = 'D'
+
+  # Severity
   SEVERITY_INFO = 'I'
 
   # Severity
@@ -902,6 +917,12 @@ module Comet
 
   # StoredObjectType
   STOREDOBJECTTYPE_WINEFS = 'winefs'
+
+  # StoredObjectType
+  STOREDOBJECTTYPE_WINDOWSFILE = 'winfile'
+
+  # StoredObjectType
+  STOREDOBJECTTYPE_WINDOWSDIR = 'windir'
 
   # StoredObjectType
   STOREDOBJECTTYPE_EMAILMESSAGE = 'emailmessage'

@@ -9,25 +9,8 @@ require 'json'
 
 module Comet
 
-  # WasabiVirtualStorageRoleSettings is a typed class wrapper around the underlying Comet Server API data structure.
-  # This is an alias type for AmazonAWSVirtualStorageRoleSettings.
-  class WasabiVirtualStorageRoleSettings
-
-    # If set, the Storage Template will generate Storage Vaults pointing to a subdirectory within this
-    # bucket. A single dynamic IAM policy will cover all created Storage Vaults.
-    # This is preferable for platforms that have limits on the total number of IAM policies. However, it
-    # requires a high level of IAM compatibility.
-    # If left blank, the Storage Template will generate Storage Vaults pointing to new, separate S3
-    # buckets each time. An additional IAM policy is created for each new Storage Vault.
-    # This is preferable for platforms that have a lower level of IAM compatibility.
-    # @type [String] master_bucket
-    attr_accessor :master_bucket
-
-    # @type [String] access_key
-    attr_accessor :access_key
-
-    # @type [String] secret_key
-    attr_accessor :secret_key
+  # ObjectLockStorageTemplateSettings is a typed class wrapper around the underlying Comet Server API data structure.
+  class ObjectLockStorageTemplateSettings
 
     # @type [Boolean] use_object_lock__legacy__do_not_use
     # @deprecated This member has been deprecated since Comet version 23.x.x
@@ -56,9 +39,6 @@ module Comet
     end
 
     def clear
-      @master_bucket = ''
-      @access_key = ''
-      @secret_key = ''
       @object_lock_mode = 0
       @object_lock_days = 0
       @unknown_json_fields = {}
@@ -77,18 +57,6 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'MasterBucket'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @master_bucket = v
-        when 'AccessKey'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @access_key = v
-        when 'SecretKey'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @secret_key = v
         when 'UseObjectLock'
           @use_object_lock__legacy__do_not_use = v
         when 'ObjectLockMode'
@@ -110,9 +78,6 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['MasterBucket'] = @master_bucket
-      ret['AccessKey'] = @access_key
-      ret['SecretKey'] = @secret_key
       ret['UseObjectLock'] = @use_object_lock__legacy__do_not_use
       ret['ObjectLockMode'] = @object_lock_mode
       ret['ObjectLockDays'] = @object_lock_days

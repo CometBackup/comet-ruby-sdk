@@ -193,6 +193,9 @@ module Comet
     # @type [Comet::StorjDestinationLocation] storj
     attr_accessor :storj
 
+    # @type [Comet::SMBDestinationLocation] smb
+    attr_accessor :smb
+
     # A list of underlying destinations, that will be combined and presented as one.
     # @type [Array<Comet::DestinationLocation>] span_targets
     attr_accessor :span_targets
@@ -245,6 +248,10 @@ module Comet
     # The "Prevent users from viewing the actual storage type" option
     # @type [Boolean] rebrand_storage
     attr_accessor :rebrand_storage
+
+    # If not empty, an error occured during a retention pass. Describes the error.
+    # @type [String] retention_error
+    attr_accessor :retention_error
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -299,6 +306,7 @@ module Comet
       @b2 = Comet::B2DestinationLocation.new
       @web_dav = Comet::WebDavDestinationLocation.new
       @storj = Comet::StorjDestinationLocation.new
+      @smb = Comet::SMBDestinationLocation.new
       @span_targets = []
       @tag = ''
       @encryption_key_encryption_method = 0
@@ -307,6 +315,7 @@ module Comet
       @storage_limit_bytes = 0
       @statistics = Comet::DestinationStatistics.new
       @default_retention = Comet::RetentionPolicy.new
+      @retention_error = ''
       @unknown_json_fields = {}
     end
 
@@ -532,6 +541,9 @@ module Comet
         when 'Storj'
           @storj = Comet::StorjDestinationLocation.new
           @storj.from_hash(v)
+        when 'SMB'
+          @smb = Comet::SMBDestinationLocation.new
+          @smb.from_hash(v)
         when 'SpanTargets'
           if v.nil?
             @span_targets = []
@@ -574,6 +586,10 @@ module Comet
           @default_retention.from_hash(v)
         when 'RebrandStorage'
           @rebrand_storage = v
+        when 'RetentionError'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @retention_error = v
         else
           @unknown_json_fields[k] = v
         end
@@ -634,6 +650,7 @@ module Comet
       ret['B2'] = @b2
       ret['WebDav'] = @web_dav
       ret['Storj'] = @storj
+      ret['SMB'] = @smb
       ret['SpanTargets'] = @span_targets
       ret['SpanUseStaticSlots'] = @span_use_static_slots
       ret['Tag'] = @tag
@@ -647,6 +664,7 @@ module Comet
       end
       ret['DefaultRetention'] = @default_retention
       ret['RebrandStorage'] = @rebrand_storage
+      ret['RetentionError'] = @retention_error
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
