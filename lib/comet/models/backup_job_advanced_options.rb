@@ -42,6 +42,11 @@ module Comet
     # @type [Number] auto_retention_level
     attr_accessor :auto_retention_level
 
+    # Desired concurrency count. If Zero, uses mode defaults
+    # @type [Number] concurrency_count
+    attr_accessor :concurrency_count
+
+    # Log verbosity level. LOG_DEBUG has the greatest verbosity
     # @type [String] log_level
     attr_accessor :log_level
 
@@ -56,6 +61,7 @@ module Comet
       @stop_after = 0
       @limit_vault_speed_bps = 0
       @auto_retention_level = 0
+      @concurrency_count = 0
       @log_level = ''
       @unknown_json_fields = {}
     end
@@ -93,6 +99,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @auto_retention_level = v
+        when 'ConcurrencyCount'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @concurrency_count = v
         when 'LogLevel'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -113,6 +123,7 @@ module Comet
       ret['UseOnDiskIndexes'] = @use_on_disk_indexes
       ret['AllowZeroFilesSuccess'] = @allow_zero_files_success
       ret['AutoRetentionLevel'] = @auto_retention_level
+      ret['ConcurrencyCount'] = @concurrency_count
       ret['LogLevel'] = @log_level
       @unknown_json_fields.each do |k, v|
         ret[k] = v

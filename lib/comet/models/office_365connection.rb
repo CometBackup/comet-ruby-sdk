@@ -12,8 +12,8 @@ module Comet
   # Office365Connection is a typed class wrapper around the underlying Comet Server API data structure.
   class Office365Connection
 
-    # @type [String] feature_flag
-    attr_accessor :feature_flag
+    # @type [Number] concurrency
+    attr_accessor :concurrency
 
     # @type [Comet::Office365Credential] credential
     attr_accessor :credential
@@ -21,14 +21,20 @@ module Comet
     # @type [Comet::Office365CustomSetting] custom_setting
     attr_accessor :custom_setting
 
+    # @type [Comet::Office365CustomSettingV2] custom_setting_v2
+    attr_accessor :custom_setting_v2
+
+    # @type [String] feature_flag
+    attr_accessor :feature_flag
+
+    # @type [String] log_level
+    attr_accessor :log_level
+
     # @type [Array<String>] mailbox_unique_members
     attr_accessor :mailbox_unique_members
 
     # @type [Array<String>] site_unique_members
     attr_accessor :site_unique_members
-
-    # @type [Comet::Office365CustomSettingV2] custom_setting_v2
-    attr_accessor :custom_setting_v2
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -38,12 +44,14 @@ module Comet
     end
 
     def clear
-      @feature_flag = ''
+      @concurrency = 0
       @credential = Comet::Office365Credential.new
       @custom_setting = Comet::Office365CustomSetting.new
+      @custom_setting_v2 = Comet::Office365CustomSettingV2.new
+      @feature_flag = ''
+      @log_level = ''
       @mailbox_unique_members = []
       @site_unique_members = []
-      @custom_setting_v2 = Comet::Office365CustomSettingV2.new
       @unknown_json_fields = {}
     end
 
@@ -60,16 +68,27 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'FeatureFlag'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+        when 'Concurrency'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
-          @feature_flag = v
+          @concurrency = v
         when 'Credential'
           @credential = Comet::Office365Credential.new
           @credential.from_hash(v)
         when 'CustomSetting'
           @custom_setting = Comet::Office365CustomSetting.new
           @custom_setting.from_hash(v)
+        when 'CustomSettingV2'
+          @custom_setting_v2 = Comet::Office365CustomSettingV2.new
+          @custom_setting_v2.from_hash(v)
+        when 'FeatureFlag'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @feature_flag = v
+        when 'LogLevel'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @log_level = v
         when 'MailboxUniqueMembers'
           if v.nil?
             @mailbox_unique_members = []
@@ -92,9 +111,6 @@ module Comet
               @site_unique_members[i1] = v1
             end
           end
-        when 'CustomSettingV2'
-          @custom_setting_v2 = Comet::Office365CustomSettingV2.new
-          @custom_setting_v2.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -104,12 +120,14 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['FeatureFlag'] = @feature_flag
+      ret['Concurrency'] = @concurrency
       ret['Credential'] = @credential
       ret['CustomSetting'] = @custom_setting
+      ret['CustomSettingV2'] = @custom_setting_v2
+      ret['FeatureFlag'] = @feature_flag
+      ret['LogLevel'] = @log_level
       ret['MailboxUniqueMembers'] = @mailbox_unique_members
       ret['SiteUniqueMembers'] = @site_unique_members
-      ret['CustomSettingV2'] = @custom_setting_v2
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
