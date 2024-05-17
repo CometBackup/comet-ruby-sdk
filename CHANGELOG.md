@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2024-05-17 v2.30.0
+
+- Based on Comet 24.3.8
+- Added support for configuring Software Build Role builder count
+- Added LastStartTime field to job statistics
+
 ## 2024-05-14 v2.29.0
 
 - Based on Comet 24.3.7
