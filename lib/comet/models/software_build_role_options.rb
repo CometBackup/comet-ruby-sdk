@@ -18,6 +18,11 @@ module Comet
     # @type [Boolean] allow_unauthenticated_downloads
     attr_accessor :allow_unauthenticated_downloads
 
+    # 0 will default to CPU core count - 2
+    # This field is available in Comet 24.3.8 and later.
+    # @type [Number] max_builders
+    attr_accessor :max_builders
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -26,6 +31,7 @@ module Comet
     end
 
     def clear
+      @max_builders = 0
       @unknown_json_fields = {}
     end
 
@@ -46,6 +52,10 @@ module Comet
           @role_enabled = v
         when 'AllowUnauthenticatedDownloads'
           @allow_unauthenticated_downloads = v
+        when 'MaxBuilders'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @max_builders = v
         else
           @unknown_json_fields[k] = v
         end
@@ -57,6 +67,7 @@ module Comet
       ret = {}
       ret['RoleEnabled'] = @role_enabled
       ret['AllowUnauthenticatedDownloads'] = @allow_unauthenticated_downloads
+      ret['MaxBuilders'] = @max_builders
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

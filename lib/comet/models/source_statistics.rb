@@ -12,6 +12,9 @@ module Comet
   # SourceStatistics is a typed class wrapper around the underlying Comet Server API data structure.
   class SourceStatistics
 
+    # @type [Number] last_start_time
+    attr_accessor :last_start_time
+
     # @type [Comet::BackupJobDetail] last_backup_job
     attr_accessor :last_backup_job
 
@@ -26,6 +29,7 @@ module Comet
     end
 
     def clear
+      @last_start_time = 0
       @last_backup_job = Comet::BackupJobDetail.new
       @last_successful_backup_job = Comet::BackupJobDetail.new
       @unknown_json_fields = {}
@@ -44,6 +48,10 @@ module Comet
 
       obj.each do |k, v|
         case k
+        when 'LastStartTime'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @last_start_time = v
         when 'LastBackupJob'
           @last_backup_job = Comet::BackupJobDetail.new
           @last_backup_job.from_hash(v)
@@ -59,6 +67,7 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
+      ret['LastStartTime'] = @last_start_time
       ret['LastBackupJob'] = @last_backup_job
       ret['LastSuccessfulBackupJob'] = @last_successful_backup_job
       @unknown_json_fields.each do |k, v|
