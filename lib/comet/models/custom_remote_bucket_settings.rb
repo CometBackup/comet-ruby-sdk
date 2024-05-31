@@ -19,6 +19,13 @@ module Comet
     # @type [Hash{String => String}] custom_headers
     attr_accessor :custom_headers
 
+    # This field is available in Comet 24.5.0 and later.
+    # @type [String] custom_body
+    attr_accessor :custom_body
+
+    # @type [String] custom_body_type
+    attr_accessor :custom_body_type
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -29,6 +36,8 @@ module Comet
     def clear
       @url = ''
       @custom_headers = {}
+      @custom_body = ''
+      @custom_body_type = ''
       @unknown_json_fields = {}
     end
 
@@ -60,6 +69,14 @@ module Comet
               @custom_headers[k1] = v1
             end
           end
+        when 'CustomBody'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @custom_body = v
+        when 'CustomBodyType'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @custom_body_type = v
         else
           @unknown_json_fields[k] = v
         end
@@ -71,6 +88,8 @@ module Comet
       ret = {}
       ret['URL'] = @url
       ret['CustomHeaders'] = @custom_headers
+      ret['CustomBody'] = @custom_body
+      ret['CustomBodyType'] = @custom_body_type
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '24.3.9'
+  APPLICATION_VERSION = '24.5.0'
 
   APPLICATION_VERSION_MAJOR = 24
 
-  APPLICATION_VERSION_MINOR = 3
+  APPLICATION_VERSION_MINOR = 5
 
-  APPLICATION_VERSION_REVISION = 9
+  APPLICATION_VERSION_REVISION = 0
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -68,6 +68,18 @@ module Comet
 
   # CompressMode
   COMPRESS_DEFAULT = COMPRESS_LVL_4
+
+  # CustomRemoteBucketCustomBodyType
+  CUSTOMREMOTEBUCKET_CUSTOMBODY_NONE = 'none'
+
+  # CustomRemoteBucketCustomBodyType
+  CUSTOMREMOTEBUCKET_CUSTOMBODY_JSON = 'json'
+
+  # CustomRemoteBucketCustomBodyType
+  CUSTOMREMOTEBUCKET_CUSTOMBODY_URLENC = 'urlencoded'
+
+  # CustomRemoteBucketCustomBodyType
+  CUSTOMREMOTEBUCKET_CUSTOMBODY_FORM = 'form'
 
   # LanguageCode
   DEFAULT_LANGUAGE = 'en_US'
@@ -439,7 +451,7 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
   # PSAType
   PSA_TYPE_SYNCRO = 2
 
-  RELEASE_CODENAME = 'Voyager'
+  RELEASE_CODENAME = 'Enceladus'
 
   # RemoteServerType: Comet Server
   REMOTESERVER_COMET = 'comet'

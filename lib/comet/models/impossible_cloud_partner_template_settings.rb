@@ -21,6 +21,25 @@ module Comet
     # @type [String] access_key
     attr_accessor :access_key
 
+    # @type [Boolean] use_object_lock__legacy__do_not_use
+    # @deprecated This member has been deprecated since Comet version 23.x.x
+    attr_accessor :use_object_lock__legacy__do_not_use
+
+    # Control whether the resulting Storage Vaults are configured for Object Lock. One of the
+    # OBJECT_LOCK_ constants
+    # @type [Number] object_lock_mode
+    attr_accessor :object_lock_mode
+
+    # @type [Number] object_lock_days
+    attr_accessor :object_lock_days
+
+    # Control whether the "Allow removal of deleted files" checkbox is enabled for Storage Vaults
+    # generated from this Storage Template.
+    # When configuring a Storage Template from the Comet Server web interface, this field is set
+    # automatically for Storage Templates using Object Lock.
+    # @type [Boolean] remove_deleted
+    attr_accessor :remove_deleted
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -31,6 +50,8 @@ module Comet
     def clear
       @region = ''
       @access_key = ''
+      @object_lock_mode = 0
+      @object_lock_days = 0
       @unknown_json_fields = {}
     end
 
@@ -55,6 +76,18 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @access_key = v
+        when 'UseObjectLock'
+          @use_object_lock__legacy__do_not_use = v
+        when 'ObjectLockMode'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @object_lock_mode = v
+        when 'ObjectLockDays'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @object_lock_days = v
+        when 'RemoveDeleted'
+          @remove_deleted = v
         else
           @unknown_json_fields[k] = v
         end
@@ -66,6 +99,10 @@ module Comet
       ret = {}
       ret['Region'] = @region
       ret['AccessKey'] = @access_key
+      ret['UseObjectLock'] = @use_object_lock__legacy__do_not_use
+      ret['ObjectLockMode'] = @object_lock_mode
+      ret['ObjectLockDays'] = @object_lock_days
+      ret['RemoveDeleted'] = @remove_deleted
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
