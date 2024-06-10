@@ -43,6 +43,11 @@ module Comet
     # @type [Boolean] smtpallow_unencrypted
     attr_accessor :smtpallow_unencrypted
 
+    # Override the HELO/EHLO hostname for SMTP or MX Direct modes. If blank, uses system default
+    # HELO/EHLO hostname.
+    # @type [String] smtpcustom_ehlo
+    attr_accessor :smtpcustom_ehlo
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -59,6 +64,7 @@ module Comet
       @smtpport = 0
       @smtpusername = ''
       @smtppassword = ''
+      @smtpcustom_ehlo = ''
       @unknown_json_fields = {}
     end
 
@@ -117,6 +123,10 @@ module Comet
           @smtpallow_invalid_certificate = v
         when 'SMTPAllowUnencrypted'
           @smtpallow_unencrypted = v
+        when 'SMTPCustomEhlo'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @smtpcustom_ehlo = v
         else
           @unknown_json_fields[k] = v
         end
@@ -149,6 +159,9 @@ module Comet
       end
       unless @smtpallow_unencrypted.nil?
         ret['SMTPAllowUnencrypted'] = @smtpallow_unencrypted
+      end
+      unless @smtpcustom_ehlo.nil?
+        ret['SMTPCustomEhlo'] = @smtpcustom_ehlo
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

@@ -15,6 +15,9 @@ module Comet
     # @type [String] default_drive_id
     attr_accessor :default_drive_id
 
+    # @type [Boolean] disabled
+    attr_accessor :disabled
+
     # @type [String] display_name
     attr_accessor :display_name
 
@@ -99,6 +102,8 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @default_drive_id = v
+        when 'Disabled'
+          @disabled = v
         when 'DisplayName'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -171,6 +176,9 @@ module Comet
       ret = {}
       unless @default_drive_id.nil?
         ret['DefaultDriveID'] = @default_drive_id
+      end
+      unless @disabled.nil?
+        ret['Disabled'] = @disabled
       end
       unless @display_name.nil?
         ret['DisplayName'] = @display_name

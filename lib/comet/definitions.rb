@@ -7,11 +7,11 @@
 
 module Comet
 
-  APPLICATION_VERSION = '24.5.0'
+  APPLICATION_VERSION = '24.6.0'
 
   APPLICATION_VERSION_MAJOR = 24
 
-  APPLICATION_VERSION_MINOR = 5
+  APPLICATION_VERSION_MINOR = 6
 
   APPLICATION_VERSION_REVISION = 0
 
@@ -451,7 +451,7 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
   # PSAType
   PSA_TYPE_SYNCRO = 2
 
-  RELEASE_CODENAME = 'Enceladus'
+  RELEASE_CODENAME = 'Voyager'
 
   # RemoteServerType: Comet Server
   REMOTESERVER_COMET = 'comet'

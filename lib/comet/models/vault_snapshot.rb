@@ -15,6 +15,10 @@ module Comet
     # @type [String] snapshot
     attr_accessor :snapshot
 
+    # This field is available in Comet 24.3.x and later.
+    # @type [String] engine_type
+    attr_accessor :engine_type
+
     # @type [String] source
     attr_accessor :source
 
@@ -34,6 +38,7 @@ module Comet
 
     def clear
       @snapshot = ''
+      @engine_type = ''
       @source = ''
       @create_time = 0
       @unknown_json_fields = {}
@@ -56,6 +61,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @snapshot = v
+        when 'EngineType'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @engine_type = v
         when 'Source'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -76,6 +85,7 @@ module Comet
     def to_hash
       ret = {}
       ret['Snapshot'] = @snapshot
+      ret['EngineType'] = @engine_type
       ret['Source'] = @source
       ret['CreateTime'] = @create_time
       ret['HasOriginalPathInfo'] = @has_original_path_info
