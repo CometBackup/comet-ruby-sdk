@@ -62,6 +62,21 @@ module Comet
     # @type [Number] server_license_feature_set
     attr_accessor :server_license_feature_set
 
+    # If non-zero, the maximum numbers of devices and Protected Item types that this server is allowed.
+    # This field is available in Comet 24.6.3 and later.
+    # @type [Comet::LicenseLimits] server_license_limit
+    attr_accessor :server_license_limit
+
+    # A count of the devices registered on the server that have a configured Protected Item.
+    # This field is available in Comet 24.6.3 and later.
+    # @type [Number] configured_devices
+    attr_accessor :configured_devices
+
+    # The current number of Protected Item types configured on the server.
+    # This field is available in Comet 24.6.3 and later.
+    # @type [Hash{String => Number}] booster_limit
+    attr_accessor :booster_limit
+
     # Unix timestamp, in seconds.
     # @type [Number] license_valid_until
     attr_accessor :license_valid_until
@@ -110,6 +125,9 @@ module Comet
       @current_time = 0
       @server_license_hash = ''
       @server_license_feature_set = 0
+      @server_license_limit = Comet::LicenseLimits.new
+      @configured_devices = 0
+      @booster_limit = {}
       @license_valid_until = 0
       @emails_sent_successfully = 0
       @emails_sent_errors = 0
@@ -186,6 +204,24 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @server_license_feature_set = v
+        when 'ServerLicenseLimit'
+          @server_license_limit = Comet::LicenseLimits.new
+          @server_license_limit.from_hash(v)
+        when 'ConfiguredDevices'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @configured_devices = v
+        when 'BoosterLimit'
+          @booster_limit = {}
+          if v.nil?
+            @booster_limit = {}
+          else
+            v.each do |k1, v1|
+              raise TypeError, "'v1' expected Numeric, got #{v1.class}" unless v1.is_a? Numeric
+
+              @booster_limit[k1] = v1
+            end
+          end
         when 'LicenseValidUntil'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -255,6 +291,9 @@ module Comet
       ret['ServerLicenseHash'] = @server_license_hash
       ret['ServerLicenseFeaturesAll'] = @server_license_features_all
       ret['ServerLicenseFeatureSet'] = @server_license_feature_set
+      ret['ServerLicenseLimit'] = @server_license_limit
+      ret['ConfiguredDevices'] = @configured_devices
+      ret['BoosterLimit'] = @booster_limit
       ret['LicenseValidUntil'] = @license_valid_until
       ret['EmailsSentSuccessfully'] = @emails_sent_successfully
       ret['EmailsSentErrors'] = @emails_sent_errors

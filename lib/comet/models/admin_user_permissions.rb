@@ -75,6 +75,10 @@ module Comet
     # @type [Array<String>] allowed_user_policies
     attr_accessor :allowed_user_policies
 
+    # This field is available in Comet 24.6.1 and later.
+    # @type [Boolean] deny_software_build_role
+    attr_accessor :deny_software_build_role
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -155,6 +159,8 @@ module Comet
               @allowed_user_policies[i1] = v1
             end
           end
+        when 'DenySoftwareBuildRole'
+          @deny_software_build_role = v
         else
           @unknown_json_fields[k] = v
         end
@@ -217,6 +223,9 @@ module Comet
       end
       unless @allowed_user_policies.nil?
         ret['AllowedUserPolicies'] = @allowed_user_policies
+      end
+      unless @deny_software_build_role.nil?
+        ret['DenySoftwareBuildRole'] = @deny_software_build_role
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
