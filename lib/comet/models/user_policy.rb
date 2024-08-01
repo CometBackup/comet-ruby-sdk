@@ -48,6 +48,15 @@ module Comet
     # @type [Number] mode_schedule_skip_already_running
     attr_accessor :mode_schedule_skip_already_running
 
+    # @type [Number] mode_schedule_last_job_fail_do_retry
+    attr_accessor :mode_schedule_last_job_fail_do_retry
+
+    # @type [Number] mode_last_job_fail_do_retry_time
+    attr_accessor :mode_last_job_fail_do_retry_time
+
+    # @type [Number] mode_last_job_fail_do_retry_count
+    attr_accessor :mode_last_job_fail_do_retry_count
+
     # @type [Number] mode_admin_reset_password
     attr_accessor :mode_admin_reset_password
 
@@ -129,6 +138,9 @@ module Comet
       @protected_item_engine_types = Comet::ProtectedItemEngineTypePolicy.new
       @file_and_folder_mandatory_exclusions = []
       @mode_schedule_skip_already_running = 0
+      @mode_schedule_last_job_fail_do_retry = 0
+      @mode_last_job_fail_do_retry_time = 0
+      @mode_last_job_fail_do_retry_count = 0
       @mode_admin_reset_password = 0
       @mode_admin_view_filenames = 0
       @mode_require_user_reset_password = 0
@@ -191,6 +203,18 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @mode_schedule_skip_already_running = v
+        when 'ModeScheduleLastJobFailDoRetry'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @mode_schedule_last_job_fail_do_retry = v
+        when 'ModeLastJobFailDoRetryTime'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @mode_last_job_fail_do_retry_time = v
+        when 'ModeLastJobFailDoRetryCount'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @mode_last_job_fail_do_retry_count = v
         when 'ModeAdminResetPassword'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -303,6 +327,15 @@ module Comet
       end
       unless @mode_schedule_skip_already_running.nil?
         ret['ModeScheduleSkipAlreadyRunning'] = @mode_schedule_skip_already_running
+      end
+      unless @mode_schedule_last_job_fail_do_retry.nil?
+        ret['ModeScheduleLastJobFailDoRetry'] = @mode_schedule_last_job_fail_do_retry
+      end
+      unless @mode_last_job_fail_do_retry_time.nil?
+        ret['ModeLastJobFailDoRetryTime'] = @mode_last_job_fail_do_retry_time
+      end
+      unless @mode_last_job_fail_do_retry_count.nil?
+        ret['ModeLastJobFailDoRetryCount'] = @mode_last_job_fail_do_retry_count
       end
       unless @mode_admin_reset_password.nil?
         ret['ModeAdminResetPassword'] = @mode_admin_reset_password

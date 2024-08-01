@@ -949,6 +949,32 @@ module Comet
       ret
     end
 
+    # AdminConvertStorageRole
+    #
+    # Convert IAM Storage Role vault to its underlying S3 type.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    #
+    # @param [String] target_user The user to receive the new Storage Vault
+    # @param [String] destination_id The id of the old storage role destination to convert
+    # @return [Comet::RequestStorageVaultResponseMessage]
+    def admin_convert_storage_role(target_user, destination_id)
+      submit_params = {}
+      raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
+
+      submit_params['TargetUser'] = target_user
+      raise TypeError, "'destination_id' expected String, got #{destination_id.class}" unless destination_id.is_a? String
+
+      submit_params['DestinationId'] = destination_id
+
+      body = perform_request('api/v1/admin/convert-storage-role', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::RequestStorageVaultResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminCountJobsForCustomSearch
     #
     # Count jobs (for custom search).

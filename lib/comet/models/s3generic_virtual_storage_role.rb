@@ -61,6 +61,11 @@ module Comet
     # @type [String] region
     attr_accessor :region
 
+    # Optional. Prefix to use for bucket paths.
+    # This field is available in Comet 24.6.3 and later.
+    # @type [String] prefix
+    attr_accessor :prefix
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -77,6 +82,7 @@ module Comet
       @object_lock_mode = 0
       @object_lock_days = 0
       @region = ''
+      @prefix = ''
       @unknown_json_fields = {}
     end
 
@@ -129,6 +135,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @region = v
+        when 'Prefix'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @prefix = v
         else
           @unknown_json_fields[k] = v
         end
@@ -148,6 +158,7 @@ module Comet
       ret['ObjectLockDays'] = @object_lock_days
       ret['RemoveDeleted'] = @remove_deleted
       ret['Region'] = @region
+      ret['Prefix'] = @prefix
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

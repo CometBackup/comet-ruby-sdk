@@ -32,6 +32,9 @@ module Comet
     # @type [Number] end_time
     attr_accessor :end_time
 
+    # @type [Number] retry_count
+    attr_accessor :retry_count
+
     # The Protected Item that this job is for
     # @type [String] source_guid
     attr_accessor :source_guid
@@ -45,6 +48,11 @@ module Comet
 
     # @type [String] snapshot_id
     attr_accessor :snapshot_id
+
+    # The ID of the backup rule that contains the schedule that triggered this job
+    # This field is available in Comet 24.6.6 and later.
+    # @type [String] backup_rule_guid
+    attr_accessor :backup_rule_guid
 
     # @type [String] client_version
     attr_accessor :client_version
@@ -122,10 +130,12 @@ module Comet
       @status = 0
       @start_time = 0
       @end_time = 0
+      @retry_count = 0
       @source_guid = ''
       @destination_guid = ''
       @device_id = ''
       @snapshot_id = ''
+      @backup_rule_guid = ''
       @client_version = ''
       @total_directories = 0
       @total_files = 0
@@ -183,6 +193,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @end_time = v
+        when 'RetryCount'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @retry_count = v
         when 'SourceGUID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -199,6 +213,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @snapshot_id = v
+        when 'BackupRuleGUID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @backup_rule_guid = v
         when 'ClientVersion'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -279,11 +297,15 @@ module Comet
       ret['Status'] = @status
       ret['StartTime'] = @start_time
       ret['EndTime'] = @end_time
+      ret['RetryCount'] = @retry_count
       ret['SourceGUID'] = @source_guid
       ret['DestinationGUID'] = @destination_guid
       ret['DeviceID'] = @device_id
       unless @snapshot_id.nil?
         ret['SnapshotID'] = @snapshot_id
+      end
+      unless @backup_rule_guid.nil?
+        ret['BackupRuleGUID'] = @backup_rule_guid
       end
       ret['ClientVersion'] = @client_version
       ret['TotalDirectories'] = @total_directories

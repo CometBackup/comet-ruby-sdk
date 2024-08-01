@@ -21,6 +21,21 @@ module Comet
     # @type [Boolean] on_pcboot_if_last_job_missed
     attr_accessor :on_pcboot_if_last_job_missed
 
+    # The option to enable retrying when a backup job failed.
+    # This field is available in Comet 24.6.6 and later.
+    # @type [Boolean] on_last_job_fail_do_retry
+    attr_accessor :on_last_job_fail_do_retry
+
+    # The number of retries when the backup job fails.
+    # This field is available in Comet 24.6.6 and later.
+    # @type [Number] last_job_fail_do_retry_count
+    attr_accessor :last_job_fail_do_retry_count
+
+    # The number of minutes before retrying when the backup job fails.
+    # This field is available in Comet 24.6.6 and later.
+    # @type [Number] last_job_fail_do_retry_time
+    attr_accessor :last_job_fail_do_retry_time
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -29,6 +44,8 @@ module Comet
     end
 
     def clear
+      @last_job_fail_do_retry_count = 0
+      @last_job_fail_do_retry_time = 0
       @unknown_json_fields = {}
     end
 
@@ -49,6 +66,16 @@ module Comet
           @on_pcboot = v
         when 'OnPCBootIfLastJobMissed'
           @on_pcboot_if_last_job_missed = v
+        when 'OnLastJobFailDoRetry'
+          @on_last_job_fail_do_retry = v
+        when 'LastJobFailDoRetryCount'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @last_job_fail_do_retry_count = v
+        when 'LastJobFailDoRetryTime'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @last_job_fail_do_retry_time = v
         else
           @unknown_json_fields[k] = v
         end
@@ -63,6 +90,15 @@ module Comet
       end
       unless @on_pcboot_if_last_job_missed.nil?
         ret['OnPCBootIfLastJobMissed'] = @on_pcboot_if_last_job_missed
+      end
+      unless @on_last_job_fail_do_retry.nil?
+        ret['OnLastJobFailDoRetry'] = @on_last_job_fail_do_retry
+      end
+      unless @last_job_fail_do_retry_count.nil?
+        ret['LastJobFailDoRetryCount'] = @last_job_fail_do_retry_count
+      end
+      unless @last_job_fail_do_retry_time.nil?
+        ret['LastJobFailDoRetryTime'] = @last_job_fail_do_retry_time
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
