@@ -14,11 +14,17 @@ module Comet
 # Protected Items, in order to safely perform retention passes on their behalf.
   class SourceBasicInfo
 
+    # @type [String] engine
+    attr_accessor :engine
+
     # @type [String] description
     attr_accessor :description
 
     # @type [Number] o365account_count
     attr_accessor :o365account_count
+
+    # @type [Number] total_vm_count
+    attr_accessor :total_vm_count
 
     # Bytes
     # @type [Number] size
@@ -35,8 +41,10 @@ module Comet
     end
 
     def clear
+      @engine = ''
       @description = ''
       @o365account_count = 0
+      @total_vm_count = 0
       @size = 0
       @override_destination_retention = {}
       @unknown_json_fields = {}
@@ -55,6 +63,10 @@ module Comet
 
       obj.each do |k, v|
         case k
+        when 'Engine'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @engine = v
         when 'Description'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -63,6 +75,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @o365account_count = v
+        when 'TotalVmCount'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @total_vm_count = v
         when 'Size'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -86,8 +102,10 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
+      ret['Engine'] = @engine
       ret['Description'] = @description
       ret['O365AccountCount'] = @o365account_count
+      ret['TotalVmCount'] = @total_vm_count
       ret['Size'] = @size
       unless @override_destination_retention.nil?
         ret['OverrideDestinationRetention'] = @override_destination_retention

@@ -28,6 +28,11 @@ module Comet
     # @type [Boolean] overwrite_if_different_content
     attr_accessor :overwrite_if_different_content
 
+    # For RESTORETYPE_FILE. If set, OverwriteExistingFiles must be true. This can be set in combination
+    # with other OverwriteIf options.
+    # @type [Boolean] overwrite_force_permissions
+    attr_accessor :overwrite_force_permissions
+
     # For RESTORETYPE_FILE. If set, DestPath must be blank
     # @type [Boolean] dest_is_original_location
     attr_accessor :dest_is_original_location
@@ -149,6 +154,8 @@ module Comet
           @overwrite_if_newer = v
         when 'OverwriteIfDifferentContent'
           @overwrite_if_different_content = v
+        when 'OverwriteForcePermissions'
+          @overwrite_force_permissions = v
         when 'DestIsOriginalLocation'
           @dest_is_original_location = v
         when 'DestPath'
@@ -225,6 +232,7 @@ module Comet
       ret['OverwriteExistingFiles'] = @overwrite_existing_files
       ret['OverwriteIfNewer'] = @overwrite_if_newer
       ret['OverwriteIfDifferentContent'] = @overwrite_if_different_content
+      ret['OverwriteForcePermissions'] = @overwrite_force_permissions
       ret['DestIsOriginalLocation'] = @dest_is_original_location
       ret['DestPath'] = @dest_path
       ret['ExactDestPaths'] = @exact_dest_paths

@@ -101,6 +101,16 @@ module Comet
     # @type [Number] quota_office_365protected_accounts
     attr_accessor :quota_office_365protected_accounts
 
+    # A limit on the total number of Hyper-V guests across all Hyper-V Protected Items in this account.
+    # Set to zero to allow unlimited Office 365 Protected Accounts.
+    # @type [Number] quota_hyper_vguests
+    attr_accessor :quota_hyper_vguests
+
+    # A limit on the total number of VMware guests across all VMware Protected Items in this account.
+    # Set to zero to allow unlimited Office 365 Protected Accounts.
+    # @type [Number] quota_vmware_guests
+    attr_accessor :quota_vmware_guests
+
     # If the PolicyID field is set to a non-empty string, the Comet Server will enforce the contents of
     # the Policy field based on the matching server's policy. Otherwise if the PolicyID field is set to
     # an empty string, the administrator may configure any custom values in the Policy field.
@@ -182,6 +192,8 @@ module Comet
       @all_protected_items_quota_bytes = 0
       @maximum_devices = 0
       @quota_office_365protected_accounts = 0
+      @quota_hyper_vguests = 0
+      @quota_vmware_guests = 0
       @policy_id = ''
       @policy = Comet::UserPolicy.new
       @password_format = 0
@@ -311,6 +323,14 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @quota_office_365protected_accounts = v
+        when 'QuotaHyperVGuests'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @quota_hyper_vguests = v
+        when 'QuotaVMwareGuests'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @quota_vmware_guests = v
         when 'PolicyID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -386,6 +406,8 @@ module Comet
       ret['AllProtectedItemsQuotaBytes'] = @all_protected_items_quota_bytes
       ret['MaximumDevices'] = @maximum_devices
       ret['QuotaOffice365ProtectedAccounts'] = @quota_office_365protected_accounts
+      ret['QuotaHyperVGuests'] = @quota_hyper_vguests
+      ret['QuotaVMwareGuests'] = @quota_vmware_guests
       ret['PolicyID'] = @policy_id
       ret['Policy'] = @policy
       ret['PasswordFormat'] = @password_format
