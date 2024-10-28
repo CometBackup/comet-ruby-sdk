@@ -99,6 +99,12 @@ module Comet
     # @type [Number] total_unlicensed_mails_count
     attr_accessor :total_unlicensed_mails_count
 
+    # If this field is present, this job did not perform some work because the Storage Vault is
+    # currently busy.
+    # This field is available in Comet 24.9.2 and later.
+    # @type [String] conflicting_job_id
+    attr_accessor :conflicting_job_id
+
     # If this field is present, it is possible to request cancellation of this job via the API.
     # @type [String] cancellation_id
     attr_accessor :cancellation_id
@@ -149,6 +155,7 @@ module Comet
       @total_accounts_count = 0
       @total_licensed_mails_count = 0
       @total_unlicensed_mails_count = 0
+      @conflicting_job_id = ''
       @cancellation_id = ''
       @progress = Comet::BackupJobProgress.new
       @destination_size_start = Comet::SizeMeasurement.new
@@ -269,6 +276,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @total_unlicensed_mails_count = v
+        when 'ConflictingJobID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @conflicting_job_id = v
         when 'CancellationID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -331,6 +342,9 @@ module Comet
       end
       unless @total_unlicensed_mails_count.nil?
         ret['TotalUnlicensedMailsCount'] = @total_unlicensed_mails_count
+      end
+      unless @conflicting_job_id.nil?
+        ret['ConflictingJobID'] = @conflicting_job_id
       end
       unless @cancellation_id.nil?
         ret['CancellationID'] = @cancellation_id

@@ -31,6 +31,9 @@ module Comet
     # @type [Number] items_done
     attr_accessor :items_done
 
+    # @type [Number] items_total
+    attr_accessor :items_total
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -44,6 +47,7 @@ module Comet
       @recieved_time = 0
       @bytes_done = 0
       @items_done = 0
+      @items_total = 0
       @unknown_json_fields = {}
     end
 
@@ -80,6 +84,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @items_done = v
+        when 'ItemsTotal'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @items_total = v
         else
           @unknown_json_fields[k] = v
         end
@@ -94,6 +102,7 @@ module Comet
       ret['RecievedTime'] = @recieved_time
       ret['BytesDone'] = @bytes_done
       ret['ItemsDone'] = @items_done
+      ret['ItemsTotal'] = @items_total
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

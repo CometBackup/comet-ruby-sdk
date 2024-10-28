@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '24.9.1'
+  APPLICATION_VERSION = '24.9.6'
 
   APPLICATION_VERSION_MAJOR = 24
 
   APPLICATION_VERSION_MINOR = 9
 
-  APPLICATION_VERSION_REVISION = 1
+  APPLICATION_VERSION_REVISION = 6
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -584,6 +584,9 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
 
   # RestoreType: Restore disk image backup as VMware-compatible virtual disks
   RESTORETYPE_WINDISK_ESXI = 12
+
+  # RestoreType: Restore disk image backup as Hyper-V-compatible virtual disks (.vhdx format)
+  RESTORETYPE_WINDISK_VHDX = 13
 
   # RestoreType: Legacy name alias - Prefer to use RESTORETYPE_PROCESS_ARCHIVE since multiple archive file formats are supported within this single RESTORETYPE_
   RESTORETYPE_PROCESS_TARBALL = 3

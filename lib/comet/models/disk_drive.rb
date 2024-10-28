@@ -27,22 +27,33 @@ module Comet
     # @type [String] serial_number
     attr_accessor :serial_number
 
+    # Bytes
     # @type [Number] size
     attr_accessor :size
 
     # @type [Array<Comet::Partition>] partitions
     attr_accessor :partitions
 
+    # For physical disks, this array will be empty. For virtual disks, RAID devices or Linux DM devices,
+    # this array may contain the DeviceName of the parent device.
+    # This field is available in Comet 24.6.x and later.
+    # @type [Array<String>] device_parents
+    attr_accessor :device_parents
+
+    # See WINDISKFLAG_ constants
     # @type [Number] flags
     attr_accessor :flags
 
     # @type [Number] cylinders
+    # @deprecated This member has been deprecated since Comet version 24.6.x This value is reported from the disk driver if available. Otherwise emulates a value based on modern LBA addressing. The field value is not used.
     attr_accessor :cylinders
 
     # @type [Number] heads
+    # @deprecated This member has been deprecated since Comet version 24.6.x This value is reported from the disk driver if available. Otherwise emulates a value based on modern LBA addressing. The field value is not used.
     attr_accessor :heads
 
     # @type [Number] sectors
+    # @deprecated This member has been deprecated since Comet version 24.6.x This value is reported from the disk driver if available. Otherwise emulates a value based on modern LBA addressing. The field value is not used.
     attr_accessor :sectors
 
     # @type [Number] sector_size
@@ -63,6 +74,7 @@ module Comet
       @serial_number = ''
       @size = 0
       @partitions = []
+      @device_parents = []
       @flags = 0
       @cylinders = 0
       @heads = 0
@@ -118,6 +130,17 @@ module Comet
               @partitions[i1].from_hash(v1)
             end
           end
+        when 'DeviceParents'
+          if v.nil?
+            @device_parents = []
+          else
+            @device_parents = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+
+              @device_parents[i1] = v1
+            end
+          end
         when 'Flags'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -154,6 +177,7 @@ module Comet
       ret['SerialNumber'] = @serial_number
       ret['Size'] = @size
       ret['Partitions'] = @partitions
+      ret['DeviceParents'] = @device_parents
       ret['Flags'] = @flags
       ret['Cylinders'] = @cylinders
       ret['Heads'] = @heads

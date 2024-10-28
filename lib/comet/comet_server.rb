@@ -2169,6 +2169,33 @@ module Comet
       ret
     end
 
+    # AdminDispatcherTestSmbAuth
+    #
+    # Test a set of Windows SMB credentials.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::WinSMBAuth] wsa The target credentials to test
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_dispatcher_test_smb_auth(target_id, wsa)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'wsa' expected Comet::WinSMBAuth, got #{wsa.class}" unless wsa.is_a? Comet::WinSMBAuth
+
+      submit_params['Wsa'] = wsa.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/test-smb-auth', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherUninstallSoftware
     #
     # Instruct a live connected device to self-uninstall the software.
