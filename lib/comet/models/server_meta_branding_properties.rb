@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -53,6 +53,10 @@ module Comet
 
     # @type [Array<Comet::ExternalAuthenticationSourceDisplay>] external_authentication_sources
     attr_accessor :external_authentication_sources
+
+    # If true, this Comet Server currently has no admins or users.
+    # @type [Boolean] server_is_empty
+    attr_accessor :server_is_empty
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -132,6 +136,8 @@ module Comet
               @external_authentication_sources[i1].from_hash(v1)
             end
           end
+        when 'ServerIsEmpty'
+          @server_is_empty = v
         else
           @unknown_json_fields[k] = v
         end
@@ -155,6 +161,7 @@ module Comet
       unless @external_authentication_sources.nil?
         ret['ExternalAuthenticationSources'] = @external_authentication_sources
       end
+      ret['ServerIsEmpty'] = @server_is_empty
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

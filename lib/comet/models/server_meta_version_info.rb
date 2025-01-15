@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -57,8 +57,10 @@ module Comet
     attr_accessor :server_license_hash
 
     # @type [Boolean] server_license_features_all
+    # @deprecated This member has been deprecated since Comet version 24.9.x
     attr_accessor :server_license_features_all
 
+    # A bitset of feature flags representing functionality available in this Comet Server's plan
     # @type [Number] server_license_feature_set
     attr_accessor :server_license_feature_set
 

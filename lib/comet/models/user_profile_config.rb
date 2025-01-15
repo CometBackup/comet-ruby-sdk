@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -36,11 +36,14 @@ module Comet
     # @type [String] organization_id
     attr_accessor :organization_id
 
+    # @type [String] group_id
+    attr_accessor :group_id
+
     # A list of email addresses to send reports to.
     # @type [Array<String>] emails
     attr_accessor :emails
 
-    # By default, all the email addresses in the Emails field will receieve the policy-default or
+    # By default, all the email addresses in the Emails field will receive the policy-default or
     # server-wide-default style of email report. Add an override for a specific email address in here to
     # allow customizing the email report that will be received.
     # @type [Hash{String => Comet::UserCustomEmailSettings}] override_email_settings
@@ -54,6 +57,10 @@ module Comet
     # The string keys can be any unique key. Using a GUID is recommended, but optional.
     # @type [Hash{String => Comet::DestinationConfig}] destinations
     attr_accessor :destinations
+
+    # Leave as true
+    # @type [Boolean] supports_device_associations
+    attr_accessor :supports_device_associations
 
     # Protected Items
     # The string keys can be any unique key. Using a GUID is recommended, but optional.
@@ -137,6 +144,8 @@ module Comet
     # @type [String] password_recovery
     attr_accessor :password_recovery
 
+    # Allow login using the password alone. Set this to false if the password alone should not be
+    # sufficient.
     # @type [Boolean] allow_password_login
     attr_accessor :allow_password_login
 
@@ -169,6 +178,9 @@ module Comet
     # @type [Comet::UserServerConfig] server_config
     attr_accessor :server_config
 
+    # @type [String] auto_storage_template_guid
+    attr_accessor :auto_storage_template_guid
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -182,6 +194,7 @@ module Comet
       @local_timezone = ''
       @language_code = ''
       @organization_id = ''
+      @group_id = ''
       @emails = []
       @override_email_settings = {}
       @destinations = {}
@@ -204,6 +217,7 @@ module Comet
       @create_time = 0
       @creation_guid = ''
       @server_config = Comet::UserServerConfig.new
+      @auto_storage_template_guid = ''
       @unknown_json_fields = {}
     end
 
@@ -240,6 +254,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @organization_id = v
+        when 'GroupID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @group_id = v
         when 'Emails'
           if v.nil?
             @emails = []
@@ -273,6 +291,8 @@ module Comet
               @destinations[k1].from_hash(v1)
             end
           end
+        when 'SupportsDeviceAssociations'
+          @supports_device_associations = v
         when 'Sources'
           @sources = {}
           if v.nil?
@@ -375,6 +395,10 @@ module Comet
         when 'ServerConfig'
           @server_config = Comet::UserServerConfig.new
           @server_config.from_hash(v)
+        when 'AutoStorageTemplateGUID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @auto_storage_template_guid = v
         else
           @unknown_json_fields[k] = v
         end
@@ -391,10 +415,12 @@ module Comet
       unless @organization_id.nil?
         ret['OrganizationID'] = @organization_id
       end
+      ret['GroupID'] = @group_id
       ret['Emails'] = @emails
       ret['OverrideEmailSettings'] = @override_email_settings
       ret['SendEmailReports'] = @send_email_reports
       ret['Destinations'] = @destinations
+      ret['SupportsDeviceAssociations'] = @supports_device_associations
       ret['Sources'] = @sources
       ret['BackupRules'] = @backup_rules
       ret['Devices'] = @devices
@@ -425,6 +451,7 @@ module Comet
       unless @server_config.nil?
         ret['ServerConfig'] = @server_config
       end
+      ret['AutoStorageTemplateGUID'] = @auto_storage_template_guid
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -47,6 +47,10 @@ module Comet
 
     # @type [Array<Comet::AdminWebAuthnRegistration>] web_authn_registrations
     attr_accessor :web_authn_registrations
+
+    # This field is available in Comet 24.12.0 and later.
+    # @type [Boolean] require_password_change
+    attr_accessor :require_password_change
 
     # One of the ENCRYPTIONMETHOD_ constants
     # @type [Number] totpkey_encryption_format
@@ -146,6 +150,8 @@ module Comet
               @web_authn_registrations[i1].from_hash(v1)
             end
           end
+        when 'RequirePasswordChange'
+          @require_password_change = v
         when 'TOTPKeyEncryptionFormat'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -187,6 +193,7 @@ module Comet
       unless @web_authn_registrations.nil?
         ret['WebAuthnRegistrations'] = @web_authn_registrations
       end
+      ret['RequirePasswordChange'] = @require_password_change
       unless @totpkey_encryption_format.nil?
         ret['TOTPKeyEncryptionFormat'] = @totpkey_encryption_format
       end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -29,6 +29,9 @@ module Comet
 
     # @type [Comet::StorageVaultProviderPolicy] storage_vault_providers
     attr_accessor :storage_vault_providers
+
+    # @type [String] default_new_storage_vault
+    attr_accessor :default_new_storage_vault
 
     # @type [Boolean] prevent_new_protected_item
     attr_accessor :prevent_new_protected_item
@@ -135,6 +138,7 @@ module Comet
 
     def clear
       @storage_vault_providers = Comet::StorageVaultProviderPolicy.new
+      @default_new_storage_vault = ''
       @protected_item_engine_types = Comet::ProtectedItemEngineTypePolicy.new
       @file_and_folder_mandatory_exclusions = []
       @mode_schedule_skip_already_running = 0
@@ -180,6 +184,10 @@ module Comet
         when 'StorageVaultProviders'
           @storage_vault_providers = Comet::StorageVaultProviderPolicy.new
           @storage_vault_providers.from_hash(v)
+        when 'DefaultNewStorageVault'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @default_new_storage_vault = v
         when 'PreventNewProtectedItem'
           @prevent_new_protected_item = v
         when 'PreventEditProtectedItem'
@@ -318,6 +326,7 @@ module Comet
       ret['HideCloudStorageBranding'] = @hide_cloud_storage_branding
       ret['PreventDeleteStorageVault'] = @prevent_delete_storage_vault
       ret['StorageVaultProviders'] = @storage_vault_providers
+      ret['DefaultNewStorageVault'] = @default_new_storage_vault
       ret['PreventNewProtectedItem'] = @prevent_new_protected_item
       ret['PreventEditProtectedItem'] = @prevent_edit_protected_item
       ret['PreventDeleteProtectedItem'] = @prevent_delete_protected_item

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -253,6 +253,9 @@ module Comet
     # @type [String] retention_error
     attr_accessor :retention_error
 
+    # @type [Array<String>] associated_devices
+    attr_accessor :associated_devices
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -316,6 +319,7 @@ module Comet
       @statistics = Comet::DestinationStatistics.new
       @default_retention = Comet::RetentionPolicy.new
       @retention_error = ''
+      @associated_devices = []
       @unknown_json_fields = {}
     end
 
@@ -590,6 +594,17 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @retention_error = v
+        when 'AssociatedDevices'
+          if v.nil?
+            @associated_devices = []
+          else
+            @associated_devices = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+
+              @associated_devices[i1] = v1
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -665,6 +680,7 @@ module Comet
       ret['DefaultRetention'] = @default_retention
       ret['RebrandStorage'] = @rebrand_storage
       ret['RetentionError'] = @retention_error
+      ret['AssociatedDevices'] = @associated_devices
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

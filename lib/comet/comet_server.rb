@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -318,6 +318,30 @@ module Comet
       submit_params['Credential'] = credential
 
       body = perform_request('api/v1/admin/account/webauthn/submit-challenge-response', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminAddFirstAdminUser
+    #
+    # Add first admin user account on new server.
+    #
+    # @param [String] target_user the username for this new admin
+    # @param [String] target_password the password for this new admin user
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_add_first_admin_user(target_user, target_password)
+      submit_params = {}
+      raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
+
+      submit_params['TargetUser'] = target_user
+      raise TypeError, "'target_password' expected String, got #{target_password.class}" unless target_password.is_a? String
+
+      submit_params['TargetPassword'] = target_password
+
+      body = perform_request('api/v1/admin/add-first-admin-user', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::CometAPIResponseMessage.new
@@ -1801,6 +1825,7 @@ module Comet
     #
     # Request a list of Office365 mailbox accounts.
     # The remote device must have given consent for an MSP to browse their files.
+    # This is primarily used for testing the connection to Graph API, not for actual listing
     #
     # You must supply administrator authentication credentials to use this API.
     # This API requires the Auth Role to be enabled.
@@ -3250,12 +3275,18 @@ module Comet
     # Access to this API may be prevented on a per-administrator basis.
     #
     # @param [Array<Comet::RemoteStorageOption>] remote_storage_options Updated configuration content
+    # @param [String] replacement_auto_vault_id (Optional) Replacement Storage Template ID for auto Storage Vault configurations that use deleted Storage Templates
     # @return [Comet::CometAPIResponseMessage]
-    def admin_meta_remote_storage_vault_set(remote_storage_options)
+    def admin_meta_remote_storage_vault_set(remote_storage_options, replacement_auto_vault_id = nil)
       submit_params = {}
       raise TypeError, "'remote_storage_options' expected Array, got #{remote_storage_options.class}" unless remote_storage_options.is_a? Array
 
       submit_params['RemoteStorageOptions'] = remote_storage_options.to_json
+      unless replacement_auto_vault_id.nil?
+        raise TypeError, "'replacement_auto_vault_id' expected String, got #{replacement_auto_vault_id.class}" unless replacement_auto_vault_id.is_a? String
+
+        submit_params['ReplacementAutoVaultID'] = replacement_auto_vault_id
+      end
 
       body = perform_request('api/v1/admin/meta/remote-storage-vault/set', submit_params)
       json_body = JSON.parse body
@@ -4037,8 +4068,9 @@ module Comet
     # @param [String] target_user The user to receive the new Storage Vault
     # @param [String] storage_provider ID for the storage template destination
     # @param [String] self_address (Optional) The external URL for this server. Used to resolve conflicts
+    # @param [String] device_id (Optional) The ID of the device to be added as a associated device of the Storage Vault
     # @return [Comet::RequestStorageVaultResponseMessage]
-    def admin_request_storage_vault(target_user, storage_provider, self_address = nil)
+    def admin_request_storage_vault(target_user, storage_provider, self_address = nil, device_id = nil)
       submit_params = {}
       raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
 
@@ -4052,6 +4084,11 @@ module Comet
         raise TypeError, "'self_address' expected String, got #{self_address.class}" unless self_address.is_a? String
 
         submit_params['SelfAddress'] = self_address
+      end
+      unless device_id.nil?
+        raise TypeError, "'device_id' expected String, got #{device_id.class}" unless device_id.is_a? String
+
+        submit_params['DeviceID'] = device_id
       end
 
       body = perform_request('api/v1/admin/request-storage-vault', submit_params)
@@ -4448,6 +4485,208 @@ module Comet
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::UpdateCampaignStatus.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminUserGroupsDelete
+    #
+    # Delete an existing user group object.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] group_id The user group ID to delete
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_user_groups_delete(group_id)
+      submit_params = {}
+      raise TypeError, "'group_id' expected String, got #{group_id.class}" unless group_id.is_a? String
+
+      submit_params['GroupID'] = group_id
+
+      body = perform_request('api/v1/admin/user-groups/delete', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminUserGroupsGet
+    #
+    # Retrieve a single user group object.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] group_id The user group ID to retrieve
+    # @param [Boolean] include_users (Optional) If present, includes the users array in the response.
+    # @return [Comet::GetUserGroupWithUsersResponse]
+    def admin_user_groups_get(group_id, include_users = nil)
+      submit_params = {}
+      raise TypeError, "'group_id' expected String, got #{group_id.class}" unless group_id.is_a? String
+
+      submit_params['GroupID'] = group_id
+      unless include_users.nil?
+        submit_params['IncludeUsers'] = (include_users ? 1 : 0)
+      end
+
+      body = perform_request('api/v1/admin/user-groups/get', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::GetUserGroupWithUsersResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminUserGroupsList
+    #
+    # List all user group names.
+    # For the top-level organization, the API result includes all user groups for all organizations, unless the TargetOrganization parameter is present.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_organization (Optional) If present, list the user groups belonging to another organization. Only allowed for administrator accounts in the top-level organization.
+    # @return [Hash{String => String}]
+    def admin_user_groups_list(target_organization = nil)
+      submit_params = {}
+      unless target_organization.nil?
+        raise TypeError, "'target_organization' expected String, got #{target_organization.class}" unless target_organization.is_a? String
+
+        submit_params['TargetOrganization'] = target_organization
+      end
+
+      body = perform_request('api/v1/admin/user-groups/list', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = {}
+      if json_body.nil?
+        ret = {}
+      else
+        json_body.each do |k, v|
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          ret[k] = v
+        end
+      end
+      ret
+    end
+
+    # AdminUserGroupsListFull
+    #
+    # Get all user group objects.
+    # For the top-level organization, the API result includes all user groups for all organizations, unless the TargetOrganization parameter is present.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_organization (Optional) If present, list the user groups belonging to the specified organization. Only allowed for administrator accounts in the top-level organization.
+    # @return [Hash{String => Comet::UserGroup}]
+    def admin_user_groups_list_full(target_organization = nil)
+      submit_params = {}
+      unless target_organization.nil?
+        raise TypeError, "'target_organization' expected String, got #{target_organization.class}" unless target_organization.is_a? String
+
+        submit_params['TargetOrganization'] = target_organization
+      end
+
+      body = perform_request('api/v1/admin/user-groups/list-full', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = {}
+      if json_body.nil?
+        ret = {}
+      else
+        json_body.each do |k, v|
+          ret[k] = Comet::UserGroup.new
+          ret[k].from_hash(v)
+        end
+      end
+      ret
+    end
+
+    # AdminUserGroupsNew
+    #
+    # Create a new user group object.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] name this is the name of the group.
+    # @param [String] target_organization (Optional) If present, list the policies belonging to another organization. Only allowed for administrator accounts in the top-level organization.
+    # @return [Comet::CreateUserGroupResponse]
+    def admin_user_groups_new(name, target_organization = nil)
+      submit_params = {}
+      raise TypeError, "'name' expected String, got #{name.class}" unless name.is_a? String
+
+      submit_params['Name'] = name
+      unless target_organization.nil?
+        raise TypeError, "'target_organization' expected String, got #{target_organization.class}" unless target_organization.is_a? String
+
+        submit_params['TargetOrganization'] = target_organization
+      end
+
+      body = perform_request('api/v1/admin/user-groups/new', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CreateUserGroupResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminUserGroupsSet
+    #
+    # Update an existing user group or create a new user group.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] group_id The user group ID to update or create
+    # @param [Comet::UserGroup] group The user group data
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_user_groups_set(group_id, group)
+      submit_params = {}
+      raise TypeError, "'group_id' expected String, got #{group_id.class}" unless group_id.is_a? String
+
+      submit_params['GroupID'] = group_id
+      raise TypeError, "'group' expected Comet::UserGroup, got #{group.class}" unless group.is_a? Comet::UserGroup
+
+      submit_params['Group'] = group.to_json
+
+      body = perform_request('api/v1/admin/user-groups/set', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminUserGroupsSetUsersForGroup
+    #
+    # Update the users in the specified group.
+    # The provided list of users will be moved into the specified group, and any users
+    # already in the group who are not in the list of usernames will be removed.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] group_id The user group ID to update
+    # @param [Array<String>] users An array of usernames.
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_user_groups_set_users_for_group(group_id, users)
+      submit_params = {}
+      raise TypeError, "'group_id' expected String, got #{group_id.class}" unless group_id.is_a? String
+
+      submit_params['GroupID'] = group_id
+      raise TypeError, "'users' expected Array, got #{users.class}" unless users.is_a? Array
+
+      submit_params['Users'] = users.to_json
+
+      body = perform_request('api/v1/admin/user-groups/set-users-for-group', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
     end

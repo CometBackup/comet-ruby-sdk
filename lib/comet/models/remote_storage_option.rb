@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -77,6 +77,12 @@ module Comet
     # @type [Boolean] rebrand_storage
     attr_accessor :rebrand_storage
 
+    # @type [String] id
+    attr_accessor :id
+
+    # @type [Boolean] default
+    attr_accessor :default
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -101,6 +107,7 @@ module Comet
       @imp_partner = Comet::ImpossibleCloudPartnerTemplateSettings.new
       @imp_user = Comet::ImpossibleCloudIAMTemplateSettings.new
       @storage_limit_bytes = 0
+      @id = ''
       @unknown_json_fields = {}
     end
 
@@ -175,6 +182,12 @@ module Comet
           @storage_limit_bytes = v
         when 'RebrandStorage'
           @rebrand_storage = v
+        when 'ID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @id = v
+        when 'Default'
+          @default = v
         else
           @unknown_json_fields[k] = v
         end
@@ -228,6 +241,8 @@ module Comet
       ret['StorageLimitEnabled'] = @storage_limit_enabled
       ret['StorageLimitBytes'] = @storage_limit_bytes
       ret['RebrandStorage'] = @rebrand_storage
+      ret['ID'] = @id
+      ret['Default'] = @default
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

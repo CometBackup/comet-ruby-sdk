@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
 
 module Comet
 
-  APPLICATION_VERSION = '24.9.6'
+  APPLICATION_VERSION = '24.12.2'
 
   APPLICATION_VERSION_MAJOR = 24
 
-  APPLICATION_VERSION_MINOR = 9
+  APPLICATION_VERSION_MINOR = 12
 
-  APPLICATION_VERSION_REVISION = 6
+  APPLICATION_VERSION_REVISION = 2
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -212,7 +212,7 @@ module Comet
   # Microsoft SQL Server
   ENGINE_BUILTIN_MSSQL = 'engine1/mssql'
 
-  # Windows System Backup
+  # Windows System Backup, deprecated from version 24.12.2
   ENGINE_BUILTIN_WINDOWSSYSTEM = 'engine1/windowssystem'
 
   # Microsoft Exchange Server
@@ -404,6 +404,15 @@ module Comet
 
   # MSSQLRestoreOpt
   MSSQL_RESTORE_NORECOVERY = 'NO_RECOVERY'
+
+  # Used in policy to define that the automatic Storage Vaults for new devices is not enforced by the policy
+  NEW_STORAGE_VAULT_MODE_USER = 'user_controlled'
+
+  # No Storage Vault will be created when a new device is added
+  NEW_STORAGE_VAULT_MODE_NONE = 'none'
+
+  # When a new device is added, a Storage Vault will be created using the servers default Storage Template
+  NEW_STORAGE_VAULT_MODE_SERVER = 'server_controlled'
 
   # Enable Object Lock capability if the corresponding Days field is greater than zero.
 New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
@@ -911,6 +920,15 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
 
   # StreamableEventType: Device disconnected from registration lobby
   SEVT_DEVICE_LOBBY_DISCONNECT = 4705
+
+  # StreamableEventType: UserGroup created.
+  SEVT_USERGROUP_NEW = 4800
+
+  # StreamableEventType: UserGroup deleted
+  SEVT_USERGROUP_REMOVED = 4801
+
+  # StreamableEventType: UserGroup updated.
+  SEVT_USERGROUP_UPDATED = 4802
 
   # StreamableEventType
   SEVT__MAX = 4999

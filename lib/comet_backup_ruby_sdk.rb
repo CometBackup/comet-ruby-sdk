@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -52,6 +52,7 @@ require_relative 'comet/models/content_measurement'
 require_relative 'comet/models/content_measurement_component'
 require_relative 'comet/models/count_jobs_response'
 require_relative 'comet/models/create_group_policy_response'
+require_relative 'comet/models/create_user_group_response'
 require_relative 'comet/models/custom_remote_bucket_settings'
 require_relative 'comet/models/custom_remote_bucket_settings'
 require_relative 'comet/models/days_of_week_config'
@@ -82,6 +83,8 @@ require_relative 'comet/models/ftpdestination_location'
 require_relative 'comet/models/get_group_policy_response'
 require_relative 'comet/models/get_profile_and_hash_response_message'
 require_relative 'comet/models/get_profile_hash_response_message'
+require_relative 'comet/models/get_user_group_response'
+require_relative 'comet/models/get_user_group_with_users_response'
 require_relative 'comet/models/global_override_options'
 require_relative 'comet/models/group_policy'
 require_relative 'comet/models/hour_sched_config'
@@ -98,6 +101,7 @@ require_relative 'comet/models/license_options'
 require_relative 'comet/models/live_user_connection'
 require_relative 'comet/models/local_destination_location'
 require_relative 'comet/models/local_storage_directory'
+require_relative 'comet/models/login_protection_options'
 require_relative 'comet/models/mac_oscode_sign_properties'
 require_relative 'comet/models/mongo_dbconnection'
 require_relative 'comet/models/mssqlconnection'
@@ -191,6 +195,7 @@ require_relative 'comet/models/update_campaign_properties'
 require_relative 'comet/models/update_campaign_status'
 require_relative 'comet/models/update_campaign_status_device_entry'
 require_relative 'comet/models/user_custom_email_settings'
+require_relative 'comet/models/user_group'
 require_relative 'comet/models/user_on_server'
 require_relative 'comet/models/user_policy'
 require_relative 'comet/models/user_profile_config'

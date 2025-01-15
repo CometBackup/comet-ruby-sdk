@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (c) 2020-2024 Comet Licensing Ltd.
+# Copyright (c) 2020-2025 Comet Licensing Ltd.
 # Please see the LICENSE file for usage information.
 #
 # SPDX-License-Identifier: MIT
@@ -45,6 +45,10 @@ module Comet
     # The Comet Server can enforce a bandwidth limit based on the target IP address
     # @type [Comet::RatelimitOptions] iprate_limit
     attr_accessor :iprate_limit
+
+    # This field is available in Comet 24.9.x and later.
+    # @type [Comet::LoginProtectionOptions] login_protection
+    attr_accessor :login_protection
 
     # @type [Comet::LicenseOptions] license
     attr_accessor :license
@@ -103,6 +107,7 @@ module Comet
       @experimental_options = []
       @external_admin_user_sources = {}
       @iprate_limit = Comet::RatelimitOptions.new
+      @login_protection = Comet::LoginProtectionOptions.new
       @license = Comet::LicenseOptions.new
       @listen_addresses = []
       @organizations = {}
@@ -178,6 +183,9 @@ module Comet
         when 'IPRateLimit'
           @iprate_limit = Comet::RatelimitOptions.new
           @iprate_limit.from_hash(v)
+        when 'LoginProtection'
+          @login_protection = Comet::LoginProtectionOptions.new
+          @login_protection.from_hash(v)
         when 'License'
           @license = Comet::LicenseOptions.new
           @license.from_hash(v)
@@ -267,6 +275,7 @@ module Comet
       end
       ret['ExternalAdminUserSources'] = @external_admin_user_sources
       ret['IPRateLimit'] = @iprate_limit
+      ret['LoginProtection'] = @login_protection
       ret['License'] = @license
       ret['ListenAddresses'] = @listen_addresses
       ret['Organizations'] = @organizations
