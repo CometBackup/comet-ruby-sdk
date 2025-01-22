@@ -58,6 +58,19 @@ module Comet
     # @type [Boolean] server_is_empty
     attr_accessor :server_is_empty
 
+    # @type [String] cloud_storage_name
+    attr_accessor :cloud_storage_name
+
+    # Will hide the "Pre-built software client" option from the server settings. Only properly enforced
+    # when custom branding is enforced via the license.
+    # @type [Boolean] admin_hide_pre_built_client_option
+    attr_accessor :admin_hide_pre_built_client_option
+
+    # Will hide Comet Storage from everywhere, including the admin view. Only properly enforced when
+    # custom branding is enforced via the license.
+    # @type [Boolean] admin_hide_branded_cloud_storage
+    attr_accessor :admin_hide_branded_cloud_storage
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -74,6 +87,7 @@ module Comet
       @prune_logs_after_days = 0
       @expired_in_seconds = 0
       @external_authentication_sources = []
+      @cloud_storage_name = ''
       @unknown_json_fields = {}
     end
 
@@ -138,6 +152,14 @@ module Comet
           end
         when 'ServerIsEmpty'
           @server_is_empty = v
+        when 'CloudStorageName'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @cloud_storage_name = v
+        when 'AdminHidePreBuiltClientOption'
+          @admin_hide_pre_built_client_option = v
+        when 'AdminHideBrandedCloudStorage'
+          @admin_hide_branded_cloud_storage = v
         else
           @unknown_json_fields[k] = v
         end
@@ -162,6 +184,9 @@ module Comet
         ret['ExternalAuthenticationSources'] = @external_authentication_sources
       end
       ret['ServerIsEmpty'] = @server_is_empty
+      ret['CloudStorageName'] = @cloud_storage_name
+      ret['AdminHidePreBuiltClientOption'] = @admin_hide_pre_built_client_option
+      ret['AdminHideBrandedCloudStorage'] = @admin_hide_branded_cloud_storage
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

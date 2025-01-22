@@ -36,6 +36,15 @@ module Comet
     # @type [Boolean] hide_background_logo
     attr_accessor :hide_background_logo
 
+    # @type [String] cloud_storage_name
+    attr_accessor :cloud_storage_name
+
+    # @type [Boolean] admin_hide_pre_built_client_option
+    attr_accessor :admin_hide_pre_built_client_option
+
+    # @type [Boolean] admin_hide_branded_cloud_storage
+    attr_accessor :admin_hide_branded_cloud_storage
+
     # One of the CLIENTBRANDINGBUILD_ constants
     # @type [Number] build_mode
     attr_accessor :build_mode
@@ -134,6 +143,7 @@ module Comet
       @default_login_server_url = ''
       @tile_background_color = ''
       @account_register_url = ''
+      @cloud_storage_name = ''
       @build_mode = 0
       @path_ico_file = ''
       @path_icns_file = ''
@@ -204,6 +214,14 @@ module Comet
           @account_register_url = v
         when 'HideBackgroundLogo'
           @hide_background_logo = v
+        when 'CloudStorageName'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @cloud_storage_name = v
+        when 'AdminHidePreBuiltClientOption'
+          @admin_hide_pre_built_client_option = v
+        when 'AdminHideBrandedCloudStorage'
+          @admin_hide_branded_cloud_storage = v
         when 'BuildMode'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -324,6 +342,9 @@ module Comet
       ret['TileBackgroundColor'] = @tile_background_color
       ret['AccountRegisterURL'] = @account_register_url
       ret['HideBackgroundLogo'] = @hide_background_logo
+      ret['CloudStorageName'] = @cloud_storage_name
+      ret['AdminHidePreBuiltClientOption'] = @admin_hide_pre_built_client_option
+      ret['AdminHideBrandedCloudStorage'] = @admin_hide_branded_cloud_storage
       ret['BuildMode'] = @build_mode
       ret['PathIcoFile'] = @path_ico_file
       ret['PathIcnsFile'] = @path_icns_file

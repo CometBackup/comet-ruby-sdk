@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '24.12.2'
+  APPLICATION_VERSION = '24.12.3'
 
   APPLICATION_VERSION_MAJOR = 24
 
   APPLICATION_VERSION_MINOR = 12
 
-  APPLICATION_VERSION_REVISION = 2
+  APPLICATION_VERSION_REVISION = 3
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -245,14 +245,14 @@ module Comet
   # FtpsModeType: Use explicit FTPS, first creating an insecure connection and then upgrading to SSL/TLS using AUTH TLS (like STARTTLS).
   FTPS_MODE_EXPLICIT = 2
 
-  # Back up Hyper-V virtual machines using VSS mode. This includes all previous snapshots.
+  # HypervMethod: Back up Hyper-V virtual machines using VSS mode. This includes all previous snapshots.
   HYPERV_METHOD_VSS = 'vss'
 
-  # Back up Hyper-V virtual machines using WMI mode. This includes the latest snapshot data only.
+  # HypervMethod: Back up Hyper-V virtual machines using WMI mode. This includes the latest snapshot data only.
   # This const is available in Comet 23.9.8 and later.
   HYPERV_METHOD_WMI_COPY = 'copy'
 
-  # Back up Hyper-V virtual machines using WMI mode with RCT acceleration. This includes the latest snapshot data only.
+  # HypervMethod: Back up Hyper-V virtual machines using WMI mode with RCT acceleration. This includes the latest snapshot data only.
   # This const is available in Comet 23.9.8 and later.
   HYPERV_METHOD_WMI_CBT = 'wmi'
 
