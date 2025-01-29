@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '24.12.3'
+  APPLICATION_VERSION = '24.12.4'
 
   APPLICATION_VERSION_MAJOR = 24
 
   APPLICATION_VERSION_MINOR = 12
 
-  APPLICATION_VERSION_REVISION = 3
+  APPLICATION_VERSION_REVISION = 4
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
