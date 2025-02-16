@@ -59,6 +59,10 @@ module Comet
     # @type [Number] sector_size
     attr_accessor :sector_size
 
+    # Used to indicate the partition conflicts on the disk.
+    # @type [Array<Comet::PartitionConflict>] partition_conflicts
+    attr_accessor :partition_conflicts
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -80,6 +84,7 @@ module Comet
       @heads = 0
       @sectors = 0
       @sector_size = 0
+      @partition_conflicts = []
       @unknown_json_fields = {}
     end
 
@@ -161,6 +166,16 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @sector_size = v
+        when 'PartitionConflicts'
+          if v.nil?
+            @partition_conflicts = []
+          else
+            @partition_conflicts = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              @partition_conflicts[i1] = Comet::PartitionConflict.new
+              @partition_conflicts[i1].from_hash(v1)
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -183,6 +198,7 @@ module Comet
       ret['Heads'] = @heads
       ret['Sectors'] = @sectors
       ret['SectorSize'] = @sector_size
+      ret['PartitionConflicts'] = @partition_conflicts
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

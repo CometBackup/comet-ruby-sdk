@@ -1143,6 +1143,37 @@ module Comet
       ret
     end
 
+    # AdminDispatcherBrowseVirtualMachines
+    #
+    # Browse virtual machines in target snapshot.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [String] destination_id The Storage Vault GUID
+    # @param [String] snapshot_id Snapshot to search
+    # @return [Comet::DispatcherListSnapshotVirtualMachinesResponse]
+    def admin_dispatcher_browse_virtual_machines(target_id, destination_id, snapshot_id)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'destination_id' expected String, got #{destination_id.class}" unless destination_id.is_a? String
+
+      submit_params['DestinationID'] = destination_id
+      raise TypeError, "'snapshot_id' expected String, got #{snapshot_id.class}" unless snapshot_id.is_a? String
+
+      submit_params['SnapshotID'] = snapshot_id
+
+      body = perform_request('api/v1/admin/dispatcher/browse-virtual-machines', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::DispatcherListSnapshotVirtualMachinesResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherDeepverifyStorageVault
     #
     # Instruct a live connected device to deeply verify Storage Vault content.
@@ -1742,6 +1773,130 @@ module Comet
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::BrowseVMwareResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherRequestBrowseVmwareDatacenters
+    #
+    # Request a list of VMware vSphere Datacenters on a VMware vSphere connection.
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::VMwareConnection] credentials The VMware vSphere connection settings
+    # @return [Comet::BrowseVMwareDatacentersResponse]
+    def admin_dispatcher_request_browse_vmware_datacenters(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::VMwareConnection, got #{credentials.class}" unless credentials.is_a? Comet::VMwareConnection
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-vmware/datacenters', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseVMwareDatacentersResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherRequestBrowseVmwareDatastores
+    #
+    # Request a list of VMware vSphere Datastores on a VMware vSphere connection, for a specified VMware Datacenter.
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::VMwareConnection] credentials The VMware vSphere connection settings
+    # @param [String] filter The name of the target VMware Datacenter
+    # @return [Comet::BrowseVMwareDatastoresResponse]
+    def admin_dispatcher_request_browse_vmware_datastores(target_id, credentials, filter)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::VMwareConnection, got #{credentials.class}" unless credentials.is_a? Comet::VMwareConnection
+
+      submit_params['Credentials'] = credentials.to_json
+      raise TypeError, "'filter' expected String, got #{filter.class}" unless filter.is_a? String
+
+      submit_params['Filter'] = filter
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-vmware/datastores', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseVMwareDatastoresResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherRequestBrowseVmwareHosts
+    #
+    # Request a list of VMware vSphere Hosts on a VMware vSphere connection, for a specified VMware Datacenter.
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::VMwareConnection] credentials The VMware vSphere connection settings
+    # @param [String] filter The name of the target VMware Datacenter
+    # @return [Comet::BrowseVMwareHostsResponse]
+    def admin_dispatcher_request_browse_vmware_hosts(target_id, credentials, filter)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::VMwareConnection, got #{credentials.class}" unless credentials.is_a? Comet::VMwareConnection
+
+      submit_params['Credentials'] = credentials.to_json
+      raise TypeError, "'filter' expected String, got #{filter.class}" unless filter.is_a? String
+
+      submit_params['Filter'] = filter
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-vmware/hosts', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseVMwareHostsResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherRequestBrowseVmwareNetworks
+    #
+    # Request a list of VMware vSphere Networks on a VMware vSphere connection, for a specified VMware Datacenter.
+    # The remote device must have given consent for an MSP to browse their files.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::VMwareConnection] credentials The VMware vSphere connection settings
+    # @param [String] filter The name of the target VMware Datacenter
+    # @return [Comet::BrowseVMwareNetworksResponse]
+    def admin_dispatcher_request_browse_vmware_networks(target_id, credentials, filter)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::VMwareConnection, got #{credentials.class}" unless credentials.is_a? Comet::VMwareConnection
+
+      submit_params['Credentials'] = credentials.to_json
+      raise TypeError, "'filter' expected String, got #{filter.class}" unless filter.is_a? String
+
+      submit_params['Filter'] = filter
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-vmware/networks', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseVMwareNetworksResponse.new
       ret.from_hash(json_body)
       ret
     end
@@ -3976,8 +4131,9 @@ module Comet
     # @param [String] policy_id The policy ID to update or create
     # @param [Comet::GroupPolicy] policy The policy data
     # @param [String] check_policy_hash (Optional) An atomic verification hash as supplied by the AdminPoliciesGet API
+    # @param [Comet::PolicyOptions] options (Optional) An array of PolicySourceID that will be explicitly deleted.
     # @return [Comet::CometAPIResponseMessage]
-    def admin_policies_set(policy_id, policy, check_policy_hash = nil)
+    def admin_policies_set(policy_id, policy, check_policy_hash = nil, options = nil)
       submit_params = {}
       raise TypeError, "'policy_id' expected String, got #{policy_id.class}" unless policy_id.is_a? String
 
@@ -3989,6 +4145,11 @@ module Comet
         raise TypeError, "'check_policy_hash' expected String, got #{check_policy_hash.class}" unless check_policy_hash.is_a? String
 
         submit_params['CheckPolicyHash'] = check_policy_hash
+      end
+      unless options.nil?
+        raise TypeError, "'options' expected Comet::PolicyOptions, got #{options.class}" unless options.is_a? Comet::PolicyOptions
+
+        submit_params['Options'] = options.to_json
       end
 
       body = perform_request('api/v1/admin/policies/set', submit_params)
@@ -4251,8 +4412,9 @@ module Comet
     # @param [String] target_user Selected account username
     # @param [Comet::UserProfileConfig] profile_data Modified user profile
     # @param [String] require_hash Previous hash parameter
+    # @param [Comet::AdminOptions] admin_options (Optional) Instructions for modifying user profile
     # @return [Comet::CometAPIResponseMessage]
-    def admin_set_user_profile_hash(target_user, profile_data, require_hash)
+    def admin_set_user_profile_hash(target_user, profile_data, require_hash, admin_options = nil)
       submit_params = {}
       raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
 
@@ -4263,6 +4425,11 @@ module Comet
       raise TypeError, "'require_hash' expected String, got #{require_hash.class}" unless require_hash.is_a? String
 
       submit_params['RequireHash'] = require_hash
+      unless admin_options.nil?
+        raise TypeError, "'admin_options' expected Comet::AdminOptions, got #{admin_options.class}" unless admin_options.is_a? Comet::AdminOptions
+
+        submit_params['AdminOptions'] = admin_options.to_json
+      end
 
       body = perform_request('api/v1/admin/set-user-profile-hash', submit_params)
       json_body = JSON.parse body

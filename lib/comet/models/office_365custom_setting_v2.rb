@@ -15,20 +15,34 @@ module Comet
   # This type is available in Comet 21.9.xx and later.
   class Office365CustomSettingV2
 
-    # If true, then backup the entire Office 365 Tenant except the selected members. If false, backup
-    # the selected members only.
+    # If true, then backup everything except the selected users (group members are still included)
     # @type [Boolean] organization
+    # @deprecated This member has been deprecated since Comet version 24.12.2
     attr_accessor :organization
 
-    # Key can be the ID of user, group or SharePoint
-    # Value is a bitset of the SERVICE_ constants, to select which services to back up for this member.
+    # If true, exclude all filtered IDs and Members. Backup everything else
+    # @type [Boolean] filter_mode
+    attr_accessor :filter_mode
+
+    # Key is the ID of User, Group, or Site
+    # Value is a bitset of the SERVICE_ constants, to select which services to back up for members
     # @type [Hash{String => Number}] backup_options
     attr_accessor :backup_options
 
-    # Key must be a group ID
-    # Value is a bitset of the SERVICE_ constants, to select which services to back up for this member.
+    # Key is the ID of a Group or Team Site
+    # Value is a bitset of the SERVICE_ constants, to select which services to back up for members
     # @type [Hash{String => Number}] member_backup_options
     attr_accessor :member_backup_options
+
+    # Key is the ID of a User, Group, or Site
+    # Value is a bitset of the SERVICE_ constants, to select which services to back up for members
+    # @type [Hash{String => Number}] filter_options
+    attr_accessor :filter_options
+
+    # Key is the ID of a Group or Team Site
+    # Value is a bitset of the SERVICE_ constants, to select which services to back up for members
+    # @type [Hash{String => Number}] filter_member_options
+    attr_accessor :filter_member_options
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -40,6 +54,8 @@ module Comet
     def clear
       @backup_options = {}
       @member_backup_options = {}
+      @filter_options = {}
+      @filter_member_options = {}
       @unknown_json_fields = {}
     end
 
@@ -58,6 +74,8 @@ module Comet
         case k
         when 'Organization'
           @organization = v
+        when 'FilterMode'
+          @filter_mode = v
         when 'BackupOptions'
           @backup_options = {}
           if v.nil?
@@ -80,6 +98,28 @@ module Comet
               @member_backup_options[k1] = v1
             end
           end
+        when 'FilterOptions'
+          @filter_options = {}
+          if v.nil?
+            @filter_options = {}
+          else
+            v.each do |k1, v1|
+              raise TypeError, "'v1' expected Numeric, got #{v1.class}" unless v1.is_a? Numeric
+
+              @filter_options[k1] = v1
+            end
+          end
+        when 'FilterMemberOptions'
+          @filter_member_options = {}
+          if v.nil?
+            @filter_member_options = {}
+          else
+            v.each do |k1, v1|
+              raise TypeError, "'v1' expected Numeric, got #{v1.class}" unless v1.is_a? Numeric
+
+              @filter_member_options[k1] = v1
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -90,11 +130,18 @@ module Comet
     def to_hash
       ret = {}
       ret['Organization'] = @organization
+      ret['FilterMode'] = @filter_mode
       unless @backup_options.nil?
         ret['BackupOptions'] = @backup_options
       end
       unless @member_backup_options.nil?
         ret['MemberBackupOptions'] = @member_backup_options
+      end
+      unless @filter_options.nil?
+        ret['FilterOptions'] = @filter_options
+      end
+      unless @filter_member_options.nil?
+        ret['FilterMemberOptions'] = @filter_member_options
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

@@ -9,10 +9,10 @@ require 'json'
 
 module Comet
 
-  # BrowseVMwareResponse is a typed class wrapper around the underlying Comet Server API data structure.
-  # BrowseVMwareResponse contains a list of Virtual Machines when remotely browsing a VMware vSphere
-# connection.
-  class BrowseVMwareResponse
+  # BrowseVMwareNetworksResponse is a typed class wrapper around the underlying Comet Server API data structure.
+  # BrowseVMwareHostsResponse contains a list of VMware Networks for a specific VMware Datacenter,
+# when remotely browsing a VMware vSphere connection.
+  class BrowseVMwareNetworksResponse
 
     # If the operation was successful, the status will be in the 200-299 range.
     # @type [Number] status
@@ -21,8 +21,8 @@ module Comet
     # @type [String] message
     attr_accessor :message
 
-    # @type [Array<Comet::VMwareMachineInfo>] virtual_machines
-    attr_accessor :virtual_machines
+    # @type [Array<Comet::VMwareNetworkInfo>] networks
+    attr_accessor :networks
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -34,7 +34,7 @@ module Comet
     def clear
       @status = 0
       @message = ''
-      @virtual_machines = []
+      @networks = []
       @unknown_json_fields = {}
     end
 
@@ -59,14 +59,14 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @message = v
-        when 'VirtualMachines'
+        when 'Networks'
           if v.nil?
-            @virtual_machines = []
+            @networks = []
           else
-            @virtual_machines = Array.new(v.length)
+            @networks = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              @virtual_machines[i1] = Comet::VMwareMachineInfo.new
-              @virtual_machines[i1].from_hash(v1)
+              @networks[i1] = Comet::VMwareNetworkInfo.new
+              @networks[i1].from_hash(v1)
             end
           end
         else
@@ -80,7 +80,7 @@ module Comet
       ret = {}
       ret['Status'] = @status
       ret['Message'] = @message
-      ret['VirtualMachines'] = @virtual_machines
+      ret['Networks'] = @networks
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

@@ -9,20 +9,11 @@ require 'json'
 
 module Comet
 
-  # BrowseVMwareResponse is a typed class wrapper around the underlying Comet Server API data structure.
-  # BrowseVMwareResponse contains a list of Virtual Machines when remotely browsing a VMware vSphere
-# connection.
-  class BrowseVMwareResponse
+  # PolicyOptions is a typed class wrapper around the underlying Comet Server API data structure.
+  class PolicyOptions
 
-    # If the operation was successful, the status will be in the 200-299 range.
-    # @type [Number] status
-    attr_accessor :status
-
-    # @type [String] message
-    attr_accessor :message
-
-    # @type [Array<Comet::VMwareMachineInfo>] virtual_machines
-    attr_accessor :virtual_machines
+    # @type [Array<String>] delete_sources
+    attr_accessor :delete_sources
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -32,9 +23,7 @@ module Comet
     end
 
     def clear
-      @status = 0
-      @message = ''
-      @virtual_machines = []
+      @delete_sources = []
       @unknown_json_fields = {}
     end
 
@@ -51,22 +40,15 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Status'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @status = v
-        when 'Message'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @message = v
-        when 'VirtualMachines'
+        when 'DeleteSources'
           if v.nil?
-            @virtual_machines = []
+            @delete_sources = []
           else
-            @virtual_machines = Array.new(v.length)
+            @delete_sources = Array.new(v.length)
             v.each_with_index do |v1, i1|
-              @virtual_machines[i1] = Comet::VMwareMachineInfo.new
-              @virtual_machines[i1].from_hash(v1)
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+
+              @delete_sources[i1] = v1
             end
           end
         else
@@ -78,9 +60,7 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Status'] = @status
-      ret['Message'] = @message
-      ret['VirtualMachines'] = @virtual_machines
+      ret['DeleteSources'] = @delete_sources
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

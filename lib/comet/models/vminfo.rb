@@ -9,34 +9,33 @@ require 'json'
 
 module Comet
 
-  # HyperVMachineInfo is a typed class wrapper around the underlying Comet Server API data structure.
-  class HyperVMachineInfo
+  # VMInfo is a typed class wrapper around the underlying Comet Server API data structure.
+  # This type is available in Comet 24.12.x and later.
+  class VMInfo
 
     # @type [String] id
     attr_accessor :id
 
-    # @type [String] display_name
-    attr_accessor :display_name
+    # @type [String] name
+    attr_accessor :name
 
-    # This field is available in Comet 24.12.x and later.
-    # @type [Number] memory_limit_mb
-    attr_accessor :memory_limit_mb
-
-    # This field is available in Comet 24.12.x and later.
     # @type [Number] cpucores
     attr_accessor :cpucores
 
-    # This field is available in Comet 24.12.x and later.
-    # @type [Array<String>] hard_drives
-    attr_accessor :hard_drives
+    # Bytes
+    # @type [Number] ram_bytes
+    attr_accessor :ram_bytes
 
-    # This field is available in Comet 24.12.x and later.
-    # @type [Number] generation
-    attr_accessor :generation
+    # The BIOS mode of this machine e.g. "Legacy"|"UEFI"
+    # @type [String] firmware_type
+    attr_accessor :firmware_type
 
-    # This field is available in Comet 24.12.x and later.
-    # @type [String] config_file_path
-    attr_accessor :config_file_path
+    # Relative path to config file or directory, if supported by this Protected Item type
+    # @type [String] config_path
+    attr_accessor :config_path
+
+    # @type [Array<Comet::VMDiskInfo>] disks
+    attr_accessor :disks
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -47,12 +46,12 @@ module Comet
 
     def clear
       @id = ''
-      @display_name = ''
-      @memory_limit_mb = 0
+      @name = ''
       @cpucores = 0
-      @hard_drives = []
-      @generation = 0
-      @config_file_path = ''
+      @ram_bytes = 0
+      @firmware_type = ''
+      @config_path = ''
+      @disks = []
       @unknown_json_fields = {}
     end
 
@@ -76,34 +75,33 @@ module Comet
         when 'Name'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @display_name = v
-        when 'MemoryLimitMB'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @memory_limit_mb = v
+          @name = v
         when 'CPUCores'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @cpucores = v
-        when 'HardDrives'
-          if v.nil?
-            @hard_drives = []
-          else
-            @hard_drives = Array.new(v.length)
-            v.each_with_index do |v1, i1|
-              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
-
-              @hard_drives[i1] = v1
-            end
-          end
-        when 'Generation'
+        when 'RamBytes'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
-          @generation = v
-        when 'ConfigFilePath'
+          @ram_bytes = v
+        when 'FirmwareType'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @config_file_path = v
+          @firmware_type = v
+        when 'ConfigPath'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @config_path = v
+        when 'Disks'
+          if v.nil?
+            @disks = []
+          else
+            @disks = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              @disks[i1] = Comet::VMDiskInfo.new
+              @disks[i1].from_hash(v1)
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -114,12 +112,12 @@ module Comet
     def to_hash
       ret = {}
       ret['ID'] = @id
-      ret['Name'] = @display_name
-      ret['MemoryLimitMB'] = @memory_limit_mb
+      ret['Name'] = @name
       ret['CPUCores'] = @cpucores
-      ret['HardDrives'] = @hard_drives
-      ret['Generation'] = @generation
-      ret['ConfigFilePath'] = @config_file_path
+      ret['RamBytes'] = @ram_bytes
+      ret['FirmwareType'] = @firmware_type
+      ret['ConfigPath'] = @config_path
+      ret['Disks'] = @disks
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

@@ -10,6 +10,7 @@ require 'json'
 module Comet
 
   # VMwareMachineInfo is a typed class wrapper around the underlying Comet Server API data structure.
+  # VMwareMachineInfo describes a single VMware virtual machine.
   class VMwareMachineInfo
 
     # @type [String] name

@@ -107,6 +107,16 @@ module Comet
     # @type [Comet::MSSQLLoginArgs] ms_sql_connection
     attr_accessor :ms_sql_connection
 
+    # For RESTORETYPE_VMHOST
+    # This field is available in Comet 24.12.x and later.
+    # @type [Comet::VMwareRestoreTargetOptions] vmware_connection
+    attr_accessor :vmware_connection
+
+    # For RESTORETYPE_VMHOST
+    # This field is available in Comet 24.12.x and later.
+    # @type [Comet::HyperVRestoreTargetOptions] hyper_vconnection
+    attr_accessor :hyper_vconnection
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -128,6 +138,8 @@ module Comet
       @ssl_crt_file = ''
       @ssl_key_file = ''
       @ms_sql_connection = Comet::MSSQLLoginArgs.new
+      @vmware_connection = Comet::VMwareRestoreTargetOptions.new
+      @hyper_vconnection = Comet::HyperVRestoreTargetOptions.new
       @unknown_json_fields = {}
     end
 
@@ -219,6 +231,12 @@ module Comet
         when 'MsSqlConnection'
           @ms_sql_connection = Comet::MSSQLLoginArgs.new
           @ms_sql_connection.from_hash(v)
+        when 'VMwareConnection'
+          @vmware_connection = Comet::VMwareRestoreTargetOptions.new
+          @vmware_connection.from_hash(v)
+        when 'HyperVConnection'
+          @hyper_vconnection = Comet::HyperVRestoreTargetOptions.new
+          @hyper_vconnection.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -253,6 +271,12 @@ module Comet
       ret['SslKeyFile'] = @ssl_key_file
       unless @ms_sql_connection.nil?
         ret['MsSqlConnection'] = @ms_sql_connection
+      end
+      unless @vmware_connection.nil?
+        ret['VMwareConnection'] = @vmware_connection
+      end
+      unless @hyper_vconnection.nil?
+        ret['HyperVConnection'] = @hyper_vconnection
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
