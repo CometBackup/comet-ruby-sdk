@@ -1749,6 +1749,87 @@ module Comet
       ret
     end
 
+    # AdminDispatcherRequestBrowseProxmox
+    #
+    # Request a list of Proxmox virtual machines and containers.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::ProxmoxConnection] credentials The Proxmox connection settings
+    # @return [Comet::BrowseProxmoxResponse]
+    def admin_dispatcher_request_browse_proxmox(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::ProxmoxConnection, got #{credentials.class}" unless credentials.is_a? Comet::ProxmoxConnection
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-proxmox', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseProxmoxResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherRequestBrowseProxmoxNodes
+    #
+    # Request a list of Proxmox nodes.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::SSHConnection] credentials The SSH connection settings
+    # @return [Comet::BrowseProxmoxNodesResponse]
+    def admin_dispatcher_request_browse_proxmox_nodes(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::SSHConnection, got #{credentials.class}" unless credentials.is_a? Comet::SSHConnection
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-proxmox/nodes', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseProxmoxNodesResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherRequestBrowseProxmoxStorage
+    #
+    # Request a list of configured Proxmox storage.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [Comet::SSHConnection] credentials The SSH connection settings
+    # @return [Comet::BrowseProxmoxStorageResponse]
+    def admin_dispatcher_request_browse_proxmox_storage(target_id, credentials)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'credentials' expected Comet::SSHConnection, got #{credentials.class}" unless credentials.is_a? Comet::SSHConnection
+
+      submit_params['Credentials'] = credentials.to_json
+
+      body = perform_request('api/v1/admin/dispatcher/request-browse-proxmox/storage', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::BrowseProxmoxStorageResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDispatcherRequestBrowseVmware
     #
     # Request a list of VMware vSphere virtual machines.
@@ -2413,8 +2494,9 @@ module Comet
     #
     # @param [String] target_id The live connection GUID
     # @param [String] destination The Storage Vault GUID
+    # @param [Boolean] allow_unsafe (Optional) Allow legacy Storage Vault unlocking, which is unsafe in some cases.
     # @return [Comet::CometAPIResponseMessage]
-    def admin_dispatcher_unlock(target_id, destination)
+    def admin_dispatcher_unlock(target_id, destination, allow_unsafe = nil)
       submit_params = {}
       raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
 
@@ -2422,6 +2504,9 @@ module Comet
       raise TypeError, "'destination' expected String, got #{destination.class}" unless destination.is_a? String
 
       submit_params['Destination'] = destination
+      unless allow_unsafe.nil?
+        submit_params['AllowUnsafe'] = (allow_unsafe ? 1 : 0)
+      end
 
       body = perform_request('api/v1/admin/dispatcher/unlock', submit_params)
       json_body = JSON.parse body
@@ -4231,8 +4316,9 @@ module Comet
     # @param [String] storage_provider ID for the storage template destination
     # @param [String] self_address (Optional) The external URL for this server. Used to resolve conflicts
     # @param [String] device_id (Optional) The ID of the device to be added as a associated device of the Storage Vault
+    # @param [String] profile_hash (Optional) The profile hash of the user profile
     # @return [Comet::RequestStorageVaultResponseMessage]
-    def admin_request_storage_vault(target_user, storage_provider, self_address = nil, device_id = nil)
+    def admin_request_storage_vault(target_user, storage_provider, self_address = nil, device_id = nil, profile_hash = nil)
       submit_params = {}
       raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
 
@@ -4251,6 +4337,11 @@ module Comet
         raise TypeError, "'device_id' expected String, got #{device_id.class}" unless device_id.is_a? String
 
         submit_params['DeviceID'] = device_id
+      end
+      unless profile_hash.nil?
+        raise TypeError, "'profile_hash' expected String, got #{profile_hash.class}" unless profile_hash.is_a? String
+
+        submit_params['ProfileHash'] = profile_hash
       end
 
       body = perform_request('api/v1/admin/request-storage-vault', submit_params)
@@ -4413,7 +4504,7 @@ module Comet
     # @param [Comet::UserProfileConfig] profile_data Modified user profile
     # @param [String] require_hash Previous hash parameter
     # @param [Comet::AdminOptions] admin_options (Optional) Instructions for modifying user profile
-    # @return [Comet::CometAPIResponseMessage]
+    # @return [Comet::GetProfileAndHashResponseMessage]
     def admin_set_user_profile_hash(target_user, profile_data, require_hash, admin_options = nil)
       submit_params = {}
       raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
@@ -4434,7 +4525,7 @@ module Comet
       body = perform_request('api/v1/admin/set-user-profile-hash', submit_params)
       json_body = JSON.parse body
       check_status json_body
-      ret = Comet::CometAPIResponseMessage.new
+      ret = Comet::GetProfileAndHashResponseMessage.new
       ret.from_hash(json_body)
       ret
     end

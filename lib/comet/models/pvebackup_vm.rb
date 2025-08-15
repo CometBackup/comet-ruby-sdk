@@ -9,24 +9,23 @@ require 'json'
 
 module Comet
 
-  # RequestStorageVaultResponseMessage is a typed class wrapper around the underlying Comet Server API data structure.
-  class RequestStorageVaultResponseMessage
+  # PVEBackupVM is a typed class wrapper around the underlying Comet Server API data structure.
+  class PVEBackupVM
 
-    # If the operation was successful, the status will be in the 200-299 range.
-    # @type [Number] status
-    attr_accessor :status
+    # @type [Array<Comet::PVEBackupDisk>] included_disks
+    attr_accessor :included_disks
 
-    # @type [String] message
-    attr_accessor :message
+    # @type [String] name
+    attr_accessor :name
 
-    # @type [String] destination_id
-    attr_accessor :destination_id
+    # @type [Boolean] selected
+    attr_accessor :selected
 
-    # @type [String] profile_hash
-    attr_accessor :profile_hash
+    # @type [String] type
+    attr_accessor :type
 
-    # @type [Comet::UserProfileConfig] profile
-    attr_accessor :profile
+    # @type [String] vmid
+    attr_accessor :vmid
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -36,11 +35,10 @@ module Comet
     end
 
     def clear
-      @status = 0
-      @message = ''
-      @destination_id = ''
-      @profile_hash = ''
-      @profile = Comet::UserProfileConfig.new
+      @included_disks = []
+      @name = ''
+      @type = ''
+      @vmid = ''
       @unknown_json_fields = {}
     end
 
@@ -57,25 +55,30 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Status'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @status = v
-        when 'Message'
+        when 'IncludedDisks'
+          if v.nil?
+            @included_disks = []
+          else
+            @included_disks = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              @included_disks[i1] = Comet::PVEBackupDisk.new
+              @included_disks[i1].from_hash(v1)
+            end
+          end
+        when 'Name'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @message = v
-        when 'DestinationID'
+          @name = v
+        when 'Selected'
+          @selected = v
+        when 'Type'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @destination_id = v
-        when 'ProfileHash'
+          @type = v
+        when 'VMID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @profile_hash = v
-        when 'Profile'
-          @profile = Comet::UserProfileConfig.new
-          @profile.from_hash(v)
+          @vmid = v
         else
           @unknown_json_fields[k] = v
         end
@@ -85,11 +88,21 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Status'] = @status
-      ret['Message'] = @message
-      ret['DestinationID'] = @destination_id
-      ret['ProfileHash'] = @profile_hash
-      ret['Profile'] = @profile
+      unless @included_disks.nil?
+        ret['IncludedDisks'] = @included_disks
+      end
+      unless @name.nil?
+        ret['Name'] = @name
+      end
+      unless @selected.nil?
+        ret['Selected'] = @selected
+      end
+      unless @type.nil?
+        ret['Type'] = @type
+      end
+      unless @vmid.nil?
+        ret['VMID'] = @vmid
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

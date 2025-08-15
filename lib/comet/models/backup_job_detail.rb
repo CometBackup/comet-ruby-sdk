@@ -99,6 +99,10 @@ module Comet
     # @type [Number] total_unlicensed_mails_count
     attr_accessor :total_unlicensed_mails_count
 
+    # The CRC32 of the billing data for this job.
+    # @type [Number] billing_crc_32
+    attr_accessor :billing_crc_32
+
     # If this field is present, this job did not perform some work because the Storage Vault is
     # currently busy.
     # This field is available in Comet 24.9.2 and later.
@@ -155,6 +159,7 @@ module Comet
       @total_accounts_count = 0
       @total_licensed_mails_count = 0
       @total_unlicensed_mails_count = 0
+      @billing_crc_32 = 0
       @conflicting_job_id = ''
       @cancellation_id = ''
       @progress = Comet::BackupJobProgress.new
@@ -276,6 +281,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @total_unlicensed_mails_count = v
+        when 'BillingCrc32'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @billing_crc_32 = v
         when 'ConflictingJobID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -342,6 +351,9 @@ module Comet
       end
       unless @total_unlicensed_mails_count.nil?
         ret['TotalUnlicensedMailsCount'] = @total_unlicensed_mails_count
+      end
+      unless @billing_crc_32.nil?
+        ret['BillingCrc32'] = @billing_crc_32
       end
       unless @conflicting_job_id.nil?
         ret['ConflictingJobID'] = @conflicting_job_id

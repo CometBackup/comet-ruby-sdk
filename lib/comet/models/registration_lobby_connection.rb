@@ -36,6 +36,9 @@ module Comet
     # @type [String] ipaddress
     attr_accessor :ipaddress
 
+    # @type [String] host
+    attr_accessor :host
+
     # @type [Number] connection_time
     attr_accessor :connection_time
 
@@ -55,6 +58,7 @@ module Comet
       @reported_platform_version = Comet::OSInfo.new
       @device_time_zone = ''
       @ipaddress = ''
+      @host = ''
       @connection_time = 0
       @unknown_json_fields = {}
     end
@@ -103,6 +107,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @ipaddress = v
+        when 'Host'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @host = v
         when 'ConnectionTime'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -129,6 +137,9 @@ module Comet
       end
       unless @ipaddress.nil?
         ret['IPAddress'] = @ipaddress
+      end
+      unless @host.nil?
+        ret['Host'] = @host
       end
       ret['ConnectionTime'] = @connection_time
       @unknown_json_fields.each do |k, v|

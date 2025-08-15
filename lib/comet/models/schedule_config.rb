@@ -39,6 +39,12 @@ module Comet
     # @type [Number] random_delay_secs
     attr_accessor :random_delay_secs
 
+    # @type [Number] selected_month
+    attr_accessor :selected_month
+
+    # @type [Number] selected_day
+    attr_accessor :selected_day
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -54,6 +60,8 @@ module Comet
       @to_time = Comet::HourSchedConfig.new
       @days_select = Comet::DaysOfWeekConfig.new
       @random_delay_secs = 0
+      @selected_month = 0
+      @selected_day = 0
       @unknown_json_fields = {}
     end
 
@@ -99,6 +107,14 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @random_delay_secs = v
+        when 'SelectedMonth'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @selected_month = v
+        when 'SelectedDay'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @selected_day = v
         else
           @unknown_json_fields[k] = v
         end
@@ -121,6 +137,8 @@ module Comet
       unless @random_delay_secs.nil?
         ret['RandomDelaySecs'] = @random_delay_secs
       end
+      ret['SelectedMonth'] = @selected_month
+      ret['SelectedDay'] = @selected_day
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

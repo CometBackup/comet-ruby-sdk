@@ -129,6 +129,11 @@ module Comet
     # @type [Number] random_delay_secs
     attr_accessor :random_delay_secs
 
+    # Rotate access keys of a conflicting jobs Storage Vault, if no update from the conflicting job for
+    # X hours. If value is 0, ROTATE_STORAGE_VAULT_KEYS_DEFAULT is used.
+    # @type [Number] rotate_storage_vault_keys_hours
+    attr_accessor :rotate_storage_vault_keys_hours
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -155,6 +160,7 @@ module Comet
       @default_sources_with_osrestriction = {}
       @default_backup_rules = {}
       @random_delay_secs = 0
+      @rotate_storage_vault_keys_hours = 0
       @unknown_json_fields = {}
     end
 
@@ -311,6 +317,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @random_delay_secs = v
+        when 'RotateStorageVaultKeysHours'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @rotate_storage_vault_keys_hours = v
         else
           @unknown_json_fields[k] = v
         end
@@ -377,6 +387,7 @@ module Comet
       unless @random_delay_secs.nil?
         ret['RandomDelaySecs'] = @random_delay_secs
       end
+      ret['RotateStorageVaultKeysHours'] = @rotate_storage_vault_keys_hours
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

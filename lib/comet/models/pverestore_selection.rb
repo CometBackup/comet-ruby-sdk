@@ -9,24 +9,17 @@ require 'json'
 
 module Comet
 
-  # RequestStorageVaultResponseMessage is a typed class wrapper around the underlying Comet Server API data structure.
-  class RequestStorageVaultResponseMessage
+  # PVERestoreSelection is a typed class wrapper around the underlying Comet Server API data structure.
+  class PVERestoreSelection
 
-    # If the operation was successful, the status will be in the 200-299 range.
-    # @type [Number] status
-    attr_accessor :status
+    # @type [String] id
+    attr_accessor :id
 
-    # @type [String] message
-    attr_accessor :message
+    # @type [String] name
+    attr_accessor :name
 
-    # @type [String] destination_id
-    attr_accessor :destination_id
-
-    # @type [String] profile_hash
-    attr_accessor :profile_hash
-
-    # @type [Comet::UserProfileConfig] profile
-    attr_accessor :profile
+    # @type [Comet::PVEVM] target_vm
+    attr_accessor :target_vm
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -36,11 +29,9 @@ module Comet
     end
 
     def clear
-      @status = 0
-      @message = ''
-      @destination_id = ''
-      @profile_hash = ''
-      @profile = Comet::UserProfileConfig.new
+      @id = ''
+      @name = ''
+      @target_vm = Comet::PVEVM.new
       @unknown_json_fields = {}
     end
 
@@ -57,25 +48,17 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Status'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @status = v
-        when 'Message'
+        when 'ID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @message = v
-        when 'DestinationID'
+          @id = v
+        when 'Name'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @destination_id = v
-        when 'ProfileHash'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @profile_hash = v
-        when 'Profile'
-          @profile = Comet::UserProfileConfig.new
-          @profile.from_hash(v)
+          @name = v
+        when 'TargetVM'
+          @target_vm = Comet::PVEVM.new
+          @target_vm.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -85,11 +68,13 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Status'] = @status
-      ret['Message'] = @message
-      ret['DestinationID'] = @destination_id
-      ret['ProfileHash'] = @profile_hash
-      ret['Profile'] = @profile
+      unless @id.nil?
+        ret['ID'] = @id
+      end
+      unless @name.nil?
+        ret['Name'] = @name
+      end
+      ret['TargetVM'] = @target_vm
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

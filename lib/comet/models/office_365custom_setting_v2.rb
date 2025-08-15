@@ -24,23 +24,27 @@ module Comet
     # @type [Boolean] filter_mode
     attr_accessor :filter_mode
 
+    # If true, backup everything, ignoring selection and filter options
+    # @type [Boolean] whole_org
+    attr_accessor :whole_org
+
     # Key is the ID of User, Group, or Site
-    # Value is a bitset of the SERVICE_ constants, to select which services to back up for members
+    # Value is a bitset of the SERVICE_ constants, to select which services to backup for accounts
     # @type [Hash{String => Number}] backup_options
     attr_accessor :backup_options
 
     # Key is the ID of a Group or Team Site
-    # Value is a bitset of the SERVICE_ constants, to select which services to back up for members
+    # Value is a bitset of the SERVICE_ constants, to select which services to backup for members
     # @type [Hash{String => Number}] member_backup_options
     attr_accessor :member_backup_options
 
     # Key is the ID of a User, Group, or Site
-    # Value is a bitset of the SERVICE_ constants, to select which services to back up for members
+    # Value is a bitset of the SERVICE_ constants, to select which services to not backup for accounts
     # @type [Hash{String => Number}] filter_options
     attr_accessor :filter_options
 
     # Key is the ID of a Group or Team Site
-    # Value is a bitset of the SERVICE_ constants, to select which services to back up for members
+    # Value is a bitset of the SERVICE_ constants, to select which services to not backup for members
     # @type [Hash{String => Number}] filter_member_options
     attr_accessor :filter_member_options
 
@@ -76,6 +80,8 @@ module Comet
           @organization = v
         when 'FilterMode'
           @filter_mode = v
+        when 'WholeOrg'
+          @whole_org = v
         when 'BackupOptions'
           @backup_options = {}
           if v.nil?
@@ -130,7 +136,12 @@ module Comet
     def to_hash
       ret = {}
       ret['Organization'] = @organization
-      ret['FilterMode'] = @filter_mode
+      unless @filter_mode.nil?
+        ret['FilterMode'] = @filter_mode
+      end
+      unless @whole_org.nil?
+        ret['WholeOrg'] = @whole_org
+      end
       unless @backup_options.nil?
         ret['BackupOptions'] = @backup_options
       end

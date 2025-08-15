@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '24.12.5'
+  APPLICATION_VERSION = '25.6.8'
 
-  APPLICATION_VERSION_MAJOR = 24
+  APPLICATION_VERSION_MAJOR = 25
 
-  APPLICATION_VERSION_MINOR = 12
+  APPLICATION_VERSION_MINOR = 6
 
-  APPLICATION_VERSION_REVISION = 5
+  APPLICATION_VERSION_REVISION = 8
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -104,6 +104,9 @@ module Comet
   DESTINATION_SFTP_AUTHMODE_PRIVATEKEY = 2
 
   DESTINATIONTYPE___INVALID = 0
+
+  # Storage type that is applied when Storage Gateway fails to launch correctly
+  DESTINATIONTYPE_ERROR = 1
 
   # S3-compatible, or a specific S3 service such as AWS S3, Wasabi, or iDrive e2
   DESTINATIONTYPE_S3 = 1000
@@ -235,6 +238,9 @@ module Comet
 
   # VMware
   ENGINE_BUILTIN_VMWARE = 'engine1/vmware'
+
+  # Proxmox (PVE)
+  ENGINE_BUILTIN_PROXMOX = 'engine1/proxmox'
 
   # FtpsModeType: Use plain FTP, do not use FTPS.
   FTPS_MODE_PLAINTEXT = 0
@@ -433,6 +439,8 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
 
   OFFICE365_REGION_US_DOD = 'USGovtGccDoDCloud'
 
+  OFFICE365_REGION_PUBLIC_TEST = 'GlobalPublicCloudTest'
+
   # ExtraFileExclusionOSRestriction: Applies to any device
   OS_ANY = 0
 
@@ -466,6 +474,10 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
   # OidcProvider
   PROVIDER_DASHBOARD = 'dashboard'
 
+  PROXMOX_TYPE_VM = 'qemu'
+
+  PROXMOX_TYPE_CONTAINER = 'lxc'
+
   # PSAType
   PSA_TYPE_GENERIC = 0
 
@@ -474,6 +486,14 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
 
   # PSAType
   PSA_TYPE_SYNCRO = 2
+
+  PVE_BACKUP_METHOD_STOP = 'stop'
+
+  PVE_BACKUP_METHOD_SUSPEND = 'suspend'
+
+  PVE_BACKUP_METHOD_SNAPSHOT = 'snapshot'
+
+  PVE_BACKUP_METHOD_DEFAULT = PVE_BACKUP_METHOD_SNAPSHOT
 
   RELEASE_CODENAME = 'Voyager'
 
@@ -619,7 +639,7 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
   # RetentionRangeType: Uses Timestamp
   RETENTIONRANGE_NEWER_THAN_X = 901
 
-  # RetentionRangeType: Uses Days, Weeks, Months
+  # RetentionRangeType: Uses Days, Weeks, Months, Years
   RETENTIONRANGE_JOBS_SINCE = 902
 
   # RetentionRangeType: Uses Days
@@ -644,10 +664,18 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
   # RetentionRangeType: Uses Jobs
   RETENTIONRANGE_LAST_X_BACKUPS_ONE_FOR_EACH_MONTH = 909
 
+  # RetentionRangeType: Uses Jobs
+  RETENTIONRANGE_LAST_X_BACKUPS_ONE_FOR_EACH_YEAR = 910
+
+  # RetentionRangeType: Uses Years, YearOffset
+  RETENTIONRANGE_FIRST_JOB_FOR_LAST_X_YEARS = 911
+
   # RetentionRangeType
-  RETENTIONRANGE__HIGHEST = 909
+  RETENTIONRANGE__HIGHEST = 911
 
   RETENTIONRANGE_MAXINT = 1_125_899_906_842_624
+
+  ROTATE_STORAGE_VAULT_KEYS_DEFAULT = 48
 
   SCHEDULE_FREQUENCY_LOWEST = 8010
 
@@ -669,7 +697,10 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
   # SecondsPast is the number of seconds per period. Offset: Shunt seconds after unix epoch
   SCHEDULE_FREQUENCY_PERIODIC = 8015
 
-  SCHEDULE_FREQUENCY_HIGHEST = 8015
+  # SecondsPast is the number of seconds past 00:00 1st, in the device's local timezone.
+  SCHEDULE_FREQUENCY_YEARLY = 8016
+
+  SCHEDULE_FREQUENCY_HIGHEST = 8016
 
   # Maximum random delay (5 hours)
   SCHEDULE_MAX_RANDOM_DELAY_SECS = 18_000
@@ -1020,6 +1051,9 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
 
   # StoredObjectType
   STOREDOBJECTTYPE_VMDK_SYMLINK = 'vmdksymlink'
+
+  # StoredObjectType
+  STOREDOBJECTTYPE_VMDK_WINDEDUP = 'vmdkwindedup'
 
   # StoredObjectType
   STOREDOBJECTTYPE_VIRTUALIMAGE_DISK = 'virtualimagedisk'

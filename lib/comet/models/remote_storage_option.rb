@@ -18,15 +18,15 @@ module Comet
     # @type [String] description
     attr_accessor :description
 
-    # For use with Comet Server (Storage Role / Auth Role)
+    # For use with Comet Server (Storage Gateway / Management Console)
     # @type [String] remote_address
     attr_accessor :remote_address
 
-    # For use with Comet Server (Storage Role / Auth Role)
+    # For use with Comet Server (Storage Gateway / Management Console)
     # @type [String] username
     attr_accessor :username
 
-    # For use with Comet Server (Storage Role / Auth Role)
+    # For use with Comet Server (Storage Gateway / Management Console)
     # @type [String] password
     attr_accessor :password
 

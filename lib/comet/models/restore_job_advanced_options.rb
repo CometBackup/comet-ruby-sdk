@@ -117,6 +117,10 @@ module Comet
     # @type [Comet::HyperVRestoreTargetOptions] hyper_vconnection
     attr_accessor :hyper_vconnection
 
+    # For RESTORETYPE_VMHOST
+    # @type [Comet::ProxmoxRestoreTargetOptions] proxmox_connection
+    attr_accessor :proxmox_connection
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -140,6 +144,7 @@ module Comet
       @ms_sql_connection = Comet::MSSQLLoginArgs.new
       @vmware_connection = Comet::VMwareRestoreTargetOptions.new
       @hyper_vconnection = Comet::HyperVRestoreTargetOptions.new
+      @proxmox_connection = Comet::ProxmoxRestoreTargetOptions.new
       @unknown_json_fields = {}
     end
 
@@ -237,6 +242,9 @@ module Comet
         when 'HyperVConnection'
           @hyper_vconnection = Comet::HyperVRestoreTargetOptions.new
           @hyper_vconnection.from_hash(v)
+        when 'ProxmoxConnection'
+          @proxmox_connection = Comet::ProxmoxRestoreTargetOptions.new
+          @proxmox_connection.from_hash(v)
         else
           @unknown_json_fields[k] = v
         end
@@ -277,6 +285,9 @@ module Comet
       end
       unless @hyper_vconnection.nil?
         ret['HyperVConnection'] = @hyper_vconnection
+      end
+      unless @proxmox_connection.nil?
+        ret['ProxmoxConnection'] = @proxmox_connection
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

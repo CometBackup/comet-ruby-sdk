@@ -9,24 +9,19 @@ require 'json'
 
 module Comet
 
-  # RequestStorageVaultResponseMessage is a typed class wrapper around the underlying Comet Server API data structure.
-  class RequestStorageVaultResponseMessage
+  # ProxmoxRestoreTargetOptions is a typed class wrapper around the underlying Comet Server API data structure.
+  class ProxmoxRestoreTargetOptions
 
-    # If the operation was successful, the status will be in the 200-299 range.
-    # @type [Number] status
-    attr_accessor :status
+    # The name of the node to restore to in the Proxmox Cluster
+    # @type [String] node
+    attr_accessor :node
 
-    # @type [String] message
-    attr_accessor :message
+    # @type [Comet::SSHConnection] ssh
+    attr_accessor :ssh
 
-    # @type [String] destination_id
-    attr_accessor :destination_id
-
-    # @type [String] profile_hash
-    attr_accessor :profile_hash
-
-    # @type [Comet::UserProfileConfig] profile
-    attr_accessor :profile
+    # the name of the storage location to restore to
+    # @type [String] storage
+    attr_accessor :storage
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -36,11 +31,9 @@ module Comet
     end
 
     def clear
-      @status = 0
-      @message = ''
-      @destination_id = ''
-      @profile_hash = ''
-      @profile = Comet::UserProfileConfig.new
+      @node = ''
+      @ssh = Comet::SSHConnection.new
+      @storage = ''
       @unknown_json_fields = {}
     end
 
@@ -57,25 +50,17 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Status'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @status = v
-        when 'Message'
+        when 'Node'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @message = v
-        when 'DestinationID'
+          @node = v
+        when 'SSH'
+          @ssh = Comet::SSHConnection.new
+          @ssh.from_hash(v)
+        when 'Storage'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @destination_id = v
-        when 'ProfileHash'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @profile_hash = v
-        when 'Profile'
-          @profile = Comet::UserProfileConfig.new
-          @profile.from_hash(v)
+          @storage = v
         else
           @unknown_json_fields[k] = v
         end
@@ -85,11 +70,9 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Status'] = @status
-      ret['Message'] = @message
-      ret['DestinationID'] = @destination_id
-      ret['ProfileHash'] = @profile_hash
-      ret['Profile'] = @profile
+      ret['Node'] = @node
+      ret['SSH'] = @ssh
+      ret['Storage'] = @storage
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

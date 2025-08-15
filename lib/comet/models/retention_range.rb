@@ -34,6 +34,9 @@ module Comet
     # @type [Number] months
     attr_accessor :months
 
+    # @type [Number] years
+    attr_accessor :years
+
     # 0: Sunday, 6: Saturday
     # @type [Number] week_offset
     attr_accessor :week_offset
@@ -44,6 +47,9 @@ module Comet
     # For example, if the offset is set to 30, no backup will be kept for February.
     # @type [Number] month_offset
     attr_accessor :month_offset
+
+    # @type [Number] year_offset
+    attr_accessor :year_offset
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -59,8 +65,10 @@ module Comet
       @days = 0
       @weeks = 0
       @months = 0
+      @years = 0
       @week_offset = 0
       @month_offset = 0
+      @year_offset = 0
       @unknown_json_fields = {}
     end
 
@@ -101,6 +109,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @months = v
+        when 'Years'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @years = v
         when 'WeekOffset'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
@@ -109,6 +121,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @month_offset = v
+        when 'YearOffset'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @year_offset = v
         else
           @unknown_json_fields[k] = v
         end
@@ -124,8 +140,10 @@ module Comet
       ret['Days'] = @days
       ret['Weeks'] = @weeks
       ret['Months'] = @months
+      ret['Years'] = @years
       ret['WeekOffset'] = @week_offset
       ret['MonthOffset'] = @month_offset
+      ret['YearOffset'] = @year_offset
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

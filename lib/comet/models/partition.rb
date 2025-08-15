@@ -15,6 +15,14 @@ module Comet
     # @type [String] device_name
     attr_accessor :device_name
 
+    # The partition's MBR or GPT id, if any
+    # @type [String] partition_guid
+    attr_accessor :partition_guid
+
+    # The partition's offset within the physical disk
+    # @type [Number] partition_offset
+    attr_accessor :partition_offset
+
     # The name of the filesystem used on this partition (e.g. "NTFS")
     # @type [String] filesystem
     attr_accessor :filesystem
@@ -59,6 +67,8 @@ module Comet
 
     def clear
       @device_name = ''
+      @partition_guid = ''
+      @partition_offset = 0
       @filesystem = ''
       @volume_name = ''
       @volume_guid = ''
@@ -89,6 +99,14 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @device_name = v
+        when 'PartitionGuid'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @partition_guid = v
+        when 'PartitionOffset'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @partition_offset = v
         when 'Filesystem'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -146,6 +164,8 @@ module Comet
     def to_hash
       ret = {}
       ret['DeviceName'] = @device_name
+      ret['PartitionGuid'] = @partition_guid
+      ret['PartitionOffset'] = @partition_offset
       ret['Filesystem'] = @filesystem
       ret['VolumeName'] = @volume_name
       ret['VolumeGuid'] = @volume_guid

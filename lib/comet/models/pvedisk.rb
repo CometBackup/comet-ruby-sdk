@@ -9,24 +9,29 @@ require 'json'
 
 module Comet
 
-  # RequestStorageVaultResponseMessage is a typed class wrapper around the underlying Comet Server API data structure.
-  class RequestStorageVaultResponseMessage
+  # PVEDisk is a typed class wrapper around the underlying Comet Server API data structure.
+  class PVEDisk
 
-    # If the operation was successful, the status will be in the 200-299 range.
-    # @type [Number] status
-    attr_accessor :status
+    # @type [String] device
+    attr_accessor :device
 
-    # @type [String] message
-    attr_accessor :message
+    # @type [Number] device_num
+    attr_accessor :device_num
 
-    # @type [String] destination_id
-    attr_accessor :destination_id
+    # @type [String] storage_id
+    attr_accessor :storage_id
 
-    # @type [String] profile_hash
-    attr_accessor :profile_hash
+    # @type [String] volume
+    attr_accessor :volume
 
-    # @type [Comet::UserProfileConfig] profile
-    attr_accessor :profile
+    # @type [String] size
+    attr_accessor :size
+
+    # @type [String] format
+    attr_accessor :format
+
+    # @type [String] options
+    attr_accessor :options
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -36,11 +41,13 @@ module Comet
     end
 
     def clear
-      @status = 0
-      @message = ''
-      @destination_id = ''
-      @profile_hash = ''
-      @profile = Comet::UserProfileConfig.new
+      @device = ''
+      @device_num = 0
+      @storage_id = ''
+      @volume = ''
+      @size = ''
+      @format = ''
+      @options = ''
       @unknown_json_fields = {}
     end
 
@@ -57,25 +64,34 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Status'
+        when 'Device'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @device = v
+        when 'DeviceNum'
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
-          @status = v
-        when 'Message'
+          @device_num = v
+        when 'StorageID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @message = v
-        when 'DestinationID'
+          @storage_id = v
+        when 'Volume'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @destination_id = v
-        when 'ProfileHash'
+          @volume = v
+        when 'Size'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @profile_hash = v
-        when 'Profile'
-          @profile = Comet::UserProfileConfig.new
-          @profile.from_hash(v)
+          @size = v
+        when 'Format'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @format = v
+        when 'Options'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @options = v
         else
           @unknown_json_fields[k] = v
         end
@@ -85,11 +101,23 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Status'] = @status
-      ret['Message'] = @message
-      ret['DestinationID'] = @destination_id
-      ret['ProfileHash'] = @profile_hash
-      ret['Profile'] = @profile
+      ret['Device'] = @device
+      ret['DeviceNum'] = @device_num
+      unless @storage_id.nil?
+        ret['StorageID'] = @storage_id
+      end
+      unless @volume.nil?
+        ret['Volume'] = @volume
+      end
+      unless @size.nil?
+        ret['Size'] = @size
+      end
+      unless @format.nil?
+        ret['Format'] = @format
+      end
+      unless @options.nil?
+        ret['Options'] = @options
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

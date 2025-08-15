@@ -26,8 +26,8 @@ module Comet
     # @type [Number] compression
     attr_accessor :compression
 
-    # The jobs database is often the largest component of the Server Self-Backup archive. By excluding
-    # it, you could run the Server Self-Backup more often.
+    # The jobs database is often the largest component of the System Self-Backup archive. By excluding
+    # it, you could run the System Self-Backup more often.
     # @type [Boolean] exclude_jobs_db
     attr_accessor :exclude_jobs_db
 

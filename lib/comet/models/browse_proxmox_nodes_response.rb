@@ -9,8 +9,8 @@ require 'json'
 
 module Comet
 
-  # RequestStorageVaultResponseMessage is a typed class wrapper around the underlying Comet Server API data structure.
-  class RequestStorageVaultResponseMessage
+  # BrowseProxmoxNodesResponse is a typed class wrapper around the underlying Comet Server API data structure.
+  class BrowseProxmoxNodesResponse
 
     # If the operation was successful, the status will be in the 200-299 range.
     # @type [Number] status
@@ -19,14 +19,8 @@ module Comet
     # @type [String] message
     attr_accessor :message
 
-    # @type [String] destination_id
-    attr_accessor :destination_id
-
-    # @type [String] profile_hash
-    attr_accessor :profile_hash
-
-    # @type [Comet::UserProfileConfig] profile
-    attr_accessor :profile
+    # @type [Array<String>] nodes
+    attr_accessor :nodes
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -38,9 +32,7 @@ module Comet
     def clear
       @status = 0
       @message = ''
-      @destination_id = ''
-      @profile_hash = ''
-      @profile = Comet::UserProfileConfig.new
+      @nodes = []
       @unknown_json_fields = {}
     end
 
@@ -65,17 +57,17 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @message = v
-        when 'DestinationID'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+        when 'Nodes'
+          if v.nil?
+            @nodes = []
+          else
+            @nodes = Array.new(v.length)
+            v.each_with_index do |v1, i1|
+              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
 
-          @destination_id = v
-        when 'ProfileHash'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @profile_hash = v
-        when 'Profile'
-          @profile = Comet::UserProfileConfig.new
-          @profile.from_hash(v)
+              @nodes[i1] = v1
+            end
+          end
         else
           @unknown_json_fields[k] = v
         end
@@ -87,9 +79,7 @@ module Comet
       ret = {}
       ret['Status'] = @status
       ret['Message'] = @message
-      ret['DestinationID'] = @destination_id
-      ret['ProfileHash'] = @profile_hash
-      ret['Profile'] = @profile
+      ret['Nodes'] = @nodes
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
