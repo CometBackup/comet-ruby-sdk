@@ -10,6 +10,9 @@ require 'json'
 module Comet
 
   # PVEParams is a typed class wrapper around the underlying Comet Server API data structure.
+  # This type is used in the EngineProps for an "engine1/proxmox" Protected Item. It represents the
+# entire Protected Item configuration. It is expected to be user-configurable.
+  # This type is available in Comet 25.8.0 and later.
   class PVEParams
 
     # @type [Boolean] everything
@@ -18,17 +21,19 @@ module Comet
     # @type [Array<Comet::PVEBackupNode>] exclusions
     attr_accessor :exclusions
 
+    # One of the PVE_BACKUP_METHOD constants
     # @type [String] method
     attr_accessor :method
 
-    # @type [Number] quota
-    attr_accessor :quota
-
+    # Primary node URL + SSH credentials
     # @type [Comet::SSHConnection] sshconnection
     attr_accessor :sshconnection
 
     # @type [Array<Comet::PVEBackupNode>] selections
     attr_accessor :selections
+
+    # @type [Boolean] use_cbt
+    attr_accessor :use_cbt
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -40,7 +45,6 @@ module Comet
     def clear
       @exclusions = []
       @method = ''
-      @quota = 0
       @sshconnection = Comet::SSHConnection.new
       @selections = []
       @unknown_json_fields = {}
@@ -75,10 +79,6 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @method = v
-        when 'Quota'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @quota = v
         when 'SSHConnection'
           @sshconnection = Comet::SSHConnection.new
           @sshconnection.from_hash(v)
@@ -92,6 +92,8 @@ module Comet
               @selections[i1].from_hash(v1)
             end
           end
+        when 'UseCBT'
+          @use_cbt = v
         else
           @unknown_json_fields[k] = v
         end
@@ -110,14 +112,14 @@ module Comet
       unless @method.nil?
         ret['Method'] = @method
       end
-      unless @quota.nil?
-        ret['Quota'] = @quota
-      end
       unless @sshconnection.nil?
         ret['SSHConnection'] = @sshconnection
       end
       unless @selections.nil?
         ret['Selections'] = @selections
+      end
+      unless @use_cbt.nil?
+        ret['UseCBT'] = @use_cbt
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

@@ -24,7 +24,8 @@ module Comet
     # @type [String] volume
     attr_accessor :volume
 
-    # @type [String] size
+    # Bytes
+    # @type [Number] size
     attr_accessor :size
 
     # @type [String] format
@@ -45,7 +46,7 @@ module Comet
       @device_num = 0
       @storage_id = ''
       @volume = ''
-      @size = ''
+      @size = 0
       @format = ''
       @options = ''
       @unknown_json_fields = {}
@@ -81,7 +82,7 @@ module Comet
 
           @volume = v
         when 'Size'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @size = v
         when 'Format'

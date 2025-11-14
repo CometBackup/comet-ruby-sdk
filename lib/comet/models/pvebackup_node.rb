@@ -10,11 +10,16 @@ require 'json'
 module Comet
 
   # PVEBackupNode is a typed class wrapper around the underlying Comet Server API data structure.
+  # This type is used in the EngineProps for an "engine1/proxmox" Protected Item. It represents the
+# selection state for a single Proxmox VE node. It is expected to be user-configurable.
+  # This type is available in Comet 25.8.0 and later.
   class PVEBackupNode
 
     # @type [Array<Comet::PVEBackupVM>] included_vms
     attr_accessor :included_vms
 
+    # Used as a cache if the device is offline when editing the Protected Item; not considered as part
+    # of the selection
     # @type [String] name
     attr_accessor :name
 

@@ -10,17 +10,23 @@ require 'json'
 module Comet
 
   # PVEBackupVM is a typed class wrapper around the underlying Comet Server API data structure.
+  # This type is used in the EngineProps for an "engine1/proxmox" Protected Item. It represents the
+# selection state for a single Proxmox VM or LXC Container. It is expected to be user-configurable.
+  # This type is available in Comet 25.8.0 and later.
   class PVEBackupVM
 
     # @type [Array<Comet::PVEBackupDisk>] included_disks
     attr_accessor :included_disks
 
+    # Used as a cache if the device is offline when editing the Protected Item; not considered as part
+    # of the selection
     # @type [String] name
     attr_accessor :name
 
     # @type [Boolean] selected
     attr_accessor :selected
 
+    # One of the PROXMOX_TYPE_ constants
     # @type [String] type
     attr_accessor :type
 

@@ -1059,6 +1059,33 @@ module Comet
       ret
     end
 
+    # AdminDeleteProtectedItem
+    #
+    # Delete a Protected Item.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_user Selected account username
+    # @param [String] source_id Selected Protected Item GUID
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_delete_protected_item(target_user, source_id)
+      submit_params = {}
+      raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
+
+      submit_params['TargetUser'] = target_user
+      raise TypeError, "'source_id' expected String, got #{source_id.class}" unless source_id.is_a? String
+
+      submit_params['SourceID'] = source_id
+
+      body = perform_request('api/v1/admin/delete-protected-item', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
     # AdminDeleteUser
     #
     # Delete user account.
@@ -1321,6 +1348,30 @@ module Comet
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::EmailReportGeneratedPreview.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherForceLogin
+    #
+    # Instruct a live connected device to re-enter login credentials.
+    # The device will terminate its live-connection process and will not reconnect.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_dispatcher_force_login(target_id)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+
+      body = perform_request('api/v1/admin/dispatcher/force-login', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
       ret.from_hash(json_body)
       ret
     end
@@ -2227,7 +2278,7 @@ module Comet
     #
     # @param [String] target_id The live connection GUID
     # @param [String] backup_rule The schedule GUID
-    # @return [Comet::CometAPIResponseMessage]
+    # @return [Comet::DispatchWithJobIDResponse]
     def admin_dispatcher_run_backup(target_id, backup_rule)
       submit_params = {}
       raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
@@ -2240,7 +2291,7 @@ module Comet
       body = perform_request('api/v1/admin/dispatcher/run-backup', submit_params)
       json_body = JSON.parse body
       check_status json_body
-      ret = Comet::CometAPIResponseMessage.new
+      ret = Comet::DispatchWithJobIDResponse.new
       ret.from_hash(json_body)
       ret
     end
@@ -2256,7 +2307,7 @@ module Comet
     # @param [String] source The Protected Item GUID
     # @param [String] destination The Storage Vault GUID
     # @param [Comet::BackupJobAdvancedOptions] options (Optional) Extra job parameters (>= 19.3.6)
-    # @return [Comet::CometAPIResponseMessage]
+    # @return [Comet::DispatchWithJobIDResponse]
     def admin_dispatcher_run_backup_custom(target_id, source, destination, options = nil)
       submit_params = {}
       raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
@@ -2277,7 +2328,7 @@ module Comet
       body = perform_request('api/v1/admin/dispatcher/run-backup-custom', submit_params)
       json_body = JSON.parse body
       check_status json_body
-      ret = Comet::CometAPIResponseMessage.new
+      ret = Comet::DispatchWithJobIDResponse.new
       ret.from_hash(json_body)
       ret
     end
@@ -2296,7 +2347,7 @@ module Comet
     # @param [String] destination The Storage Vault ID
     # @param [String] snapshot (Optional) If present, restore a specific snapshot. Otherwise, restore the latest snapshot for the selected Protected Item + Storage Vault pair
     # @param [Array<String>] paths (Optional) If present, restore these paths only. Otherwise, restore all data (>= 19.3.0)
-    # @return [Comet::CometAPIResponseMessage]
+    # @return [Comet::DispatchWithJobIDResponse]
     def admin_dispatcher_run_restore(target_id, path, source, destination, snapshot = nil, paths = nil)
       submit_params = {}
       raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
@@ -2325,7 +2376,7 @@ module Comet
       body = perform_request('api/v1/admin/dispatcher/run-restore', submit_params)
       json_body = JSON.parse body
       check_status json_body
-      ret = Comet::CometAPIResponseMessage.new
+      ret = Comet::DispatchWithJobIDResponse.new
       ret.from_hash(json_body)
       ret
     end
@@ -2347,7 +2398,7 @@ module Comet
     # @param [Number] known_file_count (Optional) The number of files to restore, if known. Supplying this means we don't need to walk the entire tree just to find the file count and will speed up the restoration process.
     # @param [Number] known_byte_count (Optional) The total size in bytes of files to restore, if known. Supplying this means we don't need to walk the entire tree just to find the total file size and will speed up the restoration process.
     # @param [Number] known_dir_count (Optional) The number of directories to restore, if known. Supplying this means we don't need to walk the entire tree just to find the number of directories and will speed up the restoration process.
-    # @return [Comet::CometAPIResponseMessage]
+    # @return [Comet::DispatchWithJobIDResponse]
     def admin_dispatcher_run_restore_custom(target_id, source, destination, options, snapshot = nil, paths = nil, known_file_count = nil, known_byte_count = nil, known_dir_count = nil)
       submit_params = {}
       raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
@@ -2391,7 +2442,7 @@ module Comet
       body = perform_request('api/v1/admin/dispatcher/run-restore-custom', submit_params)
       json_body = JSON.parse body
       check_status json_body
-      ret = Comet::CometAPIResponseMessage.new
+      ret = Comet::DispatchWithJobIDResponse.new
       ret.from_hash(json_body)
       ret
     end
@@ -2509,6 +2560,33 @@ module Comet
       end
 
       body = perform_request('api/v1/admin/dispatcher/unlock', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminDispatcherUpdateLoginPassword
+    #
+    # Instruct a live connected device to update its login password.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_id The live connection GUID
+    # @param [String] new_password The new password of this user
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_dispatcher_update_login_password(target_id, new_password)
+      submit_params = {}
+      raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
+
+      submit_params['TargetID'] = target_id
+      raise TypeError, "'new_password' expected String, got #{new_password.class}" unless new_password.is_a? String
+
+      submit_params['NewPassword'] = new_password
+
+      body = perform_request('api/v1/admin/dispatcher/update-login-password', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::CometAPIResponseMessage.new
@@ -2911,6 +2989,33 @@ module Comet
           ret[i].from_hash(v)
         end
       end
+      ret
+    end
+
+    # AdminGetProtectedItemWithBackupRules
+    #
+    # Get a Protected Item with its backup rules.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_user Selected account username
+    # @param [String] source_id Selected Protected Item GUID
+    # @return [Comet::ProtectedItemWithBackupRulesResponse]
+    def admin_get_protected_item_with_backup_rules(target_user, source_id)
+      submit_params = {}
+      raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
+
+      submit_params['TargetUser'] = target_user
+      raise TypeError, "'source_id' expected String, got #{source_id.class}" unless source_id.is_a? String
+
+      submit_params['SourceID'] = source_id
+
+      body = perform_request('api/v1/admin/get-protected-item-with-backup-rules', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::ProtectedItemWithBackupRulesResponse.new
+      ret.from_hash(json_body)
       ret
     end
 
@@ -4457,6 +4562,51 @@ module Comet
     # @return [Comet::CometAPIResponseMessage]
     def admin_self_backup_start
       body = perform_request('api/v1/admin/self-backup/start')
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminSetProtectedItemWithBackupRules
+    #
+    # Add or update a Protected Item with its backup rules.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] target_user Selected account username
+    # @param [String] source_id Selected Protected Item GUID
+    # @param [String] require_hash (Optional) Previous account profile hash
+    # @param [Comet::SourceConfig] source (Optional) Optional Protected Item to create or update
+    # @param [Hash{String => Comet::BackupRuleConfig}] backup_rules (Optional) Optional backup rules for the Protected Item
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_set_protected_item_with_backup_rules(target_user, source_id, require_hash = nil, source = nil, backup_rules = nil)
+      submit_params = {}
+      raise TypeError, "'target_user' expected String, got #{target_user.class}" unless target_user.is_a? String
+
+      submit_params['TargetUser'] = target_user
+      raise TypeError, "'source_id' expected String, got #{source_id.class}" unless source_id.is_a? String
+
+      submit_params['SourceID'] = source_id
+      unless require_hash.nil?
+        raise TypeError, "'require_hash' expected String, got #{require_hash.class}" unless require_hash.is_a? String
+
+        submit_params['RequireHash'] = require_hash
+      end
+      unless source.nil?
+        raise TypeError, "'source' expected Comet::SourceConfig, got #{source.class}" unless source.is_a? Comet::SourceConfig
+
+        submit_params['Source'] = source.to_json
+      end
+      unless backup_rules.nil?
+        raise TypeError, "'backup_rules' expected Hash, got #{backup_rules.class}" unless backup_rules.is_a? Hash
+
+        submit_params['BackupRules'] = backup_rules.to_json
+      end
+
+      body = perform_request('api/v1/admin/set-protected-item-with-backup-rules', submit_params)
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::CometAPIResponseMessage.new

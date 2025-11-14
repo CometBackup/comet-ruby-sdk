@@ -65,6 +65,18 @@ module Comet
     # @type [String] windows_code_sign_azure_tenant_id
     attr_accessor :windows_code_sign_azure_tenant_id
 
+    # URL of the SAS Relic server, with protocol (https://) and trailing slash
+    # @type [String] windows_code_sign_relic_server_url
+    attr_accessor :windows_code_sign_relic_server_url
+
+    # The SAS Relic client keypair in PEM format
+    # @type [String] windows_code_sign_relic_keypair_file
+    attr_accessor :windows_code_sign_relic_keypair_file
+
+    # The name of the key to select on the remote SAS Relic server
+    # @type [String] windows_code_sign_relic_key_name
+    attr_accessor :windows_code_sign_relic_key_name
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -89,6 +101,9 @@ module Comet
       @windows_code_sign_azure_app_secret_format = 0
       @windows_code_sign_azure_app_secret = ''
       @windows_code_sign_azure_tenant_id = ''
+      @windows_code_sign_relic_server_url = ''
+      @windows_code_sign_relic_keypair_file = ''
+      @windows_code_sign_relic_key_name = ''
       @unknown_json_fields = {}
     end
 
@@ -169,6 +184,18 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @windows_code_sign_azure_tenant_id = v
+        when 'WindowsCodeSignRelicServerURL'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @windows_code_sign_relic_server_url = v
+        when 'WindowsCodeSignRelicKeypairFile'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @windows_code_sign_relic_keypair_file = v
+        when 'WindowsCodeSignRelicKeyName'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @windows_code_sign_relic_key_name = v
         else
           @unknown_json_fields[k] = v
         end
@@ -194,6 +221,9 @@ module Comet
       ret['WindowsCodeSignAzureAppSecretFormat'] = @windows_code_sign_azure_app_secret_format
       ret['WindowsCodeSignAzureAppSecret'] = @windows_code_sign_azure_app_secret
       ret['WindowsCodeSignAzureTenantID'] = @windows_code_sign_azure_tenant_id
+      ret['WindowsCodeSignRelicServerURL'] = @windows_code_sign_relic_server_url
+      ret['WindowsCodeSignRelicKeypairFile'] = @windows_code_sign_relic_keypair_file
+      ret['WindowsCodeSignRelicKeyName'] = @windows_code_sign_relic_key_name
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

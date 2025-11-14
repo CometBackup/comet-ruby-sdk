@@ -80,6 +80,10 @@ module Comet
     # @type [String] log_level
     attr_accessor :log_level
 
+    # Default disabled
+    # @type [String] tags
+    attr_accessor :tags
+
     # Scheduled start times
     # @type [Array<Comet::ScheduleConfig>] schedules
     attr_accessor :schedules
@@ -109,6 +113,7 @@ module Comet
       @auto_retention_level = 0
       @concurrency_count = 0
       @log_level = ''
+      @tags = ''
       @schedules = []
       @event_triggers = Comet::BackupRuleEventTriggers.new
       @unknown_json_fields = {}
@@ -208,6 +213,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @log_level = v
+        when 'Tags'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @tags = v
         when 'Schedules'
           if v.nil?
             @schedules = []
@@ -247,6 +256,7 @@ module Comet
       ret['AutoRetentionLevel'] = @auto_retention_level
       ret['ConcurrencyCount'] = @concurrency_count
       ret['LogLevel'] = @log_level
+      ret['Tags'] = @tags
       ret['Schedules'] = @schedules
       ret['EventTriggers'] = @event_triggers
       @unknown_json_fields.each do |k, v|

@@ -99,10 +99,6 @@ module Comet
     # @type [Number] total_unlicensed_mails_count
     attr_accessor :total_unlicensed_mails_count
 
-    # The CRC32 of the billing data for this job.
-    # @type [Number] billing_crc_32
-    attr_accessor :billing_crc_32
-
     # If this field is present, this job did not perform some work because the Storage Vault is
     # currently busy.
     # This field is available in Comet 24.9.2 and later.
@@ -125,6 +121,10 @@ module Comet
     # The size of the Storage Vault, as measured at the end of the job.
     # @type [Comet::SizeMeasurement] destination_size_end
     attr_accessor :destination_size_end
+
+    # The tags sent as BackupJobOptions, Useful for Groupings
+    # @type [String] tags
+    attr_accessor :tags
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -159,12 +159,12 @@ module Comet
       @total_accounts_count = 0
       @total_licensed_mails_count = 0
       @total_unlicensed_mails_count = 0
-      @billing_crc_32 = 0
       @conflicting_job_id = ''
       @cancellation_id = ''
       @progress = Comet::BackupJobProgress.new
       @destination_size_start = Comet::SizeMeasurement.new
       @destination_size_end = Comet::SizeMeasurement.new
+      @tags = ''
       @unknown_json_fields = {}
     end
 
@@ -281,10 +281,6 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @total_unlicensed_mails_count = v
-        when 'BillingCrc32'
-          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
-
-          @billing_crc_32 = v
         when 'ConflictingJobID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
@@ -302,6 +298,10 @@ module Comet
         when 'DestinationSizeEnd'
           @destination_size_end = Comet::SizeMeasurement.new
           @destination_size_end.from_hash(v)
+        when 'Tags'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @tags = v
         else
           @unknown_json_fields[k] = v
         end
@@ -352,9 +352,6 @@ module Comet
       unless @total_unlicensed_mails_count.nil?
         ret['TotalUnlicensedMailsCount'] = @total_unlicensed_mails_count
       end
-      unless @billing_crc_32.nil?
-        ret['BillingCrc32'] = @billing_crc_32
-      end
       unless @conflicting_job_id.nil?
         ret['ConflictingJobID'] = @conflicting_job_id
       end
@@ -369,6 +366,9 @@ module Comet
       end
       unless @destination_size_end.nil?
         ret['DestinationSizeEnd'] = @destination_size_end
+      end
+      unless @tags.nil?
+        ret['Tags'] = @tags
       end
       @unknown_json_fields.each do |k, v|
         ret[k] = v

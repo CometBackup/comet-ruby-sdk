@@ -181,6 +181,11 @@ module Comet
     # @type [String] auto_storage_template_guid
     attr_accessor :auto_storage_template_guid
 
+    # If enabled, Linux devices in this user account will sandbox all read/write operations to paths
+    # inside user home directories
+    # @type [Boolean] linux_homedir_sandbox
+    attr_accessor :linux_homedir_sandbox
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -399,6 +404,8 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @auto_storage_template_guid = v
+        when 'LinuxHomedirSandbox'
+          @linux_homedir_sandbox = v
         else
           @unknown_json_fields[k] = v
         end
@@ -452,6 +459,7 @@ module Comet
         ret['ServerConfig'] = @server_config
       end
       ret['AutoStorageTemplateGUID'] = @auto_storage_template_guid
+      ret['LinuxHomedirSandbox'] = @linux_homedir_sandbox
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

@@ -10,11 +10,17 @@ require 'json'
 module Comet
 
   # PVEBackupDisk is a typed class wrapper around the underlying Comet Server API data structure.
+  # This type is used in the EngineProps for an "engine1/proxmox" Protected Item. It represents the
+# selection state for a single disk attached to a single Proxmox VM or LXC Container. It is expected
+# to be user-configurable.
+  # This type is available in Comet 25.8.0 and later.
   class PVEBackupDisk
 
+    # For a disk "scsi0", this field should contain: "scsi"
     # @type [String] device
     attr_accessor :device
 
+    # For a disk "scsi0", this field should contain: 0
     # @type [Number] device_num
     attr_accessor :device_num
 

@@ -9,14 +9,18 @@ require 'json'
 
 module Comet
 
-  # BlockInfo is a typed class wrapper around the underlying Comet Server API data structure.
-  class BlockInfo
+  # DispatchWithJobIDResponse is a typed class wrapper around the underlying Comet Server API data structure.
+  class DispatchWithJobIDResponse
 
-    # @type [String] device_id
-    attr_accessor :device_id
+    # If the operation was successful, the status will be in the 200-299 range.
+    # @type [Number] status
+    attr_accessor :status
 
-    # @type [String] disk_node_name
-    attr_accessor :disk_node_name
+    # @type [String] message
+    attr_accessor :message
+
+    # @type [String] job_id
+    attr_accessor :job_id
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -26,8 +30,9 @@ module Comet
     end
 
     def clear
-      @device_id = ''
-      @disk_node_name = ''
+      @status = 0
+      @message = ''
+      @job_id = ''
       @unknown_json_fields = {}
     end
 
@@ -44,14 +49,18 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'DeviceID'
+        when 'Status'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @status = v
+        when 'Message'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @device_id = v
-        when 'DiskNodeName'
+          @message = v
+        when 'JobID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @disk_node_name = v
+          @job_id = v
         else
           @unknown_json_fields[k] = v
         end
@@ -61,8 +70,11 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['DeviceID'] = @device_id
-      ret['DiskNodeName'] = @disk_node_name
+      ret['Status'] = @status
+      ret['Message'] = @message
+      unless @job_id.nil?
+        ret['JobID'] = @job_id
+      end
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

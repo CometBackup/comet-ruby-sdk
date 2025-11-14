@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '25.6.8'
+  APPLICATION_VERSION = '25.9.6'
 
   APPLICATION_VERSION_MAJOR = 25
 
-  APPLICATION_VERSION_MINOR = 6
+  APPLICATION_VERSION_MINOR = 9
 
-  APPLICATION_VERSION_REVISION = 8
+  APPLICATION_VERSION_REVISION = 6
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -328,6 +328,9 @@ module Comet
   # JobStatus: The job has encountered an error and will wait to retry.
   JOB_STATUS_RUNNING_TRYAGAIN = 6003
 
+  # JobStatus: The job has been created by the server but has not yet been initialized by the client.
+  JOB_STATUS_NOT_YET_STARTED = 6004
+
   # JobStatus
   JOB_STATUS_RUNNING__MAX = 6999
 
@@ -487,12 +490,16 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
   # PSAType
   PSA_TYPE_SYNCRO = 2
 
+  # PveBackupMethod
   PVE_BACKUP_METHOD_STOP = 'stop'
 
+  # PveBackupMethod
   PVE_BACKUP_METHOD_SUSPEND = 'suspend'
 
+  # PveBackupMethod
   PVE_BACKUP_METHOD_SNAPSHOT = 'snapshot'
 
+  # PveBackupMethod
   PVE_BACKUP_METHOD_DEFAULT = PVE_BACKUP_METHOD_SNAPSHOT
 
   RELEASE_CODENAME = 'Voyager'
@@ -1176,5 +1183,8 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
 
   # WindowsCodesignMethod: Use a configured Azure Key Vault for Authenticode codesigning
   WINDOWSCODESIGN_METHOD_AZUREKEYVAULT = 4
+
+  # WindowsCodesignMethod: Use a configured SAS Relic server for Authenticode codesigning
+  WINDOWSCODESIGN_METHOD_RELICSERVER = 5
 
 end

@@ -88,6 +88,13 @@ module Comet
     # - LOGNOTRUNC: If present, take a "Log (no truncation)" backup job. Otherwise, take a "Full (copy
     # only)" backup job.
     #
+    # For engine1/stdout, Comet understands the following EngineProp keys:
+    #
+    # - COMMAND: The command to run
+    # - WORKDIR: The working directory for the command
+    # - SAVEAS: The virtual filename inside the backup snapshot
+    # - Any key starting with EXTRACOMMAND- : Additional commands to run. Each value should be a JSON
+    # array of 3 strings, equivalent to the COMMAND, WORKDIR, SAVEAS values.
     # @type [Hash{String => String}] engine_props
     attr_accessor :engine_props
 

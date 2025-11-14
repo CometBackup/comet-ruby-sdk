@@ -10,6 +10,7 @@ require 'json'
 module Comet
 
   # PVEVM is a typed class wrapper around the underlying Comet Server API data structure.
+  # PVEVM describes a single Proxmox virtual machine or container.
   class PVEVM
 
     # @type [String] cpu
@@ -36,6 +37,7 @@ module Comet
     # @type [String] type
     attr_accessor :type
 
+    # String type, but always contains an integer value
     # @type [String] vmid
     attr_accessor :vmid
 

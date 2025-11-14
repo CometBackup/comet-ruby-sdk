@@ -50,6 +50,10 @@ module Comet
     # @type [String] log_level
     attr_accessor :log_level
 
+    # Default disabled
+    # @type [String] tags
+    attr_accessor :tags
+
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
 
@@ -63,6 +67,7 @@ module Comet
       @auto_retention_level = 0
       @concurrency_count = 0
       @log_level = ''
+      @tags = ''
       @unknown_json_fields = {}
     end
 
@@ -107,6 +112,10 @@ module Comet
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
           @log_level = v
+        when 'Tags'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @tags = v
         else
           @unknown_json_fields[k] = v
         end
@@ -125,6 +134,7 @@ module Comet
       ret['AutoRetentionLevel'] = @auto_retention_level
       ret['ConcurrencyCount'] = @concurrency_count
       ret['LogLevel'] = @log_level
+      ret['Tags'] = @tags
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end
