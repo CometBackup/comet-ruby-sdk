@@ -7,13 +7,13 @@
 
 module Comet
 
-  APPLICATION_VERSION = '25.9.6'
+  APPLICATION_VERSION = '25.9.8'
 
   APPLICATION_VERSION_MAJOR = 25
 
   APPLICATION_VERSION_MINOR = 9
 
-  APPLICATION_VERSION_REVISION = 6
+  APPLICATION_VERSION_REVISION = 8
 
   # AutoRetentionLevel: The system will automatically choose how often to run an automatic Retention Pass after each backup job.
   BACKUPJOBAUTORETENTION_AUTOMATIC = 0
@@ -971,6 +971,15 @@ New code should explicitly use OBJECT_LOCK_ON / OBJECT_LOCK_OFF instead.
 
   # StreamableEventType: UserGroup updated.
   SEVT_USERGROUP_UPDATED = 4802
+
+  # StreamableEventType
+  SEVT_SQUOTA_NEW = 4803
+
+  # StreamableEventType
+  SEVT_SQUOTA_REMOVED = 4804
+
+  # StreamableEventType
+  SEVT_SQUOTA_UPDATED = 4805
 
   # StreamableEventType
   SEVT__MAX = 4999

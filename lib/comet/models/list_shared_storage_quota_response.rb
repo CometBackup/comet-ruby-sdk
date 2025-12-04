@@ -9,18 +9,18 @@ require 'json'
 
 module Comet
 
-  # PVEStorageName is a typed class wrapper around the underlying Comet Server API data structure.
-  # PVEStorageName contains the name and type of storage configured on a Proxmox Cluster
-  class PVEStorageName
+  # ListSharedStorageQuotaResponse is a typed class wrapper around the underlying Comet Server API data structure.
+  class ListSharedStorageQuotaResponse
 
-    # @type [String] name
-    attr_accessor :name
+    # If the operation was successful, the status will be in the 200-299 range.
+    # @type [Number] status
+    attr_accessor :status
 
-    # @type [String] type
-    attr_accessor :type
+    # @type [String] message
+    attr_accessor :message
 
-    # @type [Array<String>] content
-    attr_accessor :content
+    # @type [Hash{String => Comet::SharedStorageQuota}] entries
+    attr_accessor :entries
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -30,9 +30,9 @@ module Comet
     end
 
     def clear
-      @name = ''
-      @type = ''
-      @content = []
+      @status = 0
+      @message = ''
+      @entries = {}
       @unknown_json_fields = {}
     end
 
@@ -49,23 +49,22 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Name'
+        when 'Status'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @status = v
+        when 'Message'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @name = v
-        when 'Type'
-          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
-
-          @type = v
-        when 'Content'
+          @message = v
+        when 'Entries'
+          @entries = {}
           if v.nil?
-            @content = []
+            @entries = {}
           else
-            @content = Array.new(v.length)
-            v.each_with_index do |v1, i1|
-              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
-
-              @content[i1] = v1
+            v.each do |k1, v1|
+              @entries[k1] = Comet::SharedStorageQuota.new
+              @entries[k1].from_hash(v1)
             end
           end
         else
@@ -77,9 +76,9 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Name'] = @name
-      ret['Type'] = @type
-      ret['Content'] = @content
+      ret['Status'] = @status
+      ret['Message'] = @message
+      ret['Entries'] = @entries
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

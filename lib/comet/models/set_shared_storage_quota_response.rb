@@ -9,18 +9,18 @@ require 'json'
 
 module Comet
 
-  # PVEStorageName is a typed class wrapper around the underlying Comet Server API data structure.
-  # PVEStorageName contains the name and type of storage configured on a Proxmox Cluster
-  class PVEStorageName
+  # SetSharedStorageQuotaResponse is a typed class wrapper around the underlying Comet Server API data structure.
+  class SetSharedStorageQuotaResponse
 
-    # @type [String] name
-    attr_accessor :name
+    # If the operation was successful, the status will be in the 200-299 range.
+    # @type [Number] status
+    attr_accessor :status
 
-    # @type [String] type
-    attr_accessor :type
+    # @type [String] message
+    attr_accessor :message
 
-    # @type [Array<String>] content
-    attr_accessor :content
+    # @type [String] shared_storage_quota_hash
+    attr_accessor :shared_storage_quota_hash
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -30,9 +30,9 @@ module Comet
     end
 
     def clear
-      @name = ''
-      @type = ''
-      @content = []
+      @status = 0
+      @message = ''
+      @shared_storage_quota_hash = ''
       @unknown_json_fields = {}
     end
 
@@ -49,25 +49,18 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Name'
+        when 'Status'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
+
+          @status = v
+        when 'Message'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @name = v
-        when 'Type'
+          @message = v
+        when 'SharedStorageQuotaHash'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @type = v
-        when 'Content'
-          if v.nil?
-            @content = []
-          else
-            @content = Array.new(v.length)
-            v.each_with_index do |v1, i1|
-              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
-
-              @content[i1] = v1
-            end
-          end
+          @shared_storage_quota_hash = v
         else
           @unknown_json_fields[k] = v
         end
@@ -77,9 +70,9 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Name'] = @name
-      ret['Type'] = @type
-      ret['Content'] = @content
+      ret['Status'] = @status
+      ret['Message'] = @message
+      ret['SharedStorageQuotaHash'] = @shared_storage_quota_hash
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

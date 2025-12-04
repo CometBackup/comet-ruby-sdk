@@ -9,18 +9,20 @@ require 'json'
 
 module Comet
 
-  # PVEStorageName is a typed class wrapper around the underlying Comet Server API data structure.
-  # PVEStorageName contains the name and type of storage configured on a Proxmox Cluster
-  class PVEStorageName
+  # SharedStorageQuota is a typed class wrapper around the underlying Comet Server API data structure.
+  # A SharedStorageQuota can be applied to multiple Storage Vaults in the
+# 'DestinationConfig.StorageLimitID' field.
+  class SharedStorageQuota
 
-    # @type [String] name
-    attr_accessor :name
+    # @type [String] description
+    attr_accessor :description
 
-    # @type [String] type
-    attr_accessor :type
+    # @type [String] organization_id
+    attr_accessor :organization_id
 
-    # @type [Array<String>] content
-    attr_accessor :content
+    # Bytes
+    # @type [Number] limit_bytes
+    attr_accessor :limit_bytes
 
     # @type [Hash] Hidden storage to preserve future properties for non-destructive roundtrip operations
     attr_accessor :unknown_json_fields
@@ -30,9 +32,9 @@ module Comet
     end
 
     def clear
-      @name = ''
-      @type = ''
-      @content = []
+      @description = ''
+      @organization_id = ''
+      @limit_bytes = 0
       @unknown_json_fields = {}
     end
 
@@ -49,25 +51,18 @@ module Comet
 
       obj.each do |k, v|
         case k
-        when 'Name'
+        when 'Description'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @name = v
-        when 'Type'
+          @description = v
+        when 'OrganizationID'
           raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
 
-          @type = v
-        when 'Content'
-          if v.nil?
-            @content = []
-          else
-            @content = Array.new(v.length)
-            v.each_with_index do |v1, i1|
-              raise TypeError, "'v1' expected String, got #{v1.class}" unless v1.is_a? String
+          @organization_id = v
+        when 'LimitBytes'
+          raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
-              @content[i1] = v1
-            end
-          end
+          @limit_bytes = v
         else
           @unknown_json_fields[k] = v
         end
@@ -77,9 +72,9 @@ module Comet
     # @return [Hash] The complete object as a Ruby hash
     def to_hash
       ret = {}
-      ret['Name'] = @name
-      ret['Type'] = @type
-      ret['Content'] = @content
+      ret['Description'] = @description
+      ret['OrganizationID'] = @organization_id
+      ret['LimitBytes'] = @limit_bytes
       @unknown_json_fields.each do |k, v|
         ret[k] = v
       end

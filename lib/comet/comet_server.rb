@@ -1863,8 +1863,9 @@ module Comet
     #
     # @param [String] target_id The live connection GUID
     # @param [Comet::SSHConnection] credentials The SSH connection settings
+    # @param [String] node The target node
     # @return [Comet::BrowseProxmoxStorageResponse]
-    def admin_dispatcher_request_browse_proxmox_storage(target_id, credentials)
+    def admin_dispatcher_request_browse_proxmox_storage(target_id, credentials, node)
       submit_params = {}
       raise TypeError, "'target_id' expected String, got #{target_id.class}" unless target_id.is_a? String
 
@@ -1872,6 +1873,9 @@ module Comet
       raise TypeError, "'credentials' expected Comet::SSHConnection, got #{credentials.class}" unless credentials.is_a? Comet::SSHConnection
 
       submit_params['Credentials'] = credentials.to_json
+      raise TypeError, "'node' expected String, got #{node.class}" unless node.is_a? String
+
+      submit_params['Node'] = node
 
       body = perform_request('api/v1/admin/dispatcher/request-browse-proxmox/storage', submit_params)
       json_body = JSON.parse body
@@ -4676,6 +4680,102 @@ module Comet
       json_body = JSON.parse body
       check_status json_body
       ret = Comet::GetProfileAndHashResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminSquotaDelete
+    #
+    # Delete a shared storage quota and detach all users.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] shared_storage_quota_id (No description available)
+    # @return [Comet::CometAPIResponseMessage]
+    def admin_squota_delete(shared_storage_quota_id)
+      submit_params = {}
+      raise TypeError, "'shared_storage_quota_id' expected String, got #{shared_storage_quota_id.class}" unless shared_storage_quota_id.is_a? String
+
+      submit_params['SharedStorageQuotaID'] = shared_storage_quota_id
+
+      body = perform_request('api/v1/admin/squota/delete', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::CometAPIResponseMessage.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminSquotaGetWithHash
+    #
+    # Get properties for a shared storage quota.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] shared_storage_quota_id (No description available)
+    # @return [Comet::GetSharedStorageQuotaResponse]
+    def admin_squota_get_with_hash(shared_storage_quota_id)
+      submit_params = {}
+      raise TypeError, "'shared_storage_quota_id' expected String, got #{shared_storage_quota_id.class}" unless shared_storage_quota_id.is_a? String
+
+      submit_params['SharedStorageQuotaID'] = shared_storage_quota_id
+
+      body = perform_request('api/v1/admin/squota/get-with-hash', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::GetSharedStorageQuotaResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminSquotaListAll
+    #
+    # List available shared storage quota objects.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @return [Comet::ListSharedStorageQuotaResponse]
+    def admin_squota_list_all
+      body = perform_request('api/v1/admin/squota/list-all')
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::ListSharedStorageQuotaResponse.new
+      ret.from_hash(json_body)
+      ret
+    end
+
+    # AdminSquotaSetWithHash
+    #
+    # Create or update a shared storage quota.
+    #
+    # You must supply administrator authentication credentials to use this API.
+    # This API requires the Auth Role to be enabled.
+    #
+    # @param [String] shared_storage_quota_id (No description available)
+    # @param [Comet::SharedStorageQuota] shared_storage_quota (No description available)
+    # @param [String] check_hash (Optional) If supplied, validate the change against this hash. Omit to forcibly apply changes.
+    # @return [Comet::SetSharedStorageQuotaResponse]
+    def admin_squota_set_with_hash(shared_storage_quota_id, shared_storage_quota, check_hash = nil)
+      submit_params = {}
+      raise TypeError, "'shared_storage_quota_id' expected String, got #{shared_storage_quota_id.class}" unless shared_storage_quota_id.is_a? String
+
+      submit_params['SharedStorageQuotaID'] = shared_storage_quota_id
+      raise TypeError, "'shared_storage_quota' expected Comet::SharedStorageQuota, got #{shared_storage_quota.class}" unless shared_storage_quota.is_a? Comet::SharedStorageQuota
+
+      submit_params['SharedStorageQuota'] = shared_storage_quota.to_json
+      unless check_hash.nil?
+        raise TypeError, "'check_hash' expected String, got #{check_hash.class}" unless check_hash.is_a? String
+
+        submit_params['CheckHash'] = check_hash
+      end
+
+      body = perform_request('api/v1/admin/squota/set-with-hash', submit_params)
+      json_body = JSON.parse body
+      check_status json_body
+      ret = Comet::SetSharedStorageQuotaResponse.new
       ret.from_hash(json_body)
       ret
     end

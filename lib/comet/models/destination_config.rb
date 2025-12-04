@@ -236,6 +236,11 @@ module Comet
     # @type [Number] storage_limit_bytes
     attr_accessor :storage_limit_bytes
 
+    # If set, use a shared Storage Vault quota from the Comet Management Console. The direct value of
+    # StorageLimitBytes is ignored.
+    # @type [String] storage_limit_id
+    attr_accessor :storage_limit_id
+
     # @type [Comet::DestinationStatistics] statistics
     attr_accessor :statistics
 
@@ -316,6 +321,7 @@ module Comet
       @encrypted_encryption_key = ''
       @repo_init_timestamp = 0
       @storage_limit_bytes = 0
+      @storage_limit_id = ''
       @statistics = Comet::DestinationStatistics.new
       @default_retention = Comet::RetentionPolicy.new
       @retention_error = ''
@@ -582,6 +588,10 @@ module Comet
           raise TypeError, "'v' expected Numeric, got #{v.class}" unless v.is_a? Numeric
 
           @storage_limit_bytes = v
+        when 'StorageLimitID'
+          raise TypeError, "'v' expected String, got #{v.class}" unless v.is_a? String
+
+          @storage_limit_id = v
         when 'Statistics'
           @statistics = Comet::DestinationStatistics.new
           @statistics.from_hash(v)
@@ -674,6 +684,7 @@ module Comet
       ret['RepoInitTimestamp'] = @repo_init_timestamp
       ret['StorageLimitEnabled'] = @storage_limit_enabled
       ret['StorageLimitBytes'] = @storage_limit_bytes
+      ret['StorageLimitID'] = @storage_limit_id
       unless @statistics.nil?
         ret['Statistics'] = @statistics
       end
